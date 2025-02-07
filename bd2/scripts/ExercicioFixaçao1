@@ -1,0 +1,63 @@
+create table RESERVA (
+	id_reserva serial,
+	id_quarto integer not null,
+	hospede varchar(40) not null,
+	data_checkin date not null,
+	data_checkout date check (data_checkout > data_checkin or data_checkout is null)
+)partition by range (data_checkin)
+
+-- drop table RESERVA
+
+create table reservas_2023 partition of RESERVA 
+for values from ('2023-01-01') to ('2024-01-01')
+
+create table reservas_2024 partition of RESERVA 
+for values from ('2024-01-01') to ('2025-01-01')
+
+create table reservas_2025 partition of RESERVA 
+for values from ('2025-01-01') to ('2026-01-01')
+
+create table reservas_outros partition of RESERVA 
+for values from ('2026-01-01') to (maxvalue)
+
+create table reservas_anteriores partition of RESERVA 
+for values from (minvalue) to ('2023-01-01')
+
+INSERT INTO RESERVA (id_quarto, hospede, data_checkin, data_checkout)
+VALUES (101, 'João Silva', '2023-06-15', '2023-06-20')
+
+INSERT INTO RESERVA (id_quarto, hospede, data_checkin, data_checkout)
+VALUES (202, 'Maria Santos', '2024-09-10', '2024-09-15')
+
+INSERT INTO RESERVA (id_quarto, hospede, data_checkin, data_checkout)
+VALUES (303, 'Carlos Pereira', '2025-03-05', '2025-03-10')
+
+INSERT INTO RESERVA (id_quarto, hospede, data_checkin, data_checkout)
+VALUES (674, 'Marcos Augustos', '2020-03-05', '2025-03-10')
+
+INSERT INTO RESERVA (id_quarto, hospede, data_checkin, data_checkout)
+VALUES (353, 'Antetegemon', '2021-12-08', '2023-07-18')
+
+SELECT * FROM reservas_2023
+
+SELECT * FROM reservas_2024
+
+select * from reservas_2025
+
+SELECT * FROM reservas_outros
+
+select * from reservas_anteriores
+
+ALTER TABLE RESERVA ADD PRIMARY KEY (id_reserva)
+
+alter table reservas_2023 add primary key (id_reserva)
+alter table reservas_2024 add primary key (id_reserva)
+alter table reservas_2025 add primary key (id_reserva)
+alter table reservas_anteriores add primary key (id_reserva)
+alter table reservas_outros add primary key (id_reserva)
+
+select * from RESERVA where data_checkin between ('2020-01-01') and ('2023-12-30') order by id_reserva
+
+
+select * from RESERVA
+select * from RESERVA order by data_checkin
