@@ -13,4 +13,11 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <name>RPGMaster</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE240</version>
+        </dependency>
+    </dependencies>
 </project>
