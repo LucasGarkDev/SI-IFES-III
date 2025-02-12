@@ -1,0 +1,60 @@
+/* Resetando margens e removendo decoração padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilizando a barra de navegação */
+.navbar {
+    background-color: #111; /* Cor escura de fundo */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+/* Estilizando a logo */
+.logo img {
+    height: 30px; /* Ajuste conforme necessário */
+}
+
+/* Estilizando a lista do menu */
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+/* Estilizando os links */
+.menu li a {
+    color: #ddd; /* Cor do texto */
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px;
+}
+
+/* Adicionando hover */
+.menu li a:hover {
+    color: #f7b600; /* Cor amarela no hover */
+}
+
+/* Botão "Acesse sua conta" */
+.acessar {
+    font-weight: bold;
+    color: #f7b600;
+}
+
+/* Botão "Abra sua conta" */
+.abrir {
+    background-color: #f7b600;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.abrir:hover {
+    background-color: #e6a500;
+}
