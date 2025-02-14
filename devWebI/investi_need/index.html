@@ -19,12 +19,22 @@
         <!-- Div que contém o logo -->
         <div class="logo">
             <!-- Imagem do logo -->
-            <img src="../resorces/LogoInvestiNeed.png" alt="Logo InvestiNeed">
+            <img src="/devWebI/investi_need/resorces/imagens/Logo sem fundo.png" alt="Logo InvestiNeed">
         </div>
         <!-- Lista de itens do menu -->
         <ul class="menu">
             <!-- Item do menu: Sobre a XP -->
-            <li><a href="#">Sobre a XP ▾</a></li>
+            <li><a href="#">Sobre a InvestiNeed ▾</a>
+                <!-- Submenu do item: Sobre a XP -->
+                <ul class="submenu">
+                    <!-- Item do submenu: Quem somos -->
+                    <li><a href="#">Quem somos</a></li>
+                    <!-- Item do submenu: Nossos valores -->
+                    <li><a href="#">Nossos valores</a></li>
+                    <!-- Item do submenu: Carreiras -->
+                    <li><a href="#">Nossos Resultados</a></li>
+                </ul>
+            </li>
             <!-- Item do menu: Produtos e Serviços -->
             <li><a href="#">Produtos e Serviços ▾</a></li>
             <!-- Item do menu: Conteúdos -->
@@ -47,6 +57,11 @@
     <p> <span style="color:rgb(99, 99, 115)">Este é um simulador de investimentos. Insira o <strong>valor</strong>  a ser <strong> investido </strong> e o <strong>prazo de investimento</strong> para calcular o <strong>rendimento</strong>.</span></p>
     <!-- Define um parágrafo de texto -->
      
+    <p> <span style="color:rgb(99, 99, 115)">Valor a ser investido: <input type="text" id="valor" placeholder="R$ 0,00"></span></p>
+    <!-- Define um parágrafo de texto com um campo de entrada de texto -->
+
+    <p> <span style="color:rgb(99, 99, 115)">Prazo de investimento: <input type="text" id="prazo" placeholder="0 meses"></span></p>
+    <!-- Define um parágrafo de texto com um campo de entrada de texto -->
 </body>
 
 </html>
