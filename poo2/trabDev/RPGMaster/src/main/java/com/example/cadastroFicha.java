@@ -44,6 +44,7 @@ public class cadastroFicha extends javax.swing.JFrame {
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
+        jPanel29 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
@@ -289,15 +290,31 @@ public class cadastroFicha extends javax.swing.JFrame {
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        jPanel29.setLayout(jPanel29Layout);
+        jPanel29Layout.setHorizontalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 734, Short.MAX_VALUE)
+        );
+        jPanel29Layout.setVerticalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 94, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1810, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1073, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 929, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(829, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Pag 1", jPanel8);
@@ -1501,6 +1518,7 @@ public class cadastroFicha extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
