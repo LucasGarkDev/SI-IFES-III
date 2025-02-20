@@ -288,8 +288,6 @@ public class fichaAberta extends javax.swing.JFrame {
         jRadioButton73 = new javax.swing.JRadioButton();
         jRadioButton70 = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.setBackground(new java.awt.Color(153, 102, 0));
 
         lblNomePersonagm.setFont(new java.awt.Font("LM Roman 10", 1, 24)); // NOI18N
@@ -299,7 +297,7 @@ public class fichaAberta extends javax.swing.JFrame {
         txtNomePersonagem.setBackground(new java.awt.Color(0, 0, 0));
         txtNomePersonagem.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jPanel4.setBackground(new java.awt.Color(153, 0, 51));
+        jPanel4.setBackground(new java.awt.Color(102, 51, 0));
 
         lblRaca.setFont(new java.awt.Font("LM Roman 10", 1, 24)); // NOI18N
         lblRaca.setText("Raça:");
