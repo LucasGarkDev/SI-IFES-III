@@ -8,13 +8,12 @@ package com.example;
  *
  * @author lucas
  */
-public class Login extends javax.swing.JDialog {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Login(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Login() {
         initComponents();
     }
 
@@ -35,10 +34,10 @@ public class Login extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnSemCadastro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -46,7 +45,7 @@ public class Login extends javax.swing.JDialog {
 
         jToggleButton1.setText("jToggleButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Login - RPGMaster");
         setBackground(new java.awt.Color(226, 211, 162));
         setResizable(false);
@@ -67,7 +66,12 @@ public class Login extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("LOGIN");
 
-        jButton2.setText("ENTRAR");
+        btnEntrar.setText("ENTRAR");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -89,7 +93,7 @@ public class Login extends javax.swing.JDialog {
                             .addComponent(jLabel2))
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addGap(72, 72, 72)
-                            .addComponent(jButton2))
+                            .addComponent(btnEntrar))
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addGap(26, 26, 26)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,12 +118,12 @@ public class Login extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addComponent(jButton2)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addComponent(btnEntrar)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
-        jButton1.setText("Não tenho cadastro");
+        btnSemCadastro.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
+        btnSemCadastro.setText("Não tenho cadastro");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -132,7 +136,7 @@ public class Login extends javax.swing.JDialog {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jButton1)))
+                        .addComponent(btnSemCadastro)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -140,8 +144,9 @@ public class Login extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(btnSemCadastro)
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -218,6 +223,11 @@ public class Login extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        HomeJogador entreHome = new HomeJogador();
+        entreHome.setVisible(true);
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,7 +239,7 @@ public class Login extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("GTK+".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -248,7 +258,7 @@ public class Login extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login dialog = new Login(new javax.swing.JFrame(), true);
+                Login dialog = new Login();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -261,8 +271,8 @@ public class Login extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnSemCadastro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

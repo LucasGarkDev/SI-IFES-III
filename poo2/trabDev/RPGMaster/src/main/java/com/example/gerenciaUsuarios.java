@@ -32,18 +32,18 @@ public class gerenciaUsuarios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        txtPesquisaNomeUsuario = new javax.swing.JTextField();
+        btnExcluiUsuario = new javax.swing.JButton();
+        btnAlteraUsuario = new javax.swing.JButton();
+        cbxAlteraUsuario = new javax.swing.JComboBox<>();
+        cbxExcluiUsuario = new javax.swing.JComboBox<>();
+        chkUsuarioMestre = new javax.swing.JCheckBox();
+        chkUsuarioJogador = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblListaUsuarios = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(204, 102, 0));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -69,23 +69,24 @@ public class gerenciaUsuarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        jPanel3.setBackground(new java.awt.Color(102, 51, 0));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel3.setFont(new java.awt.Font("LM Roman 10", 1, 18)); // NOI18N
         jLabel3.setText("Nome :");
 
-        jButton3.setText("Excluir");
+        btnExcluiUsuario.setText("Excluir");
 
-        jButton4.setText("Alterar");
-        jButton4.setToolTipText("");
+        btnAlteraUsuario.setText("Alterar");
+        btnAlteraUsuario.setToolTipText("");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Ainda nao escolheu--", "Pedro", "Lucas", "Rodrigo", "Miguel" }));
+        cbxAlteraUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Ainda nao escolheu--", "Pedro", "Lucas", "Rodrigo", "Miguel" }));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Ainda nao escolheu--", "Pedro", "Lucas", "Rodrigo", "Miguel" }));
+        cbxExcluiUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Ainda nao escolheu--", "Pedro", "Lucas", "Rodrigo", "Miguel" }));
 
-        jCheckBox1.setText("Mestre");
+        chkUsuarioMestre.setText("Mestre");
 
-        jCheckBox2.setText("Jogador");
+        chkUsuarioJogador.setText("Jogador");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -96,50 +97,55 @@ public class gerenciaUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxExcluiUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPesquisaNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
+                                .addComponent(chkUsuarioMestre)
                                 .addGap(60, 60, 60)
-                                .addComponent(jCheckBox2)))
+                                .addComponent(chkUsuarioJogador)))
                         .addGap(148, 148, 148)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxAlteraUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnExcluiUsuario)
+                    .addComponent(btnAlteraUsuario))
                 .addGap(122, 122, 122))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPesquisaNomeUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(cbxExcluiUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluiUsuario)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4)))
+                            .addComponent(cbxAlteraUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAlteraUsuario)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2))))
+                            .addComponent(chkUsuarioMestre)
+                            .addComponent(chkUsuarioJogador))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel4.setBackground(new java.awt.Color(102, 51, 0));
+
+        tblListaUsuarios.setBackground(new java.awt.Color(255, 204, 153));
+        tblListaUsuarios.setForeground(new java.awt.Color(0, 0, 0));
+        tblListaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -175,14 +181,21 @@ public class gerenciaUsuarios extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jTable3.setRowHeight(40);
-        jTable3.setShowGrid(true);
-        jScrollPane2.setViewportView(jTable3);
+        tblListaUsuarios.setRowHeight(40);
+        tblListaUsuarios.setShowGrid(true);
+        jScrollPane2.setViewportView(tblListaUsuarios);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -278,12 +291,12 @@ public class gerenciaUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JButton btnAlteraUsuario;
+    private javax.swing.JButton btnExcluiUsuario;
+    private javax.swing.JComboBox<String> cbxAlteraUsuario;
+    private javax.swing.JComboBox<String> cbxExcluiUsuario;
+    private javax.swing.JCheckBox chkUsuarioJogador;
+    private javax.swing.JCheckBox chkUsuarioMestre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -292,7 +305,7 @@ public class gerenciaUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblListaUsuarios;
+    private javax.swing.JTextField txtPesquisaNomeUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,4 +1,8 @@
 /home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/Cadastro.java
 /home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/HomeJogador.java
 /home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/Login.java
-/home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/Main.java
+/home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/cadastroFicha.java
+/home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/fichaAberta.java
+/home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/gerenciaMesas.java
+/home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/gerenciaUsuarios.java
+/home/lucas/Documentos/ifes-3ano/SI-IFES-III/poo2/trabDev/RPGMaster/src/main/java/com/example/gerenciarPersonagens.java
