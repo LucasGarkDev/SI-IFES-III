@@ -33,3 +33,34 @@ h1 {
     color: yellow;
     font-style:italic
 }
+
+/* Exercicio 2 */
+.negrito{
+    font-weight: bold;
+}
+
+.subescrito{
+    font-size: 15px;
+    vertical-align: sub;
+}
+
+.sobrescrito{
+    font-size: 15px;
+    vertical-align: super;
+}
+
+.marcado{
+    background-color: yellow;
+}
+
+.tachado{
+    text-decoration: line-through;
+}
+
+.italico{
+    font-style: italic;
+}
+
+.subilinhado{
+    text-decoration: underline;
+}
