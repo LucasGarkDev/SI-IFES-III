@@ -28,3 +28,8 @@ h1 {
     /* color: royalblue; */
     font-size: 40px;
 }
+
+#paragrafo-principal{
+    color: yellow;
+    font-style:italic
+}
