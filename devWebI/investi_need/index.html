@@ -54,14 +54,34 @@
     <!-- Contém o conteúdo visível da página -->
     <h2><em>Simulador de Investimentos</em></h2>
     <!-- Define um título de segundo nível e aplica ênfase -->
-    <p> <span style="color:rgb(99, 99, 115)">Este é um simulador de investimentos. Insira o <strong>valor</strong>  a ser <strong> investido </strong> e o <strong>prazo de investimento</strong> para calcular o <strong>rendimento</strong>.</span></p>
+    <p> Este é um simulador de investimentos. Insira o <strong>valor</strong>  a ser <strong> investido </strong> e o <strong>prazo de investimento</strong> para calcular o <strong>rendimento</strong>.</span></p>
     <!-- Define um parágrafo de texto -->
      
-    <p> <span style="color:rgb(99, 99, 115)">Valor a ser investido: <input type="text" id="valor" placeholder="R$ 0,00"></span></p>
+    <p> Valor a ser investido: <input type="text" id="valor" placeholder="R$ 0,00"></span></p>
     <!-- Define um parágrafo de texto com um campo de entrada de texto -->
 
-    <p> <span style="color:rgb(99, 99, 115)">Prazo de investimento: <input type="text" id="prazo" placeholder="0 meses"></span></p>
+    <p> Prazo de investimento: <input type="text" id="prazo" placeholder="0 meses"></span></p>
     <!-- Define um parágrafo de texto com um campo de entrada de texto -->
+    
+    <p> Rendimento: <input type="text" id="rendimento" placeholder="R$ 0,00"></span></p>
+    <!-- Define um parágrafo de texto com um campo de entrada de texto -->
+    
+    <div style="text-align: center;">
+        <button class="calcular" onclick="calcular()">Calcular</button>
+    </div></div>
+    <!-- Define um botão que chama a função calcular() ao ser clicado que esta no arquivo script.js -->
+
+    <script src="script.js"></script>
+    <!-- Importa o arquivo de scripts externo -->
+    <footer>
+        <!-- Rodapé do site -->
+        <div class="footer">
+            <!-- Div que contém o texto do rodapé -->
+            <p>InvestiNeed © 2021</p>
+            <!-- Parágrafo com o texto do rodapé -->
+        </div>
+    </footer>
+    <!-- Fim do rodapé do site -->
 </body>
 
 </html>

@@ -58,3 +58,38 @@
 .abrir:hover {
     background-color: #e6a500;
 }
+
+/* Estilizando o texto interno */
+p {
+    font-size: 18px;
+    margin: 20px 0;
+    color:rgb(99, 99, 115)
+}
+
+/* Estilizando o botão "Calcular" */
+.calcular {
+    background-color: #f7b600;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.calcular:hover {
+    background-color: #e6a500;
+}
+
+/* Estilizando o rodapé */
+.footer {
+    background-color: #111;
+    color: #ddd;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+/* Estilizando o título */
+h1 {
+    font-size: 24px;
+    margin: 20px 0;
+    color: #111;
+}
