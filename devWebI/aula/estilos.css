@@ -1,0 +1,19 @@
+body {
+    background-color: darkolivegreen;
+    background-image: none;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+p {
+    color: indianred;
+    text-align: justify;
+}
+h1 {
+    font-size: 50px;
+    border: 2px solid green;
+    color: aquamarine;
+    text-align: center;
+    background-color: midnightblue;
+    border-radius: 10px;
+}
+
