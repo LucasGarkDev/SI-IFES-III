@@ -1,11 +1,14 @@
+* {
+    font-family: Verdana;
+}
 body {
     background-color: darkolivegreen;
     background-image: none;
-    color: white;
     font-family: Arial, sans-serif;
 }
 p {
-    color: indianred;
+    color: white;
+    font-size: 20px;
     text-align: justify;
 }
 h1 {
@@ -16,4 +19,11 @@ h1 {
     background-color: midnightblue;
     border-radius: 10px;
 }
+.destaque{
+    color: blueviolet;
+    font-weight: bold;
+}
 
+.fgrande{
+    font-size: 40px;
+}
