@@ -50,7 +50,7 @@ public class Cadastro extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnTerminarCadastro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -129,8 +129,13 @@ public class Cadastro extends javax.swing.JDialog {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
-        jButton1.setText("Terminar");
+        btnTerminarCadastro.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
+        btnTerminarCadastro.setText("Terminar");
+        btnTerminarCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarCadastroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -176,7 +181,7 @@ public class Cadastro extends javax.swing.JDialog {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(48, 48, 48)
-                                .addComponent(jButton1)))
+                                .addComponent(btnTerminarCadastro)))
                         .addGap(93, 93, 93)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
@@ -216,7 +221,7 @@ public class Cadastro extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnTerminarCadastro)
                 .addContainerGap(176, Short.MAX_VALUE))
         );
 
@@ -325,6 +330,12 @@ public class Cadastro extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void btnTerminarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarCadastroActionPerformed
+        Login loginUsuario = new Login();
+        loginUsuario.setVisible(true); // Abre o novo frame
+        this.dispose(); // Fecha o frame atual (Login)
+    }//GEN-LAST:event_btnTerminarCadastroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -369,7 +380,7 @@ public class Cadastro extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnTerminarCadastro;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox<String> jComboBox1;

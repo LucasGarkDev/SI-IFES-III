@@ -45,6 +45,11 @@
             <artifactId>flatlaf</artifactId>
             <version>3.2</version> <!-- Substitua pela versão mais recente -->
         </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 
     <build>

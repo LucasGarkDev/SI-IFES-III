@@ -45,7 +45,7 @@ public class Login extends javax.swing.JFrame {
 
         jToggleButton1.setText("jToggleButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login - RPGMaster");
         setBackground(new java.awt.Color(226, 211, 162));
         setResizable(false);
@@ -124,6 +124,11 @@ public class Login extends javax.swing.JFrame {
 
         btnSemCadastro.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
         btnSemCadastro.setText("Não tenho cadastro");
+        btnSemCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSemCadastroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -225,8 +230,15 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         HomeJogador entreHome = new HomeJogador();
-        entreHome.setVisible(true);
+        entreHome.setVisible(true); // Abre o novo frame
+        this.dispose(); // Fecha o frame atual (Login)
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void btnSemCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSemCadastroActionPerformed
+        Cadastro cadUsuario = new Cadastro(this, true);
+        cadUsuario.setVisible(true); // Abre o novo frame
+        this.dispose(); // Fecha o frame atual (Login)
+    }//GEN-LAST:event_btnSemCadastroActionPerformed
 
     /**
      * @param args the command line arguments
