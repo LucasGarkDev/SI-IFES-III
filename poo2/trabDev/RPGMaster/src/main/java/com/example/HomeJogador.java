@@ -4,6 +4,13 @@
  */
 package com.example;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lucas
@@ -16,6 +23,10 @@ public class HomeJogador extends javax.swing.JFrame {
     public HomeJogador() {
         initComponents();
     }
+    
+    private int ultimaRolagem = 0;
+    private int penultimaRolagem = 0;
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,7 +154,7 @@ public class HomeJogador extends javax.swing.JFrame {
         formatedValorDado = new javax.swing.JFormattedTextField();
         txtNomePersonagem = new javax.swing.JTextField();
         scrListaIniciativas = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tbListaIniciativas = new javax.swing.JTable();
         pnlHistoricoPersonagem = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHistoricoPersonagens = new javax.swing.JTable();
@@ -261,7 +272,7 @@ public class HomeJogador extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        cbxOperacaoDado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soma", "Subtração" }));
+        cbxOperacaoDado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Nenhuma--", "Soma", "Subtração" }));
 
         lblOperacaoDados.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
         lblOperacaoDados.setText("Operaçoes de Dados:");
@@ -270,6 +281,11 @@ public class HomeJogador extends javax.swing.JFrame {
         lblValorDadoAnterior.setText("Valor do Dado anterior:");
 
         btnRolarDado.setText("Rolar Dado");
+        btnRolarDado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRolarDadoActionPerformed(evt);
+            }
+        });
 
         lblNumPvMaximo.setFont(new java.awt.Font("LM Roman 10", 1, 48)); // NOI18N
         lblNumPvMaximo.setText("30");
@@ -320,8 +336,8 @@ public class HomeJogador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(formatedNumPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(formatedNumPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(lblNumPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,9 +384,8 @@ public class HomeJogador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(formatedNumPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlRolagemDadosLayout = new javax.swing.GroupLayout(pnlRolagemDados);
@@ -1158,6 +1173,11 @@ public class HomeJogador extends javax.swing.JFrame {
         jLabel7.setText("Nome do Personagem:");
 
         btnInserirIniciativa.setText("Inserir");
+        btnInserirIniciativa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirIniciativaActionPerformed(evt);
+            }
+        });
 
         formatedValorDado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         formatedValorDado.addActionListener(new java.awt.event.ActionListener() {
@@ -1207,8 +1227,8 @@ public class HomeJogador extends javax.swing.JFrame {
         scrListaIniciativas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Iniciativas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("LM Roman 10", 1, 18))); // NOI18N
         scrListaIniciativas.setFont(new java.awt.Font("LM Mono 10", 1, 15)); // NOI18N
 
-        jTable4.setFont(new java.awt.Font("LM Roman 10", 1, 18)); // NOI18N
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tbListaIniciativas.setFont(new java.awt.Font("LM Roman 10", 1, 18)); // NOI18N
+        tbListaIniciativas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -1228,8 +1248,8 @@ public class HomeJogador extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable4.setShowGrid(true);
-        scrListaIniciativas.setViewportView(jTable4);
+        tbListaIniciativas.setShowGrid(true);
+        scrListaIniciativas.setViewportView(tbListaIniciativas);
 
         pnlHistoricoPersonagem.setBackground(new java.awt.Color(102, 51, 0));
         pnlHistoricoPersonagem.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Historico de Personagens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("LM Roman 10", 1, 18))); // NOI18N
@@ -1466,6 +1486,90 @@ public class HomeJogador extends javax.swing.JFrame {
         gerUsuario.setVisible(true);
     }//GEN-LAST:event_opicaoGerenciaUsuariosActionPerformed
 
+    private void btnRolarDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRolarDadoActionPerformed
+        try {
+            // Obtendo o tipo de dado (ex: d4, d6, d8, d20)
+            String dadoSelecionado = cbxDadoSelecionado.getSelectedItem().toString();
+            int faces = Integer.parseInt(dadoSelecionado.substring(1)); // Remove o 'd' e pega o número
+
+            // Obtendo o modificador
+            String modTexto = formatedModificador.getText().trim();
+            int modificador = 0;
+
+            if (!modTexto.isEmpty()) {
+                modificador = Integer.parseInt(modTexto);
+            }
+
+            // Gerando o número aleatório do dado
+            Random random = new Random();
+            int resultadoDado = random.nextInt(faces) + 1;
+
+            // Aplicando o modificador
+            int resultadoFinal = resultadoDado + modificador;
+
+            // Atualizando os valores anteriores
+            penultimaRolagem = ultimaRolagem;  // O penúltimo recebe o último antes de ser atualizado
+            ultimaRolagem = resultadoFinal;    // O último recebe o novo resultado
+
+            // Atualizando os labels e textfields
+            lblNumValorDado.setText(String.valueOf(resultadoFinal));
+            formatedValorPrimeiroDadoAnterior.setText(String.valueOf(ultimaRolagem));
+            formatedValorSegundoDadoAnterior.setText(String.valueOf(penultimaRolagem)); // Atualiza o segundo anterior
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Erro: Insira um modificador válido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRolarDadoActionPerformed
+
+    private void btnInserirIniciativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirIniciativaActionPerformed
+        try {
+            // Obtendo os valores dos campos
+            int valorIniciativa = Integer.parseInt(formatedValorDado.getText().trim()); // Garante que só aceita números inteiros
+            String nomePersonagem = txtNomePersonagem.getText().trim(); // Pega o nome digitado
+
+            // Verifica se o nome está vazio
+            if (nomePersonagem.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, insira o nome do personagem!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Obtém o modelo da tabela
+            DefaultTableModel model = (DefaultTableModel) tbListaIniciativas.getModel();
+
+            // Adiciona o novo valor à tabela
+            model.addRow(new Object[]{valorIniciativa, nomePersonagem});
+
+            // Ordenar a tabela por ordem decrescente de iniciativa
+//            ordenarTabelaIniciativa(model);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Erro: Insira um número inteiro válido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnInserirIniciativaActionPerformed
+
+    // Método para ordenar a tabela por ordem decrescente (maior iniciativa primeiro)
+//    private void ordenarTabelaIniciativa(DefaultTableModel model) {
+//        int rowCount = model.getRowCount();
+//
+//        // Correção: Declarando corretamente a lista de arrays de objetos
+//        List<Object[]> listaDados = new ArrayList<>();
+//
+//        // Extrair os dados manualmente
+//        for (int i = 0; i < rowCount; i++) {
+//            int iniciativa = Integer.parseInt(model.getValueAt(i, 0).toString());
+//            String nome = model.getValueAt(i, 1).toString();
+//            listaDados.add(new Object[]{iniciativa, nome});
+//        }
+//
+//        // Ordenar em ordem decrescente (maior iniciativa primeiro)
+//        listaDados.sort((a, b) -> Integer.compare((int) b[0], (int) a[0]));
+//
+//        // Limpa a tabela e reinsere os valores ordenados
+//        model.setRowCount(0);
+//        for (Object[] linha : listaDados) {
+//            model.addRow(linha);
+//        }
+//    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1552,7 +1656,6 @@ public class HomeJogador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblAdicionarIniciativa;
     private javax.swing.JLabel lblArmasADistancia;
@@ -1631,6 +1734,7 @@ public class HomeJogador extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioSobrevivencia;
     private javax.swing.JRadioButton redioPercepcao;
     private javax.swing.JScrollPane scrListaIniciativas;
+    private javax.swing.JTable tbListaIniciativas;
     private javax.swing.JTable tblHistoricoPersonagens;
     private javax.swing.JTable tblMesasAtivas;
     private javax.swing.JTextArea textDescricaoItemMagico;
