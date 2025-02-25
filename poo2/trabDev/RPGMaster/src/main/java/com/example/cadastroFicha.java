@@ -326,6 +326,11 @@ public class cadastroFicha extends javax.swing.JFrame {
         formatedPontosExperiencia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
 
         btnTerminarFicha.setText("Terminar");
+        btnTerminarFicha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarFichaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -2355,6 +2360,10 @@ public class cadastroFicha extends javax.swing.JFrame {
     private void btnAplicarDadoVidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarDadoVidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAplicarDadoVidaActionPerformed
+
+    private void btnTerminarFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarFichaActionPerformed
+        this.dispose(); // Fecha o frame atual (Cadastro ficha)
+    }//GEN-LAST:event_btnTerminarFichaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -199,7 +199,7 @@ public class HomeJogador extends javax.swing.JFrame {
         lblValorDado.setText("Valor do dado: ");
 
         lblNumValorDado.setFont(new java.awt.Font("LM Roman 10", 1, 36)); // NOI18N
-        lblNumValorDado.setText("12");
+        lblNumValorDado.setText("0");
 
         lblModificador.setFont(new java.awt.Font("LM Mono 10", 1, 15)); // NOI18N
         lblModificador.setText("Modificador:");
@@ -288,7 +288,7 @@ public class HomeJogador extends javax.swing.JFrame {
         });
 
         lblNumPvMaximo.setFont(new java.awt.Font("LM Roman 10", 1, 48)); // NOI18N
-        lblNumPvMaximo.setText("30");
+        lblNumPvMaximo.setText("8");
 
         formatedNumPvAtual.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         formatedNumPvAtual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
@@ -340,8 +340,9 @@ public class HomeJogador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lblNumPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
+                        .addComponent(lblNumPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnRolarDado)
                             .addComponent(lblPvMaximo)))))
@@ -377,11 +378,9 @@ public class HomeJogador extends javax.swing.JFrame {
                     .addComponent(pnlTesteContraMorte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(lblNumPvMaximo))
-                            .addComponent(lblPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNumPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(formatedNumPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1230,11 +1229,7 @@ public class HomeJogador extends javax.swing.JFrame {
         tbListaIniciativas.setFont(new java.awt.Font("LM Roman 10", 1, 18)); // NOI18N
         tbListaIniciativas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Valor Inicativa", "Personagem"
