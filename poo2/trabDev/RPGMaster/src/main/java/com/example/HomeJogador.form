@@ -301,11 +301,11 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="formatedNumPvAtual" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="formatedNumPvAtual" min="-2" pref="76" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblPvAtual" min="-2" pref="230" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="lblNumPvMaximo" min="-2" pref="71" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -366,10 +366,9 @@
                                           <Component id="formatedNumPvAtual" min="-2" pref="65" max="-2" attributes="0"/>
                                           <Component id="lblPvAtual" min="-2" pref="48" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -564,9 +563,10 @@
                     <Component class="javax.swing.JComboBox" name="cbxOperacaoDado">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="2">
-                            <StringItem index="0" value="Soma"/>
-                            <StringItem index="1" value="Subtra&#xe7;&#xe3;o"/>
+                          <StringArray count="3">
+                            <StringItem index="0" value="--Nenhuma--"/>
+                            <StringItem index="1" value="Soma"/>
+                            <StringItem index="2" value="Subtra&#xe7;&#xe3;o"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -596,6 +596,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Rolar Dado"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRolarDadoActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblNumPvMaximo">
                       <Properties>
@@ -2072,6 +2075,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Inserir"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInserirIniciativaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="formatedValorDado">
                   <Properties>
@@ -2106,7 +2112,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable4">
+                <Component class="javax.swing.JTable" name="tbListaIniciativas">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="LM Roman 10" size="18" style="1"/>
