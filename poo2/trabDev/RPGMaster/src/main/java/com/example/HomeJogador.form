@@ -201,12 +201,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="painelRecursosFicha" min="-2" pref="527" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="painelMesasAtivas" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               <Component id="pnlRolagemDados" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="painelRecursosFicha" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnlHistoricoPersonagem" min="-2" max="-2" attributes="0"/>
@@ -265,6 +265,8 @@
                               <Component id="lblValorDado" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblNumValorDado" min="-2" pref="76" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnRolarDado" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -309,10 +311,7 @@
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                       <Component id="lblNumPvMaximo" min="-2" pref="59" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnRolarDado" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblPvMaximo" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="lblPvMaximo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -338,20 +337,13 @@
                                       <Component id="formatedModificador" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblValorDado" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblNumValorDado" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btnRolarDado" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblValorDado" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNumValorDado" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnRolarDado" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="pnlTesteContraMorte" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -366,7 +358,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2240,7 +2232,7 @@
                               <Data value="Vivo"/>
                               <Data value="Vivo"/>
                               <Data value="Vivo"/>
-                              <Data value="null"/>
+                              <Data value="Morto"/>
                               <Data value="null"/>
                               <Data value="null"/>
                             </Column>
