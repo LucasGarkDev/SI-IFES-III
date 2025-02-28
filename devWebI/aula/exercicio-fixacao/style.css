@@ -1,0 +1,29 @@
+.light-gray-text {
+    color: gray;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    align-self: center;
+}
+
+.letra-principal {
+    font-size: 1em;
+    text-align: justify;
+    font-family: "UOLtext",Arial,sans-serif;
+    line-height: 1.5;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000;
+    font-family: "UOLtext", Arial, sans-serif;
+
+    border-radius: 10px;
+}
+
+a {
+    color: red;
+}
