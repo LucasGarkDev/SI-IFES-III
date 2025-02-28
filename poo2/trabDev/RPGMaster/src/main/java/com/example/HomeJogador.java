@@ -22,6 +22,15 @@ public class HomeJogador extends javax.swing.JFrame {
      */
     public HomeJogador() {
         initComponents();
+        
+        // Adiciona os Listeners para que o status seja atualizado ao clicar nos botões
+        radioSucesso1.addActionListener(e -> atualizarStatusTesteMorte());
+        radioSucesso2.addActionListener(e -> atualizarStatusTesteMorte());
+        radioSucesso3.addActionListener(e -> atualizarStatusTesteMorte());
+
+        radioFracasso1.addActionListener(e -> atualizarStatusTesteMorte());
+        radioFracasso2.addActionListener(e -> atualizarStatusTesteMorte());
+        radioFracasso3.addActionListener(e -> atualizarStatusTesteMorte());
     }
     
     private int ultimaRolagem = 0;
@@ -48,15 +57,15 @@ public class HomeJogador extends javax.swing.JFrame {
         lblModificador = new javax.swing.JLabel();
         formatedModificador = new javax.swing.JFormattedTextField();
         pnlTesteContraMorte = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        radioSucesso1 = new javax.swing.JRadioButton();
+        radioSucesso2 = new javax.swing.JRadioButton();
+        radioSucesso3 = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jLabel10 = new javax.swing.JLabel();
+        radioFracasso2 = new javax.swing.JRadioButton();
+        radioFracasso1 = new javax.swing.JRadioButton();
+        radioFracasso3 = new javax.swing.JRadioButton();
+        lblStatusTesteMorte = new javax.swing.JLabel();
         formatedValorPrimeiroDadoAnterior = new javax.swing.JFormattedTextField();
         cbxOperacaoDado = new javax.swing.JComboBox<>();
         formatedValorSegundoDadoAnterior = new javax.swing.JFormattedTextField();
@@ -67,6 +76,9 @@ public class HomeJogador extends javax.swing.JFrame {
         formatedNumPvAtual = new javax.swing.JFormattedTextField();
         lblPvMaximo = new javax.swing.JLabel();
         lblPvAtual = new javax.swing.JLabel();
+        btnFazerOperacao = new javax.swing.JButton();
+        lblValorOperacao = new javax.swing.JLabel();
+        lblNumValorOperacao = new javax.swing.JLabel();
         painelMesasAtivas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblMesasAtivas = new javax.swing.JTable();
@@ -215,8 +227,8 @@ public class HomeJogador extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("LM Mono 10", 1, 15)); // NOI18N
         jLabel9.setText("Fracassos");
 
-        jLabel10.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
-        jLabel10.setText("Status: ???");
+        lblStatusTesteMorte.setFont(new java.awt.Font("LM Roman 10", 1, 15)); // NOI18N
+        lblStatusTesteMorte.setText("Status: ???");
 
         javax.swing.GroupLayout pnlTesteContraMorteLayout = new javax.swing.GroupLayout(pnlTesteContraMorte);
         pnlTesteContraMorte.setLayout(pnlTesteContraMorteLayout);
@@ -226,50 +238,53 @@ public class HomeJogador extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
-                        .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
+                        .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStatusTesteMorte)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton5))
+                        .addComponent(radioFracasso1))
                     .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(35, 35, 35)
-                        .addComponent(jRadioButton1)))
+                        .addComponent(radioSucesso1)))
                 .addGap(18, 18, 18)
                 .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton4))
+                    .addComponent(radioSucesso2)
+                    .addComponent(radioFracasso2))
                 .addGap(18, 18, 18)
                 .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton6))
+                    .addComponent(radioSucesso3)
+                    .addComponent(radioFracasso3))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         pnlTesteContraMorteLayout.setVerticalGroup(
             pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTesteContraMorteLayout.createSequentialGroup()
+                        .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
+                                .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(radioSucesso3)
+                                    .addComponent(radioSucesso2))
+                                .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(radioFracasso2)
+                                            .addComponent(radioFracasso3)))
+                                    .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(radioFracasso1)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(lblStatusTesteMorte))
                     .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
-                        .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton2))
-                        .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton4)
-                                    .addComponent(jRadioButton6)))
-                            .addGroup(pnlTesteContraMorteLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(pnlTesteContraMorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton5)
-                                    .addComponent(jLabel9))))))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10)
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(radioSucesso1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         cbxOperacaoDado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Nenhuma--", "Soma", "Subtração" }));
@@ -300,6 +315,19 @@ public class HomeJogador extends javax.swing.JFrame {
         lblPvAtual.setFont(new java.awt.Font("LM Roman 10", 1, 18)); // NOI18N
         lblPvAtual.setText("Pontos de vida atuais");
 
+        btnFazerOperacao.setText("Fazer Operação");
+        btnFazerOperacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFazerOperacaoActionPerformed(evt);
+            }
+        });
+
+        lblValorOperacao.setFont(new java.awt.Font("LM Mono 10", 1, 15)); // NOI18N
+        lblValorOperacao.setText("Valor Operação: ");
+
+        lblNumValorOperacao.setFont(new java.awt.Font("LM Roman 10", 1, 36)); // NOI18N
+        lblNumValorOperacao.setText("0");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -309,43 +337,54 @@ public class HomeJogador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNumValorDado, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRolarDado))
+                .addComponent(btnRolarDado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFazerOperacao)
+                .addGap(24, 24, 24))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lblDadoASerRolado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxDadoSelecionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(lblDadoASerRolado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxDadoSelecionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(lblModificador)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(formatedModificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addComponent(lblOperacaoDados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbxOperacaoDado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(lblValorDadoAnterior)
+                                .addGap(18, 18, 18)
+                                .addComponent(formatedValorPrimeiroDadoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(formatedValorSegundoDadoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lblModificador)
+                        .addContainerGap()
+                        .addComponent(pnlTesteContraMorte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(formatedModificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(80, 80, 80)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lblValorDadoAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formatedValorPrimeiroDadoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(formatedValorSegundoDadoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(lblOperacaoDados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbxOperacaoDado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTesteContraMorte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(formatedNumPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblNumPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPvMaximo))))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(formatedNumPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblNumPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblPvMaximo))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(lblValorOperacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNumValorOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,14 +403,24 @@ public class HomeJogador extends javax.swing.JFrame {
                         .addComponent(lblValorDadoAnterior)
                         .addComponent(formatedValorSegundoDadoAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(formatedModificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblValorDado)
-                    .addComponent(lblNumValorDado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRolarDado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTesteContraMorte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblValorDado)
+                            .addComponent(lblNumValorDado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRolarDado))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFazerOperacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNumValorOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblValorOperacao)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPvMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,8 +428,11 @@ public class HomeJogador extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(formatedNumPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                            .addComponent(lblPvAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(pnlTesteContraMorte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlRolagemDadosLayout = new javax.swing.GroupLayout(pnlRolagemDados);
@@ -1322,7 +1374,7 @@ public class HomeJogador extends javax.swing.JFrame {
                         .addComponent(painelMesasAtivas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(pnlRolagemDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(painelRecursosFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(painelRecursosFicha, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHistoricoPersonagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1408,7 +1460,7 @@ public class HomeJogador extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1718, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1681, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1537,6 +1589,58 @@ public class HomeJogador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInserirIniciativaActionPerformed
 
+    private void btnFazerOperacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFazerOperacaoActionPerformed
+        try {
+            // Obter os dois últimos valores dos dados
+            int primeiroValor = Integer.parseInt(formatedValorPrimeiroDadoAnterior.getText().trim());
+            int segundoValor = Integer.parseInt(formatedValorSegundoDadoAnterior.getText().trim());
+
+            // Obter a operação escolhida no ComboBox
+            String operacao = cbxOperacaoDado.getSelectedItem().toString();
+
+            int resultado = 0;
+
+            // Realizar a operação escolhida
+            if (operacao.equals("Soma")) {
+                resultado = primeiroValor + segundoValor;
+            } else if (operacao.equals("Subtração")) {
+                resultado = primeiroValor - segundoValor;
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione uma operação válida!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Atualizar o label com o resultado da operação
+            lblNumValorOperacao.setText(String.valueOf(resultado));
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Erro: Certifique-se de que há dois valores válidos para a operação!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnFazerOperacaoActionPerformed
+
+    private void atualizarStatusTesteMorte() {
+        // Verificar quantos sucessos e fracassos estão marcados
+        int sucessos = 0;
+        int fracassos = 0;
+
+        if (radioSucesso1.isSelected()) sucessos++;
+        if (radioSucesso2.isSelected()) sucessos++;
+        if (radioSucesso3.isSelected()) sucessos++;
+
+        if (radioFracasso1.isSelected()) fracassos++;
+        if (radioFracasso2.isSelected()) fracassos++;
+        if (radioFracasso3.isSelected()) fracassos++;
+
+        // Atualizar o status com base na regra definida
+        if (sucessos == 3) {
+            lblStatusTesteMorte.setText("Status : Ainda Vivo");
+        } else if (fracassos == 3) {
+            lblStatusTesteMorte.setText("Status : Morto");
+        } else {
+            lblStatusTesteMorte.setText("Status : Vivo");
+        }
+    }
+    
     // Método para ordenar a tabela por ordem decrescente (maior iniciativa primeiro)
 //    private void ordenarTabelaIniciativa(DefaultTableModel model) {
 //        int rowCount = model.getRowCount();
@@ -1602,6 +1706,7 @@ public class HomeJogador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFazerOperacao;
     private javax.swing.JButton btnInserirIniciativa;
     private javax.swing.JButton btnRolarDado;
     private javax.swing.JComboBox<String> cbxDadoSelecionado;
@@ -1624,7 +1729,6 @@ public class HomeJogador extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;
@@ -1637,12 +1741,6 @@ public class HomeJogador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1671,13 +1769,16 @@ public class HomeJogador extends javax.swing.JFrame {
     private javax.swing.JLabel lblNumBonusItemMagico;
     private javax.swing.JLabel lblNumPvMaximo;
     private javax.swing.JLabel lblNumValorDado;
+    private javax.swing.JLabel lblNumValorOperacao;
     private javax.swing.JLabel lblOperacaoDados;
     private javax.swing.JLabel lblPvAtual;
     private javax.swing.JLabel lblPvMaximo;
     private javax.swing.JLabel lblRequerSintonizacao;
+    private javax.swing.JLabel lblStatusTesteMorte;
     private javax.swing.JLabel lblValorDado;
     private javax.swing.JLabel lblValorDadoAnterior;
     private javax.swing.JLabel lblValorNoDado;
+    private javax.swing.JLabel lblValorOperacao;
     private javax.swing.JList<String> listArmaADistancia;
     private javax.swing.JList<String> listArmaCorpoACorpo;
     private javax.swing.JMenuBar menuHome;
@@ -1714,6 +1815,9 @@ public class HomeJogador extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioAtletismo;
     private javax.swing.JRadioButton radioAtuacao;
     private javax.swing.JRadioButton radioEnganacao;
+    private javax.swing.JRadioButton radioFracasso1;
+    private javax.swing.JRadioButton radioFracasso2;
+    private javax.swing.JRadioButton radioFracasso3;
     private javax.swing.JRadioButton radioFurtividade;
     private javax.swing.JRadioButton radioHistoria;
     private javax.swing.JRadioButton radioIntimidacao;
@@ -1726,6 +1830,9 @@ public class HomeJogador extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioPrestidigitacao;
     private javax.swing.JRadioButton radioReligiao;
     private javax.swing.JRadioButton radioSobrevivencia;
+    private javax.swing.JRadioButton radioSucesso1;
+    private javax.swing.JRadioButton radioSucesso2;
+    private javax.swing.JRadioButton radioSucesso3;
     private javax.swing.JRadioButton redioPercepcao;
     private javax.swing.JScrollPane scrListaIniciativas;
     private javax.swing.JTable tbListaIniciativas;
