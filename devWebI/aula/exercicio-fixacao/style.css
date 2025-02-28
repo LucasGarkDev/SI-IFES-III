@@ -11,7 +11,7 @@ h1 {
 .letra-principal {
     font-size: 1em;
     text-align: justify;
-    font-family: "UOLtext",Arial,sans-serif;
+    font-family: "UOLtext", Arial, sans-serif;
     line-height: 1.5;
 }
 
@@ -25,5 +25,9 @@ h2 {
 }
 
 a {
+    color: red;
+}
+
+ul li::marker {
     color: red;
 }
