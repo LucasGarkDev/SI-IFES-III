@@ -33,3 +33,8 @@ a {
 ul li::marker {
     color: red;
 }
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
