@@ -1,0 +1,90 @@
+CREATE TABLE obra (
+    nr_obra SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE genero (
+    id_genero SERIAL PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL
+);
+
+ALTER TABLE obra ADD COLUMN id_genero INT REFERENCES genero(id_genero);
+
+
+CREATE TABLE autor (
+    id_autor SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE autoria (
+    nr_obra INT REFERENCES obra(nr_obra) ON DELETE CASCADE,
+    id_autor INT REFERENCES autor(id_autor) ON DELETE CASCADE,
+    PRIMARY KEY (nr_obra, id_autor)
+);
+
+
+CREATE TABLE editora (
+    id_editora SERIAL PRIMARY KEY,
+    nome_fantasia VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE livro (
+    nr_livro SERIAL PRIMARY KEY,
+    nr_obra INT REFERENCES obra(nr_obra) ON DELETE CASCADE,
+    id_editora INT REFERENCES editora(id_editora) ON DELETE SET NULL,
+    data_aquisicao DATE NOT NULL,
+    edicao INT NOT NULL
+);
+
+
+CREATE TABLE usuario (
+    matricula SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sexo CHAR(1) CHECK (sexo IN ('M', 'F')),
+    data_nascimento DATE NOT NULL,
+    telefone VARCHAR(20),
+    celular VARCHAR(20),
+    e_mail VARCHAR(255) UNIQUE,
+    endereco TEXT
+);
+
+
+CREATE TABLE movimentacao (
+    matricula INT REFERENCES usuario(matricula) ON DELETE CASCADE,
+    nr_livro INT REFERENCES livro(nr_livro) ON DELETE CASCADE,
+    data_emprestimo DATE NOT NULL,
+    data_prevista DATE NOT NULL,
+    data_devolucao DATE,
+    PRIMARY KEY (matricula, nr_livro, data_emprestimo)
+);
+
+
+-----------------------------------------------
+INSERT INTO genero (descricao) VALUES ('Ficção'), ('História'), ('Ciência');
+INSERT INTO obra (titulo, id_genero) VALUES ('Dom Casmurro', 1), ('A Origem das Espécies', 3);
+INSERT INTO autor (nome) VALUES ('Machado de Assis'), ('Charles Darwin');
+INSERT INTO autoria (nr_obra, id_autor) VALUES (1, 1), (2, 2);
+INSERT INTO editora (nome_fantasia) VALUES ('Companhia das Letras'), ('Penguin Books');
+INSERT INTO livro (nr_obra, id_editora, data_aquisicao, edicao) 
+VALUES (1, 1, '2023-01-15', 5);
+INSERT INTO usuario (nome, sexo, data_nascimento, telefone, celular, e_mail, endereco) 
+VALUES ('João Silva', 'M', '1990-05-10', '1234-5678', '9876-5432', 'joao@email.com', 'Rua A, 123');
+INSERT INTO movimentacao (matricula, nr_livro, data_emprestimo, data_prevista) 
+VALUES (1, 1, '2024-04-01', '2024-04-15');
+
+----------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
