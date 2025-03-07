@@ -34,7 +34,7 @@ ul li::marker {
     color: red;
 }
 
-.container {
+body, article, footer, header, section {
     max-width: 900px;
     margin: 0 auto;
 }
