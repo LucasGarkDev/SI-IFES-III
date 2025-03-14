@@ -1,28 +1,33 @@
-body {
+:root {
+    --vermelho-oficial: #e25e5e;
+}
+
+body:not(h1) {
     font-family: 'Arial', sans-serif;
 }
 
-/* header {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-} */
-
-section p{
+/* section p{
     color: green;
-}
+} */
 
 /* main .destaque {
     color: gold;
 } */
 
 footer a {
-    color: teal;
+    color: green;
 }
 
-.destaque {
-    color: red;
+footer a[title] {
+    color: aqua;
+}
+
+footer a[title="Teste"] {
+    color: brown;
+}
+
+.destaque, h3{
+    color: var(--vermelho-oficial);
     font-weight: bold;
 }
 
@@ -45,4 +50,29 @@ h1.destaque{
 
 footer > p {
     color: deeppink;
+}
+
+/* .destaque + p {
+    font-style: italic;
+    color: gold;
+} */
+
+.destaque ~ p {
+    font-style: italic;
+    color: gold;
+}
+
+
+/* h1, h2, h3, h4, h5, h6 {
+    text-decoration: underline;
+} */
+
+a:hover {
+    background-color: var(--vermelho-oficial); 
+    color: white;
+    font-size: 30px;
+}
+
+p::first-letter {
+    font-size: 35px;
 }
