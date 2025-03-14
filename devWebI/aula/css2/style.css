@@ -2,6 +2,47 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-p{
-    color: blue;
+/* header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+} */
+
+section p{
+    color: green;
+}
+
+/* main .destaque {
+    color: gold;
+} */
+
+footer a {
+    color: teal;
+}
+
+.destaque {
+    color: red;
+    font-weight: bold;
+}
+
+h1.destaque{
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+.fgrande {
+    font-size: 40px;
+}
+
+.destaque.fgrande {
+    font-style: italic;
+}
+
+/* .destaque .fgrande {
+    font-style: oblique;
+} e diferente */
+
+footer > p {
+    color: deeppink;
 }
