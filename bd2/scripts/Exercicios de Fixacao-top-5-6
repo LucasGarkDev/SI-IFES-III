@@ -1,0 +1,64 @@
+--------------------topico 5------------------------
+-- [1] - Escreva uma Função SQL que receba como parâmetro de entrada a MATRICULA do usuário e o NR_LIVRO para registrar o empréstimo de um Livro para um Usuário específico. 
+-- Ou seja, a função deverá inserir um novo registro na tabela MOVIMENTACAO. 
+-- Faça com que a data prevista de devolução do Livro seja equivalente a 8 dias após o empréstimo. 
+-- A data efetiva de devolução deverá apresentar valor NULO. A função deverá 
+-- retornar a quantidade de livros que o usuário tomou emprestado (incluindo o Livro recém emprestado).
+-- emprestaLivro( integer, integer)
+
+CREATE OR REPLACE FUNCTION REGISTRAR_EMPRESTIMO(MAT INTEGER, NUMLIVRO INTEGER)
+RETURNS INTEGER AS $$
+DECLARE
+    total_emprestimos INTEGER;
+BEGIN
+    -- Inserindo o empréstimo na tabela MOVIMENTACAO
+    INSERT INTO movimentacao (matricula, nr_livro, data_emprestimo, data_prevista, data_devolucao)
+    VALUES (MAT, NUMLIVRO, CURRENT_DATE, CURRENT_DATE + INTERVAL '8 days', NULL);
+
+    -- Contando o total de livros emprestados pelo usuário
+    SELECT COUNT(*) INTO total_emprestimos
+    FROM movimentacao
+    WHERE matricula = MAT;
+
+    -- Retorna a quantidade total de empréstimos do usuário
+    RETURN total_emprestimos;
+END;
+$$ LANGUAGE plpgsql;
+-------------------------------
+
+
+-- [2] - Desenvolva uma Função SQL para devolver livro para a biblioteca. A função devolveLivro(integer) 
+-- recebe como parâmetro de entrada o NR_LIVRO do livro devolvido. Em consequência, a Função deverá 
+-- alterar o registro da movimentação trocando o valor NULO da data efetiva de devolução para a 
+-- data corrente do dia da devolução. Também deverá retornar a quantidade de dias atrasados na 
+-- devolução do Livro.
+
+-- [3] - Implemente uma Função SQL livrosEmPosseDoUsuario(integer) que recebe como parâmetro de entrada a MATRICULA do Usuário. 
+-- A referida função deverá retornar o NR_LIVRO, o NR_OBRA, o TÌTULO, a DT_EMPRÉSTIMO e o TOTAL_DIAS_DE_ATRASO.
+
+-- [4] - Programe uma Função SQL usuariosMaisFrequentes(  ) que retornará MATRÍCULA, NOME, SEXO, IDADE e TOTAL_MOVIMENTACOES 
+-- para os 10 usuários com mais movimentações de livros. Apenas 10 registros devem ser exibidos. 
+-- Ainda que o décimo primeiro usuário apresente o mesmo TOTAL_MOVIMENTACOES que o décimo usuário, 
+-- a Função deverá exibir apenas 10 registros (no máximo).
+
+-- [5] - Faça uma Função SQL movimentacoesPorCategorias(   ) que retornará o total de movimentações dos 
+-- usuários por GENERO da Obra, SEXO e IDADE.
+
+-- [6] - Apresente uma Função SQL excluiLivro(nr_livro) .
+
+-- [7] - Escreva uma Função SQL obrasDeAutor(id_autor) que receba como parâmetro de entrada o 
+-- ID_AUTOR e exiba o TÍTULO e DS_GENERO de todas as OBRAS escritas por esse autor.
+
+
+--------------------topico 6------------------------
+-- [1] - Faça uma função PLPGSQL insere_obra(nr_obra, titulo, id_genero) . A referida função deverá 
+-- efetuar validações em relação aos dados de entrada: (A) nr_obra, titulo e 
+-- id_genero devem estar devidamente preenchidos;  e (B) id_genero informado 
+-- deve existir na tabela GENERO.
+
+-- [2] - Elabore uma função PLPGSQL insere_livro(nr_livro, edicao, nr_obra, id_editora). 
+-- Nr_livro deve apresentar um valor inédito para a tabela LIVRO 
+-- (o nr_livro não pode ser repetido). Edicao deve apresentar um valor maior que zero. 
+-- Nr_obra deve fazer referência a uma obra já existente na tabela OBRA. Id_Editora deve 
+-- igualmente fazer referência a uma editora existente na tabela EDITORA. 
+-- A data de aquisição deverá corresponder à data efetiva de criação do registro na tabela LIVRO.
