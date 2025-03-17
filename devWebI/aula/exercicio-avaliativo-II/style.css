@@ -1,11 +1,11 @@
-* {
+html *,header * , section * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     max-width: 100%;
 }
   
-body {
+body#main-body {
     font-family: "UOLtext", Arial, sans-serif;
     font-size: 18px;
     min-height: 100vh;
@@ -18,96 +18,74 @@ body {
     width: 100%;
 }
   
-header{
+header.cabecalho {
     text-align: center;
     width: 100%;
 }
-main {
+
+main.noticia-economia {
     max-width: 75%;
 }
-figcaption{
+
+header figcaption {
     margin-top: 15px;
     font-family: serif;
 }
   
-.flex-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-  
-.sub {
+section .sub {
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
     color: #666666;
 }
   
-img {
+figure img {
     width: 100%;
     height: auto;
     object-fit: cover;
     vertical-align: middle;
     margin: 0;
 }
-.underline {
-    text-decoration: underline;
-}
-.italic {
-    font-style: italic;
-}
+
   
-h1 {
+figure h1 {
     font-weight: 300;
     line-height: 32px;
     margin: 18px;
 }
-h2 {
-    font-family: "Arial",serif;
+
+figure h2 {
+    font-family: "Arial", serif;
     font-size: 32px;
     font-weight: normal;
     line-height: 40px;
     margin: 32px 0 32px 0;
 }
   
-p,li {
+section p{
     font-size: 20px;
     font-weight: 400;
     line-height: 32px;
     margin: 30px 0px 30px 0px;
 }
   
-ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-  
-ul li {
-    padding-bottom: 16px;
-}
-  
-a {
+a.noticia {
     padding-bottom: 1px;
     text-decoration: none;
     color: #107270;
     border-bottom: 2px solid #107270;
 }
   
-footer {
-    max-width: 50%;
-    margin: 10px;
-}
 
-.legenda{
+p.legenda{
     font-size: 14px;
     font-weight: 600;
     margin: 0px;
 }
 
-.legenda-container{
+p.legenda-container{
     margin: 30px;
 }
-.imagem-main{
+figure .imagem-main{
     width: 59%;
 }
