@@ -17,6 +17,7 @@ body#main-body {
     align-items: center;
     width: 100%;
 }
+
   
 header.cabecalho {
     text-align: center;
@@ -86,6 +87,7 @@ p.legenda{
 p.legenda-container{
     margin: 30px;
 }
+
 figure .imagem-main{
     width: 59%;
 }
