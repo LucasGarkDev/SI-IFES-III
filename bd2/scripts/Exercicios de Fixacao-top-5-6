@@ -24,17 +24,82 @@ BEGIN
     RETURN total_emprestimos;
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT * FROM livro
+SELECT REGISTRAR_EMPRESTIMO(6,8);
 -------------------------------
-
-
 -- [2] - Desenvolva uma Função SQL para devolver livro para a biblioteca. A função devolveLivro(integer) 
 -- recebe como parâmetro de entrada o NR_LIVRO do livro devolvido. Em consequência, a Função deverá 
 -- alterar o registro da movimentação trocando o valor NULO da data efetiva de devolução para a 
 -- data corrente do dia da devolução. Também deverá retornar a quantidade de dias atrasados na 
 -- devolução do Livro.
+CREATE OR REPLACE FUNCTION DEVOLVE_LIVRO(NUMLIVRO INTEGER)
+RETURNS INTEGER AS $$
+DECLARE
+    dias_atraso INTEGER;  
+    data_prevista DATE;  
+BEGIN
+    -- Obtendo a data prevista de devolução do livro emprestado
+    SELECT m.data_prevista INTO data_prevista
+    FROM movimentacao m
+    WHERE m.nr_livro = NUMLIVRO AND m.data_devolucao IS NULL
+    ORDER BY m.data_emprestimo DESC
+    LIMIT 1;
+
+    -- Se não houver empréstimo pendente, retorna -1 para indicar erro
+    IF NOT FOUND THEN
+        RETURN -1;
+    END IF;
+
+    -- Atualizando a data de devolução para a data atual
+    UPDATE movimentacao
+    SET data_devolucao = CURRENT_DATE
+    WHERE nr_livro = NUMLIVRO AND data_devolucao IS NULL;
+
+    -- Calculando os dias de atraso usando a variável corretamente
+    dias_atraso := GREATEST(0, CURRENT_DATE - data_prevista);
+
+    -- Retornando os dias de atraso
+    RETURN dias_atraso;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT DEVOLVE_LIVRO(4);
 
 -- [3] - Implemente uma Função SQL livrosEmPosseDoUsuario(integer) que recebe como parâmetro de entrada a MATRICULA do Usuário. 
 -- A referida função deverá retornar o NR_LIVRO, o NR_OBRA, o TÌTULO, a DT_EMPRÉSTIMO e o TOTAL_DIAS_DE_ATRASO.
+CREATE OR REPLACE FUNCTION LIVROS_EM_POSSE_DO_USUARIO(MATRICULA INTEGER)
+RETURNS RECORD AS $$
+DECLARE
+    resultado RECORD;
+BEGIN
+    -- Pegamos os dados do primeiro livro encontrado na posse do usuário
+    SELECT 
+        m.nr_livro, 
+        l.nr_obra, 
+        o.titulo, 
+        m.data_emprestimo, 
+        GREATEST(0, CURRENT_DATE - m.data_prevista) AS total_dias_atraso
+    INTO resultado
+    FROM movimentacao m
+    JOIN livro l ON m.nr_livro = l.nr_livro
+    JOIN obra o ON l.nr_obra = o.nr_obra
+    WHERE m.matricula = LIVROS_EM_POSSE_DO_USUARIO.matricula
+    AND m.data_devolucao IS NULL
+    LIMIT 1; -- Retorna apenas um livro
+
+    -- Se o usuário não tiver livros emprestados, retorna NULL
+    IF NOT FOUND THEN
+        RETURN NULL;
+    END IF;
+
+    -- Retorna o registro encontrado
+    RETURN resultado;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM LIVROS_EM_POSSE_DO_USUARIO(1);
+
 
 -- [4] - Programe uma Função SQL usuariosMaisFrequentes(  ) que retornará MATRÍCULA, NOME, SEXO, IDADE e TOTAL_MOVIMENTACOES 
 -- para os 10 usuários com mais movimentações de livros. Apenas 10 registros devem ser exibidos. 
@@ -59,6 +124,3 @@ $$ LANGUAGE plpgsql;
 -- [2] - Elabore uma função PLPGSQL insere_livro(nr_livro, edicao, nr_obra, id_editora). 
 -- Nr_livro deve apresentar um valor inédito para a tabela LIVRO 
 -- (o nr_livro não pode ser repetido). Edicao deve apresentar um valor maior que zero. 
--- Nr_obra deve fazer referência a uma obra já existente na tabela OBRA. Id_Editora deve 
--- igualmente fazer referência a uma editora existente na tabela EDITORA. 
--- A data de aquisição deverá corresponder à data efetiva de criação do registro na tabela LIVRO.
