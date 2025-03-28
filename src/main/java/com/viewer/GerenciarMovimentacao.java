@@ -27,7 +27,7 @@ public class GerenciarMovimentacao extends javax.swing.JFrame {
         initComponents();
         
         // Definir as colunas e os atributos da tabela
-        String[] colunas = {"ID", "Apelido", "Tipo", "Data", "Destino", "Motivo", "Observações"};
+        String[] colunas = {"ID", "Animal", "Tipo", "Data", "Destino", "Motivo", "Observações"};
         String[] atributos = {"id", "apelidoAnimal", "tipo", "dataMovimentacao", "destino", "motivo", "observacoes"};
 
         // Criar o modelo genérico e associar à JTable
@@ -83,9 +83,11 @@ public class GerenciarMovimentacao extends javax.swing.JFrame {
         menuGerenciarFazendas = new javax.swing.JMenuItem();
         menuGerenciaGado = new javax.swing.JMenu();
         menuGerenciarGado = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        menuRelatorio = new javax.swing.JMenu();
+        menuGerarRelatorio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Movimentações - FarmForm");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos Principais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic", 1, 18))); // NOI18N
@@ -114,7 +116,7 @@ public class GerenciarMovimentacao extends javax.swing.JFrame {
 
         cbxMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compra", "Venda", "Abate", "Transferência" }));
 
-        cbxDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sitio Recanto dos Sonho", "Frisa", " ", " " }));
+        cbxDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sitio Recanto dos Sonho", "Frisa" }));
 
         txtObservacao.setColumns(20);
         txtObservacao.setRows(5);
@@ -179,7 +181,8 @@ public class GerenciarMovimentacao extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dateDataMovimentacao.setBackground(new java.awt.Color(255, 255, 255));
+        dateDataMovimentacao.setBackground(new java.awt.Color(0, 0, 0));
+        dateDataMovimentacao.setForeground(new java.awt.Color(255, 255, 255));
         dateDataMovimentacao.setFont(new java.awt.Font("URW Gothic", 1, 15)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -384,9 +387,13 @@ public class GerenciarMovimentacao extends javax.swing.JFrame {
 
         jMenuBar1.add(menuGerenciaGado);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon("/home/lucas/NetBeansProjects/FarmFormII/src/resorces/imagens/note_edit.png")); // NOI18N
-        jMenu5.setText("Relatorio");
-        jMenuBar1.add(jMenu5);
+        menuRelatorio.setIcon(new javax.swing.ImageIcon("/home/lucas/NetBeansProjects/FarmFormII/src/resorces/imagens/note_edit.png")); // NOI18N
+        menuRelatorio.setText("Relatorio");
+
+        menuGerarRelatorio.setText("Gerar Relatorio");
+        menuRelatorio.add(menuGerarRelatorio);
+
+        jMenuBar1.add(menuRelatorio);
 
         setJMenuBar(jMenuBar1);
 
@@ -622,7 +629,6 @@ public class GerenciarMovimentacao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -632,10 +638,12 @@ public class GerenciarMovimentacao extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JMenuItem menuGerarRelatorio;
     private javax.swing.JMenu menuGerenciaFazenda;
     private javax.swing.JMenu menuGerenciaGado;
     private javax.swing.JMenuItem menuGerenciarFazendas;
     private javax.swing.JMenuItem menuGerenciarGado;
+    private javax.swing.JMenu menuRelatorio;
     private javax.swing.JMenu menuRetornar;
     private javax.swing.JMenuItem menuVoltarHome;
     private javax.swing.JTable tabelaMovimentacao;
