@@ -4,9 +4,15 @@
  */
 package com.viewer;
 
+import com.controller.controll.FuncoesUteis;
 import com.controller.graficinterface.GenericTableModel;
+import com.controller.graficinterface.GerenciaInterfaceGrafica;
 import com.domain.Fazenda;
 import com.viewer.CadastrarBovino;
+import domain.Endereco;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -21,14 +27,15 @@ public class GerenciarFazenda extends javax.swing.JFrame {
     private int contadorID = 1; // Variável para gerar IDs únicos
     private int linhaEditando = -1; // Armazena o índice da linha que está sendo editada
     private GenericTableModel<Fazenda> tableModel;
+    private Endereco ender;
     
     public GerenciarFazenda() {
         initComponents();
         adicionarListenerSpinner();
         
          // Definir as colunas e os atributos da tabela
-        String[] colunas = {"ID", "Nome da Fazenda", "Localizacao", "Tamanho (ha)", "Qtde. Bovinos", "Observações"};
-        String[] atributos = {"","","","","",""}; //Iguais aos campos do objeto
+        String[] colunas = {"ID", "Nome da Fazenda", "Localizacao", "Tamanho (ha)", "Qtde.Max Bovinos","Bovinos", "Observações"};
+        String[] atributos = {"id","nome","localizacao","tamanhoHectares","quantidadeBovinos","listaBovinos","observacoes"}; //Iguais aos campos do objeto
 
         // Criar o modelo genérico e associar à JTable
         tableModel = new GenericTableModel<>(colunas, atributos);
@@ -49,7 +56,6 @@ public class GerenciarFazenda extends javax.swing.JFrame {
         txtNomeFazenda = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        formatedLocalizacaoFazenda = new javax.swing.JFormattedTextField();
         spinnerQtdBovinos = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -59,6 +65,7 @@ public class GerenciarFazenda extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacoesFazenda = new javax.swing.JTextArea();
+        formatedLocalizacao = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnInserir = new javax.swing.JButton();
@@ -87,9 +94,11 @@ public class GerenciarFazenda extends javax.swing.JFrame {
         menuGerenciarGado = new javax.swing.JMenuItem();
         menuMovimentacoes = new javax.swing.JMenu();
         menuMovimentacao = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        menuRelatorio = new javax.swing.JMenu();
+        menuGerarRelatorio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciar Fazendas - FarmForm");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro da Fazenda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic", 1, 18))); // NOI18N
@@ -103,6 +112,8 @@ public class GerenciarFazenda extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("URW Gothic", 1, 18)); // NOI18N
         jLabel3.setText("Tamanho da Fazenda (hectares) :");
 
+        spinnerQtdBovinos.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         jLabel4.setFont(new java.awt.Font("URW Gothic", 1, 18)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("URW Gothic", 1, 18)); // NOI18N
@@ -114,11 +125,17 @@ public class GerenciarFazenda extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("URW Gothic", 1, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("URW Gothic", 1, 18)); // NOI18N
-        jLabel8.setText("Quantidade de Bovinos:");
+        jLabel8.setText("Quantidade Maxima de Bovinos:");
 
         txtObservacoesFazenda.setColumns(20);
         txtObservacoesFazenda.setRows(5);
         jScrollPane1.setViewportView(txtObservacoesFazenda);
+
+        try {
+            formatedLocalizacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,7 +153,7 @@ public class GerenciarFazenda extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(formatedLocalizacaoFazenda)))
+                                .addComponent(formatedLocalizacao)))
                         .addGap(53, 53, 53)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -148,12 +165,12 @@ public class GerenciarFazenda extends javax.swing.JFrame {
                                 .addComponent(spinnerQtdBovinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(69, 69, 69)
                                 .addComponent(lblQtdBovinos)))
-                        .addGap(71, 71, 71)
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel4))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -172,7 +189,7 @@ public class GerenciarFazenda extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(formatedLocalizacaoFazenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(formatedLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(spinnerTamanhoHectares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -241,7 +258,7 @@ public class GerenciarFazenda extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAlterar)
                     .addComponent(btnExcluir))
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,9 +457,13 @@ public class GerenciarFazenda extends javax.swing.JFrame {
 
         jMenuBar1.add(menuMovimentacoes);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon("/home/lucas/NetBeansProjects/FarmFormII/src/resorces/imagens/note_edit.png")); // NOI18N
-        jMenu5.setText("Relatorio");
-        jMenuBar1.add(jMenu5);
+        menuRelatorio.setIcon(new javax.swing.ImageIcon("/home/lucas/NetBeansProjects/FarmFormII/src/resorces/imagens/note_edit.png")); // NOI18N
+        menuRelatorio.setText("Relatorio");
+
+        menuGerarRelatorio.setText("Gerar Relatorio");
+        menuRelatorio.add(menuGerarRelatorio);
+
+        jMenuBar1.add(menuRelatorio);
 
         setJMenuBar(jMenuBar1);
 
@@ -482,35 +503,24 @@ public class GerenciarFazenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuGerenciarGadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarGadoActionPerformed
-        // Criando e exibindo a tela de Cadastro de Bovinos
-        System.out.println("Abrindo tela de Gerenciamento de Gado...");
-        CadastrarBovino bovinoFrame = new CadastrarBovino();
-        bovinoFrame.setVisible(true);
-
-        // Ocultando a tela atual (Home)
-        this.dispose();
+        GerenciaInterfaceGrafica.getInstance().abrirTela("CadastrarBovino");
     }//GEN-LAST:event_menuGerenciarGadoActionPerformed
 
     private void menuMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMovimentacaoActionPerformed
-        // Criando e exibindo a tela de Movimentações
-        Movimentacao movimentacaoFrame = new Movimentacao();
-        movimentacaoFrame.setVisible(true);
-
-        // Ocultando a tela atual (Home)
-        this.dispose();
+        GerenciaInterfaceGrafica.getInstance().abrirTela("GerenciarMovimentacao");
     }//GEN-LAST:event_menuMovimentacaoActionPerformed
 
     private void menuVoltarHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarHomeActionPerformed
-        // Criando e exibindo a Home novamente
-        Home homeFrame = new Home();
-        homeFrame.setVisible(true);
-
-        // Fechando a tela atual
-        this.dispose();
+        GerenciaInterfaceGrafica.getInstance().abrirTela("Home");
     }//GEN-LAST:event_menuVoltarHomeActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         inserirFazenda();
+        try {
+            ender = FuncoesUteis.consultarCEP(formatedLocalizacao.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(GerenciarFazenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -541,158 +551,105 @@ public class GerenciarFazenda extends javax.swing.JFrame {
         lblQtdBovinos.setText(String.valueOf(qtdBovinos)); // Atualiza a label
     }
     
-    // Método principal chamado ao clicar no botão "Inserir"
-    private void inserirFazenda() {
-        String[] dados = obterDadosFormulario();
-        
-        if (!validarCampos(dados)) {
-            return; // Se a validação falhar, sai da função
-        }
-
-        int[] valoresNumericos = converterValores(dados[2], dados[3]);
-        if (valoresNumericos == null) {
-            return; // Se a conversão falhar, sai da função
-        }
-
-        adicionarNaTabela(contadorID++, dados[0], dados[1], valoresNumericos[0], valoresNumericos[1], dados[4]);
-        limparCampos();
-        mostrarMensagem("Fazenda adicionada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    // Obtém os dados digitados nos campos e retorna como um array de Strings
-    private String[] obterDadosFormulario() {
-        return new String[]{
-            txtNomeFazenda.getText().trim(),
-            formatedLocalizacaoFazenda.getText().trim(),
-            spinnerTamanhoHectares.getValue().toString(), // Obtém o valor do JSpinner
-            spinnerQtdBovinos.getValue().toString(), // Obtém o valor do JSpinner
-            txtObservacoesFazenda.getText().trim()
-        };
-    }
-
-    // Valida se os campos obrigatórios foram preenchidos
-    private boolean validarCampos(String[] dados) {
-        if (dados[0].isEmpty() || dados[1].isEmpty() || dados[2].isEmpty() || dados[3].isEmpty()) {
-            mostrarMensagem("Preencha todos os campos obrigatórios!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    // Converte os valores numéricos e retorna um array com os valores convertidos
-    private int[] converterValores(String tamanhoStr, String qtdBovinosStr) {
+     // 🔹 Obtém os dados preenchidos e cria um objeto Fazenda
+    private Fazenda obterFazendaFormulario() {
         try {
-            int tamanho = Integer.parseInt(tamanhoStr); // Garante que o tamanho seja um número inteiro
-            int qtdBovinos = Integer.parseInt(qtdBovinosStr);
-            return new int[]{tamanho, qtdBovinos};
-        } catch (NumberFormatException e) {
-            mostrarMensagem("Os campos 'Tamanho da Fazenda' e 'Quantidade de Bovinos' devem ser números inteiros!", "Erro", JOptionPane.ERROR_MESSAGE);
+            String nome = txtNomeFazenda.getText().trim();
+            String localizacao = ender.getCidade() + " - " + ender.getUf();
+            int tamanhoHectares = (int) spinnerTamanhoHectares.getValue();
+            int quantidadeBovinos = (int) spinnerQtdBovinos.getValue();
+            String observacoes = txtObservacoesFazenda.getText().trim();
+
+            if (nome.isEmpty() || localizacao.isEmpty()) {
+                mostrarMensagem("Preencha os campos obrigatórios!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+
+            return new Fazenda(contadorID++, nome, localizacao, tamanhoHectares, quantidadeBovinos, observacoes);
+        } catch (Exception e) {
+            mostrarMensagem("Erro ao obter dados do formulário!", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
 
-    // Adiciona os dados na tabela com um ID gerado automaticamente
-    private void adicionarNaTabela(int id, String nome, String localizacao, int tamanho, int qtdBovinos, String observacoes) {
-        DefaultTableModel modelo = (DefaultTableModel) tabelaFazendas.getModel();
-        modelo.addRow(new Object[]{id, nome, localizacao, tamanho, qtdBovinos, observacoes});
+    // 🔹 Método principal chamado ao clicar no botão "Inserir"
+    private void inserirFazenda() {
+        Fazenda novaFazenda = obterFazendaFormulario();
+        if (novaFazenda == null) return;
+
+        tableModel.adicionar(novaFazenda);
+        limparCampos();
+        mostrarMensagem("Fazenda cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    // Exibe mensagens para o usuário
-    private void mostrarMensagem(String mensagem, String titulo, int tipo) {
-        JOptionPane.showMessageDialog(this, mensagem, titulo, tipo);
-    }
-
-    // Método para limpar os campos após a inserção
-    private void limparCampos() {
-        txtNomeFazenda.setText("");
-        formatedLocalizacaoFazenda.setValue(null);
-        spinnerTamanhoHectares.setValue(0);
-        spinnerQtdBovinos.setValue(0);
-        txtObservacoesFazenda.setText("");
-        txtNomeFazenda.requestFocus();
-    }
-    
-    // Método principal para excluir a fazenda selecionada
-    private void excluirFazenda() {
-        int linhaSelecionada = tabelaFazendas.getSelectedRow();
-
-        if (linhaSelecionada == -1) {
-            mostrarMensagem("Selecione uma fazenda para excluir!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Confirmação antes da exclusão
-        int confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir esta fazenda?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if (confirmacao == JOptionPane.NO_OPTION) {
-            return;
-        }
-
-        // Obtém o modelo da tabela e remove a linha selecionada
-        DefaultTableModel modelo = (DefaultTableModel) tabelaFazendas.getModel();
-        modelo.removeRow(linhaSelecionada);
-
-        mostrarMensagem("Fazenda excluída com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
+    // 🔹 Método para carregar os dados da tabela para os campos
     private void carregarDadosParaCampos() {
         int linhaSelecionada = tabelaFazendas.getSelectedRow();
-
         if (linhaSelecionada == -1) {
             mostrarMensagem("Selecione uma fazenda para alterar!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Obtendo o modelo da tabela e os valores da linha selecionada
-        DefaultTableModel modelo = (DefaultTableModel) tabelaFazendas.getModel();
+        Fazenda fazendaSelecionada = tableModel.getLista().get(linhaSelecionada);
 
-        int id = (int) modelo.getValueAt(linhaSelecionada, 0); // ID da fazenda
-        String nome = (String) modelo.getValueAt(linhaSelecionada, 1);
-        String localizacao = (String) modelo.getValueAt(linhaSelecionada, 2);
-        int tamanho = (int) modelo.getValueAt(linhaSelecionada, 3);
-        int qtdBovinos = (int) modelo.getValueAt(linhaSelecionada, 4);
-        String observacoes = (String) modelo.getValueAt(linhaSelecionada, 5);
+        txtNomeFazenda.setText(fazendaSelecionada.getNome());
+        formatedLocalizacao.setText(fazendaSelecionada.getLocalizacao());
+        spinnerTamanhoHectares.setValue(fazendaSelecionada.getTamanhoHectares());
+        spinnerQtdBovinos.setValue(fazendaSelecionada.getQuantidadeBovinos());
+        txtObservacoesFazenda.setText(fazendaSelecionada.getObservacoes());
 
-        // Preenchendo os campos de entrada com os valores da tabela
-        txtNomeFazenda.setText(nome);
-        formatedLocalizacaoFazenda.setText(localizacao);
-        spinnerTamanhoHectares.setValue(tamanho);
-        spinnerQtdBovinos.setValue(qtdBovinos);
-        txtObservacoesFazenda.setText(observacoes);
-
-        // Armazenamos a linha selecionada para futura atualização
-        this.linhaEditando = linhaSelecionada;
+        linhaEditando = linhaSelecionada;
     }
-    
+
+    // 🔹 Método para salvar as alterações
     private void salvarAlteracoes() {
         if (linhaEditando == -1) {
             mostrarMensagem("Nenhuma edição em andamento!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String[] dados = obterDadosFormulario();
+        Fazenda fazendaEditada = obterFazendaFormulario();
+        if (fazendaEditada == null) return;
 
-        if (!validarCampos(dados)) {
-            return;
-        }
+        Fazenda fazendaOriginal = tableModel.getLista().get(linhaEditando);
+        fazendaEditada.setId(fazendaOriginal.getId()); // Mantém o mesmo ID
 
-        int[] valoresNumericos = converterValores(dados[2], dados[3]);
-        if (valoresNumericos == null) {
-            return;
-        }
+        tableModel.getLista().set(linhaEditando, fazendaEditada);
+        tableModel.fireTableRowsUpdated(linhaEditando, linhaEditando);
 
-        // Obtendo o modelo da tabela e atualizando os dados na linha selecionada
-        DefaultTableModel modelo = (DefaultTableModel) tabelaFazendas.getModel();
-
-        modelo.setValueAt(dados[0], linhaEditando, 1); // Nome
-        modelo.setValueAt(dados[1], linhaEditando, 2); // Localização
-        modelo.setValueAt(valoresNumericos[0], linhaEditando, 3); // Tamanho (ha)
-        modelo.setValueAt(valoresNumericos[1], linhaEditando, 4); // Quantidade de Bovinos
-        modelo.setValueAt(dados[4], linhaEditando, 5); // Observações
-
-        // Resetamos a variável de edição e limpamos os campos
         linhaEditando = -1;
         limparCampos();
         mostrarMensagem("Alteração realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    // 🔹 Método para excluir uma fazenda
+    private void excluirFazenda() {
+        int linhaSelecionada = tabelaFazendas.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            mostrarMensagem("Selecione uma fazenda para excluir!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int confirmacao = JOptionPane.showConfirmDialog(this, "Deseja excluir esta fazenda?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (confirmacao == JOptionPane.NO_OPTION) return;
+
+        tableModel.remover(linhaSelecionada);
+        mostrarMensagem("Fazenda excluída com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    // 🔹 Método para limpar os campos
+    private void limparCampos() {
+        txtNomeFazenda.setText("");
+        formatedLocalizacao.setText("");
+        spinnerTamanhoHectares.setValue(0);
+        spinnerQtdBovinos.setValue(0);
+        txtObservacoesFazenda.setText("");
+        txtNomeFazenda.requestFocus();
+    }
+
+    // 🔹 Método para exibir mensagens ao usuário
+    private void mostrarMensagem(String mensagem, String titulo, int tipo) {
+        JOptionPane.showMessageDialog(this, mensagem, titulo, tipo);
     }
     
     
@@ -743,7 +700,7 @@ public class GerenciarFazenda extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JFormattedTextField formatedLocalizacaoFazenda;
+    private javax.swing.JFormattedTextField formatedLocalizacao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -757,7 +714,6 @@ public class GerenciarFazenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -771,10 +727,12 @@ public class GerenciarFazenda extends javax.swing.JFrame {
     private javax.swing.JLabel lblTamanhoFazenda;
     private javax.swing.JLabel lblTotalBovinosFazenda;
     private javax.swing.JLabel lbltoTotalBovino;
+    private javax.swing.JMenuItem menuGerarRelatorio;
     private javax.swing.JMenu menuGerenciaGado;
     private javax.swing.JMenuItem menuGerenciarGado;
     private javax.swing.JMenuItem menuMovimentacao;
     private javax.swing.JMenu menuMovimentacoes;
+    private javax.swing.JMenu menuRelatorio;
     private javax.swing.JMenu menuRetornar;
     private javax.swing.JMenuItem menuVoltarHome;
     private javax.swing.JProgressBar progressCapacidadeBovinos;
