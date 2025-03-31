@@ -10,12 +10,16 @@ body {
 }
   
 .container {
-    max-width: 800px;
+    width: 50%;
     margin: auto;
     background-color: #fff;
     padding: 2em;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
   
 h1, h2 {
@@ -38,17 +42,34 @@ input[type="radio"] {
 }
   
 .box {
-    margin: 30px auto;
     border: 4px solid;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 25px;
     width: 100px;
     height: 100px;
-    background-color: darkblue;
+    animation: animation-rgb-roda 5s infinite, roda 1.5s infinite;
     color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s ease;
-    animation: animation-rgb-roda 5s infinite;
+    background-color: darkblue;
+    margin: 10px;
+    transition: all 0.7s ease-out;
+    -webkit-animation: animation-rgb-roda 5s infinite, roda 1.5s infinite;
+    -webkit-transition: all 0.7s ease-out;
+    -moz-transition: all 0.7s ease-out;
+    -ms-transition: all 0.7s ease-out;
+    -o-transition: all 0.7s ease-out;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
 }
   
+.box:hover{
+    opacity: 0.7;
+}
+.img-unidade{
+    width: 25%;
+}
+  
+.aberto {
+    display: block;
+}
