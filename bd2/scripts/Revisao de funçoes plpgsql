@@ -1,0 +1,77 @@
+-- 5. Crie a função devolve_livro(nr_livro INTEGER) que:
+
+-- Atualiza o campo data_devolucao da movimentação ativa desse livro.
+
+-- Retorna a quantidade de dias de atraso (ou 0 se entregue no prazo).
+
+DROP FUNCTION devolve_livro(integer)
+
+CREATE OR REPLACE FUNCTION DEVOLVE_LIVRO(NRLIVRO INTEGER)
+RETURNS INTEGER AS $$
+DECLARE
+    NR_ATRASO INTEGER;
+    DATA_PREVISTA DATE;
+BEGIN
+    SELECT DT_PREVISTA INTO DATA_PREVISTA
+    FROM MOVIMENTACAO
+    WHERE NR_LIVRO = $1 AND DT_DEVOLUCAO IS NULL
+    ORDER BY DT_EMPRESTIMO DESC LIMIT 1;
+
+    UPDATE MOVIMENTACAO
+    SET DT_DEVOLUCAO = CURRENT_DATE
+    WHERE NR_LIVRO = $1 AND DT_DEVOLUCAO IS NULL;
+
+    NR_ATRASO := GREATEST(0, CURRENT_DATE - DATA_PREVISTA);
+    RETURN NR_ATRASO;
+END;
+$$ LANGUAGE PLPGSQL;
+
+SELECT * FROM MOVIMENTACAO
+
+SELECT DEVOLVE_LIVRO(3);
+
+-- 6. Crie a função exclui_usuario(matricula INTEGER) que:
+
+-- Verifica se o usuário tem movimentações pendentes (sem devolução).
+
+-- Caso tenha, impede a exclusão e retorna mensagem.
+
+-- Caso contrário, exclui o usuário da tabela usuario.
+
+CREATE OR REPLACE FUNCTION EXCLUI_USUARIO(MAT INTEGER)
+RETURNS TEXT AS $$
+DECLARE
+    RESPOSTA TEXT;
+BEGIN
+    PERFORM MATRICULA FROM MOVIMENTACAO
+	WHERE MATRICULA = MAT;
+
+	IF NOT FOUND
+	THEN DELETE FROM USUARIO WHERE MATRICULA = MAT;
+		RESPOSTA:= 'USUARIO EXCLUIDO COM SUCESSO';
+	ELSE 
+		RESPOSTA:= 'USUARIO POSSUI MOVIMENTAÇOES PENDENTES';
+	END IF;
+
+	RETURN RESPOSTA;
+END;
+$$ LANGUAGE PLPGSQL;
+
+SELECT * FROM USUARIO;
+
+INSERT INTO USUARIO VALUES(3,'MARIA DE LURDES', 'F', '1956-12-23', NULL, NULL, NULL);
+
+SELECT EXCLUI_USUARIO(3);
+
+-- 7. Implemente a função insere_obra(nr_obra INTEGER, titulo TEXT, id_genero INTEGER) que:
+
+-- Valida se os parâmetros foram preenchidos corretamente.
+
+-- Verifica se o gênero existe na tabela genero.
+
+-- Se tudo estiver certo, insere a nova obra.
+
+-- Retorna uma mensagem de sucesso ou erro.
+
+
+

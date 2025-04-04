@@ -5,6 +5,7 @@ package viewer;
 
 
 
+import controller.GenericTableModel;
 import controller.GerInterGrafica;
 import controller.TableModelItemPedido;
 import domain.ItemPedido;
@@ -34,16 +35,19 @@ public class DlgCadPedido extends javax.swing.JDialog {
     private float valorTotal;
     private float novoValor;
     
-    private TableModelItemPedido tableModelItemPedido;    
+    private GenericTableModel<ItemPedido> tableModelItemPedido;    
    
     public DlgCadPedido(java.awt.Frame parent, boolean modal) {
         initComponents();
 
-        valorTotal = (float) 0.0;
-        novoValor = (float) 0.0;
-        
-        // Amarro o JTable com o meu Abstract Table Model
-        tableModelItemPedido = new TableModelItemPedido();
+        valorTotal = 0.0f;
+        novoValor = 0.0f;
+
+        // Configurar modelo genérico
+        String[] colunas = {"Lanche", "Qtde", "Bife", "Ovo", "Presunto", "Queijo", "Ingredientes"};
+        String[] atributos = {"lanche", "qtde", "maisBife", "maisOvo", "maisPresunto", "maisQueijo", "ingredientes"};
+
+        tableModelItemPedido = new GenericTableModel<>(colunas, atributos);
         tblPedido.setModel(tableModelItemPedido);
     }
 

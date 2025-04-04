@@ -7,39 +7,53 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author 1547816
  */
 public class ConexaoMySQL {
-    private static Connection conexao;
-    
-    public static Connection obterConexao() throws ClassNotFoundException, SQLException {
-        
-        // String url = "jdbc:mysql://id_servidor:porta/nome_banco";
-        
-        // MYSQL       
-        String url = "jdbc:mysql://127.0.0.1:3306/jeanxfome";
-        String user = "root";
-        String password = "";
-        
-        Class.forName("com.mysql.cj.jdbc.Driver");
-            
-        
-        /* 
-        // POSTGRESQL
-        String url = "jdbc:postgresql://127.0.0.1:5432/Hotel";
-        String user = "postgres";
-        String password = "postgres";
-        
-        Class.forName("org.postgresql.Driver");
-        */
-                
-        conexao = DriverManager.getConnection(url, user, password);
+     private static Connection conexao = null;
+     // Dados da conexão (ATUALIZADO)
+    private static final String SERVIDOR = "localhost";  // Ou IP do servidor
+    private static final String BANCO = "jeanxfome";      // Novo nome do banco de dados
+    private static final String USUARIO = "postgres";     // Usuário do PostgreSQL
+    private static final String SENHA = "123";            // Senha do PostgreSQL
+    private static final String URL = "jdbc:postgresql://" + SERVIDOR + "/" + BANCO;
+
+    // Construtor privado para evitar instanciação externa
+    private ConexaoMySQL() {}
+
+    // Método para obter a conexão única (Singleton)
+    public static Connection obterConexao() {
+        if (conexao == null) {
+            try {
+                Class.forName("org.postgresql.Driver");
+                conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
+                System.out.println("Conexão com o banco 'jeanxfome' estabelecida com sucesso!");
+            } catch (ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "Driver JDBC não encontrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                System.exit(1); // Encerra a aplicação
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                System.exit(1); // Encerra a aplicação
+            }
+        }
         return conexao;
-        
-        
+    }
+
+    // Método para fechar a conexão (opcional)
+    public static void fecharConexao() {
+        if (conexao != null) {
+            try {
+                conexao.close();
+                conexao = null;
+                System.out.println("Conexão com o banco de dados fechada.");
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
             
 }
