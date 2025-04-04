@@ -1,0 +1,49 @@
+CREATE TABLE raca (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+
+
+CREATE TABLE vacina (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+
+CREATE TABLE fazenda (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    localizacao VARCHAR(150),
+    tamanho_hectares DOUBLE PRECISION,
+    capacidade_bovinos INT,
+    observacoes TEXT
+);
+
+CREATE TABLE bovino (
+    id SERIAL PRIMARY KEY,
+    origem VARCHAR(100),
+    raca_id INT NOT NULL REFERENCES raca(id),
+    data_nascimento DATE,
+    peso_atual DOUBLE PRECISION,
+    status VARCHAR(20) CHECK (status IN ('Comprado', 'Ativo', 'Vendido')),
+    fazenda_id INT REFERENCES fazenda(id)
+);
+
+CREATE TABLE movimentacao (
+    id SERIAL PRIMARY KEY,
+    animal_id INT NOT NULL REFERENCES bovino(id),
+    tipo VARCHAR(20) CHECK (tipo IN ('Entrada', 'Saida', 'Transferencia')),
+    data DATE,
+    motivo VARCHAR(30) CHECK (motivo IN ('Compra', 'Venda', 'Abate', 'Transferência')),
+    destino_id INT REFERENCES fazenda(id),
+    observacoes TEXT
+);
+
+CREATE TABLE aplicacao_vacina (
+    id SERIAL PRIMARY KEY,
+    bovino_id INT NOT NULL REFERENCES bovino(id),
+    vacina_id INT NOT NULL REFERENCES vacina(id),
+    data_aplicacao DATE,
+    observacoes TEXT
+);

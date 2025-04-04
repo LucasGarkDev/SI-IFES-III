@@ -1,0 +1,14 @@
+INSERT INTO raca (nome, descricao) VALUES
+('Nelore', 'Raça de origem indiana, resistente ao calor e muito comum no Brasil'),
+('Angus', 'Raça britânica conhecida pela carne de alta qualidade'),
+('Brahman', 'Raça zebuína com excelente resistência e rusticidade'),
+('Girolando', 'Raça leiteira brasileira resultado do cruzamento Gir x Holandês');
+
+INSERT INTO vacina (nome, descricao) VALUES
+('BCG', 'Vacina contra a tuberculose bovina'),
+('Brucelose', 'Vacina obrigatória contra a brucelose em fêmeas bovinas'),
+('Febre Aftosa', 'Vacina obrigatória semestral contra febre aftosa'),
+('Raiva', 'Vacinação preventiva contra raiva bovina'),
+('Carbúnculo Sintomático', 'Previne doenças causadas por Clostridium chauvoei');
+
+select * from raca
