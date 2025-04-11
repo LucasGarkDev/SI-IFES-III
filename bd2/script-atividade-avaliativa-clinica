@@ -1,0 +1,203 @@
+-- 🧱 Parte 1 – Criação das Tabelas
+
+DROP TABLE IF EXISTS EXAME_PEDIDO CASCADE;
+DROP TABLE IF EXISTS EXAME CASCADE;
+DROP TABLE IF EXISTS MATERIAL CASCADE;
+DROP TABLE IF EXISTS PEDIDO CASCADE;
+DROP TABLE IF EXISTS MEDICO CASCADE;
+DROP TABLE IF EXISTS CLIENTE CASCADE;
+DROP TABLE IF EXISTS PLANO CASCADE;
+DROP TABLE IF EXISTS VALOR_US CASCADE;
+DROP TABLE IF EXISTS FATURA CASCADE;
+DROP TABLE IF EXISTS EXAME_AUTORIZADO CASCADE;
+
+-- TABELA: MATERIAL
+CREATE TABLE MATERIAL (
+    idMaterial SERIAL PRIMARY KEY,
+    descricao TEXT NOT NULL
+);
+
+-- TABELA: EXAME
+CREATE TABLE EXAME (
+    idExame SERIAL PRIMARY KEY,
+    nome TEXT NOT NULL,
+    idMaterial INTEGER REFERENCES MATERIAL(idMaterial),
+    dias_previsao INTEGER
+);
+
+-- TABELA: MEDICO
+CREATE TABLE MEDICO (
+    idMedico SERIAL PRIMARY KEY,
+    nome TEXT NOT NULL,
+    CRM VARCHAR(20) NOT NULL
+);
+
+-- TABELA: CLIENTE
+CREATE TABLE CLIENTE (
+    idCliente SERIAL PRIMARY KEY,
+    nome TEXT NOT NULL,
+    sexo CHAR(1),
+    nascimento DATE
+);
+
+-- TABELA: PLANO
+CREATE TABLE PLANO (
+    idPlano SERIAL PRIMARY KEY,
+    nome TEXT NOT NULL,
+    perc_cliente NUMERIC(5,2)
+);
+
+-- TABELA: VALOR_US
+CREATE TABLE VALOR_US (
+    idPlano INTEGER REFERENCES PLANO(idPlano),
+    data_inicial_vigencia DATE,
+    data_final_vigencia DATE,
+    valor NUMERIC(10,2),
+    PRIMARY KEY (idPlano, data_inicial_vigencia)
+);
+
+-- Tabela particionada por data_pedido
+CREATE TABLE PEDIDO (
+    nrPedido SERIAL,
+    data_pedido DATE NOT NULL,
+    idMedico INTEGER REFERENCES MEDICO(idMedico),
+    idCliente INTEGER REFERENCES CLIENTE(idCliente),
+    idPlano INTEGER REFERENCES PLANO(idPlano),
+    PRIMARY KEY (nrPedido, data_pedido)
+) PARTITION BY RANGE (data_pedido);
+
+-- Adiciona restrição de unicidade para permitir FK em EXAME_PEDIDO
+ALTER TABLE PEDIDO ADD CONSTRAINT pedido_nr_unico UNIQUE (nrPedido);
+
+-- Exemplo de partição para 2024
+CREATE TABLE PEDIDO_2024 PARTITION OF PEDIDO
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+
+-- TABELA: EXAME_PEDIDO (PARTICIONADA POR RANGE EM data_prevista)
+CREATE TABLE EXAME_PEDIDO (
+    nrPedido INTEGER,
+    idExame INTEGER,
+    data_prevista DATE NOT NULL, -- obrigatório ser NOT NULL para RANGE
+    nr_autorizacao VARCHAR(50),
+    data_coleta DATE,
+    data_efetiva DATE,
+    valor NUMERIC(10,2),
+    nr_fatura INTEGER,
+    plano INTEGER,
+    PRIMARY KEY (nrPedido, idExame, data_prevista), -- <-- solução aqui
+    FOREIGN KEY (nrPedido) REFERENCES PEDIDO(nrPedido),
+    FOREIGN KEY (idExame) REFERENCES EXAME(idExame)
+) PARTITION BY RANGE (data_prevista);
+
+-- TABELA: FATURA
+CREATE TABLE FATURA (
+    nr_fatura SERIAL PRIMARY KEY,
+    idPlano INTEGER REFERENCES PLANO(idPlano),
+    data_geracao DATE,
+    data_envio DATE,
+    data_pagamento DATE
+);
+
+-- TABELA: EXAME_AUTORIZADO
+CREATE TABLE EXAME_AUTORIZADO (
+    idPlano INTEGER REFERENCES PLANO(idPlano),
+    idExame INTEGER REFERENCES EXAME(idExame),
+    valor_ch NUMERIC(10,2),
+    PRIMARY KEY (idPlano, idExame)
+);
+
+
+-- 🧩 Parte 2 – Particionamento de PEDIDO e EXAME_PEDIDO
+
+-- TABELA BASE PARA PEDIDO (particionada por ano)
+CREATE TABLE PEDIDO (
+    nrPedido SERIAL,
+    data_pedido DATE NOT NULL,
+    idMedico INTEGER REFERENCES MEDICO(idMedico),
+    idCliente INTEGER REFERENCES CLIENTE(idCliente),
+    idPlano INTEGER REFERENCES PLANO(idPlano),
+    PRIMARY KEY (nrPedido, data_pedido)
+) PARTITION BY RANGE (data_pedido);
+
+-- Exemplo de partição
+CREATE TABLE PEDIDO_2024 PARTITION OF PEDIDO
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+
+-- TABELA BASE PARA EXAME_PEDIDO (particionada por data_prevista)
+CREATE TABLE EXAME_PEDIDO (
+    nrPedido INTEGER,
+    idExame INTEGER,
+    nr_autorizacao VARCHAR(50),
+    data_coleta DATE,
+    data_prevista DATE,
+    data_efetiva DATE,
+    valor NUMERIC(10,2),
+    nr_fatura INTEGER,
+    plano INTEGER,
+    PRIMARY KEY (nrPedido, idExame),
+    FOREIGN KEY (nrPedido) REFERENCES PEDIDO(nrPedido),
+    FOREIGN KEY (idExame) REFERENCES EXAME(idExame)
+) PARTITION BY RANGE (data_prevista);
+
+-- Exemplo de partição
+CREATE TABLE EXAME_PEDIDO_2024 PARTITION OF EXAME_PEDIDO
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+
+-- 🔍 Parte 3 – Índices
+
+CREATE INDEX idx_exame_material ON EXAME(idMaterial);
+CREATE INDEX idx_valor_ls_periodo ON VALOR_LS(data_inicial_vigencia, data_final_vigencia);
+CREATE INDEX idx_examepedido_data ON EXAME_PEDIDO(data_prevista);
+CREATE INDEX idx_pedido_cliente ON PEDIDO(idCliente);
+CREATE INDEX idx_pedido_data ON PEDIDO(data_pedido);
+
+-- 🧮 Parte 4 – Função CALCULA_VALOR_EXAMES_CLIENTES
+
+CREATE OR REPLACE FUNCTION CALCULA_VALOR_EXAMES_CLIENTES(p_mes INT, p_ano INT)
+RETURNS NUMERIC AS $$
+DECLARE
+    total_valor NUMERIC := 0;
+BEGIN
+    SELECT SUM(valor)
+    INTO total_valor
+    FROM EXAME_PEDIDO ep
+    JOIN PEDIDO p ON ep.nrPedido = p.nrPedido
+    WHERE EXTRACT(MONTH FROM p.data_pedido) = p_mes
+      AND EXTRACT(YEAR FROM p.data_pedido) = p_ano
+      AND ep.plano IS NULL; -- Apenas clientes (sem plano)
+
+    RETURN COALESCE(total_valor, 0);
+END;
+$$ LANGUAGE plpgsql;
+
+-- 📝 Parte 5 – Função INSERE_PEDIDO
+
+CREATE OR REPLACE FUNCTION INSERE_PEDIDO(
+    p_idMedico INTEGER,
+    p_idCliente INTEGER,
+    p_idPlano INTEGER
+) RETURNS INTEGER AS $$
+DECLARE
+    novo_pedido INTEGER;
+BEGIN
+    -- Verificação
+    IF NOT EXISTS (SELECT 1 FROM MEDICO WHERE idMedico = p_idMedico) THEN
+        RAISE EXCEPTION 'Médico não encontrado.';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM CLIENTE WHERE idCliente = p_idCliente) THEN
+        RAISE EXCEPTION 'Cliente não encontrado.';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM PLANO WHERE idPlano = p_idPlano) THEN
+        RAISE EXCEPTION 'Plano não encontrado.';
+    END IF;
+
+    -- Inserção
+    INSERT INTO PEDIDO (data_pedido, idMedico, idCliente, idPlano)
+    VALUES (CURRENT_DATE, p_idMedico, p_idCliente, p_idPlano)
+    RETURNING nrPedido INTO novo_pedido;
+
+    RETURN novo_pedido;
+END;
+$$ LANGUAGE plpgsql;
