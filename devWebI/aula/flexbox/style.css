@@ -7,6 +7,24 @@ body{
 }
 
 .container{
+    border: 2px solid rgb(217, 17, 17);
     display: flex;
 }
 
+
+.item{
+    width: 100px;
+    height: 100px;
+    color: white;
+}
+
+.item1{
+    background-color: red;
+}
+
+.item2{
+    background-color: blue;
+}
+.item3{
+    background-color: green;
+}
