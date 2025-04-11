@@ -1,5 +1,5 @@
 h1, p, a, img{
-    border: 2px solid red;
+    border: 2px solid rgb(155, 104, 104);
     box-sizing: border-box;
 }
 
