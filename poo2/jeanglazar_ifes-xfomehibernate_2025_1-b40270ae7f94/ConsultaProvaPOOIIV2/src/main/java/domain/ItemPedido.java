@@ -20,8 +20,8 @@ import java.util.List;
 public class ItemPedido {
         
        
-    // Somente para TESTE
-    private String lanche;
+    private Lanche lanche;
+    private Pedido pedido;
     
     private int qtde;
     private String observacao;
@@ -32,7 +32,7 @@ public class ItemPedido {
     private List ingredientes;
 
 
-    public ItemPedido(String lanche, int qtde, int maisBife, int maisOvo, 
+    public ItemPedido(Lanche lanche, int qtde, int maisBife, int maisOvo, 
             int maisPresunto, int maisQueijo, String observacao, List ingredientes) {
         this.lanche = lanche;
         this.qtde = qtde;
@@ -44,11 +44,11 @@ public class ItemPedido {
         this.ingredientes = ingredientes;
     }
 
-    public String getLanche() {
+    public Lanche getLanche() {
         return lanche;
     }
 
-    public void setLanche(String lanche) {
+    public void setLanche(Lanche lanche) {
         this.lanche = lanche;
     }
 
@@ -109,6 +109,7 @@ public class ItemPedido {
         this.observacao = observacao;
     }
 
+    
     
     
 }

@@ -12,7 +12,8 @@ import java.util.Objects;
  */
 public class Cidade {
      private int idCidade;
-     private String nome;
+    private String nome;       
+        
 
     public Cidade(int idCidade, String nome) {
         this.idCidade = idCidade;
@@ -62,6 +63,5 @@ public class Cidade {
         return Objects.equals(this.nome, other.nome);
     }
      
-    
      
 }

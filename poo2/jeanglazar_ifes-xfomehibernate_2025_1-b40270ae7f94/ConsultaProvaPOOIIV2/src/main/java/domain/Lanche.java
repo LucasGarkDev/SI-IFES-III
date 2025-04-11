@@ -59,6 +59,4 @@ public class Lanche {
         return nome + " - R$ " + valor;
     }
     
-    
-    
 }
