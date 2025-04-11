@@ -1,0 +1,17 @@
+h1, p, a, img{
+    border: 2px solid red;
+    box-sizing: border-box;
+}
+
+h1, p{
+    width: 200px;
+    display: inline-block;
+}
+
+img{
+    width: 100px;
+}
+
+/* a{
+    display: none;
+} */

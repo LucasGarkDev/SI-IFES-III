@@ -1,0 +1,21 @@
+body{
+    margin: 0;
+}
+
+h1{
+    width: 33.333%;
+    display: inline-block;
+    margin: 0;
+}
+
+.t1{
+    background-color: blue;
+}
+
+.t2{
+    background-color: red;
+}
+
+.t3{
+    background-color: green;
+}

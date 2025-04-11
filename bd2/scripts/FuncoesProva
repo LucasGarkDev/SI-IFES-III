@@ -1,0 +1,193 @@
+-- 1. Crie uma função SQL chamada idade_usuario(matricula INTEGER) que retorna a idade de um 
+-- usuário com base em sua data de nascimento, contida na tabela usuario(data_nascimento).
+SELECT * FROM USUARIO
+
+CREATE OR REPLACE FUNCTION idade_usuario(MAT INTEGER)
+RETURNS INTEGER AS '
+	SELECT EXTRACT(YEAR FROM age(CURRENT_DATE, dt_nascimento)) FROM USUARIO
+	WHERE matricula = MAT
+'
+LANGUAGE SQL;
+
+SELECT idade_usuario(2);
+
+-- 2. Crie uma função SQL total_livros_usuario(matricula INTEGER) que 
+-- retorna a quantidade total de movimentações feitas por um determinado 
+-- usuário na tabela movimentacao.
+SELECT * FROM MOVIMENTACAO
+
+CREATE OR REPLACE FUNCTION total_livros_usuario(MAT INTEGER)
+RETURNS INTEGER AS '
+	SELECT COUNT(*) FROM MOVIMENTACAO
+	WHERE matricula = MAT AND dt_devolucao IS NULL
+'
+LANGUAGE SQL;
+
+SELECT total_livros_usuario(2);
+
+-- 3. Crie uma função SQL livros_por_genero(id_genero INTEGER) 
+-- que retorna o total de livros cadastrados com obras que 
+-- pertencem ao gênero informado.
+
+SELECT * FROM LIVRO
+
+CREATE OR REPLACE FUNCTION livros_por_genero(IDGENERO INTEGER)
+RETURNS INTEGER AS '
+	SELECT COUNT(*) FROM LIVRO
+	WHERE nr_obra = IDGENERO
+'
+LANGUAGE SQL;
+
+SELECT livros_por_genero(5)
+
+-- 4. Implemente a função empresta_livro(matricula INTEGER, nr_livro INTEGER) que:
+-- Insere um novo empréstimo na tabela movimentacao.
+-- Define data_emprestimo como CURRENT_DATE.
+-- Define data_prevista como CURRENT_DATE + 8.
+-- data_devolucao deve ser NULL.
+-- Retorna a quantidade de livros atualmente emprestados (sem devolução) por esse usuário.
+
+SELECT * FROM MOVIMENTACAO
+
+DROP FUNCTION empresta_livro;
+
+CREATE FUNCTION empresta_livro(MAT INTEGER, NRLIVRO INTEGER)
+RETURNS BIGINT
+AS $$
+DECLARE
+  	QTD_LIVRO INTEGER;
+BEGIN
+
+  	INSERT INTO MOVIMENTACAO(matricula, nr_livro,dt_emprestimo,dt_prevista,dt_devolucao)
+	VALUES (MAT, NRLIVRO, CURRENT_DATE,CURRENT_DATE+8, NULL);
+
+	SELECT COUNT(*) INTO QTD_LIVRO
+	FROM MOVIMENTACAO
+	WHERE matricula = MAT AND dt_devolucao IS NULL;
+	
+  RETURN QTD_LIVRO;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT empresta_livro(2,8);
+
+-- 7. Implemente a função insere_obra(nr_obra INTEGER, titulo TEXT, id_genero INTEGER) que:
+-- Valida se os parâmetros foram preenchidos corretamente.
+-- Verifica se o gênero existe na tabela genero.
+-- Se tudo estiver certo, insere a nova obra.
+-- Retorna uma mensagem de sucesso ou erro.
+
+SELECT * FROM OBRA;
+
+DROP FUNCTION insere_obra;
+
+CREATE FUNCTION insere_obra(NROBRA INTEGER, TIT TEXT, IDGENERO INTEGER)
+RETURNS TEXT
+AS $$
+DECLARE
+  	RESPOSTA TEXT;
+	GENERO_EXISTE BOOLEAN;
+BEGIN
+	IF NROBRA IS NULL OR TIT IS NULL OR IDGENERO IS NULL THEN
+        RESPOSTA := 'Erro: Todos os parâmetros devem ser preenchidos.';
+    END IF;
+
+	SELECT COUNT(*) INTO GENERO_EXISTE
+    FROM GENERO
+    WHERE id_genero = IDGENERO;
+
+    IF GENERO_EXISTE = 0 THEN
+        RESPOSTA := 'Erro: Gênero informado não existe.';
+    END IF;
+
+	INSERT INTO OBRA(nr_obra, titulo, id_genero)
+	VALUES (NROBRA, TIT, IDGENERO);
+
+	RESPOSTA := 'Obra inserida com sucesso!!';
+	
+  RETURN RESPOSTA;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT (6,'O PODER DO HABITO','AJU');
+
+-- 8. Crie a função insere_livro(nr_livro INTEGER, edicao INTEGER, nr_obra INTEGER, id_editora INTEGER) que:
+-- Verifica se o nr_livro já existe (não pode duplicar).
+-- Verifica se edicao > 0.
+-- Valida se a obra e a editora existem.
+-- Insere o livro com CURRENT_DATE como data de aquisição.
+-- Retorna "Livro inserido com sucesso!" ou erro correspondente.
+
+SELECT * FROM LIVRO;
+
+DROP FUNCTION insere_livro;
+
+CREATE OR REPLACE FUNCTION insere_livro(NRLIVRO INTEGER, EDI INTEGER, NROBRA INTEGER, IDEDITORA CHAR)
+RETURNS TEXT AS $$
+DECLARE 
+	RESPOSTA TEXT;
+BEGIN 
+	
+	PERFORM 1 FROM LIVRO WHERE nr_livro = NRLIVRO;
+	IF FOUND THEN
+		RESPOSTA := 'ID DE LIVRO JÁ EXISTENTE';
+
+	ELSIF EDI <= 0 THEN
+		RESPOSTA := 'A EDIÇÃO PRECISA SER MAIOR QUE 0';
+
+	ELSE
+		PERFORM 1 FROM OBRA WHERE nr_obra = NROBRA;
+		IF NOT FOUND THEN
+			RESPOSTA := 'OBRA NÃO EXISTENTE';
+
+		ELSE
+			PERFORM 1 FROM EDITORA WHERE id_editora = IDEDITORA;
+			IF NOT FOUND THEN
+				RESPOSTA := 'EDITORA NÃO EXISTENTE';
+
+			ELSE
+				INSERT INTO LIVRO(nr_livro, dt_aquisicao, edicao, nr_obra, id_editora)
+				VALUES (NRLIVRO, CURRENT_DATE, EDI, NROBRA, IDEDITORA);
+				RESPOSTA := 'Livro inserido com sucesso!';
+			END IF;
+		END IF;
+	END IF;
+
+	RETURN RESPOSTA;
+END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT inserir_livro(3,1,5,'EBA');
+-- 9. Crie a função listar_em_voz_alta() que:
+-- Percorre todos os nomes da tabela usuario com um cursor.
+-- Exibe os nomes com RAISE NOTICE.
+
+CREATE FUNCTION listar_em_voz_alta()
+RETURNS VOID
+AS $$
+DECLARE
+  	C CURSOR FOR SELECT nome FROM usuario;
+	NOME TEXT;
+BEGIN
+	OPEN C;
+    LOOP
+        FETCH C INTO NOME;
+        EXIT WHEN NOT FOUND;
+        RAISE NOTICE 'Nome: %', NOME;
+    END LOOP;
+    CLOSE C;	
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT listar_em_voz_alta();
+-- 10. Crie a função verifica_atrasos() que:
+-- Usa um cursor para percorrer a tabela movimentacao.
+-- Para cada movimentação ativa, verifica se o livro está atrasado.
+-- Para os atrasados, exibe o nr_livro e os dias de atraso via RAISE NOTICE.
+
+
+-- 11. Crie a função relatorio_autores() que:
+-- Percorre todos os autores cadastrados.
+-- Para cada autor, exibe o nome e o total 
+
