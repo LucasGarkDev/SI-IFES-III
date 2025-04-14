@@ -7,24 +7,33 @@ body{
 }
 
 .container{
-    border: 2px solid rgb(217, 17, 17);
+    border: 5px solid rgb(217, 17, 17);
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 100vh;
 }
 
-
 .item{
-    width: 100px;
+    width: 150px;
     height: 100px;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .item1{
-    background-color: red;
+    background-color: blue; 
 }
 
 .item2{
-    background-color: blue;
+    background-color: red;
+    /* height: 200px; */
 }
+
 .item3{
     background-color: green;
+    /* height: 150px; */
 }
