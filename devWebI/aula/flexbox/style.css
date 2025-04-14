@@ -12,6 +12,8 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    /* align-content: flex-start;
+    align-items: baseline; */
     height: 100vh;
 }
 
@@ -20,12 +22,17 @@ body{
     height: 100px;
     color: white;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
 .item1{
     background-color: blue; 
+}
+
+.item1 div{
+    border: 5px solid black; 
 }
 
 .item2{
