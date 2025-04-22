@@ -1,0 +1,15 @@
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/controller/Conexao.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/controller/GenericTableModel.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/controller/GerenciadorDominio.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/controller/GerenciadorInterface.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/controller/ProdutoTableModel.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/dao/CategoriaDAO.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/dao/GenericDAO.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/dao/ProdutoDAO.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/domain/Categoria.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/domain/Produto.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/utils/Dicas.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/utils/FiltroProdutoUtil.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/utils/SQLs.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/utils/Util.java
+/home/lucas/NetBeansProjects/ConsultaPOOIIRevisao/src/main/java/viewer/ProdutoMain.java
