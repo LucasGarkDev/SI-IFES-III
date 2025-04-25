@@ -88,6 +88,37 @@ img {
     background-color: #FFFFFF;
 }
 
+.container-virado {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+  
+/* Faixa azul superior e inferior */
+.faixa-azul {
+    background-color: #005EB8;
+    height: 15%;
+}
+  
+/* Faixa branca central com estrela */
+.faixa-branca {
+    background-color: white;
+    height: 70%;
+}
+  
+/* Centralizar a estrela */
+.centraliza {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.estrela-israel {
+    width: 100px;
+    height: auto;
+}
+
 /* bandeira da dinamarca */
 
 .dinamarca{
