@@ -126,32 +126,68 @@ body{
 
 /* bandeira da dinamarca */
 
-.dinamarca {
+.container{
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100vh;
-    background-color: #C8102E; /* vermelho da bandeira */
-    position: relative;
 }
+
+.dinamarca.vermelho{
+    background-color: #C8102E;
+    width: 100%;
+    height: 44%;
+    display: flex;
+}
+.dinamarca.branco{
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 12%;
+}
+
+.dinamarca .p1{
+    background-color: #C8102E;
+    width: 30%;
+    height: 100%;
+}
+.dinamarca .p2{
+    background-color: #FFFFFF;
+    width: 8%;
+    height: 100%;
+}
+.dinamarca .p3{
+    background-color: #C8102E;
+    width: 62%;
+    height: 100%;
+}
+
+
+/* .dinamarca {
+    width: 100%;
+    height: 100vh;
+    background-color: #C8102E;
+    position: relative;
+} */
   
 /* Barra vertical da cruz */
-.cruz-vertical {
+/* .cruz-vertical {
     position: absolute;
-    left: 25%; /* deslocada para a esquerda */
+    left: 25%; 
     top: 0;
-    width: 10%; /* espessura da cruz */
+    width: 10%; 
     height: 100%;
     background-color: white;
-}
+} */
   
 /* Barra horizontal da cruz */
-.cruz-horizontal {
+/* .cruz-horizontal {
     position: absolute;
-    top: 45%; /* mais ou menos centralizado verticalmente */
+    top: 45%; 
     left: 0;
     width: 100%;
     height: 10%;
     background-color: white;
-}
+} */
   
 /* bandeira da noroega */
 .noruega {
