@@ -32,4 +32,14 @@ public class iOSFactory implements PlataformaFactory{
         toastTemplate.mostrar(mensagem);
     }
     
+    @Override
+    public Notificacao getNotificacaoTemplate() {
+        return notificacaoTemplate;
+    }
+
+    @Override
+    public Toast getToastTemplate() {
+        return toastTemplate;
+    }
+    
 }
