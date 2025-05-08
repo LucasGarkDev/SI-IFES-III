@@ -32,7 +32,7 @@ public class WebFactory implements PlataformaFactory{
         toastTemplate.mostrar(mensagem);
     }
 
-     @Override
+    @Override
     public Notificacao getNotificacaoTemplate() {
         return notificacaoTemplate;
     }
