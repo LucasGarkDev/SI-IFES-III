@@ -14,14 +14,20 @@ import interfaces.Toast;
  */
 public class AndroidFactory implements PlataformaFactory{
 
-    @Override
-    public Notificacao criarNotificacao() {
-        return new AndroidNotificacao();
+    private Notificacao notificacaoTemplate;
+    private Toast toastTemplate;
+
+    public AndroidFactory() {
+        this.notificacaoTemplate = new AndroidNotificacao();
+        this.toastTemplate = new AndroidToast();
     }
 
     @Override
-    public Toast criarToast() {
-       return new AndroidToast();
+    public void mostrarNotificacao(String mensagem) {
+        notificacaoTemplate.exibir(mensagem);
     }
-    
+    @Override
+    public void mostrarToast(String mensagem) {
+        toastTemplate.mostrar(mensagem);
+    }
 }

@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 public class WebNotificacao implements Notificacao{
 
     @Override
-    public void exibir() {
-        JOptionPane.showMessageDialog(null, "Notificação Web: Atualização de sistema concluída.", "Notificação Web", JOptionPane.PLAIN_MESSAGE);
+    public void exibir(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "Web Notificação", JOptionPane.PLAIN_MESSAGE);
     }
     
 }

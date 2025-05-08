@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 public class AndroidNotificacao implements Notificacao{
 
     @Override
-    public void exibir() {
-        JOptionPane.showMessageDialog(null, "Exibindo notificação estilo Android", "Android Notificação", JOptionPane.INFORMATION_MESSAGE);  
+    public void exibir(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "Android Notificação", JOptionPane.INFORMATION_MESSAGE);
     }
     
 }

@@ -20,13 +20,13 @@ import javax.swing.SwingConstants;
 public class AndroidToast implements Toast{
 
     @Override
-    public void mostrar() {
+    public void mostrar(String mensagem) {
         JWindow toastWindow = new JWindow();
         toastWindow.setLayout(new BorderLayout());
         toastWindow.setSize(300, 50);
         toastWindow.setLocationRelativeTo(null);
 
-        JLabel label = new JLabel("Toast Android: Item adicionado ao carrinho!", SwingConstants.CENTER);
+        JLabel label = new JLabel(mensagem, SwingConstants.CENTER);
         label.setOpaque(true);
         label.setBackground(new Color(0, 128, 0));
         label.setForeground(Color.WHITE);
@@ -39,7 +39,7 @@ public class AndroidToast implements Toast{
                 toastWindow.setVisible(false);
                 toastWindow.dispose();
             }
-        }, 2000); // Exibe por 2 segundos
+        }, 2000);
     }
     
 }

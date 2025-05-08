@@ -14,14 +14,22 @@ import interfaces.Toast;
  */
 public class WebFactory implements PlataformaFactory{
 
+    private final Notificacao notificacaoTemplate;
+    private final Toast toastTemplate;
+
+    public WebFactory() {
+        this.notificacaoTemplate = new WebNotificacao();
+        this.toastTemplate = new WebToast();
+    }
+    
     @Override
-    public Notificacao criarNotificacao() {
-        return new WebNotificacao();
+    public void mostrarNotificacao(String mensagem) {
+        notificacaoTemplate.exibir(mensagem);
     }
 
     @Override
-    public Toast criarToast() {
-         return new WebToast();
+    public void mostrarToast(String mensagem) {
+        toastTemplate.mostrar(mensagem);
     }
     
 }

@@ -17,34 +17,30 @@ import interfaces.Toast;
  */
 public class App {
     public static void main(String[] args) {
-        PlataformaFactory plataforma;
+        // Simulação: plataforma pode vir de args, sistema ou config
+        String plataformaSelecionada = "web"; // Pode ser "ios", "web"
 
-        try {
-            // Android
-            plataforma = new AndroidFactory();
-            Notificacao notificacaoAndroid = plataforma.criarNotificacao();
-            Toast toastAndroid = plataforma.criarToast();
-            notificacaoAndroid.exibir();
-            toastAndroid.mostrar();
-            Thread.sleep(2500); 
+        PlataformaFactory fabrica = criarFabrica(plataformaSelecionada);
 
-            // iOS
-            plataforma = new iOSFactory();
-            Notificacao notificacaoiOS = plataforma.criarNotificacao();
-            Toast toastiOS = plataforma.criarToast();
-            notificacaoiOS.exibir();
-            toastiOS.mostrar();
-            Thread.sleep(2500);
+        if (fabrica == null) {
+            System.out.println("Plataforma inválida.");
+            return;
+        }
 
-            // Web
-            plataforma = new WebFactory();
-            Notificacao notificacaoWeb = plataforma.criarNotificacao();
-            Toast toastWeb = plataforma.criarToast();
-            notificacaoWeb.exibir();
-            toastWeb.mostrar();
+        fabrica.mostrarNotificacao("Bem-vindo ao sistema!");
+        fabrica.mostrarToast("Login efetuado com sucesso!");
+    }
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    private static PlataformaFactory criarFabrica(String plataforma) {
+        switch (plataforma.toLowerCase()) {
+            case "android":
+                return new AndroidFactory();
+            case "ios":
+                return new iOSFactory();
+            case "web":
+                return new WebFactory();
+            default:
+                return null;
         }
     }
 }

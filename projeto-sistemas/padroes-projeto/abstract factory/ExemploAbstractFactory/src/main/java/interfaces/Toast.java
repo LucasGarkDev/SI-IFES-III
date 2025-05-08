@@ -9,5 +9,5 @@ package interfaces;
  * @author lucas
  */
 public interface Toast {
-    void mostrar();
+    void mostrar(String mensagem);
 }
