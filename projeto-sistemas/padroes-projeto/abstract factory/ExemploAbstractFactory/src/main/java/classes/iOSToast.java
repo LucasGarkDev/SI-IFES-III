@@ -20,21 +20,22 @@ import javax.swing.SwingConstants;
 public class iOSToast implements Toast{
 
     @Override
-    public void mostrar() {
+    public void mostrar(String mensagem) {
         JWindow toastWindow = new JWindow();
         toastWindow.setLayout(new BorderLayout());
         toastWindow.setSize(300, 50);
         toastWindow.setLocationRelativeTo(null);
 
-        JLabel label = new JLabel("Toast iOS: Mensagem enviada com sucesso!", SwingConstants.CENTER);
+        JLabel label = new JLabel(mensagem, SwingConstants.CENTER);
         label.setOpaque(true);
-        label.setBackground(new Color(30, 144, 255)); // azul típico iOS
+        label.setBackground(new Color(30, 144, 255)); // Azul iOS
         label.setForeground(Color.WHITE);
         toastWindow.add(label, BorderLayout.CENTER);
 
         toastWindow.setVisible(true);
 
         new Timer().schedule(new TimerTask() {
+            @Override
             public void run() {
                 toastWindow.setVisible(false);
                 toastWindow.dispose();

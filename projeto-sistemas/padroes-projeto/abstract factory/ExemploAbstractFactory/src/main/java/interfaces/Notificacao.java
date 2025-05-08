@@ -9,5 +9,5 @@ package interfaces;
  * @author lucas
  */
 public interface Notificacao {
-    void exibir();
+    void exibir(String mensagem);
 }

@@ -20,13 +20,13 @@ import javax.swing.SwingConstants;
 public class WebToast implements Toast{
 
     @Override
-    public void mostrar() {
+    public void mostrar(String mensagem) {
         JWindow toastWindow = new JWindow();
         toastWindow.setLayout(new BorderLayout());
         toastWindow.setSize(300, 50);
         toastWindow.setLocationRelativeTo(null);
 
-        JLabel label = new JLabel("Toast Web: Item removido do carrinho!", SwingConstants.CENTER);
+        JLabel label = new JLabel(mensagem, SwingConstants.CENTER);
         label.setOpaque(true);
         label.setBackground(Color.DARK_GRAY);
         label.setForeground(Color.WHITE);
@@ -35,6 +35,7 @@ public class WebToast implements Toast{
         toastWindow.setVisible(true);
 
         new Timer().schedule(new TimerTask() {
+            @Override
             public void run() {
                 toastWindow.setVisible(false);
                 toastWindow.dispose();

@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
  * @author lucas
  */
 public class iOSNotificacao implements Notificacao{
-
+    
     @Override
-    public void exibir() {
-        JOptionPane.showMessageDialog(null, "Notificação iOS: Novo evento no seu calendário!", "Notificação iOS", JOptionPane.WARNING_MESSAGE);
+    public void exibir(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "iOS Notificação", JOptionPane.WARNING_MESSAGE);
     }
     
 }
