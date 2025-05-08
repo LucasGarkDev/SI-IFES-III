@@ -30,8 +30,8 @@ public class App {
         Notificacao notificacao = fabrica.getNotificacaoTemplate();
         Toast toast = fabrica.getToastTemplate();
 
-        notificacao.exibir("Mensagem diretamente via template!");
-        toast.mostrar("Toast diretamente via template!");
+//        notificacao.exibir("Mensagem diretamente via template!");
+//        toast.mostrar("Toast diretamente via template!");
 
         // Uso padrão via fábrica
         fabrica.mostrarNotificacao("Bem-vindo ao sistema!");
