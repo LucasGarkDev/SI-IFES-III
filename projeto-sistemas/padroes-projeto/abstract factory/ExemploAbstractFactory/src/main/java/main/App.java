@@ -17,8 +17,7 @@ import interfaces.Toast;
  */
 public class App {
     public static void main(String[] args) {
-        // Simulação: plataforma pode vir de args, sistema ou config
-        String plataformaSelecionada = "web"; // Pode ser "ios", "web"
+        String plataformaSelecionada = "web"; // Pode ser "ios", "android", "web"
 
         PlataformaFactory fabrica = criarFabrica(plataformaSelecionada);
 
@@ -27,20 +26,24 @@ public class App {
             return;
         }
 
+        // Uso direto dos templates (justifica o relacionamento no diagrama)
+        Notificacao notificacao = fabrica.getNotificacaoTemplate();
+        Toast toast = fabrica.getToastTemplate();
+
+        notificacao.exibir("Mensagem diretamente via template!");
+        toast.mostrar("Toast diretamente via template!");
+
+        // Uso padrão via fábrica
         fabrica.mostrarNotificacao("Bem-vindo ao sistema!");
         fabrica.mostrarToast("Login efetuado com sucesso!");
     }
 
     private static PlataformaFactory criarFabrica(String plataforma) {
         switch (plataforma.toLowerCase()) {
-            case "android":
-                return new AndroidFactory();
-            case "ios":
-                return new iOSFactory();
-            case "web":
-                return new WebFactory();
-            default:
-                return null;
+            case "android": return new AndroidFactory();
+            case "ios":     return new iOSFactory();
+            case "web":     return new WebFactory();
+            default:        return null;
         }
     }
 }

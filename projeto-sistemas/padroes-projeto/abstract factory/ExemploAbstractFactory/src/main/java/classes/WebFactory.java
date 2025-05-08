@@ -31,5 +31,15 @@ public class WebFactory implements PlataformaFactory{
     public void mostrarToast(String mensagem) {
         toastTemplate.mostrar(mensagem);
     }
+
+     @Override
+    public Notificacao getNotificacaoTemplate() {
+        return notificacaoTemplate;
+    }
+
+    @Override
+    public Toast getToastTemplate() {
+        return toastTemplate;
+    }
     
 }
