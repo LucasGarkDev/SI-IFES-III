@@ -40,32 +40,43 @@ body{
     font-size: 15px;
 }
 
-.produtos{
+.produtos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.linha {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.produtos > * {
-    flex: 1 1 calc(30% - 20px); 
-    box-sizing: border-box;
-    max-width: calc(30% - 20px);
-}
-
-.card{
+.card {
     width: 320px;
     height: 180px;
     background-color: white;
-    margin: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
 }
 
-.card img{
+.card img {
     width: 100%;
-    height: 100%;
+    height: 120px;
+    object-fit: cover;
 }
 
+.card p {
+    margin: 10px 0 0;
+    font-size: 16px;
+}
