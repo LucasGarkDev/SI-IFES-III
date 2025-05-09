@@ -17,7 +17,7 @@ import interfaces.Toast;
  */
 public class App {
     public static void main(String[] args) {
-        String plataformaSelecionada = "android"; // Pode ser "ios", "android", "web"
+        String plataformaSelecionada = "ios"; // Pode ser "android", "ios", "web"
 
         PlataformaFactory fabrica = criarFabrica(plataformaSelecionada);
 
@@ -26,16 +26,13 @@ public class App {
             return;
         }
 
-        // Uso direto dos templates (justifica o relacionamento no diagrama)
-        Notificacao notificacao = fabrica.getNotificacaoTemplate();
-        Toast toast = fabrica.getToastTemplate();
+        // Criando objetos e exibindo mensagens
+        Notificacao notificacao = fabrica.criarNotificacao("Bem-vindo ao sistema!");
+        Toast toast = fabrica.criarToast("Login efetuado com sucesso!");
 
+        // (Opcional) Reutilizar objetos, se necessário:
         notificacao.exibir("Bem-vindo ao sistema!");
         toast.mostrar("Login efetuado com sucesso!");
-
-        // Uso padrão via fábrica
-//        fabrica.mostrarNotificacao("Bem-vindo ao sistema!");
-//        fabrica.mostrarToast("Login efetuado com sucesso!");
     }
 
     private static PlataformaFactory criarFabrica(String plataforma) {

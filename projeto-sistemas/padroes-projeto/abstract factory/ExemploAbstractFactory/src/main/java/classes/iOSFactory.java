@@ -12,34 +12,17 @@ import interfaces.Toast;
  *
  * @author lucas
  */
-public class iOSFactory implements PlataformaFactory{
+public class iOSFactory implements PlataformaFactory {
 
-    private final Notificacao notificacaoTemplate;
-    private final Toast toastTemplate;
-
-    public iOSFactory() {
-        this.notificacaoTemplate = new iOSNotificacao();
-        this.toastTemplate = new iOSToast();
+    @Override
+    public Notificacao criarNotificacao(String mensagem) {
+        Notificacao notificacao = new iOSNotificacao();
+        return notificacao;
     }
 
     @Override
-    public void mostrarNotificacao(String mensagem) {
-        notificacaoTemplate.exibir(mensagem);
+    public Toast criarToast(String mensagem) {
+        Toast toast = new iOSToast();
+        return toast;
     }
-
-    @Override
-    public void mostrarToast(String mensagem) {
-        toastTemplate.mostrar(mensagem);
-    }
-    
-    @Override
-    public Notificacao getNotificacaoTemplate() {
-        return notificacaoTemplate;
-    }
-
-    @Override
-    public Toast getToastTemplate() {
-        return toastTemplate;
-    }
-    
 }

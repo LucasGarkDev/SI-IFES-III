@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS EXAME_PEDIDO CASCADE;
 DROP TABLE IF EXISTS EXAME CASCADE;
 DROP TABLE IF EXISTS MATERIAL CASCADE;
 DROP TABLE IF EXISTS PEDIDO CASCADE;
+DROP TABLE IF EXISTS PEDIDO_CONTROLE CASCADE;
 DROP TABLE IF EXISTS MEDICO CASCADE;
 DROP TABLE IF EXISTS CLIENTE CASCADE;
 DROP TABLE IF EXISTS PLANO CASCADE;
@@ -73,26 +74,29 @@ CREATE TABLE EXAME_AUTORIZADO (
     PRIMARY KEY (idPlano, idExame)
 );
 
--- 🧩 Parte 2 – Particionamento de PEDIDO por LISTA e EXAME_PEDIDO por RANGE
+-- 🔧 TABELA DE CONTROLE PARA GERAR NR_PEDIDO
+CREATE TABLE PEDIDO_CONTROLE (
+    nrPedido SERIAL PRIMARY KEY
+);
 
--- TABELA: PEDIDO (particionada por idPlano)
+-- 🧩 Parte 2 – Particionamento de PEDIDO por RANGE de data_pedido
+
 CREATE TABLE PEDIDO (
-    nrPedido SERIAL,
+    nrPedido INTEGER,
     data_pedido DATE NOT NULL,
     idMedico INTEGER REFERENCES MEDICO(idMedico),
     idCliente INTEGER REFERENCES CLIENTE(idCliente),
     idPlano INTEGER NOT NULL REFERENCES PLANO(idPlano),
-    PRIMARY KEY (nrPedido, idPlano)  -- 👈 obrigatório incluir idPlano!
-) PARTITION BY LIST (idPlano);
+    PRIMARY KEY (nrPedido, data_pedido)
+) PARTITION BY RANGE (data_pedido);
 
--- Exemplos de partições da tabela PEDIDO (por plano)
-CREATE TABLE PEDIDO_PLANO_1 PARTITION OF PEDIDO FOR VALUES IN (1);
-CREATE TABLE PEDIDO_PLANO_2 PARTITION OF PEDIDO FOR VALUES IN (2);
+CREATE TABLE PEDIDO_2024 PARTITION OF PEDIDO
+FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
 
--- TABELA: EXAME_PEDIDO (precisa armazenar idPlano para referenciar PEDIDO corretamente)
+-- TABELA: EXAME_PEDIDO (particionada por data_prevista)
 CREATE TABLE EXAME_PEDIDO (
     nrPedido INTEGER,
-    idPlano INTEGER,
+    data_pedido DATE NOT NULL,
     idExame INTEGER REFERENCES EXAME(idExame),
     data_prevista DATE NOT NULL,
     nr_autorizacao VARCHAR(50),
@@ -101,14 +105,13 @@ CREATE TABLE EXAME_PEDIDO (
     valor NUMERIC(10,2),
     nr_fatura INTEGER,
     plano INTEGER,
-    PRIMARY KEY (nrPedido, idPlano, idExame, data_prevista),
-    FOREIGN KEY (nrPedido, idPlano) REFERENCES PEDIDO(nrPedido, idPlano)
+    PRIMARY KEY (nrPedido, data_pedido, idExame, data_prevista),
+    FOREIGN KEY (nrPedido, data_pedido) REFERENCES PEDIDO(nrPedido, data_pedido)
 ) PARTITION BY RANGE (data_prevista);
 
--- Partição para o ano de 2024
 CREATE TABLE EXAME_PEDIDO_2024 PARTITION OF EXAME_PEDIDO
     FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
-	
+
 -- 🔍 Parte 3 – Índices
 
 CREATE INDEX idx_exame_material ON EXAME(idMaterial);
@@ -127,7 +130,7 @@ BEGIN
     SELECT SUM(ep.valor)
     INTO total_valor
     FROM EXAME_PEDIDO ep
-    JOIN PEDIDO p ON ep.nrPedido = p.nrPedido AND ep.idPlano = p.idPlano
+    JOIN PEDIDO p ON ep.nrPedido = p.nrPedido AND ep.data_pedido = p.data_pedido
     WHERE EXTRACT(MONTH FROM p.data_pedido) = p_mes
       AND EXTRACT(YEAR FROM p.data_pedido) = p_ano
       AND ep.plano IS NULL;
@@ -146,6 +149,7 @@ CREATE OR REPLACE FUNCTION INSERE_PEDIDO(
 DECLARE
     novo_pedido INTEGER;
 BEGIN
+    -- Verificações
     IF NOT EXISTS (SELECT 1 FROM MEDICO WHERE idMedico = p_idMedico) THEN
         RAISE EXCEPTION 'Médico não encontrado.';
     END IF;
@@ -156,9 +160,12 @@ BEGIN
         RAISE EXCEPTION 'Plano não encontrado.';
     END IF;
 
-    INSERT INTO PEDIDO (data_pedido, idMedico, idCliente, idPlano)
-    VALUES (CURRENT_DATE, p_idMedico, p_idCliente, p_idPlano)
-    RETURNING nrPedido INTO novo_pedido;
+    -- Geração de nrPedido
+    INSERT INTO PEDIDO_CONTROLE DEFAULT VALUES RETURNING nrPedido INTO novo_pedido;
+
+    -- Inserção na tabela particionada
+    INSERT INTO PEDIDO (nrPedido, data_pedido, idMedico, idCliente, idPlano)
+    VALUES (novo_pedido, CURRENT_DATE, p_idMedico, p_idCliente, p_idPlano);
 
     RETURN novo_pedido;
 END;
@@ -168,41 +175,55 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE PROCEDURE INSERE_EXAME_PEDIDO(
     p_nrPedido INTEGER,
-    p_idPlano INTEGER,
+    p_dataPedido DATE,
     p_idExame INTEGER
 )
 LANGUAGE plpgsql
 AS $$
 DECLARE
+    id_plano INTEGER;
     valor_us NUMERIC;
     valor_ch NUMERIC;
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM PEDIDO WHERE nrPedido = p_nrPedido AND idPlano = p_idPlano) THEN
+    -- Verifica se o pedido existe e obtém o idPlano
+    SELECT idPlano INTO id_plano
+    FROM PEDIDO
+    WHERE nrPedido = p_nrPedido AND data_pedido = p_dataPedido;
+
+    IF NOT FOUND THEN
         RAISE EXCEPTION 'Pedido não encontrado';
     END IF;
+
+    -- Verifica se o exame existe
     IF NOT EXISTS (SELECT 1 FROM EXAME WHERE idExame = p_idExame) THEN
         RAISE EXCEPTION 'Exame não encontrado';
     END IF;
-    IF NOT EXISTS (
-        SELECT 1 FROM EXAME_AUTORIZADO WHERE idPlano = p_idPlano AND idExame = p_idExame
-    ) THEN
+
+    -- Verifica se o exame está autorizado para o plano do pedido
+    SELECT valor_ch INTO valor_ch
+    FROM EXAME_AUTORIZADO
+    WHERE idPlano = id_plano AND idExame = p_idExame;
+
+    IF NOT FOUND THEN
         RAISE EXCEPTION 'Exame não autorizado para este plano';
     END IF;
 
-    SELECT valor_ch INTO valor_ch
-    FROM EXAME_AUTORIZADO
-    WHERE idPlano = p_idPlano AND idExame = p_idExame;
-
+    -- Recupera o valor atual do US
     SELECT valor INTO valor_us
     FROM VALOR_US
-    WHERE idPlano = p_idPlano
+    WHERE idPlano = id_plano
       AND CURRENT_DATE BETWEEN data_inicial_vigencia AND data_final_vigencia
     LIMIT 1;
 
+    IF valor_us IS NULL THEN
+        RAISE EXCEPTION 'Valor US não encontrado para o plano na data atual';
+    END IF;
+
+    -- Inserção do exame vinculado ao pedido
     INSERT INTO EXAME_PEDIDO (
-        nrPedido, idPlano, idExame, data_prevista, valor
+        nrPedido, data_pedido, idExame, data_prevista, valor
     ) VALUES (
-        p_nrPedido, p_idPlano, p_idExame, CURRENT_DATE, valor_ch * valor_us
+        p_nrPedido, p_dataPedido, p_idExame, CURRENT_DATE, valor_ch * valor_us
     );
 END;
 $$;
@@ -216,7 +237,7 @@ WHERE (
     AND EXISTS (
         SELECT 1 FROM PEDIDO p
         JOIN CLIENTE c ON p.idCliente = c.idCliente
-        WHERE p.nrPedido = NEW.nrPedido AND p.idPlano = NEW.idPlano AND c.sexo = 'M'
+        WHERE p.nrPedido = NEW.nrPedido AND p.data_pedido = NEW.data_pedido AND c.sexo = 'M'
     )
 )
 DO INSTEAD NOTHING;
@@ -230,7 +251,7 @@ WHERE (
     AND EXISTS (
         SELECT 1 FROM PEDIDO p
         JOIN CLIENTE c ON p.idCliente = c.idCliente
-        WHERE p.nrPedido = NEW.nrPedido AND p.idPlano = NEW.idPlano
+        WHERE p.nrPedido = NEW.nrPedido AND p.data_pedido = NEW.data_pedido
           AND c.sexo = 'F'
           AND AGE(c.nascimento) >= INTERVAL '65 years'
     )
@@ -246,7 +267,7 @@ WHERE (
     AND EXISTS (
         SELECT 1 FROM PEDIDO p
         JOIN CLIENTE c ON p.idCliente = c.idCliente
-        WHERE p.nrPedido = NEW.nrPedido AND p.idPlano = NEW.idPlano AND c.sexo = 'F'
+        WHERE p.nrPedido = NEW.nrPedido AND p.data_pedido = NEW.data_pedido AND c.sexo = 'F'
     )
 )
 DO INSTEAD NOTHING;
@@ -263,15 +284,18 @@ AS $$
 DECLARE
     nova_fatura_id INTEGER;
 BEGIN
+    -- Cria nova fatura
     INSERT INTO FATURA (idPlano, data_geracao)
     VALUES (p_idPlano, CURRENT_DATE)
     RETURNING nr_fatura INTO nova_fatura_id;
 
+    -- Atualiza exames ainda não faturados
     UPDATE EXAME_PEDIDO ep
     SET nr_fatura = nova_fatura_id
     FROM PEDIDO p
     WHERE ep.nr_fatura IS NULL
-      AND ep.nrPedido = p.nrPedido AND ep.idPlano = p.idPlano
+      AND ep.nrPedido = p.nrPedido
+      AND ep.data_pedido = p.data_pedido
       AND EXTRACT(MONTH FROM p.data_pedido) = p_mes
       AND EXTRACT(YEAR FROM p.data_pedido) = p_ano
       AND p.idPlano = p_idPlano;
