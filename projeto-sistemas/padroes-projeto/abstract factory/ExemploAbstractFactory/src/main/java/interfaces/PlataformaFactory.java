@@ -9,9 +9,6 @@ package interfaces;
  * @author lucas
  */
 public interface PlataformaFactory {
-    Notificacao getNotificacaoTemplate();
-    Toast getToastTemplate();
-    
-    void mostrarNotificacao(String mensagem);
-    void mostrarToast(String mensagem);
+    Notificacao criarNotificacao(String mensagem);
+    Toast criarToast(String mensagem);
 }
