@@ -45,7 +45,7 @@ body{
     flex-direction: column;
     gap: 10px;
     padding: 10px;
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 20px auto;
 }
 
@@ -57,8 +57,8 @@ body{
 }
 
 .card {
-    flex: 1 1 300px;         /* permite crescer mas respeita o mínimo */
-    max-width: 400px;        /* evita que fique largo demais */
+    flex: 1 1 300px;         
+    max-width: 400px;        
     background-color: white;
     display: flex;
     flex-direction: column;
