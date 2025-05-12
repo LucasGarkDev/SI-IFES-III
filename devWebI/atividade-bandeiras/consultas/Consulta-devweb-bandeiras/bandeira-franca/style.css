@@ -1,0 +1,32 @@
+*{
+    box-sizing: border-box;  
+}
+  
+body{
+    margin: 0;
+}
+
+.container{
+   display: flex;
+   width: 100%;
+   height: 100vh;
+   /* width: 900px;
+   height: 400px; */
+}
+
+/* bandeira da frança */
+.franca{
+    width: 33.333%;
+    height: 100%;
+}
+
+.franca.azul{
+    background-color: #0055A4;
+}
+.franca.branco{
+    background-color: #FFFFFF;
+}
+.franca.vermelho{
+    background-color: #EF4135;
+}
+

@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+body {
+    margin: 0;
+}
+  
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; 
+}
+
+.dominicana.azul{
+    background-color: darkblue;
+    width: 100%;
+    height: 40%;
+    display: flex;
+}
+
+.dominicana.branco{
+    background-color: white;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dominicana.vermelho{
+    background-color: red;
+    width: 100%;
+    height: 40%;
+    display: flex;
+}
+
+.dominicana .p1{
+    background-color: darkblue;
+    width: 40%;
+    height: 100%;
+}
+
+.dominicana .p2{
+    background-color: white;
+    width: 20%;
+    height: 100%;
+}
+
+.dominicana .p3{
+    background-color: red;
+    width: 40%;
+    height: 100%;
+}
+
+.brasao-dominicano{
+    max-height: 90%;
+    width: auto;
+}
