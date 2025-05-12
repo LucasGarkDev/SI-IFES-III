@@ -1,0 +1,164 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+body {
+    margin: 0;
+}
+  
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Altere para 'row' se faixas verticais */
+}
+  
+  /* =====================
+     Bandeiras com faixas simples
+     ===================== */
+.faixa {
+    width: 100%;
+    height: 33.33%;
+}
+  
+.faixa1 {
+    background-color: #A2C8E1; /* Azul claro (Argentina / França / Irlanda) */
+}
+  
+.faixa2 {
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.faixa3 {
+    background-color: #EF4135; /* Vermelho */
+}
+  
+  /* =====================
+     Elemento central (sol, estrela, etc)
+     ===================== */
+.centro {
+    max-width: 40%;
+    height: auto;
+}
+  
+  /* =====================
+     Estrutura de cruz (Noruega / Dinamarca)
+     ===================== */
+.cruz-horizontal {
+    width: 100%;
+    height: 45%;
+    background-color: white;
+    display: flex;
+}
+  
+.cruz-horizontal.bottom {
+    align-items: flex-end;
+}
+  
+.barra-central {
+    width: 100%;
+    height: 10%;
+    background-color: blue;
+}
+  
+  /* Cada parte da cruz */
+.p1 {
+    background-color: red;
+    width: 20%;
+    height: 90%;
+}
+.p2 {
+    background-color: white;
+    width: 3%;
+    height: 90%;
+}
+.p3 {
+    background-color: blue;
+    width: 7%;
+    height: 100%;
+}
+.p4 {
+    background-color: red;
+    width: 67%;
+    height: 90%;
+}
+  
+  /* =====================
+     Bandeira com layout especial (Texas)
+     ===================== */
+.container.texas {
+    flex-direction: row;
+}
+  
+.texas-azul {
+    width: 35%;
+    height: 100%;
+    background-color: #002D72;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.texas-vermelho {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+  
+.parte-branca {
+    height: 50%;
+    background-color: white;
+}
+  
+.parte-vermelha {
+    height: 50%;
+    background-color: #BF0A30;
+}
+  
+.estrela {
+    max-width: 80%;
+    height: auto;
+}
+  
+/* 
+✅ Classe Coringa com Flexbox
+
+.centralizar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+💡 Como usar no HTML:
+
+<div class="centralizar">
+  <img src="/image/exemplo.png" alt="Imagem Centralizada" />
+</div>
+🧩 Extra: versão grid também funciona
+Se preferir usar grid (mais curta e sem flexbox), use esta:
+
+
+.centralizar {
+  display: grid;
+  place-items: center;
+}
+🛠️ Dica prática:
+Se quiser sempre garantir que a imagem não fique maior que o contêiner, combine com:
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+Quer que eu gere uma versão .css com essas utilitárias prontas para importar? */
+
+
+
+
+
+
+

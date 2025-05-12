@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bandeira Flexbox</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Para bandeiras com faixas horizontais -->
+    <div class="faixa faixa1"></div>
+    <div class="faixa faixa2">
+      <!-- Para imagens centrais (Argentina / Israel) -->
+      <img src="/image/centro.png" alt="Símbolo central" class="centro"/>
+    </div>
+    <div class="faixa faixa3"></div>
+
+    <!-- Para bandeiras com estrutura em cruz (Noruega / Dinamarca) -->
+    <div class="cruz-horizontal">
+      <div class="p1"></div>
+      <div class="p2"></div>
+      <div class="p3"></div>
+      <div class="p2"></div>
+      <div class="p4"></div>
+    </div>
+    <div class="barra-central"></div>
+    <div class="cruz-horizontal bottom">
+      <div class="p1"></div>
+      <div class="p2"></div>
+      <div class="p3"></div>
+      <div class="p2"></div>
+      <div class="p4"></div>
+    </div>
+
+  </div>
+</body>
+</html>
+
+
+
+<!-- 
+width = largura
+height = altura
+flex-direction = direção do eixo principal
+justify-content = alinha os itens ao longo do eixo principal
+align-items = alinha os itens ao longo do eixo transversal
+flex = exibe os itens como flexíveis
+
+✅ LINHA DE RACIOCÍNIO COMUM PARA QUALQUER BANDEIRA USANDO FLEXBOX
+Observar a estrutura geral da bandeira:
+
+Ela é composta por faixas verticais ou horizontais?
+
+Há uma cruz? Uma imagem central? Uma estrela?
+
+Quantas cores e quantas divisões visuais existem?
+
+Definir o eixo principal com flex-direction:
+
+Se a bandeira for feita de linhas horizontais, use flex-direction: column
+
+🇦🇷 🇮🇱 🇳🇴 🇩🇰
+
+Se for feita de faixas verticais, use flex-direction: row
+
+🇫🇷 🇮🇪 🇺🇸 (Texas)
+
+Criar uma .container que cobre toda a bandeira:
+
+Sempre com display: flex, width: 100%, height: 100vh
+
+Dividir o conteúdo dentro do container com divs representando as faixas:
+
+Use width ou height em porcentagem
+
+Defina cores com background-color
+
+Se houver conteúdo dentro de uma faixa (como uma cruz ou uma imagem):
+
+Adicione display: flex na div pai
+
+Use justify-content e align-items para centralizar elementos (ex: sol da Argentina ou estrela de Israel)
+
+Ajuste proporcional de cada faixa ou elemento:
+
+Observe espessuras: a cruz da Noruega tem faixas mais grossas no azul
+
+Use width: XX% ou height: XX% conforme necessário
+
+🧭 O QUE MUDA ENTRE AS BANDEIRAS?
+Bandeira	Diferença Principal	Técnica Exigida
+🇫🇷 França	3 faixas verticais	flex-direction: row
+🇮🇪 Irlanda	Igual à França, cores diferentes	Mesmo raciocínio
+🇦🇷 Argentina	Faixas horizontais com imagem centralizada	flex-direction: column, align-items/justify
+🇮🇱 Israel	Faixas horizontais com imagem dentro de div central	Aninhamento de flex, proporção da imagem
+🇩🇰 Dinamarca	Cruz com 2 cores (vermelho e branco)	flex-direction: column, layout cruz com divs
+🇳🇴 Noruega	Cruz com 3 cores (vermelho, branco, azul)	Cruz aninhada, proporções precisas
+🇺🇸 Texas	Faixa azul lateral com estrela, divisão horizontal	flex-direction: row, imagem centralizada
+
+💡 DICAS DE OURO PARA QUALQUER BANDEIRA
+Sempre comece pelo esqueleto da bandeira com container e as divs básicas.
+
+Use cores temporárias para visualizar antes de refinar.
+
+Se a bandeira tiver imagem, use display: flex + justify-content/align-items: center.
+
+Para cruzes, faça a estrutura horizontal com flex-direction: column, e em cada linha crie divs lado a lado para formar a cruz.
+
+Proporções não precisam ser exatas, mas devem ser visualmente próximas.
+
+Use height: 100vh para que a bandeira ocupe a tela inteira. -->
+

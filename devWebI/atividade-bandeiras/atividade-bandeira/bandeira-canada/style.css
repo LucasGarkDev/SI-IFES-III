@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+body {
+    margin: 0;
+}
+  
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row; 
+}
+
+.canada.vermelho{
+    background-color: red;
+    width: 20%;
+    height: 100%;
+}
+
+.canada.branco{
+    background-color: white;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.folha-canada{
+    max-height: 80%;
+    width: auto;
+}

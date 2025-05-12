@@ -1,0 +1,39 @@
+
+*{
+    box-sizing: border-box;  
+}
+  
+body{
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+.republica.laranja{
+    background-color: orange;
+    width: 100%;
+    height: 32%;
+}
+
+.republica.branca{
+    background-color: white;
+    width: 100%;
+    height: 36%;
+    display: flex;
+    justify-content: center;
+}
+.republica.verde-escuro{
+    background-color: darkgreen;
+    width: 100%;
+    height: 32%;
+}
+
+.estrela-dourada{
+    max-width: 35%;
+    height: auto;
+}

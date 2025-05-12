@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;  
+}
+  
+body{
+    margin: 0;
+}
+
+.container{
+   display: flex;
+   width: 100%;
+   height: 100vh;
+   /* width: 900px;
+   height: 400px; */
+   flex-direction: column;
+}
+
+.israel.azul{
+    background-color: blue;
+    width: 100%;
+    height: 15%;
+}
+
+.israel.branco-menor{
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 5%;
+}
+
+.israel.branco{
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 60%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.estrela-davi {
+    max-width: 20%;
+    height: auto;
+}

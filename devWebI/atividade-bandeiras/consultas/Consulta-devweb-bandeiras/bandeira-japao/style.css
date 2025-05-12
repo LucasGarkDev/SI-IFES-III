@@ -1,0 +1,24 @@
+*{
+    box-sizing: border-box;  
+}
+  
+body{
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.circulo {
+    background-color: red;
+    width: 30%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
