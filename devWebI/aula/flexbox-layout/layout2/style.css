@@ -80,7 +80,7 @@ body {
     height: 190px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .noticias {
       flex-direction: column;
     }
@@ -90,4 +90,4 @@ body {
     .grande, .pequeno {
       width: 100%;
     }
-}
+} */
