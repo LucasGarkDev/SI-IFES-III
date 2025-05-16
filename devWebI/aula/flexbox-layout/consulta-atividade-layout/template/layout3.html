@@ -2,11 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Garante responsividade em dispositivos móveis -->
   <title>Layout Flexbox</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- TOPO com logo e menu -->
   <header class="topo">
     <div class="logo">Logo</div>
     <nav class="menu">
@@ -17,23 +19,44 @@
   </header>
 
   <main class="conteudo">
-    <!-- LINHA DE ELEMENTOS PRINCIPAIS (ex: 3 vídeos) -->
+
+    <!-- LINHA DE ELEMENTOS (ex: vídeos ou destaques) -->
     <section class="linha">
-      <div class="card"><img src="..." alt=""><p>Título</p></div>
-      <div class="card"><img src="..." alt=""><p>Título</p></div>
-      <div class="card"><img src="..." alt=""><p>Título</p></div>
+      <div class="card">
+        <img src="..." alt="">
+        <p>Vídeo 1</p>
+      </div>
+      <div class="card">
+        <img src="..." alt="">
+        <p>Vídeo 2</p>
+      </div>
+      <div class="card">
+        <img src="..." alt="">
+        <p>Vídeo 3</p>
+      </div>
     </section>
 
-    <!-- BLOCOS SECUNDÁRIOS (ex: banner + listas) -->
+    <!-- BLOCO SECUNDÁRIO (ex: banner + listas) -->
     <section class="listas">
+
+      <!-- Banner lateral -->
       <div class="banner">
         <div class="quadro"></div>
-        <p>Texto</p>
+        <p>Banner</p>
       </div>
+
+      <!-- Lista de sugestões -->
       <div class="lista">
-        <div class="card-pequeno"><img src="..." alt=""><p>Texto</p></div>
-        <div class="card-pequeno"><img src="..." alt=""><p>Texto</p></div>
+        <div class="card-pequeno">
+          <img src="..." alt="">
+          <p>Sugestão</p>
+        </div>
+        <div class="card-pequeno">
+          <img src="..." alt="">
+          <p>Sugestão</p>
+        </div>
       </div>
+
     </section>
   </main>
 </body>
