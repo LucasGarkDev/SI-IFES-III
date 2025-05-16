@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guia de Layout com Flexbox</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2 {
+      color: #1a73e8;
+    }
+    .etapa {
+      background: #fff;
+      border-left: 6px solid #1a73e8;
+      padding: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    code, pre {
+      background-color: #eee;
+      padding: 8px;
+      display: block;
+      overflow-x: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 16px;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    table th {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✅ Etapa 1: Análise Visual do Layout</h1>
+  <div class="etapa">
+    <p>Antes de escrever qualquer HTML ou CSS, observe o layout como um todo, como se fosse um quebra-cabeça.</p>
+    <p><strong>Você precisa identificar:</strong></p>
+    <h2>🧱 Blocos principais</h2>
+    <p>Quais partes estão claramente separadas? (ex: cabeçalho, conteúdo, rodapé, destaques etc.)</p>
+    <p>Cada bloco será uma <code>div</code>, <code>section</code>, <code>header</code>, <code>main</code>, etc.</p>
+    <p><strong>Exemplo:</strong></p>
+    <ul>
+      <li>🔹 Topo (logo + menu)</li>
+      <li>🔹 Linha com 3 cards grandes</li>
+      <li>🔹 Linha com banner e sugestões menores</li>
+    </ul>
+
+    <h2>🔀 Grupos de elementos em linha ou coluna</h2>
+    <p>Verifique se os elementos estão lado a lado ou empilhados:</p>
+    <ul>
+      <li>Se lado a lado → <code>flex-direction: row</code></li>
+      <li>Se um embaixo do outro → <code>flex-direction: column</code></li>
+    </ul>
+    <p><strong>Exemplo:</strong></p>
+    <ul>
+      <li>Três vídeos: em linha (row)</li>
+      <li>Banner + sugestões: linha com colunas dentro (com listas em coluna)</li>
+    </ul>
+
+    <h2>📱 Elementos responsivos</h2>
+    <p>Pense: “O que deve mudar em telas pequenas?”</p>
+    <ul>
+      <li>Cards que estavam em linha devem se empilhar?</li>
+      <li>Uma coluna de lado deve descer para baixo do conteúdo?</li>
+    </ul>
+    <p>Isso afeta como você configura o <code>flex-wrap</code> e os <code>@media queries</code>.</p>
+  </div>
+
+  <h1>✅ Etapa 2: Estrutura HTML Base</h1>
+  <div class="etapa">
+    <p>Com o layout compreendido, escreva a estrutura HTML pura, sem CSS.</p>
+    <p>⛓️ <strong>Dica:</strong> pense em "caixas dentro de caixas".</p>
+    <pre><code>&lt;body&gt;
+  &lt;header&gt;...&lt;/header&gt;
+  &lt;main&gt;
+    &lt;section class="linha"&gt; &lt;!-- cards grandes --&gt;&lt;/section&gt;
+    &lt;section class="listas"&gt; &lt;!-- banner + listas --&gt;&lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+</code></pre>
+  </div>
+
+  <h1>✅ Etapa 3: Configuração do Flexbox</h1>
+  <div class="etapa">
+    <p>Com CSS, use Flexbox nos contêineres principais.</p>
+    <p><strong>📦 display: flex</strong></p>
+    <pre><code>.linha {
+  display: flex;
+  flex-direction: row; /* ou column */
+  gap: 20px;
+}</code></pre>
+
+    <h2>🎯 Distribuição e alinhamento</h2>
+    <ul>
+      <li><code>justify-content</code>: distribui no eixo principal (ex: space-between, center)</li>
+      <li><code>align-items</code>: alinha no eixo cruzado (topo, centro, base etc.)</li>
+    </ul>
+  </div>
+
+  <h1>✅ Etapa 4: Tamanho e Comportamento</h1>
+  <div class="etapa">
+    <p><strong>💡 Use</strong> <code>flex: 1 1 300px;</code></p>
+    <ul>
+      <li><code>1</code> = pode crescer</li>
+      <li><code>1</code> = pode encolher</li>
+      <li><code>300px</code> = tamanho base</li>
+    </ul>
+    <p>Isso permite que os cards se ajustem automaticamente ao espaço.</p>
+
+    <p><strong>📏 Use max-width ou min-width:</strong></p>
+    <pre><code>.card {
+  flex: 1 1 300px;
+  max-width: 400px;
+}</code></pre>
+  </div>
+
+  <h1>✅ Etapa 5: Imagens e Textos</h1>
+  <div class="etapa">
+    <h2>🖼️ object-fit: cover</h2>
+    <p>Faz com que a imagem preencha a caixa proporcionalmente, cortando as sobras sem distorcer.</p>
+    <pre><code>.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}</code></pre>
+
+    <h2>🎯 Centralizar conteúdo</h2>
+    <pre><code>.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+  </div>
+
+  <h1>📌 Resumo Visual</h1>
+  <div class="etapa">
+    <table>
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Ação</th>
+          <th>Objetivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. Análise</td>
+          <td>Observar blocos, linhas e colunas</td>
+          <td>Entender estrutura geral</td>
+        </tr>
+        <tr>
+          <td>2. HTML Base</td>
+          <td>Criar contêineres para os grupos visuais</td>
+          <td>Organizar o conteúdo em caixas</td>
+        </tr>
+        <tr>
+          <td>3. Flexbox</td>
+          <td><code>display: flex</code>, <code>gap</code>, <code>justify-content</code></td>
+          <td>Distribuir filhos no layout</td>
+        </tr>
+        <tr>
+          <td>4. Tamanho</td>
+          <td><code>flex: 1 1 base</code>, <code>max-width</code></td>
+          <td>Permitir responsividade, evitar deformações</td>
+        </tr>
+        <tr>
+          <td>5. Imagem</td>
+          <td><code>object-fit: cover</code></td>
+          <td>Imagem bonita sem distorção</td>
+        </tr>
+        <tr>
+          <td>5. Centralizar</td>
+          <td><code>justify-content</code> + <code>align-items</code></td>
+          <td>Centralizar texto, imagem ou ícones</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
