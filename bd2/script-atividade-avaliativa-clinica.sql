@@ -411,5 +411,9 @@ $$;
 -- Fecha a fatura do mês de abril de 2024 para o Plano Ouro (idPlano = 1)
 CALL FECHAR_FATURA_MES(4, 2024, 1);
 
+SELECT INSERE_PEDIDO(1, 1, 1);
+CALL INSERE_EXAME_PEDIDO(1, CURRENT_DATE, 1); -- Hemograma
+
 -- Consultando exames que foram faturados
+CALL FECHAR_FATURA_MES(4, 2024, 1);
 SELECT * FROM EXAME_PEDIDO WHERE nr_fatura IS NOT NULL;
