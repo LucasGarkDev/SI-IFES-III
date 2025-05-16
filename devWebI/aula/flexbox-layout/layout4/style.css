@@ -58,65 +58,62 @@ body{
 
 }
 
-.listas{
+.listas {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    max-width: 1200px; 
-    border: 2px solid red;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
 }
 
-.lista{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    max-width: 1200px; 
-    border: 5px solid darkblue;
+.banner, .lista {
+    flex: 1; 
 }
 
-.card-pequeno{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    max-width: 1200px; 
-    border: 2px solid violet;
-}
-
-.card-pequeno img{
-    width: 50px;
-    height: 50px;
-}
-.card-pequeno p{
-    margin: 0;
-    font-size: 12px;
-}
-
-.banner{
+.banner {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 10px;
     background-color: #f0f0f0;
-    padding: 20px;
-    border: 2px solid blueviolet;
 }
 
-.quadro{
-    width: 293px;
-    height: 217px;
+.quadro {
+    width: 100%;
+    height: 250px;
     background-color: #bb4747;
     border: 2px solid black;
+    margin-bottom: 10px;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-pequeno {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card-pequeno img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.card-pequeno p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.card, .banner, .lista {
+    max-width: 400px;
 }
 
 .linha {
