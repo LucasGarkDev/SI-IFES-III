@@ -37,7 +37,7 @@
 .conteudo {
   display: flex;
   flex-direction: column;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
   gap: 40px;
@@ -80,12 +80,13 @@
 /* SEÇÃO DE SUGESTÕES */
 .sugestoes {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  margin-top: 40px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
+/* Banner fixo à esquerda */
 .banner {
   width: 320px;
   background-color: white;
@@ -95,6 +96,7 @@
   text-align: center;
 }
 
+/* Imagem interna do banner */
 .imagem-banner {
   width: 100%;
   height: 200px;
@@ -110,12 +112,21 @@
   font-weight: bold;
 }
 
-.lista-sugestao {
+/* Bloco contendo as duas colunas de sugestão */
+.bloco-sugestoes {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Cada coluna com até 3 sugestões */
+.coluna-sugestoes {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
+/* Cartão de sugestão */
 .sugestao {
   display: flex;
   align-items: center;
