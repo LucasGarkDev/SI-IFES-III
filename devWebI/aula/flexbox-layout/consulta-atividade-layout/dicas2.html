@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumo: Flexbox em CSS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f0f4f8;
+      color: #333;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #005f73;
+    }
+    section {
+      background: #fff;
+      border-left: 5px solid #005f73;
+      padding: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Resumo: Flexbox em CSS</h1>
+
+  <section>
+    <h2>O que é Flexbox?</h2>
+    <p>Flexbox (ou Flexible Box Layout) é um modelo de layout do CSS3 que facilita a organização de elementos em uma página HTML de forma dinâmica e flexível. Ele permite que os itens dentro de um container se ajustem automaticamente, independentemente de seu tamanho ou da resolução da tela.</p>
+  </section>
+
+  <section>
+    <h2>Como funciona?</h2>
+    <p>O Flexbox funciona com base em dois tipos de elementos:</p>
+    <ul>
+      <li><strong>Container Flexível:</strong> o elemento pai que recebe as regras de layout;</li>
+      <li><strong>Itens Flexíveis:</strong> os elementos filhos, que serão organizados conforme as regras definidas no container.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Propriedades do Container</h2>
+    <ul>
+      <li><strong>display: flex;</strong> – ativa o modo Flexbox no container.</li>
+      <li><strong>flex-direction:</strong> define a direção dos itens (row, column, row-reverse, column-reverse).</li>
+      <li><strong>flex-wrap:</strong> define se os itens devem quebrar linha (nowrap, wrap, wrap-reverse).</li>
+      <li><strong>flex-flow:</strong> forma abreviada de <code>flex-direction</code> e <code>flex-wrap</code>.</li>
+      <li><strong>justify-content:</strong> alinha os itens no eixo principal (start, center, space-between, etc).</li>
+      <li><strong>align-items:</strong> alinha os itens no eixo secundário (stretch, center, baseline, etc).</li>
+      <li><strong>align-content:</strong> alinha as linhas do conteúdo quando há múltiplas linhas.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Propriedades dos Itens</h2>
+    <ul>
+      <li><strong>order:</strong> define a ordem de exibição dos itens (valores numéricos, padrão 0).</li>
+      <li><strong>flex-grow:</strong> define a capacidade do item de crescer para ocupar o espaço disponível.</li>
+      <li><strong>flex-shrink:</strong> define a capacidade do item de encolher se necessário.</li>
+      <li><strong>flex-basis:</strong> define o tamanho base do item antes da distribuição do espaço.</li>
+      <li><strong>flex:</strong> atalho para <code>flex-grow</code>, <code>flex-shrink</code> e <code>flex-basis</code>.</li>
+      <li><strong>align-self:</strong> sobrescreve o <code>align-items</code> para um item específico.</li>
+    </ul>
+  </section>
+
+</body>
+</html>
