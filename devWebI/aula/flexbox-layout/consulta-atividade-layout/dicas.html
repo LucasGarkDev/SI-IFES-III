@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guia de Layout com Flexbox</title>
+  <title>Guia Flexbox para Atividades Avaliativas</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -48,148 +48,169 @@
 </head>
 <body>
 
-  <h1>✅ Etapa 1: Análise Visual do Layout</h1>
+  <h1>🧭 Guia de Raciocínio para Montagem de Layout com Flexbox</h1>
+
   <div class="etapa">
-    <p>Antes de escrever qualquer HTML ou CSS, observe o layout como um todo, como se fosse um quebra-cabeça.</p>
-    <p><strong>Você precisa identificar:</strong></p>
-    <h2>🧱 Blocos principais</h2>
-    <p>Quais partes estão claramente separadas? (ex: cabeçalho, conteúdo, rodapé, destaques etc.)</p>
-    <p>Cada bloco será uma <code>div</code>, <code>section</code>, <code>header</code>, <code>main</code>, etc.</p>
-    <p><strong>Exemplo:</strong></p>
+    <h2>✅ 1. Análise Inicial do Layout</h2>
     <ul>
-      <li>🔹 Topo (logo + menu)</li>
-      <li>🔹 Linha com 3 cards grandes</li>
-      <li>🔹 Linha com banner e sugestões menores</li>
+      <li>🔹 Divida visualmente o layout em blocos (header, vídeos, banner, sugestões, etc.)</li>
+      <li>🔹 Observe: os elementos estão em linha ou empilhados?</li>
+      <li>🔹 Cada linha horizontal provavelmente será um <code>display: flex</code></li>
     </ul>
-
-    <h2>🔀 Grupos de elementos em linha ou coluna</h2>
-    <p>Verifique se os elementos estão lado a lado ou empilhados:</p>
+    <strong>Exemplos:</strong>
     <ul>
-      <li>Se lado a lado → <code>flex-direction: row</code></li>
-      <li>Se um embaixo do outro → <code>flex-direction: column</code></li>
+      <li>🧱 Topo (logo + menu)</li>
+      <li>📦 Linha de vídeos (cards lado a lado)</li>
+      <li>🎯 Linha com banner + colunas de sugestões</li>
     </ul>
-    <p><strong>Exemplo:</strong></p>
-    <ul>
-      <li>Três vídeos: em linha (row)</li>
-      <li>Banner + sugestões: linha com colunas dentro (com listas em coluna)</li>
-    </ul>
-
-    <h2>📱 Elementos responsivos</h2>
-    <p>Pense: “O que deve mudar em telas pequenas?”</p>
-    <ul>
-      <li>Cards que estavam em linha devem se empilhar?</li>
-      <li>Uma coluna de lado deve descer para baixo do conteúdo?</li>
-    </ul>
-    <p>Isso afeta como você configura o <code>flex-wrap</code> e os <code>@media queries</code>.</p>
   </div>
 
-  <h1>✅ Etapa 2: Estrutura HTML Base</h1>
   <div class="etapa">
-    <p>Com o layout compreendido, escreva a estrutura HTML pura, sem CSS.</p>
-    <p>⛓️ <strong>Dica:</strong> pense em "caixas dentro de caixas".</p>
-    <pre><code>&lt;body&gt;
-  &lt;header&gt;...&lt;/header&gt;
-  &lt;main&gt;
-    &lt;section class="linha"&gt; &lt;!-- cards grandes --&gt;&lt;/section&gt;
-    &lt;section class="listas"&gt; &lt;!-- banner + listas --&gt;&lt;/section&gt;
-  &lt;/main&gt;
-&lt;/body&gt;
-</code></pre>
+    <h2>✅ 2. Estrutura HTML Inicial</h2>
+    <p>Monte a estrutura base com <code>&lt;section&gt;</code> e <code>&lt;div&gt;</code>.</p>
+<pre><code>&lt;main class="conteudo"&gt;
+  &lt;section class="videos"&gt;
+    &lt;div class="video"&gt;...&lt;/div&gt;
+    &lt;div class="video"&gt;...&lt;/div&gt;
+    &lt;div class="video"&gt;...&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class="sugestoes"&gt;
+    &lt;div class="banner"&gt;...&lt;/div&gt;
+
+    &lt;div class="bloco-sugestoes"&gt;
+      &lt;div class="coluna-sugestoes"&gt;
+        &lt;div class="sugestao"&gt;...&lt;/div&gt;
+        &lt;div class="sugestao"&gt;...&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="coluna-sugestoes"&gt;
+        &lt;div class="sugestao"&gt;...&lt;/div&gt;
+        &lt;div class="sugestao"&gt;...&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
   </div>
 
-  <h1>✅ Etapa 3: Configuração do Flexbox</h1>
   <div class="etapa">
-    <p>Com CSS, use Flexbox nos contêineres principais.</p>
-    <p><strong>📦 display: flex</strong></p>
-    <pre><code>.linha {
+    <h2>✅ 3. CSS para Flexbox e Organização</h2>
+<pre><code>.videos {
   display: flex;
-  flex-direction: row; /* ou column */
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
-}</code></pre>
+}
 
-    <h2>🎯 Distribuição e alinhamento</h2>
-    <ul>
-      <li><code>justify-content</code>: distribui no eixo principal (ex: space-between, center)</li>
-      <li><code>align-items</code>: alinha no eixo cruzado (topo, centro, base etc.)</li>
-    </ul>
-  </div>
-
-  <h1>✅ Etapa 4: Tamanho e Comportamento</h1>
-  <div class="etapa">
-    <p><strong>💡 Use</strong> <code>flex: 1 1 300px;</code></p>
-    <ul>
-      <li><code>1</code> = pode crescer</li>
-      <li><code>1</code> = pode encolher</li>
-      <li><code>300px</code> = tamanho base</li>
-    </ul>
-    <p>Isso permite que os cards se ajustem automaticamente ao espaço.</p>
-
-    <p><strong>📏 Use max-width ou min-width:</strong></p>
-    <pre><code>.card {
+.video {
   flex: 1 1 300px;
-  max-width: 400px;
+  max-width: 320px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }</code></pre>
-  </div>
+    <p>Use a mesma lógica para <code>.sugestoes</code>, <code>.bloco-sugestoes</code> e <code>.coluna-sugestoes</code>.</p>
+<pre><code>.sugestoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
 
-  <h1>✅ Etapa 5: Imagens e Textos</h1>
-  <div class="etapa">
-    <h2>🖼️ object-fit: cover</h2>
-    <p>Faz com que a imagem preencha a caixa proporcionalmente, cortando as sobras sem distorcer.</p>
-    <pre><code>.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}</code></pre>
+.bloco-sugestoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
-    <h2>🎯 Centralizar conteúdo</h2>
-    <pre><code>.card {
+.coluna-sugestoes {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 10px;
 }</code></pre>
   </div>
 
-  <h1>📌 Resumo Visual</h1>
   <div class="etapa">
+    <h2>✅ 4. Centralização com Flex</h2>
+    <p>Para centralizar elementos dentro de cartões:</p>
+<pre><code>.video, .sugestao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}</code></pre>
+  </div>
+
+  <div class="etapa">
+    <h2>✅ 5. Imagens e Estética</h2>
+<pre><code>.imagem, .imagem-banner, .imagem-sugestao {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 150px;
+}</code></pre>
+    <p>Para imagens com <code>&lt;img&gt;</code>:</p>
+<pre><code>img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}</code></pre>
+  </div>
+
+  <div class="etapa">
+    <h2>✅ 6. Responsividade (Extra)</h2>
+<pre><code>@media (max-width: 768px) {
+  .videos, .sugestoes, .bloco-sugestoes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video, .banner, .sugestao {
+    width: 100%;
+    max-width: 100%;
+  }
+}</code></pre>
+  </div>
+
+  <div class="etapa">
+    <h2>📌 Tabela Resumo</h2>
     <table>
       <thead>
         <tr>
           <th>Etapa</th>
           <th>Ação</th>
-          <th>Objetivo</th>
+          <th>Resultado Esperado</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1. Análise</td>
-          <td>Observar blocos, linhas e colunas</td>
-          <td>Entender estrutura geral</td>
+          <td>Observar blocos e colunas</td>
+          <td>Identificar estrutura lógica</td>
         </tr>
         <tr>
           <td>2. HTML Base</td>
-          <td>Criar contêineres para os grupos visuais</td>
-          <td>Organizar o conteúdo em caixas</td>
+          <td>Montar containers com <code>div</code>/<code>section</code></td>
+          <td>HTML semântico e limpo</td>
         </tr>
         <tr>
           <td>3. Flexbox</td>
-          <td><code>display: flex</code>, <code>gap</code>, <code>justify-content</code></td>
-          <td>Distribuir filhos no layout</td>
+          <td><code>display: flex</code> + <code>gap</code></td>
+          <td>Distribuição horizontal/vertical dos elementos</td>
         </tr>
         <tr>
-          <td>4. Tamanho</td>
-          <td><code>flex: 1 1 base</code>, <code>max-width</code></td>
-          <td>Permitir responsividade, evitar deformações</td>
-        </tr>
-        <tr>
-          <td>5. Imagem</td>
-          <td><code>object-fit: cover</code></td>
-          <td>Imagem bonita sem distorção</td>
-        </tr>
-        <tr>
-          <td>5. Centralizar</td>
+          <td>4. Centralização</td>
           <td><code>justify-content</code> + <code>align-items</code></td>
-          <td>Centralizar texto, imagem ou ícones</td>
+          <td>Alinhar conteúdo no centro</td>
+        </tr>
+        <tr>
+          <td>5. Responsivo</td>
+          <td><code>flex-wrap</code> + <code>@media</code></td>
+          <td>Adaptar o layout em telas menores</td>
+        </tr>
+        <tr>
+          <td>6. Estética</td>
+          <td>Imagens, <code>box-shadow</code>, <code>border-radius</code></td>
+          <td>Visual moderno e organizado</td>
         </tr>
       </tbody>
     </table>
