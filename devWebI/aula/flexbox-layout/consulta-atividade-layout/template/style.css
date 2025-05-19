@@ -1,45 +1,204 @@
-/* 🧱 Configurações globais para evitar bugs de dimensionamento */
+/* ===== RESET BÁSICO E PADRÃO GLOBAL ===== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  font-family: sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
-/* 🎯 TOPO: flex horizontal entre logo e menu */
+/* ===== TOPO PADRÃO COM LOGO E MENU ===== */
 .topo {
   background-color: black;
-  color: white;
+  height: 100px;
   display: flex;
-  justify-content: space-between; /* logo à esquerda, menu à direita */
+  justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
+  color: white;
 }
 
-/* 📎 Estilo dos links do menu */
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
 .menu a {
   color: white;
   text-decoration: none;
-  margin-left: 20px;
+  font-size: 15px;
+  padding: 5px;
 }
 
-/* 📦 Container geral dos conteúdos */
+.menu a:hover {
+  background-color: #333;
+  border-radius: 4px;
+}
+
+/* ===== CONTAINER GERAL ===== */
 .conteudo {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  gap: 40px;
 }
 
+/* ===== LAYOUT DE LINHAS COM CARDS ===== */
+.linha, .videos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card, .video {
+  width: 300px;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ===== IMAGENS DE CARD ===== */
+.imagem, .imagem-banner, .imagem-sugestao {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 150px;
+}
+
+/* ===== TEXTO CENTRALIZADO EM CARDS ===== */
+.legenda, .titulo-banner, .nome-sugestao {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* ===== LAYOUT DE BANNER + SUGESTÕES ===== */
+.sugestoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.banner {
+  flex: 0 0 320px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.bloco-sugestoes {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.coluna-sugestoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sugestao {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px;
+  width: 320px;
+  height: 70px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ===== CARD IMAGEM FIXA COM <img> ===== */
+img.responsiva {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* ===== NOTÍCIAS TIPO LAYOUT 2 ===== */
+.item-grande, .noticia-pequena {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.item-grande img, .noticia-pequena img {
+  width: 100%;
+  height: auto;
+}
+
+.legenda-sobre-imagem {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* ===== UTILIDADES FLEXBOX ===== */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.gap-10 {
+  gap: 10px;
+}
+.gap-20 {
+  gap: 20px;
+}
+
+/* ===== RESPONSIVIDADE OPCIONAL ===== */
 @media (max-width: 768px) {
-  .linha,
-  .listas {
+  .videos,
+  .sugestoes,
+  .bloco-sugestoes {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .video,
+  .card,
+  .banner,
+  .sugestao {
+    width: 100%;
+    max-width: 100%;
   }
 }
