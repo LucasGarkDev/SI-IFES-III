@@ -66,5 +66,88 @@
     </ul>
   </section>
 
+  <section>
+    <h2>Como usar Flexbox para criar layouts</h2>
+    <p>Flexbox é extremamente útil para construir layouts modernos e responsivos. Abaixo estão os passos essenciais para criar um layout usando Flexbox.</p>
+
+    <h3>1. Defina o container flexível</h3>
+    <pre><code>
+    .container {
+    display: flex;
+    }
+    </code></pre>
+    <p>Isso ativa o Flexbox no elemento container. Todos os filhos diretos se tornam "flex items".</p>
+
+    <h3>2. Escolha a direção dos itens</h3>
+    <p>Use <code>flex-direction</code> para definir se os itens ficam em linha ou em coluna:</p>
+    <pre><code>
+    .container {
+    flex-direction: row;        /* em linha (padrão) */
+    /* flex-direction: column; */  /* empilhado verticalmente */
+    }
+    </code></pre>
+
+    <h3>3. Permitir quebra de linha (opcional)</h3>
+    <pre><code>
+    .container {
+    flex-wrap: wrap;
+    }
+    </code></pre>
+    <p>Isso permite que os itens "quebrem linha" caso não caibam no espaço disponível.</p>
+
+    <h3>4. Distribua o espaço entre os itens</h3>
+    <p>Use <code>justify-content</code> para alinhar os itens no eixo principal:</p>
+    <pre><code>
+    .container {
+    justify-content: space-between; /* espaço entre os itens */
+    /* Outros valores: center, flex-start, flex-end, space-around, space-evenly */
+    }
+    </code></pre>
+
+    <h3>5. Alinhe os itens no eixo cruzado (vertical por padrão)</h3>
+    <pre><code>
+    .container {
+    align-items: center;
+    }
+    </code></pre>
+    <p>Alinha os itens verticalmente (ou horizontalmente, se em coluna).</p>
+
+    <h3>6. Distribua múltiplas linhas (quando wrap estiver ativado)</h3>
+    <pre><code>
+    .container {
+    align-content: space-around;
+    }
+    </code></pre>
+
+    <h3>7. Controle o crescimento dos itens</h3>
+    <pre><code>
+    .item {
+    flex-grow: 1;
+    }
+    </code></pre>
+    <p>Todos os itens com <code>flex-grow: 1</code> vão crescer igualmente para ocupar o espaço disponível.</p>
+
+    <h3>8. Use o atalho <code>flex</code> para simplificar</h3>
+    <pre><code>
+    .item {
+    flex: 1; /* equivale a flex-grow: 1; flex-shrink: 1; flex-basis: 0% */
+    }
+    </code></pre>
+
+    <h3>9. Exemplo prático de layout com 3 colunas</h3>
+    <pre><code>
+    .container {
+    display: flex;
+    gap: 10px;
+    }
+    .item {
+    flex: 1;
+    background: #ddd;
+    padding: 20px;
+    }
+    </code></pre>
+    <p>Esse código cria três colunas que se ajustam automaticamente à largura da tela.</p>
+    </section>
+
 </body>
 </html>
