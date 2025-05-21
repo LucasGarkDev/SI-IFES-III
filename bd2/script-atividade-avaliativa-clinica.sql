@@ -1,4 +1,4 @@
--- 🧱 Parte 1 – Criação das Tabelas (DROP e CRIAÇÃO BASE)
+-- 🧱 Parte 0 – Criação das Tabelas (DROP e CRIAÇÃO BASE)
 DROP TABLE IF EXISTS EXAME_PEDIDO CASCADE;
 DROP TABLE IF EXISTS EXAME CASCADE;
 DROP TABLE IF EXISTS MATERIAL CASCADE;
@@ -136,33 +136,58 @@ VALUES
 -- Verificando dados inseridos:
 SELECT * FROM EXAME_AUTORIZADO;
 
--- 🧩 Parte 2 – Particionamento de PEDIDO por RANGE de data_pedido
+-- 🧩 Parte 1 – Particionamento de PEDIDO por RANGE de data_pedido
+
+-- TABELA MÃE: PEDIDO
 CREATE TABLE PEDIDO (
     nrPedido INTEGER,
     data_pedido DATE NOT NULL,
     idMedico INTEGER REFERENCES MEDICO(idMedico),
     idCliente INTEGER REFERENCES CLIENTE(idCliente),
     idPlano INTEGER NOT NULL REFERENCES PLANO(idPlano),
-    UNIQUE (nrPedido, data_pedido)  -- Necessário para a FK da EXAME_PEDIDO
+    UNIQUE (nrPedido, data_pedido)
 ) PARTITION BY RANGE (data_pedido);
 
--- Criação das partições de PEDIDO
+-- PARTIÇÃO: PEDIDO_2023
 CREATE TABLE PEDIDO_2023 PARTITION OF PEDIDO
 FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
 
+-- Inserindo valores em PEDIDO_2023
+INSERT INTO PEDIDO (nrPedido, data_pedido, idMedico, idCliente, idPlano)
+VALUES (101, '2023-04-15', 1, 1, 1);
+
+-- Verificando valores inseridos
+SELECT * FROM PEDIDO_2023;
+
+-- PARTIÇÃO: PEDIDO_2024
 CREATE TABLE PEDIDO_2024 PARTITION OF PEDIDO
 FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
 
+-- Inserindo valores em PEDIDO_2024
+INSERT INTO PEDIDO (nrPedido, data_pedido, idMedico, idCliente, idPlano)
+VALUES (102, '2024-06-10', 1, 2, 1);
+
+-- Verificando valores inseridos
+SELECT * FROM PEDIDO_2024;
+
+-- PARTIÇÃO: PEDIDO_2025
 CREATE TABLE PEDIDO_2025 PARTITION OF PEDIDO
 FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
 
--- 🧪 Verificação:
--- Verifica estrutura das partições
+-- Inserindo valores em PEDIDO_2025
+INSERT INTO PEDIDO (nrPedido, data_pedido, idMedico, idCliente, idPlano)
+VALUES (103, '2025-09-01', 1, 3, 2);
+
+-- Verificando valores inseridos
+SELECT * FROM PEDIDO_2025;
+
+-- Verificação da estrutura geral das partições de PEDIDO
 SELECT inhrelid::regclass AS particao
 FROM pg_inherits
 WHERE inhparent = 'pedido'::regclass;
 
--- TABELA: EXAME_PEDIDO (particionada por data_prevista)
+-- =====================================================
+-- TABELA MÃE: EXAME_PEDIDO (particionada por data_prevista)
 CREATE TABLE EXAME_PEDIDO (
     nrPedido INTEGER,
     data_pedido DATE NOT NULL,
@@ -177,30 +202,73 @@ CREATE TABLE EXAME_PEDIDO (
     FOREIGN KEY (nrPedido, data_pedido) REFERENCES PEDIDO(nrPedido, data_pedido)
 ) PARTITION BY RANGE (data_prevista);
 
--- Criação das partições de EXAME_PEDIDO
+-- PARTIÇÃO: EXAME_PEDIDO_2023
 CREATE TABLE EXAME_PEDIDO_2023 PARTITION OF EXAME_PEDIDO
     FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
 
+-- Inserindo valores em EXAME_PEDIDO_2023
+INSERT INTO EXAME_PEDIDO (nrPedido, data_pedido, idExame, data_prevista, valor)
+VALUES (101, '2023-04-15', 1, '2023-04-17', 25.00);
+
+-- Verificando valores inseridos
+SELECT * FROM EXAME_PEDIDO_2023;
+
+-- PARTIÇÃO: EXAME_PEDIDO_2024
 CREATE TABLE EXAME_PEDIDO_2024 PARTITION OF EXAME_PEDIDO
     FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
 
+-- Inserindo valores em EXAME_PEDIDO_2024
+INSERT INTO EXAME_PEDIDO (nrPedido, data_pedido, idExame, data_prevista, valor)
+VALUES (102, '2024-06-10', 2, '2024-06-12', 45.00);
+
+-- Verificando valores inseridos
+SELECT * FROM EXAME_PEDIDO_2024;
+
+-- PARTIÇÃO: EXAME_PEDIDO_2025
 CREATE TABLE EXAME_PEDIDO_2025 PARTITION OF EXAME_PEDIDO
     FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
 
--- 🧪 Verificação:
--- Verifica estrutura das partições
+-- Inserindo valores em EXAME_PEDIDO_2025
+INSERT INTO EXAME_PEDIDO (nrPedido, data_pedido, idExame, data_prevista, valor)
+VALUES (103, '2025-09-01', 3, '2025-09-02', 55.00);
+
+-- Verificando valores inseridos
+SELECT * FROM EXAME_PEDIDO_2025;
+
+-- Verificação da estrutura geral das partições de EXAME_PEDIDO
 SELECT inhrelid::regclass AS particao
 FROM pg_inherits
 WHERE inhparent = 'exame_pedido'::regclass;
 
-
--- 🔍 Parte 3 – Índices
+-- 🔍 Parte 2 – Índices
 
 CREATE INDEX idx_exame_material ON EXAME(idMaterial);
 CREATE INDEX idx_valor_ls_periodo ON VALOR_US(data_inicial_vigencia, data_final_vigencia);
 CREATE INDEX idx_examepedido_data ON EXAME_PEDIDO(data_prevista);
+
+-- 🔎 [TESTE] Avaliação do índice em PEDIDO(idCliente)
+
+-- 🔻 Passo 1 – Garantir que o índice ainda não existe
+DROP INDEX IF EXISTS idx_pedido_cliente;
+
+-- 🔻 Passo 2 – Consulta sem índice (vai forçar um Seq Scan)
+EXPLAIN ANALYZE
+SELECT *
+FROM PEDIDO
+WHERE idCliente = 1;
+
+-- 🔻 Passo 3 – Criar o índice
 CREATE INDEX idx_pedido_cliente ON PEDIDO(idCliente);
+
+-- 🔻 Passo 4 – Consulta após criar o índice (espera-se Index Scan)
+EXPLAIN ANALYZE
+SELECT *
+FROM PEDIDO
+WHERE idCliente = 1;
+
 CREATE INDEX idx_pedido_data ON PEDIDO(data_pedido);
+
+-- 📝 Parte 3 – Função CALCULA_VALOR_EXAMES_CLIENTES
 
 CREATE OR REPLACE FUNCTION CALCULA_VALOR_EXAMES_CLIENTES(p_mes INT, p_ano INT)
 RETURNS NUMERIC AS $$
@@ -220,10 +288,32 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- 🧪 Exemplo:
--- Consulta o valor total pago por clientes em abril de 2024
+-- 🔄 Inserindo pedido pago pelo PLANO DE SAÚDE (não deve entrar no cálculo)
+-- Ana Paula, plano 1, data em abril de 2024 (cai na partição PEDIDO_2024)
+INSERT INTO PEDIDO (nrPedido, data_pedido, idMedico, idCliente, idPlano)
+VALUES (201, '2024-04-15', 1, 1, 1);
+
+-- Exame vinculado ao pedido 201, com valor
+INSERT INTO EXAME_PEDIDO (nrPedido, data_pedido, idExame, data_prevista, valor, plano)
+VALUES (201, '2024-04-15', 1, '2024-04-16', 100.00, 1);
+
+-- 🔄 Inserindo pedido pago pelo CLIENTE (deve entrar no cálculo)
+-- Carlos Eduardo, plano pago pelo próprio cliente, data em abril de 2024
+INSERT INTO PEDIDO (nrPedido, data_pedido, idMedico, idCliente, idPlano)
+VALUES (202, '2024-04-20', 1, 2, 2);
+
+-- Exame vinculado ao pedido 202, valor pago diretamente (plano IS NULL)
+INSERT INTO EXAME_PEDIDO (nrPedido, data_pedido, idExame, data_prevista, valor, plano)
+VALUES (202, '2024-04-20', 2, '2024-04-21', 80.00, NULL);
+
+-- 🔄 Outro exame pago por CLIENTE no mesmo mês
+INSERT INTO EXAME_PEDIDO (nrPedido, data_pedido, idExame, data_prevista, valor, plano)
+VALUES (202, '2024-04-20', 1, '2024-04-22', 120.00, NULL);
+
+-- ✅ Consulta: valor total de exames pagos diretamente pelos clientes em abril de 2024
 SELECT CALCULA_VALOR_EXAMES_CLIENTES(4, 2024) AS valor_pago_clientes;
 
--- 📝 Parte 5 – Função INSERE_PEDIDO
+-- 📝 Parte 4 – Função INSERE_PEDIDO
 CREATE OR REPLACE FUNCTION INSERE_PEDIDO(
     p_idMedico INTEGER,
     p_idCliente INTEGER,
@@ -255,11 +345,42 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- 🧪 Exemplo:
--- Cria um pedido para Ana Paula (cliente 1), Dr. João (médico 1), Plano Ouro (plano 1)
--- Suponha que retorne: 1
-SELECT INSERE_PEDIDO(1, 1, 1);
+-- 🟢 CASO 1: INSERÇÃO CORRETA
+-- Esperado: sucesso. Cria um novo pedido com IDs válidos.
+-- Méd. João (1), Cliente Ana Paula (1), Plano Ouro (1)
 
--- 🧮 Parte 6 – STORED PROCEDURE INSERE_EXAME_PEDIDO
+SELECT INSERE_PEDIDO(1, 1, 1) AS resultado_ok;
+
+-- 🔴 CASO 2: MÉDICO INEXISTENTE
+-- Esperado: erro 'Médico não encontrado.'
+-- Méd. 999 não existe, Cliente 1, Plano 1
+
+SELECT INSERE_PEDIDO(999, 1, 1);
+
+-- 🔴 CASO 3: CLIENTE INEXISTENTE
+-- Esperado: erro 'Cliente não encontrado.'
+-- Méd. 1, Cliente 999 não existe, Plano 1
+
+SELECT INSERE_PEDIDO(1, 999, 1);
+
+-- 🔴 CASO 4: PLANO INEXISTENTE
+-- Esperado: erro 'Plano não encontrado.'
+-- Méd. 1, Cliente 1, Plano 999 não existe
+
+SELECT INSERE_PEDIDO(1, 1, 999);
+
+-- 🟡 CASO 5: INSERÇÃO COM NOVO CLIENTE CADASTRADO NA HORA
+-- Primeiro insere novo cliente e depois faz o pedido
+
+INSERT INTO CLIENTE (nome, sexo, nascimento) VALUES ('Roberta Nunes', 'F', '1985-11-25');
+
+-- Verifica o id gerado (digamos que foi 4)
+SELECT idCliente FROM CLIENTE WHERE nome = 'Roberta Nunes';
+
+-- Faz o pedido para essa nova cliente com dados válidos
+SELECT INSERE_PEDIDO(1, 4, 1) AS resultado_roberta;
+
+-- 🧮 Parte 5 – STORED PROCEDURE INSERE_EXAME_PEDIDO
 
 CREATE OR REPLACE PROCEDURE INSERE_EXAME_PEDIDO(
     p_nrPedido INTEGER,
@@ -273,6 +394,7 @@ DECLARE
     valor_us NUMERIC;
     v_valor_ch NUMERIC;
 BEGIN
+    -- 1. Verifica se o pedido existe e obtém o plano associado
     SELECT idPlano INTO id_plano
     FROM PEDIDO
     WHERE nrPedido = p_nrPedido AND data_pedido = p_dataPedido;
@@ -281,10 +403,12 @@ BEGIN
         RAISE EXCEPTION 'Pedido não encontrado';
     END IF;
 
+    -- 2. Verifica se o exame existe
     IF NOT EXISTS (SELECT 1 FROM EXAME WHERE idExame = p_idExame) THEN
         RAISE EXCEPTION 'Exame não encontrado';
     END IF;
 
+    -- 3. Verifica se o exame é autorizado para o plano
     SELECT valor_ch INTO v_valor_ch
     FROM EXAME_AUTORIZADO
     WHERE idPlano = id_plano AND idExame = p_idExame;
@@ -293,16 +417,18 @@ BEGIN
         RAISE EXCEPTION 'Exame não autorizado para este plano';
     END IF;
 
+    -- 4. Busca o valor US vigente com base na data do pedido (e não na data atual!)
     SELECT valor INTO valor_us
     FROM VALOR_US
     WHERE idPlano = id_plano
-      AND CURRENT_DATE BETWEEN data_inicial_vigencia AND data_final_vigencia
+      AND p_dataPedido BETWEEN data_inicial_vigencia AND data_final_vigencia
     LIMIT 1;
 
     IF valor_us IS NULL THEN
-        RAISE EXCEPTION 'Valor US não encontrado para o plano na data atual';
+        RAISE EXCEPTION 'Valor US não encontrado para o plano na data do pedido';
     END IF;
 
+    -- 5. Insere o exame vinculado ao pedido com o valor calculado
     INSERT INTO EXAME_PEDIDO (
         nrPedido, data_pedido, idExame, data_prevista, valor
     ) VALUES (
@@ -312,11 +438,44 @@ END;
 $$;
 
 -- 🧪 Exemplo:
--- Insere Hemograma (exame 1) para o pedido de Ana Paula (pedido 1)
-CALL INSERE_EXAME_PEDIDO(1, CURRENT_DATE, 1);
+-- ✅ Inserção válida
+-- Pedido 101 (2023-04-15), Exame 1 (Hemograma), autorizado para plano 1
+CALL INSERE_EXAME_PEDIDO(101, '2023-04-15', 1);
 
+-- 🔎 Verifica se o exame foi inserido
+SELECT * FROM EXAME_PEDIDO WHERE nrPedido = 101;
 
--- 🛑 Parte 7 – RULE para impedir exame de gravidez (Beta-HCG) para homens
+-- ❌ ERRO: Pedido inexistente
+CALL INSERE_EXAME_PEDIDO(999, '2024-04-15', 1);
+-- Esperado: 'Pedido não encontrado'
+
+-- ❌ ERRO: Exame inexistente
+CALL INSERE_EXAME_PEDIDO(101, '2023-04-15', 999);
+-- Esperado: 'Exame não encontrado'
+
+-- ❌ ERRO: Exame não autorizado para o plano do pedido
+CALL INSERE_EXAME_PEDIDO(101, '2023-04-15', 3);
+-- Esperado: 'Exame não autorizado para este plano'
+
+-- ⚠️ Simula ausência de valor vigente no período
+UPDATE VALOR_US
+SET data_inicial_vigencia = '2025-01-01', data_final_vigencia = '2025-12-31'
+WHERE idPlano = 1;
+
+-- ❌ ERRO: Sem valor US vigente na data do pedido
+CALL INSERE_EXAME_PEDIDO(101, '2023-04-15', 1);
+-- Esperado: 'Valor US não encontrado para o plano na data do pedido'
+
+-- 🔁 Corrige valor US para restaurar funcionamento normal
+UPDATE VALOR_US
+SET data_inicial_vigencia = '2024-01-01', data_final_vigencia = '2026-12-31'
+WHERE idPlano = 1;
+
+-- 🔎 Verificação final
+SELECT * FROM EXAME_PEDIDO
+ORDER BY data_prevista DESC;
+
+-- 🛑 Parte 6 – RULE para impedir exame de gravidez (Beta-HCG) para homens
 
 CREATE OR REPLACE RULE impedir_gravidez_homens AS
 ON INSERT TO EXAME_PEDIDO
@@ -330,14 +489,39 @@ WHERE (
 )
 DO INSTEAD NOTHING;
 
--- 🧪 Exemplo:
--- Criando pedido para Carlos Eduardo (cliente 2), Dr. João (1), Plano Ouro (1)
-SELECT INSERE_PEDIDO(1, 2, 1);  -- Suponha que retorne: 2
--- Tentando inserir Beta-HCG (2) — deverá falhar
-CALL INSERE_EXAME_PEDIDO(2, CURRENT_DATE, 2);
+-- 🧪 Exemplo completo de teste
+
+DO $$
+DECLARE
+    v_nrPedido INTEGER;
+BEGIN
+    -- 🔹 Passo 1: Cria o pedido para Carlos Eduardo (sexo M)
+    v_nrPedido := INSERE_PEDIDO(1, 2, 1);  -- médico 1, cliente 2, plano 1
+    RAISE NOTICE 'Pedido criado: %', v_nrPedido;
+
+    -- 🔹 Passo 2: Tenta inserir Beta-HCG → Deve ser bloqueado silenciosamente
+    BEGIN
+        CALL INSERE_EXAME_PEDIDO(v_nrPedido, CURRENT_DATE, 2);  -- exame Beta-HCG
+        RAISE NOTICE 'Inserção concluída (esperado: bloqueio pela RULE)';
+    EXCEPTION WHEN OTHERS THEN
+        RAISE NOTICE 'Erro inesperado: %', SQLERRM;
+    END;
+
+    -- 🔹 Passo 3: Verifica se o exame foi mesmo inserido
+    PERFORM 1 FROM EXAME_PEDIDO ep
+    JOIN EXAME e ON ep.idExame = e.idExame
+    WHERE ep.nrPedido = v_nrPedido AND e.nome ILIKE '%beta-hcg%';
+
+    IF FOUND THEN
+        RAISE NOTICE '❌ ERRO: Exame Beta-HCG foi inserido (isso não deveria acontecer)';
+    ELSE
+        RAISE NOTICE '✅ SUCESSO: Exame Beta-HCG NÃO foi inserido (regra funcionou)';
+    END IF;
+
+END $$;
 
 
--- 🛑 Parte 8 – RULE para impedir gravidez para mulheres com 65 anos ou mais
+-- 🛑 Parte 7 – RULE para impedir gravidez para mulheres com 65 anos ou mais
 
 CREATE OR REPLACE RULE impedir_gravidez_idosas AS
 ON INSERT TO EXAME_PEDIDO
@@ -354,13 +538,42 @@ WHERE (
 DO INSTEAD NOTHING;
 
 -- 🧪 Exemplo:
--- Criando pedido para Dona Geralda (cliente 3), Dr. João (1), Plano Ouro (1)
-SELECT INSERE_PEDIDO(1, 3, 1);  -- Suponha que retorne: 3
--- Tentando inserir Beta-HCG (2) — deverá falhar
-CALL INSERE_EXAME_PEDIDO(3, CURRENT_DATE, 2);
+-- 🧪 Teste da RULE impedir_gravidez_idosas
+-- 👵 Cliente: Dona Geralda (idCliente = 3, sexo = 'F', nascimento = 1950)
+-- 👨‍⚕️ Médico: Dr. João (idMedico = 1)
+-- 🧾 Plano: Ouro (idPlano = 1)
+
+DO $$
+DECLARE
+    v_nrPedido INTEGER;
+BEGIN
+    -- 🔹 Passo 1: Criar um pedido para Dona Geralda
+    v_nrPedido := INSERE_PEDIDO(1, 3, 1);  -- médico 1, cliente 3, plano 1
+    RAISE NOTICE 'Pedido criado para Dona Geralda: %', v_nrPedido;
+
+    -- 🔹 Passo 2: Tentar inserir exame Beta-HCG (idExame = 2)
+    BEGIN
+        CALL INSERE_EXAME_PEDIDO(v_nrPedido, CURRENT_DATE, 2);
+        RAISE NOTICE 'Inserção concluída (esperado: bloqueio pela RULE)';
+    EXCEPTION WHEN OTHERS THEN
+        RAISE NOTICE 'Erro inesperado: %', SQLERRM;
+    END;
+
+    -- 🔹 Passo 3: Verificar se exame Beta-HCG foi inserido
+    PERFORM 1 FROM EXAME_PEDIDO ep
+    JOIN EXAME e ON ep.idExame = e.idExame
+    WHERE ep.nrPedido = v_nrPedido AND e.nome ILIKE '%beta-hcg%';
+
+    IF FOUND THEN
+        RAISE NOTICE '❌ ERRO: Beta-HCG foi inserido para idosa (isso não deveria ocorrer)';
+    ELSE
+        RAISE NOTICE '✅ SUCESSO: Beta-HCG NÃO foi inserido para idosa (regra funcionou)';
+    END IF;
+
+END $$;
 
 
--- 🛑 Parte 9 – RULE para impedir exame de próstata (PSA) para mulheres
+-- 🛑 Parte 8 – RULE para impedir exame de próstata (PSA) para mulheres
 
 CREATE OR REPLACE RULE impedir_psa_mulheres AS
 ON INSERT TO EXAME_PEDIDO
@@ -374,12 +587,43 @@ WHERE (
 )
 DO INSTEAD NOTHING;
 
--- 🧪 Exemplo:
--- Tentando inserir PSA (exame 3) para Ana Paula (cliente 1) — deverá falhar
-CALL INSERE_EXAME_PEDIDO(1, CURRENT_DATE, 3);
+-- 👤 Cliente: Ana Paula (idCliente = 1, sexo = 'F')
+-- 🧑 Médico: Dr. João (idMedico = 1)
+-- 📄 Plano: Ouro (idPlano = 1)
+-- 🧪 Exame PSA (idExame = 3)
+
+DO $$
+DECLARE
+    v_nrPedido INTEGER;
+BEGIN
+    -- Passo 1: Criar pedido válido para Ana Paula
+    v_nrPedido := INSERE_PEDIDO(1, 1, 1);
+    RAISE NOTICE 'Pedido criado para Ana Paula: %', v_nrPedido;
+
+    -- Passo 2: Tentar inserir exame PSA → Deve ser BLOQUEADO pela RULE
+    BEGIN
+        CALL INSERE_EXAME_PEDIDO(v_nrPedido, CURRENT_DATE, 3);
+        RAISE NOTICE '❌ ERRO: PSA foi inserido para mulher (isso não deveria ocorrer)';
+    EXCEPTION WHEN OTHERS THEN
+        RAISE NOTICE '✅ Inserção bloqueada com sucesso pela RULE (como esperado)';
+    END;
+
+    -- Passo 3: Verificar se o exame PSA foi inserido mesmo assim
+    PERFORM 1
+    FROM EXAME_PEDIDO ep
+    JOIN EXAME e ON ep.idExame = e.idExame
+    WHERE ep.nrPedido = v_nrPedido AND e.nome ILIKE '%psa%';
+
+    IF FOUND THEN
+        RAISE NOTICE '❌ ERRO: Exame PSA foi inserido para mulher — isso não deveria ocorrer';
+    ELSE
+        RAISE NOTICE '✅ Exame PSA não foi inserido para mulher — comportamento correto';
+    END IF;
+END $$;
 
 
--- 🔄 Parte 10 – PROCEDURE FECHAR_FATURA_MES
+
+-- 🔄 Parte 9 – PROCEDURE FECHAR_FATURA_MES
 
 CREATE OR REPLACE PROCEDURE FECHAR_FATURA_MES(
     p_mes INT,
@@ -408,12 +652,40 @@ END;
 $$;
 
 -- 🧪 Exemplo:
--- Fecha a fatura do mês de abril de 2024 para o Plano Ouro (idPlano = 1)
+-- ✅ CENÁRIO 1: Faturar exames do Plano Ouro (1) em abril de 2024
+-- Deve atualizar exames sem fatura vinculados a esse plano e período
+
 CALL FECHAR_FATURA_MES(4, 2024, 1);
 
-SELECT INSERE_PEDIDO(1, 1, 1);
-CALL INSERE_EXAME_PEDIDO(1, CURRENT_DATE, 1); -- Hemograma
+-- Verifica os exames atualizados com fatura no período
+SELECT ep.*, f.data_geracao
+FROM EXAME_PEDIDO ep
+JOIN FATURA f ON ep.nr_fatura = f.nr_fatura
+WHERE EXTRACT(MONTH FROM ep.data_pedido) = 4
+  AND EXTRACT(YEAR FROM ep.data_pedido) = 2024
+  AND f.idPlano = 1;
 
--- Consultando exames que foram faturados
+-- 🔁 CENÁRIO 2: Repetir chamada — exames já faturados não devem ser afetados
+
 CALL FECHAR_FATURA_MES(4, 2024, 1);
-SELECT * FROM EXAME_PEDIDO WHERE nr_fatura IS NOT NULL;
+
+-- Resultado: nenhuma linha nova deve ser atualizada (já foram faturadas antes)
+
+-- ❌ CENÁRIO 3: Tentar faturar mês onde não há exames realizados
+
+CALL FECHAR_FATURA_MES(1, 2022, 1);  -- Esperado: cria a fatura mas não associa nenhum exame
+
+-- Verifica se há exames associados
+SELECT * FROM EXAME_PEDIDO WHERE nr_fatura IN (
+    SELECT nr_fatura FROM FATURA WHERE EXTRACT(MONTH FROM data_geracao) = 1 AND EXTRACT(YEAR FROM data_geracao) = 2022
+);
+
+-- ✅ CENÁRIO 4: Visualizar todas as faturas e exames faturados
+SELECT f.nr_fatura, f.idPlano, f.data_geracao, COUNT(ep.*) AS qtd_exames
+FROM FATURA f
+LEFT JOIN EXAME_PEDIDO ep ON f.nr_fatura = ep.nr_fatura
+GROUP BY f.nr_fatura, f.idPlano, f.data_geracao
+ORDER BY f.data_geracao DESC;
+
+-- 🗑️ CENÁRIO 5: Verificar exames que ainda não foram faturados
+SELECT * FROM EXAME_PEDIDO WHERE nr_fatura IS NULL;
