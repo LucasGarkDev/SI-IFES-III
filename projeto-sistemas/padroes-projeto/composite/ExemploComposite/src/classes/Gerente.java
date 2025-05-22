@@ -19,20 +19,27 @@ public class Gerente extends Funcionario {
         super(nome, cargo);
     }
 
-    public void adicionar(Funcionario f) {
-        subordinados.add(f);
-    }
-
-    public void remover(Funcionario f) {
-        subordinados.remove(f);
-    }
-
     @Override
     public void exibirInformacoes() {
         System.out.println("Gerente: " + nome + " - " + cargo);
         for (Funcionario f : subordinados) {
             f.exibirInformacoes();
         }
+    }
+
+    @Override
+    public void adicionar(Funcionario f) {
+        subordinados.add(f);
+    }
+
+    @Override
+    public void remover(Funcionario f) {
+        subordinados.remove(f);
+    }
+
+    @Override
+    public List<Funcionario> getSubordinados() {
+        return subordinados;
     }
     
 }

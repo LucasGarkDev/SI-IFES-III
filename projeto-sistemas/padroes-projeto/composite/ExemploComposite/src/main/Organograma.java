@@ -20,10 +20,10 @@ public class Organograma {
         Funcionario dev1 = new Empregado("João", "Desenvolvedor Java");
         Funcionario dev2 = new Empregado("Maria", "Desenvolvedora Front-End");
 
-        ((Gerente) gerenteTI).adicionar(dev1);
-        ((Gerente) gerenteTI).adicionar(dev2);
+        gerenteTI.adicionar(dev1);
+        gerenteTI.adicionar(dev2);
 
-        ((Gerente) gerenteGeral).adicionar(gerenteTI);
+        gerenteGeral.adicionar(gerenteTI);
 
         gerenteGeral.exibirInformacoes();
     }
