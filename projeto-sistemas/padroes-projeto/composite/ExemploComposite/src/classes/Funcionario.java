@@ -4,6 +4,8 @@
  */
 package classes;
 
+import java.util.List;
+
 /**
  *
  * @author lucas
@@ -18,4 +20,17 @@ public abstract class Funcionario {
     }
 
     public abstract void exibirInformacoes();
+    
+    // Métodos de gerenciamento (presentes mesmo nas folhas)
+    public void adicionar(Funcionario f) {
+        throw new UnsupportedOperationException("Este funcionário não pode adicionar subordinados.");
+    }
+
+    public void remover(Funcionario f) {
+        throw new UnsupportedOperationException("Este funcionário não pode remover subordinados.");
+    }
+
+    public List<Funcionario> getSubordinados() {
+        throw new UnsupportedOperationException("Este funcionário não possui subordinados.");
+    }
 }

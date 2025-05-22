@@ -9,6 +9,7 @@ package classes;
  * @author lucas
  */
 public class Empregado extends Funcionario { 
+    
     public Empregado(String nome, String cargo) {
         super(nome, cargo);
     }
