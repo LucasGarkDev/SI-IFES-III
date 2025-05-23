@@ -11,12 +11,25 @@
 
         <h2>Input Text</h2>
         <label for="nomecompleto">Nome Completo:</label>
-        <input type="text" name="nomecompleto" id="nomecompleto" size="50" maxlength="10" placeholder="Digite o seu nome completo" class="destaque">
+        <input type="text" name="nomecompleto" id="nomecompleto" size="50" maxlength="50" placeholder="Digite o seu nome completo" class="destaque">
         <!-- name se usa no server side
         id se usa no client side -->
-        <br><br>
 
+        <input type="button" name="btnsaudacao" id="btnsaudacao" value="Saudação" onclick="saudacao()">
+        <!-- existe tambem o type="submit" -->
+
+        <!-- <button type="button" name="btnsaudacao" id="btnsaudacao">Saudação</button> -->
 
     </form>
+
+    <script>
+        function saudacao() {
+            // var nome = document.getElementById("nomecompleto").value;
+            // alert("Seja bem vindo: " + nome);
+            var nome = document.getElementById("nomecompleto");
+            alert("Seja bem vindo: " + nome.value);
+        }
+    </script>
+
 </body>
 </html>
