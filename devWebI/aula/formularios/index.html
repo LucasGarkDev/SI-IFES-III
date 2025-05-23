@@ -22,7 +22,7 @@
 
         <h2>Input Color</h2>
         <label for="cordefundo">Cor de Fundo:</label>
-        <input type="color" name="cordefundo" id="cordefundo" onchange="mudacor()">
+        <input type="color" name="cordefundo" id="cordefundo" onchange="mudacor(this)">
         <span id="corhexa">#000000</span>
 
     </form>
@@ -35,10 +35,10 @@
             alert("Seja bem vindo: " + nome.value);
         }
 
-        function mudacor() {
-            var cor = document.getElementById("cordefundo");
+        function mudacor(cor) {
             var corhexa = document.getElementById("corhexa");
             corhexa.innerHTML = cor.value;
+            // corhexa.textContent = cor.value;
         } 
     </script>
 
