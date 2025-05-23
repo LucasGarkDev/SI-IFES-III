@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;  
+}
+  
+body{
+    margin: 0;
+}
+
+.destaque{
+    color: black;
+    border: 2px solid red;
+    /* width: 100%; */
+}
