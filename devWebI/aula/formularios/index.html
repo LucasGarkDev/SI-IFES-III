@@ -20,6 +20,11 @@
 
         <!-- <button type="button" name="btnsaudacao" id="btnsaudacao">Saudação</button> -->
 
+        <h2>Input Color</h2>
+        <label for="cordefundo">Cor de Fundo:</label>
+        <input type="color" name="cordefundo" id="cordefundo" onchange="mudacor()">
+        <span id="corhexa">#000000</span>
+
     </form>
 
     <script>
@@ -29,6 +34,12 @@
             var nome = document.getElementById("nomecompleto");
             alert("Seja bem vindo: " + nome.value);
         }
+
+        function mudacor() {
+            var cor = document.getElementById("cordefundo");
+            var corhexa = document.getElementById("corhexa");
+            corhexa.innerHTML = cor.value;
+        } 
     </script>
 
 </body>
