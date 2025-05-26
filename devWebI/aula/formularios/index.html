@@ -35,6 +35,74 @@
         <input type="button" name="btnmostrar" id="btnmostrar" value="Mostrar Senha"
         onclick="mostrarSenha(this)">
 
+        <h2>Input Radio</h2>
+        <label>Qual e o seu sexo?</label><br>
+        <input type="radio" name="sexo" id="masc" value="M">
+        <label for="masc">Masculino</label>
+        <br>
+        <input type="radio" name="sexo" id="fem" value="F">
+        <label for="fem">Feminino</label>
+        <br>
+        <input type="radio" name="sexo" id="outro" value="O">
+        <label for="outro">Outro</label>
+        <br>
+
+        <h2>Input Checkbox</h2>
+        <label>Possui deficiencia?</label><br>
+        <input type="checkbox" id="auditiva" name="auditiva" value="auditiva">
+        <label for="auditiva">Auditiva</label>
+        <br>
+        <input type="checkbox" id="visual" name="visual" value="visual">
+        <label for="visual">Visual</label>
+        <br>
+        <input type="checkbox" id="motora" name="motora" value="motora">
+        <label for="motora">Motora</label>
+        <br>
+        <input type="checkbox" id="outra" name="outra" value="outra">
+        <label for="outra">Outra</label>
+        <br>
+
+        <h2>Input Range</h2>
+        <label for="idade">Idade</label>
+        <input type="range" name="idade" id="idade" min="0" max="100" step="1" value="0" onmousemove="mostrarIdade(this)" onchange="mostrarIdade(this)">
+        <span id="valoridade">0</span>
+
+        <h2>Input Select</h2>
+        <label for="estado">Estado:</label>
+        <select name="estado" id="estado">
+            <option value=""selected></option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+        </select>
+
+        <h2>Textarea</h2>
+        <textarea name="texto" id="texto" cols="30" rows="10" placeholder="Digite o seu texto aqui..."></textarea>
+
     </form>
 
     <script>
@@ -65,6 +133,11 @@
                 alert("Digite a sua senha antes de clicar no botão");
             }            
         }
+
+        function mostrarIdade(idade) {
+            var valoridade = document.getElementById("valoridade");
+            valoridade.innerHTML = idade.value;
+        }    
     </script>
 
 </body>
