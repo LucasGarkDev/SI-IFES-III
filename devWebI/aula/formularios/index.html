@@ -53,13 +53,17 @@
         } 
         function mostrarSenha(botao) {
             var senha = document.getElementById("senha");
-            if (senha.type == "password") {
-                senha.type = "text";
-                botao.value = "Ocultar Senha";
+            if (senha.value != null && senha.value != "") {
+                if (senha.type == "password") {
+                    senha.type = "text";
+                    botao.value = "Esconder Senha";
+                } else {
+                    senha.type = "password";
+                    botao.value = "Mostrar Senha";
+                }
             } else {
-                senha.type = "password";
-                botao.value = "Mostrar Senha";
-            }
+                alert("Digite a sua senha antes de clicar no botão");
+            }            
         }
     </script>
 
