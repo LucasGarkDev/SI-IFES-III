@@ -35,9 +35,10 @@
             alert("Seja bem vindo: " + nome.value);
         }
 
-        function mudacor(cor) {
+        function mudacor(cor,backgroundColor) {
             var corhexa = document.getElementById("corhexa");
             corhexa.innerHTML = cor.value;
+            document.body.style.backgroundColor = cor.value;
             // corhexa.textContent = cor.value;
         } 
     </script>
