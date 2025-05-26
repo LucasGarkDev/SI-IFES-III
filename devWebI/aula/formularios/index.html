@@ -22,8 +22,18 @@
 
         <h2>Input Color</h2>
         <label for="cordefundo">Cor de Fundo:</label>
-        <input type="color" name="cordefundo" id="cordefundo" onchange="mudacor(this)">
-        <span id="corhexa">#000000</span>
+        <input type="color" name="cordefundo" id="cordefundo" onchange="mudacor(this)" value="#FFFFFF">
+        <span id="corhexa">#FFFFFF</span>
+
+        <h2>Input File</h2>
+        <label for="arquivo">Arquivo:</label>
+        <input type="file" name="arquivo" id="arquivo">
+
+        <h2>Input Password</h2>
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha" size="20" maxlength="20" placeholder="Digite a sua senha">
+        <input type="button" name="btnmostrar" id="btnmostrar" value="Mostrar Senha"
+        onclick="mostrarSenha(this)">
 
     </form>
 
@@ -41,6 +51,16 @@
             document.body.style.backgroundColor = cor.value;
             // corhexa.textContent = cor.value;
         } 
+        function mostrarSenha(botao) {
+            var senha = document.getElementById("senha");
+            if (senha.type == "password") {
+                senha.type = "text";
+                botao.value = "Ocultar Senha";
+            } else {
+                senha.type = "password";
+                botao.value = "Mostrar Senha";
+            }
+        }
     </script>
 
 </body>
