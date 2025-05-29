@@ -11,7 +11,6 @@ import interfaces.LoginProvider;
  * @author lucas
  */
 public class GitHubLoginAdapter extends GitHubAPI implements LoginProvider{
-//    private GitHubAPI gitHubAPI = new GitHubAPI();
 
     @Override
     public boolean login(String email, String senha) {

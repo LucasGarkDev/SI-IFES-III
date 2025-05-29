@@ -15,11 +15,11 @@ import java.util.Properties;
  * @author lucas
  */
 public class ConfigManager {
-    private static volatile ConfigManager instancia;
-    private static final Object lock = new Object();
+
+    private static ConfigManager instancia;
 
     private Properties propriedades;
-    
+
     private ConfigManager() {
         propriedades = new Properties();
         carregarArquivo("config.properties");
@@ -27,11 +27,7 @@ public class ConfigManager {
 
     public static ConfigManager getInstance() {
         if (instancia == null) {
-            synchronized (lock) {
-                if (instancia == null) {
-                    instancia = new ConfigManager();
-                }
-            }
+            instancia = new ConfigManager();
         }
         return instancia;
     }
@@ -54,14 +50,5 @@ public class ConfigManager {
 
     public void listarTudo() {
         propriedades.forEach((k, v) -> System.out.println(k + ": " + v));
-    }
-    
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
-    }
-
-    protected Object readResolve() {
-        return getInstance();
     }
 }

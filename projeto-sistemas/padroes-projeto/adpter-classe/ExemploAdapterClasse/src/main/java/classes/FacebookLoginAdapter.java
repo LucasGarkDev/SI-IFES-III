@@ -11,7 +11,6 @@ import interfaces.LoginProvider;
  * @author lucas
  */
 public class FacebookLoginAdapter extends FacebookAPI implements LoginProvider{
-//    private FacebookAPI facebookAPI = new FacebookAPI();
 
     @Override
     public boolean login(String email, String senha) {
