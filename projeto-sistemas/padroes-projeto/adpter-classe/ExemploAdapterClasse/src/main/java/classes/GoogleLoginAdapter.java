@@ -11,7 +11,6 @@ import interfaces.LoginProvider;
  * @author lucas
  */
 public class GoogleLoginAdapter extends GoogleAPI implements LoginProvider{
-//    private GoogleAPI googleAPI = new GoogleAPI();
 
     @Override
     public boolean login(String email, String senha) {
