@@ -11,7 +11,7 @@
 
         <h2>Input Text</h2>
         <label for="nomecompleto">Nome Completo:</label>
-        <input type="text" name="nomecompleto" id="nomecompleto" size="50" maxlength="50" placeholder="Digite o seu nome completo" class="destaque">
+        <input type="text" name="nomecompleto" id="nomecompleto" size="50" maxlength="50" placeholder="Digite o seu nome completo" class="destaque" required>
         <!-- name se usa no server side
         id se usa no client side -->
 
@@ -101,10 +101,54 @@
         </select>
 
         <h2>Textarea</h2>
+        <label for="texto">Texto:</label><br>
         <textarea name="texto" id="texto" cols="30" rows="10" maxlength="100" placeholder="Digite o seu texto aqui..."
         maxlength="100"
         oninput="atualizarContador(this)"></textarea>
         <span id="contador">0/100</span>
+
+        <h2>Input Date</h2>
+        <label for="dtnascimento">Data de Nascimento:</label>
+        <input type="date" name="dtnascimento" id="dtnascimento">
+
+        <h2>Input Datetime-local</h2>
+        <label for="dthoranascimento">Data e Hora de Nascimento:</label>
+        <input type="datetime-local" name="dthoranascimento" id="dthoranascimento">
+
+        <h2>Input Month</h2>
+        <label for="mesnascimento">Mês de Nascimento:</label>
+        <input type="month" name="mesnascimento" id="mesnascimento">
+
+        <h2>Input Week</h2>
+        <label for="semana">Semana:</label>
+        <input type="week" name="semana" id="semana">
+
+        <h2>Input Time</h2>
+        <label for="hora">Hora da Aula:</label>
+        <input type="time" name="hora" id="hora">
+
+        <h2>Input Email</h2>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email" placeholder="Digite o seu e-mail" required>
+
+        <h2>Input Number</h2>
+        <label for="qtd">Quantidade:</label>
+        <input type="number" name="qtd" id="qtd" min="0" max="100" step="0.5" value="0">
+
+        <h2>Input Search</h2>
+        <label for="busca">Busca:</label>
+        <input type="search" name="busca" id="busca" placeholder="Digite o que deseja buscar">
+
+        <h2>Input Tel</h2>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" name="telefone" id="telefone" placeholder="Digite o seu telefone" value="(27) 99863-1230" disabled>
+
+        <h2>Input URL</h2>
+        <label for="url">URL:</label>
+        <input type="url" name="url" id="url" placeholder="Digite a sua URL" value="https://www.devwebi.com.br" readonly>
+
+        <br><br>
+        <input type="submit" value="Salvar">
 
     </form>
 
