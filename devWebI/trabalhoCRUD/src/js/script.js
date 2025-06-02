@@ -1,12 +1,17 @@
 function inserirContato() {
+  const form = document.getElementById("formulario");
+  if (!form.checkValidity()) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Campos obrigatórios!',
+      text: 'Por favor, preencha todos os campos antes de inserir.',
+    });
+    return;
+  }
+
   const nome = document.getElementById("nome").value.trim();
   const telefone = document.getElementById("telefone").value.trim();
   const email = document.getElementById("email").value.trim();
-
-  if (!nome || !telefone || !email) {
-    alert("Preencha todos os campos!");
-    return;
-  }
 
   const tabela = document.getElementById("tabelaContatos");
   const novaLinha = tabela.insertRow();
@@ -21,18 +26,43 @@ function inserirContato() {
     </td>
   `;
 
-  // Limpa os campos após inserir
-  document.getElementById("nome").value = "";
-  document.getElementById("telefone").value = "";
-  document.getElementById("email").value = "";
+  form.reset();
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Contato adicionado!',
+    text: 'O contato foi inserido com sucesso.',
+    timer: 1500,
+    showConfirmButton: false
+  });
 }
 
 function excluirContato(botao) {
-  if (confirm("Deseja realmente excluir este contato?")) {
-    const linha = botao.parentNode.parentNode;
-    linha.remove();
-  }
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: "Você deseja excluir este contato?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#e74c3c',
+    cancelButtonColor: '#7f8c8d',
+    confirmButtonText: 'Sim, excluir!',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const linha = botao.parentNode.parentNode;
+      linha.remove();
+
+      Swal.fire({
+        title: 'Excluído!',
+        text: 'O contato foi removido.',
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+  });
 }
+
 
 function editarContato(botao) {
   const linha = botao.parentNode.parentNode;
@@ -88,3 +118,10 @@ function cancelarEdicao(botao, nome, telefone, email) {
     </td>
   `;
 }
+
+// Máscara para o campo de telefone
+const telefoneInput = document.getElementById('telefone');
+
+IMask(telefoneInput, {
+  mask: '(00)00000-0000'
+});

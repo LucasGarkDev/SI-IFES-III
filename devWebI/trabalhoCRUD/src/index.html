@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agenda de Contatos</title>
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Agenda de Contatos</title>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>📇 Agenda de Contatos</h1>
+    <div class="container">
+        <h1>📇 Agenda de Contatos</h1>
 
-    <div class="formulario">
-      <input type="text" id="nome" placeholder="Nome" required />
-      <input type="tel" id="telefone" placeholder="Telefone" required />
-      <input type="email" id="email" placeholder="E-mail" required />
-      <button onclick="inserirContato()">Inserir</button>
+        <form id="formulario" onsubmit="event.preventDefault(); inserirContato();">
+        <div class="formulario">
+            <input type="text" id="nome" placeholder="Nome" required />
+            <input type="tel" id="telefone" placeholder="Telefone" required />
+            <input type="email" id="email" placeholder="E-mail" required />
+            <button type="submit">Inserir</button>
+        </div>
+        </form>
+
+        <table>
+        <thead>
+            <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaContatos">
+            <!-- Contatos inseridos via JavaScript -->
+        </tbody>
+        </table>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Telefone</th>
-          <th>E-mail</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody id="tabelaContatos">
-        <!-- Contatos inseridos via JavaScript -->
-      </tbody>
-    </table>
-  </div>
-
-  <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/imask"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
