@@ -10,7 +10,9 @@
     <h1>Buscar CEP</h1>
     <form id="cepForm" method="post" action="salvar.html">
         <label for="cep">Cep:</label>
-        <input type="number" id="cep" name="cep"  placeholder="apenas numeros" onblur="buscarCep(this)"><br><br>
+        <input type="text" id="cep" name="cep" placeholder="Apenas números" maxlength="8"
+       oninput="limitarCEP(this)" onfocus="limparCampos()" onblur="buscarCep(this)">
+        <br><br>
         <label for="rua">Rua:</label>
         <input type="text" id="rua" name="rua" size="50" ><br><br>
         <label for="numero">Número:</label>
@@ -55,29 +57,67 @@
     </form>
 
     <script>
-        function buscarCep(cep){
-            var url = "https://viacep.com.br/ws/" + cep.value + "/json/";
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao buscar CEP');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.erro) {
-                        alert("CEP não encontrado.");
-                        return;
-                    }
-                    document.getElementById('rua').value = data.logradouro;
-                    document.getElementById('bairro').value = data.bairro;
-                    document.getElementById('cidade').value = data.localidade;
-                    document.getElementById('estado').value = data.uf;
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
+        function limitarCEP(campo) {
+            campo.value = campo.value.replace(/\D/g, '').slice(0, 8); 
+        }
+
+        function limparCampos() {
+            document.getElementById('rua').value = '';
+            document.getElementById('bairro').value = '';
+            document.getElementById('cidade').value = '';
+            document.getElementById('estado').value = '';
+        }
+
+        function buscarCep(cepInput) {
+            const cep = limparCep(cepInput.value);
+
+            if (!cepValido(cep)) {
+                alert("Digite um CEP válido com 8 números.");
+                return;
+            }
+
+            consultarCep(cep)
+                .then(preencherEndereco)
+                .catch(erro => {
+                    console.error('Erro:', erro);
+                    alert("Erro ao buscar CEP.");
                 });
         }
+
+        // 🔹 Limpa qualquer caractere que não seja número
+        function limparCep(valor) {
+            return valor.replace(/\D/g, '');
+        }
+
+        // 🔹 Verifica se o CEP tem 8 dígitos
+        function cepValido(cep) {
+            return /^\d{8}$/.test(cep);
+        }
+
+        // 🔹 Chamada à API viaCEP
+        function consultarCep(cep) {
+            const url = `https://viacep.com.br/ws/${cep}/json/`;
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Resposta inválida da API');
+                    }
+                    return response.json();
+                });
+        }
+
+        function preencherEndereco(data) {
+            if (data.erro) {
+                alert("CEP não encontrado.");
+                return;
+            }
+
+            document.getElementById('rua').value = data.logradouro || '';
+            document.getElementById('bairro').value = data.bairro || '';
+            document.getElementById('cidade').value = data.localidade || '';
+            document.getElementById('estado').value = data.uf || '';
+        }
+
     </script>
 
 </body>
