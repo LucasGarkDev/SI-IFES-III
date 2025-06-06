@@ -72,9 +72,11 @@ function editarContato(botao) {
   const telefoneAtual = colunas[1].textContent;
   const emailAtual = colunas[2].textContent;
 
-  colunas[0].innerHTML = `<input type="text" value="${nomeAtual}">`;
-  colunas[1].innerHTML = `<input type="tel" value="${telefoneAtual}">`;
-  colunas[2].innerHTML = `<input type="email" value="${emailAtual}">`;
+  colunas[0].innerHTML = `<input type="text" name="nome" value="${nomeAtual}">`;
+  colunas[1].innerHTML = `<input type="tel" name="tel" value="${telefoneAtual}">`;
+  colunas[2].innerHTML = `<form>
+  <input type="email" name="email" value="${emailAtual}">
+  </form>`;
   colunas[3].innerHTML = `
     <button class="salvar" onclick="salvarEdicao(this)">Salvar</button>
     <button class="cancelar" onclick="cancelarEdicao(this, '${nomeAtual}', '${telefoneAtual}', '${emailAtual}')">Cancelar</button>
