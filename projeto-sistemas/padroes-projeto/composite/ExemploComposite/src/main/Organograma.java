@@ -14,11 +14,11 @@ import classes.Gerente;
  */
 public class Organograma {
     public static void main(String[] args) {
-        Funcionario gerenteGeral = new Gerente("Carlos", "Diretor Executivo");
-        Funcionario gerenteTI = new Gerente("Fernanda", "Gerente de TI");
+        Funcionario gerenteGeral = new Gerente("Carlos", "Gerente Geral");
+        Funcionario gerenteTI = new Gerente("Fernanda", "Gerente de Investimentos");
 
-        Funcionario dev1 = new Empregado("João", "Desenvolvedor Java");
-        Funcionario dev2 = new Empregado("Maria", "Desenvolvedora Front-End");
+        Funcionario dev1 = new Empregado("João", "Analista de Crédito");
+        Funcionario dev2 = new Empregado("Maria", "Atendente Comercial");
 
         gerenteTI.adicionar(dev1);
         gerenteTI.adicionar(dev2);
