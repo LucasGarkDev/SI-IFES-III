@@ -8,11 +8,11 @@ package classes;
  *
  * @author lucas
  */
-public class Pizza extends Massa{
+public class Nhoque extends Massa{
 
     @Override
     public String getDescricao() {
-        return "Pizza";
+        return "Nhoque";
     }
 
     @Override
