@@ -1,113 +1,182 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StreamFlix - Seu Streaming de Filmes</title>
-  <meta charset="UTF-8" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamFlix - Seu Streaming de Filmes</title>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/bootstrap@5.3.6.css" />
     <!-- <link rel="stylesheet" href="./src/css/animantions.css" /> -->
     <link rel="stylesheet" href="./src/css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-dark text-light">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black px-4">
+      <a class="navbar-brand" href="#">StreamFlix</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasFilters"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black px-4">
-    <a class="navbar-brand" href="#">StreamFlix</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Filmes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Séries</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Minha Lista</a></li>
+        </ul>
+      </div>
+    </nav>
 
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#">Início</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Filmes</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Séries</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Minha Lista</a></li>
-      </ul>
+    <br>
+
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+      <div class="carousel-indicators">
+        <!-- carregado automaticamente -->
+      </div>
+      <div class="carousel-inner" id="autoLoadTopFilmes">
+        <!-- carregado automaticamente -->
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-  </nav>
 
-  <!-- Cards de filmes -->
-  <div class="container mt-4">
-    <h2>Destaques</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div class="col">
-        <div class="card bg-secondary text-light h-100">
-          <img src="src/img/filme1.jpg" class="card-img-top" alt="Filme 1">
-          <div class="card-body">
-            <h5 class="card-title">Filme 1</h5>
-            <p class="card-text">Aventura épica nos confins do universo.</p>
-            <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalFilme">Ver mais</button>
+    <!-- Cards de filmes -->
+    <div class="container mt-4">
+      <h2>Destaques</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card bg-secondary text-light h-100">
+            <img src="src/img/filme1.jpg" class="card-img-top" alt="Filme 1" />
+            <div class="card-body">
+              <h5 class="card-title">Filme 1</h5>
+              <p class="card-text">Aventura épica nos confins do universo.</p>
+              <button
+                class="btn btn-outline-light"
+                data-bs-toggle="modal"
+                data-bs-target="#modalFilme"
+              >
+                Ver mais
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Replique este bloco para mais filmes -->
+      </div>
+
+      <!-- Accordion (Episódios ou informações extras) -->
+      <div class="accordion mt-5" id="infoExtras">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+            >
+              Episódios - Série Exemplo
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse"
+            data-bs-parent="#infoExtras"
+          >
+            <div class="accordion-body">
+              <ul>
+                <li>Ep 1: O Começo</li>
+                <li>Ep 2: A Jornada</li>
+                <li>Ep 3: O Confronto</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Replique este bloco para mais filmes -->
     </div>
 
-    <!-- Accordion (Episódios ou informações extras) -->
-    <div class="accordion mt-5" id="infoExtras">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-            Episódios - Série Exemplo
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#infoExtras">
-          <div class="accordion-body">
-            <ul>
-              <li>Ep 1: O Começo</li>
-              <li>Ep 2: A Jornada</li>
-              <li>Ep 3: O Confronto</li>
-            </ul>
+    <!-- Offcanvas (Filtros) -->
+    <div
+      class="offcanvas offcanvas-start text-bg-dark"
+      tabindex="-1"
+      id="offcanvasFilters"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Filtros</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <p><strong>Gênero:</strong></p>
+        <ul>
+          <li>Ação</li>
+          <li>Comédia</li>
+          <li>Drama</li>
+          <li>Terror</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalFilme" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title">Detalhes do Filme</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Este filme é uma jornada eletrizante com personagens
+              inesquecíveis.
+            </p>
+            <p>Duração: 2h 15min</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success">Assistir</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Fechar
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Offcanvas (Filtros) -->
-  <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasFilters">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title">Filtros</h5>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body">
-      <p><strong>Gênero:</strong></p>
-      <ul>
-        <li>Ação</li>
-        <li>Comédia</li>
-        <li>Drama</li>
-        <li>Terror</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="modalFilme" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content bg-dark text-light">
-        <div class="modal-header">
-          <h5 class="modal-title">Detalhes do Filme</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <p>Este filme é uma jornada eletrizante com personagens inesquecíveis.</p>
-          <p>Duração: 2h 15min</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success">Assistir</button>
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="./src/js/popper@2.11.8.js"></script>
+    <script src="./src/js/popper@2.11.8.js"></script>
     <script src="./src/js/bootstrap@5.3.6.js"></script>
     <script src="./src/js/index.js"></script>
     <script src="./src/js/loader-top-filmes.js"></script>
-</body>
+  </body>
 </html>
