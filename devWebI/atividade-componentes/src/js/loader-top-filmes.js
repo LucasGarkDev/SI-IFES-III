@@ -1,3 +1,4 @@
+import { renderIMG,renderA,renderButton } from "./render.js";
 (() => {
   const url = "./src/data/topMovies.json";
   const options = {
