@@ -3,6 +3,7 @@
 
 // PROJECT
 // https://github.com/LUISDASARTIMANHAS/projeto-magick-ia/blob/main/src/js/renders.js
+// Javascript ES6
 
 export function renderDiv(element, classe, text) {
 	var div = document.createElement("div");
