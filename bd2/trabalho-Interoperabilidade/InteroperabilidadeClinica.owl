@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6/"
+     xml:base="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temLaudo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temLaudo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Biopsia"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Laudo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temPaciente -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temPaciente">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Biopsia"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Paciente"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temScoreGleason -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temScoreGleason">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Laudo"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ScoreGleason"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temData -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temData">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Biopsia"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temIdade -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temIdade">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Paciente"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temNome -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temNome">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Paciente"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temValor -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temValor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ScoreGleason"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Biopsia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Biopsia">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ExamePatologia"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Exame"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadeClinica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadeClinica"/>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadePadrao -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadePadrao"/>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Exame -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Exame">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadeClinica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ExamePatologia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ExamePatologia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadePadrao"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#IndicadorClinico -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#IndicadorClinico">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Laudo"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadePadrao"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Individuo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Individuo">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Paciente"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadePadrao"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Laudo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Laudo">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadeClinica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Paciente -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Paciente">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadeClinica"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ResultadoExame -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ResultadoExame">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ScoreGleason"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadePadrao"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ScoreGleason -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ScoreGleason">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#EntidadeClinica"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#joaoSIlva -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#joaoSIlva"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
