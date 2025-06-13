@@ -11,7 +11,7 @@ import classes.Massa;
  * @author lucas
  */
 public abstract class IngredienteDecorator extends Massa {
-    protected Massa massa; // Composição
+    protected Massa massa; 
 
     public IngredienteDecorator(Massa massa) {
         this.massa = massa;
