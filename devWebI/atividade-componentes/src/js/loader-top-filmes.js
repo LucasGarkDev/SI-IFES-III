@@ -21,7 +21,7 @@
     .then((data) => {
       console.log("DATA RESPONSE: ");
       console.log(data);
-      importJs(data);
+      render(data);
     })
     .catch((error) => onErrorHostname(error));
 
@@ -30,26 +30,15 @@
   }
 })();
 
-function importJs(data) {
-  const autoscripts = document.querySelector("autoscripts");
-  const protocol = document.location.protocol;
-  const fonte = `${protocol}//${hostname}/src/js/`;
-  const srcs = [
-    "window.cache",
-    "manutencao-redirect",
-    "network",
-    "copyright",
-    "functions",
-    "relogio",
-    "alterar-tema",
-    // "telemetry",
-  ];
-  const srcsLib = [
-    "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js",
-  ];
+function render(data) {
+  const autoLoadTopFilmes = document.getElementById("autoLoadTopFilmes");
 
-  for (let i = 0; i < srcsLib.length; i++) {
-    var newScriptLib = document.createElement("script");
+  // <div class="carousel-item active">
+  //   <img src="./src/img/exemplo.png" class="d-block w-100" alt="..." />
+  // </div>;
+  for (let i = 0; i < data.length; i++) {
+    var carouselitem = document.createElement("div");
+		var img = document.createElement("img");
 
     newScriptLib.setAttribute("src", srcsLib[i]);
     autoscripts.appendChild(newScriptLib);
@@ -57,6 +46,12 @@ function importJs(data) {
     console.log(`%c [SISTEMA]: Nova Lib: ${srcsLib[i]}`, "color: #ffa500");
   }
 
+	// <button
+  //         type="button"
+  //         data-bs-target="#carouselExampleIndicators"
+  //         data-bs-slide-to="2"
+  //         aria-label="Slide 3"
+  //       ></button>
   for (let i = 0; i < srcs.length; i++) {
     const src = srcs[i];
     const link = fonte + src + ".js";
