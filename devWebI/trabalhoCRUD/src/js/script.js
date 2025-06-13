@@ -73,15 +73,20 @@ function editarContato(botao) {
   const emailAtual = colunas[2].textContent;
 
   colunas[0].innerHTML = `<input type="text" name="nome" value="${nomeAtual}">`;
-  colunas[1].innerHTML = `<input type="tel" name="tel" value="${telefoneAtual}">`;
-  colunas[2].innerHTML = `<form>
-  <input type="email" name="email" value="${emailAtual}">
-  </form>`;
+  colunas[1].innerHTML = `<input type="tel" name="tel" id="tel-edicao" value="${telefoneAtual}">`;
+  colunas[2].innerHTML = `<input type="email" name="email" value="${emailAtual}">`;
   colunas[3].innerHTML = `
     <button class="salvar" onclick="salvarEdicao(this)">Salvar</button>
     <button class="cancelar" onclick="cancelarEdicao(this, '${nomeAtual}', '${telefoneAtual}', '${emailAtual}')">Cancelar</button>
   `;
+
+  // Aplica máscara ao input de telefone da edição
+  const telEdit = document.getElementById('tel-edicao');
+  IMask(telEdit, {
+    mask: '(00)00000-0000'
+  });
 }
+
 
 function salvarEdicao(botao) {
   const linha = botao.parentNode.parentNode;
@@ -91,8 +96,34 @@ function salvarEdicao(botao) {
   const novoTelefone = inputs[1].value.trim();
   const novoEmail = inputs[2].value.trim();
 
+  // Validação básica
   if (!novoNome || !novoTelefone || !novoEmail) {
-    alert("Todos os campos devem ser preenchidos!");
+    Swal.fire({
+      icon: 'error',
+      title: 'Campos vazios!',
+      text: 'Todos os campos devem ser preenchidos.',
+    });
+    return;
+  }
+
+  // Validação de telefone (deve conter pelo menos 11 dígitos)
+  const telefoneLimpo = novoTelefone.replace(/\D/g, "");
+  if (telefoneLimpo.length < 11) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Telefone inválido!',
+      text: 'O telefone deve conter 11 dígitos (com DDD).',
+    });
+    return;
+  }
+
+  // Validação simples de e-mail
+  if (!novoEmail.includes("@") || !novoEmail.includes(".")) {
+    Swal.fire({
+      icon: 'error',
+      title: 'E-mail inválido!',
+      text: 'Digite um e-mail válido contendo "@" e "."',
+    });
     return;
   }
 
@@ -105,7 +136,15 @@ function salvarEdicao(botao) {
       <button class="excluir" onclick="excluirContato(this)">Excluir</button>
     </td>
   `;
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Contato atualizado!',
+    timer: 1200,
+    showConfirmButton: false
+  });
 }
+
 
 function cancelarEdicao(botao, nome, telefone, email) {
   const linha = botao.parentNode.parentNode;
