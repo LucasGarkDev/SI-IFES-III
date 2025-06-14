@@ -6,7 +6,7 @@ const filmesMock = {
     },
     {
       titulo: "Wonka",
-      imagem: "https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg"
+      imagem: "./src/img/lancamentos/Wonka.jpg"
     },
   ],
   acao: [
