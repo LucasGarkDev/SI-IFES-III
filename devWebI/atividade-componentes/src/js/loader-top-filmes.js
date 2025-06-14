@@ -37,12 +37,9 @@ function render(data) {
     "autoLoadTopFilmesBtns"
   );
 
-  // <button
-  //         type="button"
-  //         data-bs-target="#carouselExampleIndicators"
-  //         data-bs-slide-to="2"
-  //         aria-label="Slide 3"
-  //       ></button>
+  // <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+  //   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+  //   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   for (let i = 0; i < data.length; i++) {
     var button = document.createElement("button");
 
@@ -51,6 +48,12 @@ function render(data) {
     button.setAttribute("data-bs-target", "#carouselExampleIndicators");
     button.setAttribute("data-bs-slide-to", i);
     button.setAttribute("aria-label", `Slide ${i}`);
+
+    // verifica se e o primeiro elemento e aplica configuracoes personalizadas
+    if (i == 0) {
+      button.setAttribute("class", "active");
+      button.setAttribute("aria-current", true);
+    }
 
     // adiciona o button na lista
     autoLoadTopFilmesBtns.appendChild(button);
@@ -65,6 +68,7 @@ function render(data) {
     const topFilme = data[j];
     var carrouselItem = document.createElement("div");
 
+    // verifica se e o primeiro elemento e aplica configuracoes personalizadas
     if (j == 0) {
       carrouselItem.setAttribute("class", "carousel-item active");
     } else {
