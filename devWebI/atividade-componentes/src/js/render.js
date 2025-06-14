@@ -49,8 +49,9 @@ export function renderH2(element, classe, nome) {
 	return h2;
 }
 
-export function renderIMG(picture, src, alt) {
+export function renderIMG(picture,classe, src, alt) {
 	var img = document.createElement("img");
+	img.setAttribute("class",classe)
 	img.setAttribute("src", src);
 	img.setAttribute("alt", alt);
 	picture.appendChild(img);
