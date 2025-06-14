@@ -1,58 +1,33 @@
-const filmesMock = {
-  lancamentos: [
-    {
-      titulo: "Oppenheimer",
-      imagem: "./src/img/image-coming-soon.jpg"
-    },
-    {
-      titulo: "Wonka",
-      imagem: "./src/img/lancamentos/Wonka.jpg"
-    },
-  ],
-  acao: [
-    {
-      titulo: "Missão Impossível",
-      imagem: "./src/img/acao/Missao-Impossivel.jpg"
-    },
-    {
-      titulo: "John Wick 4",
-      imagem: "./src/img/acao/John-Wick-4.jpg"
-    },
-  ],
-  comedia: [
-    {
-      titulo: "Gato de Botas 2",
-      imagem: "./src/img/comedia/Gato-de-Botas-2.jpg"
-    },
-    {
-      titulo: "As Marvels",
-      imagem: "./src/img/comedia/As-Marvels.jpg"
-    },
-  ],
-};
+import { renderCard } from "./render.js";
 
-function renderCards(lista, containerId) {
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("./src/data/TopMovies.json")
+    .then(res => res.json())
+    .then(data => {
+      renderCarouselCards(data, "carousel-cards-em-alta");
+    })
+    .catch(err => console.error("Erro ao carregar os filmes:", err));
+});
+
+function renderCarouselCards(data, containerId) {
   const container = document.getElementById(containerId);
-  lista.forEach((filme) => {
-    const col = document.createElement("div");
-    col.className = "col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3";
+  const cardsPorSlide = 5;
+  let currentSlide = null;
 
-    col.innerHTML = `
-      <div class="card bg-dark text-light border-0 h-100">
-        <img src="${filme.imagem}" class="card-img-top" alt="${filme.titulo}">
-        <div class="card-body p-2">
-          <h6 class="card-title mb-0 text-truncate">${filme.titulo}</h6>
-        </div>
-      </div>
-    `;
+  data.forEach((filme, index) => {
+    if (index % cardsPorSlide === 0) {
+      currentSlide = document.createElement("div");
+      currentSlide.className = `carousel-item ${index === 0 ? "active" : ""}`;
 
-    container.appendChild(col);
+      const row = document.createElement("div");
+      row.className = "row justify-content-between gap-3";
+      currentSlide.appendChild(row);
+      container.appendChild(currentSlide);
+    }
+
+    const rowAtual = currentSlide.querySelector(".row");
+    renderCard(filme, rowAtual, filme.id);
   });
 }
 
-// Carregar automaticamente ao iniciar
-document.addEventListener("DOMContentLoaded", () => {
-  renderCards(filmesMock.lancamentos, "secao-lancamentos");
-  renderCards(filmesMock.acao, "secao-acao");
-  renderCards(filmesMock.comedia, "secao-comedia");
-});
+
