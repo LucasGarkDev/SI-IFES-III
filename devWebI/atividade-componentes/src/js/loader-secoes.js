@@ -2,7 +2,7 @@ const filmesMock = {
   lancamentos: [
     {
       titulo: "Oppenheimer",
-      imagem: "https://image.tmdb.org/t/p/w500/iNpz2DgTsTMPaDRZq2tnbqjLqPp.jpg"
+      imagem: "./src/img/image-coming-soon.jpg"
     },
     {
       titulo: "Wonka",
@@ -12,21 +12,21 @@ const filmesMock = {
   acao: [
     {
       titulo: "Missão Impossível",
-      imagem: "https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg"
+      imagem: "./src/img/acao/Missao-Impossivel.jpg"
     },
     {
       titulo: "John Wick 4",
-      imagem: "https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"
+      imagem: "./src/img/acao/John-Wick-4.jpg"
     },
   ],
   comedia: [
     {
       titulo: "Gato de Botas 2",
-      imagem: "https://image.tmdb.org/t/p/w500/1NqwE6LP9IEdOZ57NCT51ftHtWT.jpg"
+      imagem: "./src/img/comedia/Gato-de-Botas-2.jpg"
     },
     {
       titulo: "As Marvels",
-      imagem: "https://image.tmdb.org/t/p/w500/rULWuutDcN5NvtiZi4FRPzRYWSh.jpg"
+      imagem: "./src/img/comedia/As-Marvels.jpg"
     },
   ],
 };
