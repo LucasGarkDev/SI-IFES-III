@@ -1,6 +1,6 @@
 import { renderIMG, renderA, renderButton } from "./render.js";
 window.addEventListener("load", () => {
-  const url = "./src/data/topMovies.json";
+  const url = "./src/data/top-movies.json";
   const options = {
     method: "GET",
     mode: "cors",
