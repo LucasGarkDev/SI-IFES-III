@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { renderIMG, renderA, renderButton } from "./render.js";
 window.addEventListener("load", () => {
   const url = "./src/data/top-movies.json";
@@ -9,20 +8,18 @@ window.addEventListener("load", () => {
       "content-type": "application/json;charset=utf-8",
     },
   };
-=======
-import { renderCard } from "./render.js";
->>>>>>> 2d61386 (adiciona renderização dinâmica de filmes e melhorias na interface)
 
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("src/data/TopMovies.json")
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Erro ao buscar TopMovies.json");
+  fetch(url, options)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.text().then((errorText) => {
+          throw new Error("Falha ao buscar Top Movies: " + errorText);
+        });
       }
-      return res.json();
     })
     .then((data) => {
-<<<<<<< HEAD
       console.log("DATA RESPONSE: ");
       console.log(data);
       render(data);
@@ -34,25 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.debug(error);
   }
 });
-=======
-      console.log("Filmes carregados:", data);
-      const container = document.getElementById("secao-em-alta");
-
-      if (!container) {
-        console.error("Elemento #secao-em-alta não encontrado no HTML.");
-        return;
-      }
-
-      data.forEach((filme) => {
-        renderCard(filme, container, filme.id);
-      });
-    })
-    .catch((err) => {
-      console.error("Erro ao carregar os filmes:", err);
-    });
-});
-
->>>>>>> 2d61386 (adiciona renderização dinâmica de filmes e melhorias na interface)
 
 function render(data) {
   const autoLoadTopFilmes = document.getElementById("autoLoadTopFilmes");
