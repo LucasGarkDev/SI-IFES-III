@@ -1,6 +1,7 @@
+//loader-top-filmes.js
 import { renderIMG, renderA, renderButton } from "./render.js";
 window.addEventListener("load", () => {
-  const url = "./src/data/top-movies.json";
+  const url = "src/data/top-movies.json";
   const options = {
     method: "GET",
     mode: "cors",
@@ -45,36 +46,50 @@ function render(data) {
 
 // sub funções
 function renderizarCarrossel(data, autoLoadTopFilmes) {
-  // <div class="carousel-item active">
-  // <img src="./src/img/exemplo.png" class="d-block w-100" alt="..." />
-  // </div>;
   for (let j = 0; j < data.length; j++) {
     const topFilme = data[j];
-    let src = topFilme.image;
-    var carrouselItem = document.createElement("div");
+    let src = topFilme.image || "./src/img/image-coming-soon.jpg";
 
-    if (!src) {
-      src = "./src/img/image-coming-soon.jpg";
-    }
+    const carrouselItem = document.createElement("div");
+    carrouselItem.className = `carousel-item ${j === 0 ? "active" : ""}`;
+    carrouselItem.style.position = "relative"; // permite posicionar o texto
 
-    // verifica se e o primeiro elemento e aplica configuracoes personalizadas
-    if (j == 0) {
-      carrouselItem.setAttribute("class", "carousel-item active");
-    } else {
-      carrouselItem.setAttribute("class", "carousel-item");
-    }
+    // Criação da imagem
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = topFilme.fullTitle;
+    img.className = "d-block w-100";
+    img.style.objectFit = "cover";
+    img.style.objectPosition = "top";
+    img.style.height = "400px";
+    img.style.borderRadius = "8px";
 
-    renderIMG(carrouselItem, "d-block w-100", src, topFilme.fullTitle);
+    // Criação do container de texto sobreposto
+    const caption = document.createElement("div");
+    caption.className = "carousel-caption d-none d-md-block";
+    caption.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    caption.style.padding = "1rem";
+    caption.style.borderRadius = "0.5rem";
 
-    // adiciona o div carrossel item na lista
+    // Título e descrição
+    const h5 = document.createElement("h5");
+    h5.innerText = topFilme.title;
+
+    const p = document.createElement("p");
+    p.innerText = `Ano: ${topFilme.year} • Nota IMDb: ${topFilme.imDbRating}`;
+
+    caption.appendChild(h5);
+    caption.appendChild(p);
+
+    // Montagem final
+    carrouselItem.appendChild(img);
+    carrouselItem.appendChild(caption);
     autoLoadTopFilmes.appendChild(carrouselItem);
 
-    console.log(
-      `%c [SISTEMA]: Carregado Carrossel image: ${topFilme.fullTitle}`,
-      "color: #00ff00"
-    );
+    console.log(`%c [SISTEMA]: Carregado Carrossel image: ${topFilme.fullTitle}`, "color: #00ff00");
   }
 }
+
 function renderizarBotoesCarrossel(data, autoLoadTopFilmesBtns) {
   // <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
   //   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>

@@ -1,16 +1,11 @@
-// funcoes basicas de renderização
-// POWERED BY LUIS DAS ARTIMANHAS
-
-// PROJECT
-// https://github.com/LUISDASARTIMANHAS/projeto-magick-ia/blob/main/src/js/renders.js
-// Javascript ES6
+//render.js
 
 export function renderDiv(element, classe, text) {
   var div = document.createElement("div");
   // configuracoes do span Categoria
   div.setAttribute("class", classe);
   div.textContent = text;
-  element.appendChild(a);
+  element.appendChild(div);
   return div;
 }
 
@@ -21,7 +16,7 @@ export function renderA(element, classe, href, text, target) {
   a.setAttribute("href", href);
   a.setAttribute("target", target);
   a.textContent = text;
-  element.appendChild(a);
+  element.appendChild(div);
 }
 
 export function renderButton(element, classe, text) {
