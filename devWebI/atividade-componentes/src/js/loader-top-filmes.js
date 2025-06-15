@@ -8,17 +8,6 @@ window.addEventListener("load", () => {
       "content-type": "application/json;charset=utf-8",
     },
   };
-
-  fetch(url, options)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return response.text().then((errorText) => {
-          throw new Error("Falha ao buscar Top Movies: " + errorText);
-        });
-      }
-
   fetch(url, options)
     .then((response) => {
       if (response.ok) {
