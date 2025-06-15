@@ -128,7 +128,9 @@ export function renderCard(filme, container, id) {
           </div>
           <div class="modal-footer">
             <button class="btn btn-success">Assistir agora</button>
-            <button class="btn btn-outline-light">Salvar para depois</button>
+            <button class="btn btn-outline-light salvar-depois" data-filme='${JSON.stringify(filme)}'>
+              Salvar para depois
+            </button>
           </div>
         </div>
       </div>

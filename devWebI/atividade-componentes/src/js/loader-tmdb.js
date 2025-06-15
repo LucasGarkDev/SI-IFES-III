@@ -6,10 +6,10 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
 
 document.addEventListener("DOMContentLoaded", () => {
-  carregarSecao("movie/popular", "secao-lancamentos"); // 🎬 Lançamentos
-  carregarSecao("trending/movie/week", "secao-trending"); // 🔥 Em Alta
-  carregarSecao("movie/top_rated", "secao-toprated"); // 🏆 Melhores Avaliados
-  carregarSecao("movie/upcoming", "secao-upcoming"); // 📅 Em Breve
+    carregarSecao("movie/popular", "secao-lancamentos"); // 🎬 Lançamentos
+    carregarSecao("trending/movie/week", "secao-trending"); // 🔥 Em Alta
+    carregarSecao("movie/top_rated", "secao-toprated"); // 🏆 Melhores Avaliados
+    carregarSecao("movie/upcoming", "secao-upcoming"); // 📅 Em Breve
 });
 
 function carregarFilmes(filmes, container) {
@@ -50,3 +50,50 @@ function carregarSecao(endpoint, containerId) {
       console.error(`Erro ao carregar dados de ${endpoint}:`, error)
     );
 }
+
+
+// Armazena localmente
+let filmesSalvos = JSON.parse(localStorage.getItem("filmesSalvos")) || [];
+
+// Evento para capturar cliques
+document.addEventListener("click", (event) => {
+  const botao = event.target.closest(".salvar-depois");
+  if (!botao) return;
+
+  const filme = JSON.parse(botao.dataset.filme);
+  if (!filmesSalvos.some(f => f.id === filme.id)) {
+    filmesSalvos.push(filme);
+    localStorage.setItem("filmesSalvos", JSON.stringify(filmesSalvos));
+    alert(`✅ "${filme.title}" salvo para depois!`);
+    atualizarOffcanvas();
+  } else {
+    alert(`ℹ️ "${filme.title}" já está na sua lista.`);
+  }
+});
+
+function atualizarOffcanvas() {
+  const lista = document.getElementById("lista-salvos");
+  lista.innerHTML = "";
+
+  if (filmesSalvos.length === 0) {
+    lista.innerHTML = "<p class='text-muted'>Nenhum filme salvo ainda.</p>";
+    return;
+  }
+
+  filmesSalvos.forEach((filme) => {
+    const card = document.createElement("div");
+    card.className = "d-flex align-items-center mb-3";
+
+    card.innerHTML = `
+      <img src="${filme.image}" alt="${filme.title}" width="60" class="rounded me-3" />
+      <div>
+        <h6 class="mb-0">${filme.title}</h6>
+        <small class="text-muted">${filme.year} • IMDb ${filme.imDbRating}</small>
+      </div>
+    `;
+
+    lista.appendChild(card);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", atualizarOffcanvas);
