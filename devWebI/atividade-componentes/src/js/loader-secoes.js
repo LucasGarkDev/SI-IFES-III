@@ -1,7 +1,8 @@
+// loader-secoes.js
 import { renderCard } from "./render.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("./src/data/TopMovies.json")
+  fetch("src/data/top-movies.json") 
     .then(res => res.json())
     .then(data => {
       renderCarouselCards(data, "carousel-cards-em-alta");
