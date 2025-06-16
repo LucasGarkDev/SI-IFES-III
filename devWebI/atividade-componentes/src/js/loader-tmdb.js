@@ -1,18 +1,25 @@
 import { renderCard } from "./render.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("secao-lancamentos");
-
-  // Carrega diretamente o JSON local com os dados dos filmes
   fetch("./src/data/filmes-tmdb.json")
     .then(res => res.json())
-    .then(filmes => {
-      filmes.forEach(filme => renderCard(filme, container, filme.id));
+    .then(data => {
+      carregarSecao(data.lancamentos, "secao-lancamentos");
+      carregarSecao(data.trending, "secao-trending");
+      carregarSecao(data.toprated, "secao-toprated");
+      carregarSecao(data.upcoming, "secao-upcoming");
     })
     .catch(err => console.error("❌ Erro ao carregar JSON local:", err));
 
-  atualizarOffcanvas(); // Garante a exibição dos filmes salvos para depois
+  atualizarOffcanvas();
 });
+
+function carregarSecao(filmes, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  filmes.forEach(filme => renderCard(filme, container, filme.id));
+}
 
 // ---------------- FILMES SALVOS PARA DEPOIS ----------------
 let filmesSalvos = JSON.parse(localStorage.getItem("filmesSalvos")) || [];
