@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Tarefas - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .intro-icon {
+        font-size: 3rem;
+        }
+
+        .card-feature:hover {
+        transform: scale(1.02);
+        transition: 0.3s;
+        }
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar com usuário -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">CRUD Tarefas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav me-3">
+                <li class="nav-item"><a class="nav-link active" href="index.html">🏠 Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="listagem.html">📋 Listagem</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">🆕 Nova Tarefa</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">✏️ Editar Tarefa</a></li>
+            </ul>
+
+            <!-- Usuário Simulado -->
+            <div class="d-flex align-items-center text-white">
+                <span class="me-2">👤 João</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="30" height="30" class="rounded-circle border border-light" alt="Usuário">
+            </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Simulação de Quadro de Tarefas (estático) -->
+        <div class="container my-5">
+        <h3 class="text-center mb-4">🗂️ Visão Geral de Tarefas</h3>
+
+        <!-- Filtros fictícios -->
+        <div class="text-center mb-4">
+            <button class="btn btn-outline-primary btn-sm me-2">🔄 Atualizar</button>
+            <button class="btn btn-outline-secondary btn-sm me-2">📅 Esta semana</button>
+            <button class="btn btn-outline-dark btn-sm">⚙️ Filtros</button>
+        </div>
+
+        <div class="row g-3">
+            <!-- Coluna: Não planejada -->
+            <div class="col-md-3">
+            <div class="bg-light p-3 rounded border">
+                <h5 class="text-primary">📥 Não planejada</h5>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Comprar materiais</strong>
+                <div class="text-muted small">Sem prazo</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Ana</span><span>💬 2</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Agendar reunião</strong>
+                <div class="text-muted small">Sem prazo</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 João</span><span>📎 1</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Definir metas</strong>
+                <div class="text-muted small">Sem prazo</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Ingrid</span><span>💬 1</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Coluna: Para esta semana -->
+            <div class="col-md-3">
+            <div class="bg-light p-3 rounded border">
+                <h5 class="text-warning">📌 Para esta semana</h5>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Processar leads</strong>
+                <div><span class="badge bg-success">Amanhã, 14h</span></div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Carlos</span><span>💬 1</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Montar relatório mensal</strong>
+                <div><span class="badge bg-secondary">Quarta, 10h</span></div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Fernanda</span><span>📎 2</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Criar material gráfico</strong>
+                <img src="img/post_thumbnail-041575e5961c80abba097dd33fde8ad5.jpeg" alt="Tarefa" class="img-fluid rounded mb-2 mt-2">
+                <div>
+                    <span class="badge bg-success">Amanhã, 16h</span>
+                    <img src="img/sou-uma-pessoa-boa-ou-nao.jpg" class="rounded-circle ms-2" width="30" height="30" alt="User">
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Enviar e-mails</strong>
+                <div><span class="badge bg-dark">Hoje, 17h</span></div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Felipe</span><span>📎 1</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Coluna: Em andamento -->
+            <div class="col-md-3">
+            <div class="bg-light p-3 rounded border">
+                <h5 class="text-info">⏳ Em andamento</h5>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Atualizar site</strong>
+                <div class="progress mt-2" style="height: 5px;">
+                    <div class="progress-bar bg-info" style="width: 60%;"></div>
+                </div>
+                <div class="small text-muted mt-1">60% completo</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Lucas</span><span>💬 3</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Editar apresentação</strong>
+                <div class="progress mt-2" style="height: 5px;">
+                    <div class="progress-bar bg-warning" style="width: 35%;"></div>
+                </div>
+                <div class="small text-muted mt-1">35% completo</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Marina</span><span>📎 1</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Revisar documentação</strong>
+                <div class="progress mt-2" style="height: 5px;">
+                    <div class="progress-bar bg-success" style="width: 80%;"></div>
+                </div>
+                <div class="small text-muted mt-1">80% completo</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Bruna</span><span>💬 1</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Coluna: Concluídas -->
+            <div class="col-md-3">
+            <div class="bg-light p-3 rounded border">
+                <h5 class="text-success">✅ Concluídas</h5>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Publicar campanha</strong>
+                <div class="text-muted small">Concluído ontem</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Roberta</span><span>✅</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Revisar site</strong>
+                <div class="text-muted small">Concluído hoje</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 André</span><span>📎 1</span>
+                </div>
+                </div>
+
+                <div class="bg-white p-2 rounded shadow-sm mb-2">
+                <strong>Corrigir erros do formulário</strong>
+                <div class="text-muted small">Concluído esta manhã</div>
+                <div class="mt-2 d-flex justify-content-between">
+                    <span>👤 Paulo</span><span>💬 1</span>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-primary text-white text-center p-3">
+        <small>&copy; 2025 Sistema CRUD de Tarefas | Bootstrap</small>
+    </footer>
+
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

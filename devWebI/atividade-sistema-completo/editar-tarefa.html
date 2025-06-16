@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Tarefa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="editar-tarefa.html">CRUD Tarefas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav me-3">
+                <li class="nav-item"><a class="nav-link" href="#">🏠 Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="listagem.html">📋 Listagem</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">🆕 Nova Tarefa</a></li>
+                <li class="nav-item"><a class="nav-link active" href="editar-tarefa.html">✏️ Editar Tarefa</a></li>
+            </ul>
+
+            <!-- Usuário Simulado -->
+            <div class="d-flex align-items-center text-white">
+                <span class="me-2">👤 João</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="30" height="30" class="rounded-circle border border-light" alt="Usuário">
+            </div>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Formulário -->
+  <div class="container mt-4">
+    <h2>Editando a Tarefa</h2>
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Nome da Tarefa</label>
+            <input type="text" class="form-control" value="Estudar Bootstrap" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" rows="3">Revisar os conceitos básicos do framework e montar protótipos com layout responsivo.</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Prioridade</label>
+            <select class="form-select" required>
+            <option selected>Alta</option>
+            <option>Média</option>
+            <option>Baixa</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Data/Hora</label>
+            <input type="datetime-local" class="form-control" value="2025-06-17T14:00" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar Edição</button>
+    </form>
+
+  </div>
+</body>
+</html>
