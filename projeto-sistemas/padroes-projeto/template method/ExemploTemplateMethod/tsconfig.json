@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "none",
     "outDir": "dist",
     "rootDir": "src",
-    "strict": true
+    "allowImportingTsExtensions": false,
+    "checkJs": true,
+    "noEmit": false,
+    "strict": true,
+    "target": "ES5",
+    "module": "es6",
+    "esModuleInterop": true,
+    // "sourceMap": true
   }
 }
