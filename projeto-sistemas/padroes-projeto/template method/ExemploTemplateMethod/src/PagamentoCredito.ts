@@ -1,10 +1,10 @@
 import { Pagamento } from "./Pagamento";
-import { mostrarMensagemNaTela } from "./utils";
+import { mostrarMensagemNaTela } from "./util";
 
-export class PagamentoPIX extends Pagamento {
+export class PagamentoCredito extends Pagamento {
   protected calcularDesconto(): number {
-    const desconto = this.valorBase * 0.10;
-    mostrarMensagemNaTela("Pagamento com PIX - desconto de 10% aplicado.");
+    const desconto = this.valorBase * 0.02;
+    mostrarMensagemNaTela("Pagamento com Cartão de Crédito - desconto de 2% aplicado.");
     return desconto;
   }
 }

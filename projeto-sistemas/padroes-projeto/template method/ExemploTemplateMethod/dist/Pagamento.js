@@ -8,17 +8,14 @@ class Pagamento {
     processar() {
         const desconto = this.calcularDesconto();
         const total = this.valorBase - desconto;
-        this.exibirResumo(total, desconto);
+        this.exibirResumo(total);
     }
-    exibirResumo(total, desconto) {
+    exibirResumo(total) {
         const div = document.getElementById("resumo");
         if (div) {
-            div.innerHTML = `
-        <p>Desconto aplicado: <strong>R$ ${desconto.toFixed(2)}</strong></p>
-        <p>Valor final: <strong>R$ ${total.toFixed(2)}</strong></p>
-      `;
+            div.innerHTML = `Valor com desconto: <strong>R$ ${total.toFixed(2)}</strong>`;
         }
-        console.log(`[LOG] Desconto de R$ ${desconto.toFixed(2)} aplicado. Total: R$ ${total.toFixed(2)}`);
+        console.log(`[RESUMO] Valor final: R$ ${total.toFixed(2)}`);
     }
 }
 exports.Pagamento = Pagamento;
