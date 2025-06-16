@@ -34,19 +34,8 @@ window.finalizarCompra = function (forma: string): void {
 
 window.finalizarSelecionado = function (): void {
   const select = document.getElementById("forma-pagamento") as HTMLSelectElement;
-  const forma = select?.value;
-
-  if (!forma) {
-    alert("Selecione uma forma de pagamento.");
-    return;
-  }
-
-  console.log(`[EVENTO] Pagamento iniciado com forma: ${forma}`);
+  if (!select) return;
+  const forma = select.value;
   window.finalizarCompra(forma);
 };
 
-export function mostrarMensagemNaTela(texto: string): void {
-  const resumo = document.getElementById("resumo");
-  if (resumo) resumo.innerHTML = `<p>${texto}</p>`;
-  console.log(`[LOG] ${texto}`);
-}
