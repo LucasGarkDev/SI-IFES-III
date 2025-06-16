@@ -1,7 +1,8 @@
-import { PagamentoCredito } from "./PagamentoCredito";
-import { PagamentoPIX } from "./PagamentoPIX";
-import { PagamentoBoleto } from "./PagamentoBoleto";
-import { Pagamento } from "./Pagamento";
+import { PagamentoCredito } from "./PagamentoCredito.js";
+import { PagamentoPIX } from "./PagamentoPIX.js";
+import { PagamentoBoleto } from "./PagamentoBoleto.js";
+import { Pagamento } from "./Pagamento.js";
+import { mostrarMensagemNaTela } from "./util.js";
 
 declare global {
   interface Window {
@@ -32,10 +33,9 @@ window.finalizarCompra = function (forma: string): void {
   pagamento.processar();
 };
 
-window.finalizarSelecionado = function (): void {
+window.finalizarSelecionado = function () {
   const select = document.getElementById("forma-pagamento") as HTMLSelectElement;
   if (!select) return;
   const forma = select.value;
   window.finalizarCompra(forma);
 };
-

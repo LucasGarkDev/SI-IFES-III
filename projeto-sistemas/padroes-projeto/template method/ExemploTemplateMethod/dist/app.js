@@ -1,20 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const PagamentoCredito_1 = require("./PagamentoCredito");
-const PagamentoPIX_1 = require("./PagamentoPIX");
-const PagamentoBoleto_1 = require("./PagamentoBoleto");
+import { PagamentoCredito } from "./PagamentoCredito.js";
+import { PagamentoPIX } from "./PagamentoPIX.js";
+import { PagamentoBoleto } from "./PagamentoBoleto.js";
 window.finalizarCompra = function (forma) {
     const valor = 100;
     let pagamento;
     switch (forma) {
         case "credito":
-            pagamento = new PagamentoCredito_1.PagamentoCredito(valor);
+            pagamento = new PagamentoCredito(valor);
             break;
         case "pix":
-            pagamento = new PagamentoPIX_1.PagamentoPIX(valor);
+            pagamento = new PagamentoPIX(valor);
             break;
         case "boleto":
-            pagamento = new PagamentoBoleto_1.PagamentoBoleto(valor);
+            pagamento = new PagamentoBoleto(valor);
             break;
         default:
             alert("Forma de pagamento inválida");
