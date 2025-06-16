@@ -1,6 +1,6 @@
-import { PagamentoCredito } from "./PagamentoCredito";
-import { PagamentoPIX } from "./PagamentoPIX";
-import { PagamentoBoleto } from "./PagamentoBoleto";
+import { PagamentoCredito } from "./PagamentoCredito.js";
+import { PagamentoPIX } from "./PagamentoPIX.js";
+import { PagamentoBoleto } from "./PagamentoBoleto.js";
 window.finalizarCompra = function (forma) {
     const valor = 100;
     let pagamento;
@@ -27,10 +27,3 @@ window.finalizarSelecionado = function () {
     const forma = select.value;
     window.finalizarCompra(forma);
 };
-// ✅ Função auxiliar para exibir mensagens no HTML e console
-export function mostrarMensagemNaTela(texto) {
-    const resumo = document.getElementById("resumo");
-    if (resumo)
-        resumo.innerHTML = `<p>${texto}</p>`;
-    console.log(`[LOG] ${texto}`);
-}

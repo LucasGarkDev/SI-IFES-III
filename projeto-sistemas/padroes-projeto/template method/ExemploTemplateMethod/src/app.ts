@@ -1,9 +1,9 @@
-import { PagamentoCredito } from "./PagamentoCredito";
-import { PagamentoPIX } from "./PagamentoPIX";
-import { PagamentoBoleto } from "./PagamentoBoleto";
-import { Pagamento } from "./Pagamento";
+import { PagamentoCredito } from "./PagamentoCredito.js";
+import { PagamentoPIX } from "./PagamentoPIX.js";
+import { PagamentoBoleto } from "./PagamentoBoleto.js";
+import { Pagamento } from "./Pagamento.js";
+import { mostrarMensagemNaTela } from "./util.js";
 
-// 🔄 Tornando funções globais acessíveis no HTML
 declare global {
   interface Window {
     finalizarCompra: (forma: string) => void;
@@ -33,18 +33,9 @@ window.finalizarCompra = function (forma: string): void {
   pagamento.processar();
 };
 
-window.finalizarSelecionado = function (): void {
+window.finalizarSelecionado = function () {
   const select = document.getElementById("forma-pagamento") as HTMLSelectElement;
   if (!select) return;
   const forma = select.value;
   window.finalizarCompra(forma);
 };
-
-// ✅ Função auxiliar para exibir mensagens no HTML e console
-export function mostrarMensagemNaTela(texto: string): void {
-  const resumo = document.getElementById("resumo");
-  if (resumo) resumo.innerHTML = `<p>${texto}</p>`;
-  console.log(`[LOG] ${texto}`);
-}
-
-
