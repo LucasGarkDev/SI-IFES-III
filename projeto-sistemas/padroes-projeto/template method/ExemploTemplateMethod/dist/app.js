@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mostrarMensagemNaTela = mostrarMensagemNaTela;
 const PagamentoCredito_1 = require("./PagamentoCredito");
 const PagamentoPIX_1 = require("./PagamentoPIX");
 const PagamentoBoleto_1 = require("./PagamentoBoleto");
@@ -25,17 +24,8 @@ window.finalizarCompra = function (forma) {
 };
 window.finalizarSelecionado = function () {
     const select = document.getElementById("forma-pagamento");
-    const forma = select === null || select === void 0 ? void 0 : select.value;
-    if (!forma) {
-        alert("Selecione uma forma de pagamento.");
+    if (!select)
         return;
-    }
-    console.log(`[EVENTO] Pagamento iniciado com forma: ${forma}`);
+    const forma = select.value;
     window.finalizarCompra(forma);
 };
-function mostrarMensagemNaTela(texto) {
-    const resumo = document.getElementById("resumo");
-    if (resumo)
-        resumo.innerHTML = `<p>${texto}</p>`;
-    console.log(`[LOG] ${texto}`);
-}
