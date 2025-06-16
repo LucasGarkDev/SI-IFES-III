@@ -1,14 +1,11 @@
 {
   "compilerOptions": {
+    "target": "ES6",
+    "module": "ES2020",
+    "moduleResolution": "node",
     "outDir": "dist",
     "rootDir": "src",
-    "allowImportingTsExtensions": false,
-    "checkJs": true,
-    "noEmit": false,
-    "strict": true,
-    "target": "ES5",
-    "module": "es6",
-    "esModuleInterop": true,
-    // "sourceMap": true
-  }
+    "strict": true
+  },
+  "include": ["src"]
 }
