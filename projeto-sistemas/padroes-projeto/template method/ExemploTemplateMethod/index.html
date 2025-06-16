@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Loja | Template Method</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Finalizar Compra</h1>
+  <p>Total base: <strong>R$ 100,00</strong></p>
+
+  <div class="botoes">
+    <button onclick="finalizarCompra('credito')">Pagar com Cartão</button>
+    <button onclick="finalizarCompra('pix')">Pagar com PIX</button>
+    <button onclick="finalizarCompra('boleto')">Pagar com Boleto</button>
+  </div>
+
+  <div id="resumo"></div>
+
+  <script src="dist/app.js"></script>
+</body>
+</html>

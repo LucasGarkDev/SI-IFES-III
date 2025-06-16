@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "none",
+    "outDir": "ExemploTemplateMethod/dist",
+    "rootDir": "ExemploTemplateMethod/src",
+    "strict": true
+  }
+}
