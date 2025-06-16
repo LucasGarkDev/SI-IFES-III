@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Pagamento = void 0;
-class Pagamento {
+export class Pagamento {
     constructor(valorBase) {
         this.valorBase = valorBase;
     }
@@ -18,4 +15,3 @@ class Pagamento {
         console.log(`[RESUMO] Valor final: R$ ${total.toFixed(2)}`);
     }
 }
-exports.Pagamento = Pagamento;
