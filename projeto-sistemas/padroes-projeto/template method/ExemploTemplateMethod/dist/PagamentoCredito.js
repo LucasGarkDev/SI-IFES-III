@@ -1,5 +1,5 @@
-import { Pagamento } from "./Pagamento";
-import { mostrarMensagemNaTela } from "./util";
+import { Pagamento } from "./Pagamento.js";
+import { mostrarMensagemNaTela } from "./util.js";
 export class PagamentoCredito extends Pagamento {
     calcularDesconto() {
         const desconto = this.valorBase * 0.02;
