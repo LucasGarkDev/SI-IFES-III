@@ -3,6 +3,7 @@ import { PagamentoPIX } from "./PagamentoPIX";
 import { PagamentoBoleto } from "./PagamentoBoleto";
 import { Pagamento } from "./Pagamento";
 
+// 🔄 Tornando funções globais acessíveis no HTML
 declare global {
   interface Window {
     finalizarCompra: (forma: string) => void;
@@ -38,4 +39,12 @@ window.finalizarSelecionado = function (): void {
   const forma = select.value;
   window.finalizarCompra(forma);
 };
+
+// ✅ Função auxiliar para exibir mensagens no HTML e console
+export function mostrarMensagemNaTela(texto: string): void {
+  const resumo = document.getElementById("resumo");
+  if (resumo) resumo.innerHTML = `<p>${texto}</p>`;
+  console.log(`[LOG] ${texto}`);
+}
+
 
