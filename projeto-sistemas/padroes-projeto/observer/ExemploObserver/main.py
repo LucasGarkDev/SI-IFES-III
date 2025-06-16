@@ -1,25 +1,42 @@
-# main.py
+import tkinter as tk
+from subject import Subject
+from data.simulate_data import simular_dados
+from utils.logger import Logger
+from gui.dashboard import TextWidget, GraphWidget, StatusWidget
 
-import time
-import random
-from sensor_data import SensorData
-from dashboards import GraficoTemperatura, ResumoClimatico, AlertaAltaTemperatura
+# ConcreteSubject com estado real
+class SensorData(Subject):
+    def __init__(self):
+        super().__init__()
+        self._valor = 0
 
-sensor = SensorData()
+    def set_data(self, valor):
+        self._valor = valor
+        print(f"[Sensor] Novo valor: {valor}")
+        self.notify(valor)
 
-# Instancia os dashboards
-grafico = GraficoTemperatura()
-resumo = ResumoClimatico()
-alerta = AlertaAltaTemperatura()
+# Interface principal
+def main():
+    sensor = SensorData()
+    root = tk.Tk()
+    root.title("Observer - Painel Completo")
 
-# Registra os observers
-sensor.adicionar_observer(grafico)
-sensor.adicionar_observer(resumo)
-sensor.adicionar_observer(alerta)
+    # Criação dos observers visuais
+    text_widget = TextWidget(root)
+    graph_widget = GraphWidget(root)
+    status_widget = StatusWidget(root)  # ← novo
 
-# Simula mudanças nos dados
-for _ in range(5):
-    temperatura = random.randint(20, 40)
-    umidade = random.randint(30, 90)
-    sensor.set_dados(temperatura, umidade)
-    time.sleep(2)
+    # Registrando os observers no subject
+    sensor.attach(text_widget)
+    sensor.attach(graph_widget)
+    sensor.attach(status_widget)
+
+    # (Opcional)
+    sensor.attach(Logger())
+
+    simular_dados(sensor)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
