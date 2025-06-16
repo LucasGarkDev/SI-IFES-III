@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "none",
-    "outDir": "dist",
-    "rootDir": "src",
+    "outDir": "ExemploTemplateMethod/dist",
+    "rootDir": "ExemploTemplateMethod/src",
     "strict": true
   }
 }
