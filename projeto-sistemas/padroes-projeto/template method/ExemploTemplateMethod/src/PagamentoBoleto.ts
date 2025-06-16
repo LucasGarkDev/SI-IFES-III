@@ -1,5 +1,5 @@
 import { Pagamento } from "./Pagamento";
-import { mostrarMensagemNaTela } from "./app";
+import { mostrarMensagemNaTela } from "./util";
 
 export class PagamentoBoleto extends Pagamento {
   protected calcularDesconto(): number {
