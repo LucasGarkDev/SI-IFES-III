@@ -1,3 +1,4 @@
+// Softwares/EditorTexto.hpp
 #ifndef EDITORTEXTO_HPP
 #define EDITORTEXTO_HPP
 
