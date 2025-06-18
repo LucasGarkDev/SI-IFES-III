@@ -1,3 +1,4 @@
+// HardwareArchitecture.hpp
 #ifndef HARDWAREARCHITECTURE_HPP
 #define HARDWAREARCHITECTURE_HPP
 

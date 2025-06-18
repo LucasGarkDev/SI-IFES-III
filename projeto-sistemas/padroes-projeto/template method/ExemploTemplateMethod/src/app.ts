@@ -1,3 +1,5 @@
+// File: app.ts
+
 import { PagamentoCredito } from "./PagamentoCredito.js";
 import { PagamentoPIX } from "./PagamentoPIX.js";
 import { PagamentoBoleto } from "./PagamentoBoleto.js";
