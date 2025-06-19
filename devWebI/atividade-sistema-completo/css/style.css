@@ -1,0 +1,129 @@
+/* ---------- CORES E BASE ---------- */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Conteúdo principal deve expandir */
+main {
+  flex: 1;
+}
+
+.bg-white:hover {
+  transform: scale(1.01);
+  transition: all 0.3s ease-in-out;
+}
+.progress {
+  background-color: #e9ecef;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.navbar {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar .nav-link:hover {
+  color: #ffdd57 !important;
+}
+
+.navbar .user-info img {
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+/* ---------- TÍTULOS E ÍCONES ---------- */
+
+h1, h2, h3, h5 {
+  font-weight: 600;
+}
+
+.intro-icon {
+  font-size: 3.5rem;
+}
+
+/* ---------- BOTÕES ---------- */
+
+.btn-primary, .btn-success {
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.btn-primary:hover, .btn-success:hover {
+  opacity: 0.9;
+}
+
+/* ---------- CARDS ---------- */
+
+.card-feature {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #ddd;
+}
+
+.card-feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-feature .display-4 {
+  font-size: 2.5rem;
+}
+
+/* ---------- ALERTAS ESTILIZADOS ---------- */
+
+.alert-info {
+  background-color: #e0f7fa;
+  border-left: 5px solid #00bcd4;
+}
+
+.alert-warning {
+  background-color: #fff8e1;
+  border-left: 5px solid #ffc107;
+}
+
+/* ---------- SEÇÕES ESPECIAIS ---------- */
+
+.section-title {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.4em 0.7em;
+}
+
+/* ---------- RODAPÉ ---------- */
+
+footer {
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 0 #ddd;
+}
+
+/* ---------- RESPONSIVO ---------- */
+
+/* ---------- TABELA -------------- */
+.table th,
+.table td {
+  vertical-align: middle;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.table td .btn {
+  font-size: 0.9rem;
+  padding: 4px 10px;
+}

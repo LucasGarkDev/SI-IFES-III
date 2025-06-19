@@ -1,3 +1,4 @@
+# main.py
 import tkinter as tk
 from subject import Subject
 from data.simulate_data import simular_dados

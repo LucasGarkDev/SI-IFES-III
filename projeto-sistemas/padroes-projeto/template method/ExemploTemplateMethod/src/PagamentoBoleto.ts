@@ -1,3 +1,5 @@
+// File: PagamentoBoleto.ts
+
 import { Pagamento } from "./Pagamento.js";
 import { mostrarMensagemNaTela } from "./util.js";
 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Listagem de Tarefas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="listagem.html">CRUD Tarefas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav me-3">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="listagem.html">📋 Listagem</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">🆕 Nova Tarefa</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">✏️ Editar Tarefa</a></li>
+            </ul>
+
+            <!-- Usuário Simulado -->
+            <div class="d-flex align-items-center text-white">
+                <span class="me-2">👤 João</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="30" height="30" class="rounded-circle border border-light" alt="Usuário">
+            </div>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Conteúdo -->
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Tarefas Cadastradas</h2>
+      <a href="nova-tarefa.html" class="btn btn-success">Nova Tarefa</a>
+    </div>
+
+    <table class="table table-hover align-middle shadow-sm rounded overflow-hidden">
+    <thead class="table-dark text-center">
+        <tr>
+        <th style="width: 35%;">Nome</th>
+        <th style="width: 25%;">Data/Hora</th>
+        <th style="width: 20%;">Prioridade</th>
+        <th style="width: 20%;">Ações</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr>
+        <td class="text-start">Estudar Bootstrap</td>
+        <td>2025-06-17 14:00</td>
+        <td><span class="badge bg-danger">Alta</span></td>
+        <td>
+            <a href="editar-tarefa.html" class="btn btn-sm btn-warning me-1">✏️</a>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalExcluir">🗑️</button>
+        </td>
+        </tr>
+        <tr>
+        <td class="text-start">Revisar Apresentação</td>
+        <td>2025-06-18 10:30</td>
+        <td><span class="badge bg-warning text-dark">Média</span></td>
+        <td>
+            <a href="editar-tarefa.html" class="btn btn-sm btn-warning me-1">✏️</a>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalExcluir">🗑️</button>
+        </td>
+        </tr>
+        <tr>
+        <td class="text-start">Enviar E-mail de Feedback</td>
+        <td>2025-06-19 08:00</td>
+        <td><span class="badge bg-success">Baixa</span></td>
+        <td>
+            <a href="editar-tarefa.html" class="btn btn-sm btn-warning me-1">✏️</a>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalExcluir">🗑️</button>
+        </td>
+        </tr>
+        <tr>
+        <td class="text-start">Agendar Reunião com Equipe</td>
+        <td>2025-06-20 15:45</td>
+        <td><span class="badge bg-danger">Alta</span></td>
+        <td>
+            <a href="editar-tarefa.html" class="btn btn-sm btn-warning me-1">✏️</a>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalExcluir">🗑️</button>
+        </td>
+        </tr>
+        <tr>
+        <td class="text-start">Montar Relatório Mensal</td>
+        <td>2025-06-21 09:00</td>
+        <td><span class="badge bg-warning text-dark">Média</span></td>
+        <td>
+            <a href="editar-tarefa.html" class="btn btn-sm btn-warning me-1">✏️</a>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalExcluir">🗑️</button>
+        </td>
+        </tr>
+    </tbody>
+    </table>
+
+
+  <!-- Modal de Exclusão -->
+  <div class="modal fade" id="modalExcluir" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar Exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Tem certeza que deseja excluir esta tarefa?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

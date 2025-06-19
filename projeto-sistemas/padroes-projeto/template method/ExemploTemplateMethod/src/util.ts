@@ -1,3 +1,5 @@
+// util.ts
+
 export function mostrarMensagemNaTela(texto: string): void {
   const resumo = document.getElementById("resumo");
   if (resumo) {

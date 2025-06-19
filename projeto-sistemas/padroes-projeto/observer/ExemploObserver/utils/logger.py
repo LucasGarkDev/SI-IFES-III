@@ -1,3 +1,4 @@
+# utils/logger.py
 from observer import Observer
 
 class Logger(Observer):
