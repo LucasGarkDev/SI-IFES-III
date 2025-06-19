@@ -1,3 +1,4 @@
+// File: Pagamento.ts
 export abstract class Pagamento {
   constructor(protected valorBase: number) {}
 
