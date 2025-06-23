@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+[bold],
+.bold {
+    font-weight: bold;
+}
+
+.bg-red {
+    background-color: #c4170c !important;
+    color: white !important;
+}
+
+.bg-red a {
+    color: white;
+}
+
+.bg-light-gray {
+    background-color: #F3F3F3;
+    color: black;
+}
+
+.c-blue {
+    color: blue;
+}
+
+.c-green {
+    color: green;
+}
+
+.c-red {
+    color: red;
+}
+
+.c-light-red{
+    color: #FB0334;
+}
+
+.c-orange {
+    color: #FF6700;
+}
