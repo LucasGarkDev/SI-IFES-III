@@ -10,6 +10,10 @@ ul {
   list-style: none;
   padding-left: 0;
 }
+[bold],
+.bold{
+  font-weight: bold;
+}
 
 .bg-red {
   background-color: #c4170c !important;
@@ -18,6 +22,18 @@ ul {
 
 .bg-red a {
   color: white;
+}
+.bg-light-gray{
+  background-color: #F3F3F3;
+  color: black;
+}
+
+nav .separator{
+  margin: 0 5px;
+}
+
+nav a{
+  margin: 5px;
 }
 
 .acesso-rapido {
