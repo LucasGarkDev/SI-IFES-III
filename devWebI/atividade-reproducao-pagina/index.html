@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./src/css/bootstrap-icons@1.13.1.css" />
     <link rel="stylesheet" href="./src/css/style.css" />
     <!-- more priority -->
-    <link rel="stylesheet" href="./src/css/reset.css">
+    <link rel="stylesheet" href="./src/css/reset.css" />
     <title>Notícia G1 Clone</title>
   </head>
   <body class="bg-light">
@@ -35,10 +35,10 @@
       </div>
     </nav>
     <nav
-      class="acesso-rapido flex-nowrap justify-content-between navbar-expand-lg bg-body-tertiary"
+      class="acesso-rapido d-flex flex-nowrap justify-content-center navbar-expand-lg bg-body-tertiary"
     >
       <!-- links de acesso rapido -->
-      <ul class="d-flex justify-content-between align-items-center">
+      <ul class="w-75 d-flex justify-content-end align-items-center">
         <p>fique por <strong>dentro</strong></p>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Eleições</a>
@@ -61,6 +61,7 @@
     <!-- Banner Superior -->
     <div class="text-center bg-white p-2 border-bottom">
       <img
+        class="img-fluid"
         src="./src/img/banner-superior.png"
         alt="Banner Superior"
         class="img-fluid"
@@ -68,12 +69,12 @@
     </div>
 
     <!-- Cabeçalho e Título -->
-    <div class="container mt-4">
-      <h1 class="fw-bold fs-2">
+    <div class="container mt-4 col-6">
+      <h1 class="fw-bold fs-2 content-head__title">
         Em defesa dos animais, Justiça mexicana proíbe touradas na maior arena
         do mundo
       </h1>
-      <p class="text-muted">
+      <p class="text-muted content-head__subtitle">
         Decisão ainda não é definitiva, mas até que haja uma ordem final, a
         Monumental Praça de Touros da Cidade do México ficará fechada.
       </p>
@@ -84,15 +85,19 @@
 
     <!-- Imagem Principal -->
     <div class="container my-4">
-      <img
+      <div class="container col-6">
+
+        <img
+        class="img-fluid"
         src="./src/img/img-noticia.webp"
         class="img-fluid rounded"
         alt="Praça de Touros"
-      />
-      <p class="text-muted small">
-        Imagem da Monumental Praça de Touros da Cidade do México — Foto:
-        Reprodução/Google Maps
-      </p>
+        />
+        <p class="text-muted small content-media__description">
+          Imagem da Monumental Praça de Touros da Cidade do México — Foto:
+          Reprodução/Google Maps
+        </p>
+      </div>
     </div>
 
     <!-- Corpo da Notícia -->

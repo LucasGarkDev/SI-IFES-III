@@ -11,6 +11,17 @@ ul {
     padding-left: 0;
 }
 
+nav .separator {
+    color: gray;
+    font-size: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 3px;
+    font-weight: bold;
+}
+
 [bold],
 .bold {
     font-weight: bold;
@@ -39,10 +50,10 @@ ul {
 }
 
 .c-red {
-    color: red;
+    color: #C4170C;
 }
 
-.c-light-red{
+.c-light-red {
     color: #FB0334;
 }
 
