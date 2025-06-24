@@ -5,7 +5,8 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:untitled-ontology-6="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6"/>
     
 
@@ -18,6 +19,15 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temExame -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#temExame">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Laudo"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Exame"/>
+    </owl:ObjectProperty>
     
 
 
@@ -205,9 +215,41 @@
     
 
 
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#biopsiaJoao -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#biopsiaJoao">
+        <rdf:type rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Biopsia"/>
+        <untitled-ontology-6:temPaciente rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#joaoSIlva"/>
+        <untitled-ontology-6:temData rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-10-25T00:00:00</untitled-ontology-6:temData>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#joaoSIlva -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#joaoSIlva"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#joaoSIlva">
+        <untitled-ontology-6:temIdade rdf:datatype="http://www.w3.org/2001/XMLSchema#int">62</untitled-ontology-6:temIdade>
+        <untitled-ontology-6:temNome>João Silva</untitled-ontology-6:temNome>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#laudoJoao -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#laudoJoao">
+        <rdf:type rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#Laudo"/>
+        <untitled-ontology-6:temExame rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#biopsiaJoao"/>
+        <untitled-ontology-6:temScoreGleason rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#scoreJoao"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#scoreJoao -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#scoreJoao">
+        <rdf:type rdf:resource="http://www.semanticweb.org/lucas/ontologies/2025/5/untitled-ontology-6#ScoreGleason"/>
+        <untitled-ontology-6:temValor rdf:datatype="http://www.w3.org/2001/XMLSchema#int">8</untitled-ontology-6:temValor>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 
