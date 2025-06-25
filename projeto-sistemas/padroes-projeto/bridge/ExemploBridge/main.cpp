@@ -24,6 +24,7 @@ int main() {
 
     delete editorARM;
     delete navegadorX86;
+    delete contoleDePortaEletronica;
     delete arm;
     delete x86arch;
     delete micro;
