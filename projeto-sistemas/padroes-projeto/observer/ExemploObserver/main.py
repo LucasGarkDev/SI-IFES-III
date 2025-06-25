@@ -1,20 +1,29 @@
 # main.py
 import tkinter as tk
-from subject import Subject
 from data.simulate_data import simular_dados
 from utils.logger import Logger
 from gui.dashboard import GraphWidget, TextWidget, StatusWidget, BarWidget
 
-# ConcreteSubject com estado real
-class SensorData(Subject):
+
+class SensorData:
     def __init__(self):
-        super().__init__()
+        from subject import Subject
+        self._subject = Subject()
         self._valor = 0
+
+    def attach(self, observer):
+        self._subject.attach(observer)
+
+    def detach(self, observer):
+        self._subject.detach(observer)
+
+    def notify(self):
+        self._subject.notify(self._valor)
 
     def set_data(self, valor):
         self._valor = valor
         print(f"[Sensor] Novo valor: {valor}")
-        self.notify(valor)
+        self.notify()
 
 # Interface principal
 def main():
@@ -35,9 +44,14 @@ def main():
     sensor.attach(text)
     sensor.attach(status)
 
+    # logger também pode ser adicionado aqui se quiser
+    # logger = Logger()
+    # sensor.attach(logger)
+
     simular_dados(sensor)
     root.mainloop()
 
-
 if __name__ == "__main__":
     main()
+
+
