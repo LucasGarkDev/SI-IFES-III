@@ -13,22 +13,32 @@ DECLARE
         'Feira de Santana - BA', 'Blumenau - SC', 'Vila Velha - ES', 'Jundiaí - SP', 'Caruaru - PE',
         'Franca - SP', 'Itabuna - BA', 'Petrolina - PE', 'Ilhéus - BA', 'Teófilo Otoni - MG'
     ];
+    ceps TEXT[] := ARRAY[
+        '01000-000', '20000-000', '30000-000', '90000-000',
+        '80000-000', '40000-000', '60000-000', '50000-000', '69000-000', '66000-000',
+        '88000-000', '74000-000', '79000-000', '78000-000', '29000-000',
+        '58000-000', '57000-000', '59000-000', '65000-000', '64000-000',
+        '49000-000', '77000-000', '68900-000', '69900-000', '76800-000',
+        '70000-000', '11000-000', '13000-000', '38400-000', '18000-000',
+        '24000-000', '89200-000', '86000-000', '14000-000', '36000-000',
+        '87000-000', '12200-000', '95000-000', '75000-000', '96000-000',
+        '44000-000', '89000-000', '29100-000', '13200-000', '55000-000',
+        '14400-000', '45600-000', '56300-000', '45650-000', '39800-000'
+    ];
 BEGIN
-    FOR i IN 1..50 LOOP
+    FOR i IN 1..array_length(cidades, 1) LOOP
         INSERT INTO fazenda (
             nome, localizacao, tamanho_hectares, capacidade_bovinos, observacoes, cep
         ) VALUES (
             CONCAT('Fazenda ', i),
             cidades[i],
-            500 + (random() * 1500)::int,   -- tamanho entre 500 e 2000 hectares
-            50 + (random() * 150)::int,     -- capacidade entre 50 e 200 bovinos
+            500 + (random() * 1500)::int,
+            50 + (random() * 150)::int,
             'Fazenda gerada para testes',
-            CONCAT('7500-', LPAD(i::text, 4, '0')) -- CEP simulado
+            ceps[i]
         );
     END LOOP;
 END $$;
-
-
 
 -- 2. BOVINOS - COM ID VÁLIDO
 DO $$
@@ -74,12 +84,11 @@ BEGIN
             vac_id := vacina_ids[1 + floor(random() * array_length(vacina_ids, 1))];
 
             BEGIN
-                INSERT INTO aplicacao_vacina (bovino_id, vacina_id, dataaplicacao, observacoes)
+                INSERT INTO aplicacao_vacina (bovino_id, vacina_id, dataaplicacao)
                 VALUES (
                     bovino_id,
                     vac_id,
-                    CURRENT_DATE - (30 + floor(random() * 365))::int,
-                    'Aplicação teste'
+                    CURRENT_DATE - (30 + floor(random() * 365))::int
                 );
             EXCEPTION WHEN unique_violation THEN
                 CONTINUE; -- Evita duplicação na PK composta
