@@ -12,19 +12,19 @@ int main() {
     HardwareArchitecture* x86arch = new x86();
     HardwareArchitecture* micro = new Microcontrolador();
 
-    Software* editorARM = new EditorTexto(arm);
-    Software* navegadorX86 = new NavegadorWeb(x86arch);
-    Software* contoleDePortaEletronica = new ControleEmbarcado(micro);
+    // Software* editorARM = new EditorTexto(arm);
+    Software* navegador = new NavegadorWeb(x86arch);
+    // Software* contoleDePortaEletronica = new ControleEmbarcado(micro);
 
-    editorARM->rodar();
-    std::cout << "-----------------------------" << std::endl;
-    navegadorX86->rodar();
-    std::cout << "-----------------------------" << std::endl;
-    contoleDePortaEletronica->rodar();
+    // editorARM->rodar();
+    // std::cout << "-----------------------------" << std::endl;
+    navegador->rodar();
+    // std::cout << "-----------------------------" << std::endl;
+    // contoleDePortaEletronica->rodar();
 
-    delete editorARM;
-    delete navegadorX86;
-    delete contoleDePortaEletronica;
+    // delete editorARM;
+    delete navegador;
+    // delete contoleDePortaEletronica;
     delete arm;
     delete x86arch;
     delete micro;
