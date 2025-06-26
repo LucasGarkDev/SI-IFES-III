@@ -1,20 +1,20 @@
 // main.cpp
 #include <iostream>
-#include "Architectures/microcontrolador.hpp"
+#include "Architectures/Microcontrolador.hpp"
 #include "Architectures/ARM.hpp"
 #include "Architectures/x86.hpp"
 #include "Softwares/EditorTexto.hpp"
 #include "Softwares/NavegadorWeb.hpp"
-#include "Softwares/controleEmbarcado.hpp"
+#include "Softwares/ControleEmbarcado.hpp"
 
 int main() {
     HardwareArchitecture* arm = new ARM();
     HardwareArchitecture* x86arch = new x86();
-    HardwareArchitecture* micro = new microcontrolador();
+    HardwareArchitecture* micro = new Microcontrolador();
 
     Software* editorARM = new EditorTexto(arm);
     Software* navegadorX86 = new NavegadorWeb(x86arch);
-    Software* contoleDePortaEletronica = new controleEmbarcado(micro);
+    Software* contoleDePortaEletronica = new ControleEmbarcado(micro);
 
     editorARM->rodar();
     std::cout << "-----------------------------" << std::endl;
