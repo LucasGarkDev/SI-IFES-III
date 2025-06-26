@@ -18,8 +18,8 @@ int main() {
     HardwareArchitecture* micro = new Microcontrolador();
 
     // Criação das abstrações associadas às arquiteturas (software + hardware)
-    // Software* editorARM = new EditorTexto(arm);
-    Software* navegador = new NavegadorWeb(x86arch);
+    // Software* editorARM = new EditorTexto();
+    Software* navegador = new NavegadorWeb(arm);
     // Software* contoleDePortaEletronica = new ControleEmbarcado(micro);
 
     // Executa o software associado à arquitetura (descomente para usar)
@@ -27,7 +27,7 @@ int main() {
     // std::cout << "-----------------------------" << std::endl;
     navegador->rodar();
     // std::cout << "-----------------------------" << std::endl;
-    // contoleDePortaEletronica->rodar();
+    // contoleDePortaEletronica->rodar();arm
 
     // Libera memória dos objetos criados
     // delete editorARM;
