@@ -2,6 +2,7 @@
     "files.associations": {
         "*.c": "c",
         "*.mwb": "sql",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "string": "cpp"
     }
 }
