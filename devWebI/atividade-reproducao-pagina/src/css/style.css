@@ -4,7 +4,6 @@
 
 .acesso-rapido {
   width: 100%;
-  border-bottom: 1px solid gray;
   margin-bottom: 40px;
 }
 
@@ -50,14 +49,20 @@
   -moz-font-feature-settings: initial;
 }
 
-.content-publication-data{
-  border-bottom: 1px solid gray;
-}
-
 .adware-container{
   width: auto;
 }
 
 div.adware-container-info{
   width: 60%;
+}
+
+ul.links-leia-tambem{
+  list-style: disc;
+  margin: 30px;
+
+}
+
+ul.links-leia-tambem li{
+  padding-left: 15px;
 }
