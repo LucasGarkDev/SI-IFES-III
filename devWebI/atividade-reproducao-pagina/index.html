@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./src/css/reset.css" />
     <title>Notícia G1 Clone</title>
   </head>
-  <body class="bg-light">
+  <body class="bg-light bg-white">
     <nav
       class="bg-light-gray navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-start"
     >
@@ -59,9 +59,9 @@
     </nav>
 
     <!-- Banner Superior -->
-    <div class="text-center bg-white p-2 border-bottom">
+    <div class="text-center bg-white p-2">
       <img
-        class="img-fluid"
+        class="img-fluid w-75"
         src="./src/img/banner-superior.png"
         alt="Banner Superior"
         class="img-fluid"
@@ -69,8 +69,8 @@
     </div>
 
     <!-- Cabeçalho e Título -->
-    <div class="container mt-4 col-6">
-      <h1 class="fw-bold fs-2 content-head__title">
+    <div class="content-publication-data container mt-4 col-6">
+      <h1 class="content-head__title">
         Em defesa dos animais, Justiça mexicana proíbe touradas na maior arena
         do mundo
       </h1>
@@ -101,17 +101,30 @@
     </div>
 
     <!-- Corpo da Notícia -->
-    <div class="container mb-5">
-      <p>
-        A maior arena de touradas do mundo, na Cidade do
-        <strong class="text-danger">México</strong>, foi proibida de receber
-        espetáculos desde a última sexta-feira (10).
-      </p>
-      <p>
-        O juiz Jonathan Bass deu uma ordem no fim de maio que proíbe os
-        espetáculos no local. A ação havia sido iniciada por uma organização
-        chamada Justiça Justa.
-      </p>
+    <article class="articleBody container mb-5 col-7">
+      <!-- informações da noticia com anuncio -->
+      <section class="d-flex flex-nowrap">
+        <div class="bg-dev-focus-2 adware-container-info container d-flex flex-wrap gap-lg-3">
+          <p>
+            A maior arena de touradas do mundo, na Cidade do
+            <strong class="text-danger">México</strong>, foi proibida de receber
+            espetáculos desde a última sexta-feira (10).
+          </p>
+          <p>
+            O juiz Jonathan Bass deu uma ordem no fim de maio que proíbe os
+            espetáculos no local. A ação havia sido iniciada por uma organização
+            chamada Justiça Justa.
+          </p>
+        </div>
+
+        <div class="container adware-container">
+          <img
+            class="img-fluid"
+            src="./src/img/banner-noticia.png"
+            alt="Anuncio"
+          />
+        </div>
+      </section>
 
       <!-- Links relacionados -->
       <div class="my-4">
@@ -141,7 +154,7 @@
         relação entre meio ambiente e direitos humanos já foi incorporada pelo
         Judiciário mexicano.
       </p>
-    </div>
+    </article>
 
     <!-- Imagem inferior (newsletter ou propaganda) -->
     <div class="container text-center my-5">
