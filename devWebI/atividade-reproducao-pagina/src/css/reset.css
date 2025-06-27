@@ -93,6 +93,11 @@ article p{
 .bg-dev-focus{
     background-color: aquamarine;
 }
+
+.bg-dev-focus .bg-dev-focus{
+    background-color: darkgreen;
+}
+
 .bg-dev-focus-2{
     background-color: dodgerblue;
 }
