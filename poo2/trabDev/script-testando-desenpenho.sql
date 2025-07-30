@@ -1,4 +1,4 @@
--- 1. FAZENDAS (usando 50 cidades reais do Brasil)
+-- 1. FAZENDAS (mantido, já utiliza CEP real correspondente)
 DO $$
 DECLARE
     cidades TEXT[] := ARRAY[
@@ -40,7 +40,8 @@ BEGIN
     END LOOP;
 END $$;
 
--- 2. BOVINOS - COM ID VÁLIDO
+
+-- 2. BOVINOS (sem alteração necessária)
 DO $$
 DECLARE
     raca_ids INTEGER[];
@@ -49,7 +50,6 @@ DECLARE
     fazenda_id INTEGER;
     status_list TEXT[] := ARRAY['Comprado', 'Ativo', 'Vendido'];
 BEGIN
-    -- Usa os nomes corretos das colunas de ID
     SELECT array_agg(idraca) INTO raca_ids FROM raca;
     SELECT array_agg(idfazenda) INTO fazenda_ids FROM fazenda;
 
@@ -69,20 +69,18 @@ BEGIN
     END LOOP;
 END $$;
 
--- 3. APLICAÇÃO DE VACINAS
--- (Seleciona até 3 vacinas aleatórias por bovino)
+
+-- 3. APLICAÇÃO DE VACINAS (mantido)
 DO $$
 DECLARE
-    vacina_ids INTEGER[] := ARRAY[1, 2, 3, 4, 5];  -- IDs das vacinas
+    vacina_ids INTEGER[] := ARRAY[1, 2, 3, 4, 5];  
     bovino_id INTEGER;
     vac_id INTEGER;
     j INTEGER;
 BEGIN
     FOR bovino_id IN SELECT idbovino FROM bovino LOOP
-        -- Insere entre 1 a 3 vacinas para cada bovino
         FOR j IN 1..(1 + floor(random() * 3)::int) LOOP
             vac_id := vacina_ids[1 + floor(random() * array_length(vacina_ids, 1))];
-
             BEGIN
                 INSERT INTO aplicacao_vacina (bovino_id, vacina_id, dataaplicacao)
                 VALUES (
@@ -91,36 +89,65 @@ BEGIN
                     CURRENT_DATE - (30 + floor(random() * 365))::int
                 );
             EXCEPTION WHEN unique_violation THEN
-                CONTINUE; -- Evita duplicação na PK composta
+                CONTINUE;
             END;
         END LOOP;
     END LOOP;
 END $$;
 
--- 4. MOVIMENTAÇÕES (5.000)
+
+-- 4. MOVIMENTAÇÕES (VERSÃO À PROVA DE ERRO)
 DO $$
 DECLARE
     tipo_list TEXT[] := ARRAY['Entrada', 'Saida', 'Transferencia'];
-    motivo_list TEXT[] := ARRAY['Compra', 'Venda', 'Abate', 'Transferência'];
+    motivo_entrada TEXT[] := ARRAY['Compra', 'Transferência'];
+    motivo_saida TEXT[] := ARRAY['Venda', 'Abate', 'Transferência'];
+    motivo_transferencia TEXT[] := ARRAY['Transferência'];
 
     bovino_ids INTEGER[];
     fazenda_ids INTEGER[];
     bovino_id INTEGER;
     origem_id INTEGER;
     destino_id INTEGER;
+    tipo_mov TEXT;
+    motivo_mov TEXT;
+    valido BOOLEAN;
 BEGIN
-    -- Obtem os IDs reais
     SELECT array_agg(idbovino) INTO bovino_ids FROM bovino;
     SELECT array_agg(idfazenda) INTO fazenda_ids FROM fazenda;
 
     FOR i IN 1..5000 LOOP
         bovino_id := bovino_ids[1 + floor(random() * array_length(bovino_ids, 1))::int];
-
-        -- Seleciona origem e destino diferentes
         origem_id := fazenda_ids[1 + floor(random() * array_length(fazenda_ids, 1))::int];
+
         LOOP
             destino_id := fazenda_ids[1 + floor(random() * array_length(fazenda_ids, 1))::int];
             EXIT WHEN destino_id != origem_id;
+        END LOOP;
+
+        valido := FALSE;
+        -- Repete até gerar uma combinação válida
+        WHILE NOT valido LOOP
+            tipo_mov := tipo_list[1 + floor(random() * array_length(tipo_list, 1))::int];
+
+            IF tipo_mov = 'Entrada' THEN
+                motivo_mov := motivo_entrada[1 + floor(random() * array_length(motivo_entrada, 1))::int];
+                -- Não permite motivo 'Venda' ou 'Abate'
+                IF motivo_mov IN ('Venda', 'Abate') THEN
+                    CONTINUE;
+                END IF;
+                valido := TRUE;
+            ELSIF tipo_mov = 'Saida' THEN
+                motivo_mov := motivo_saida[1 + floor(random() * array_length(motivo_saida, 1))::int];
+                -- NÃO permite motivo 'Compra'
+                IF motivo_mov = 'Compra' THEN
+                    CONTINUE;
+                END IF;
+                valido := TRUE;
+            ELSE -- Transferencia
+                motivo_mov := 'Transferência';
+                valido := TRUE;
+            END IF;
         END LOOP;
 
         INSERT INTO movimentacao (
@@ -133,9 +160,9 @@ BEGIN
             fazenda_destino_id
         )
         VALUES (
-            tipo_list[1 + floor(random() * array_length(tipo_list, 1))::int],
+            tipo_mov,
             CURRENT_DATE - floor(random() * 730)::int, -- até 2 anos atrás
-            motivo_list[1 + floor(random() * array_length(motivo_list, 1))::int],
+            motivo_mov,
             'Movimentação simulada para testes',
             bovino_id,
             origem_id,
@@ -143,4 +170,9 @@ BEGIN
         );
     END LOOP;
 END $$;
+
+-- Verificar as movimentações proibidas antes de apagar
+SELECT * FROM movimentacao
+WHERE (tipo = 'Saida' AND motivo = 'Compra')
+   OR (tipo = 'Entrada' AND motivo IN ('Abate', 'Venda'));
 
