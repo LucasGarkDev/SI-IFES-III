@@ -1,3 +1,15 @@
+section,
+aside,
+main,
+.flex-center {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
 body {
     font-family: Arial, sans-serif;
 }
@@ -20,6 +32,23 @@ nav a {
     text-decoration: none;
     margin: 3px;
     font-weight: bold;
+}
+
+article {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article p{
+    overflow-wrap: break-word;
+    font-size: 18px;
+    font-weight: 400px;
+    line-height: -.015em;
+    line-height: 28px;
 }
 
 [bold],
@@ -59,4 +88,16 @@ nav a {
 
 .c-orange {
     color: #FF6700;
+}
+
+.bg-dev-focus{
+    background-color: aquamarine;
+}
+
+.bg-dev-focus .bg-dev-focus{
+    background-color: darkgreen;
+}
+
+.bg-dev-focus-2{
+    background-color: dodgerblue;
 }
