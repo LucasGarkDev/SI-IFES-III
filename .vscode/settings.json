@@ -101,5 +101,6 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp"
-  }
+  },
+  "cmake.sourceDirectory": "/home/lucas/Documentos/ifes-3ano/SI-IFES-III/dispositivosmoveis/Mercadim/linux"
 }
