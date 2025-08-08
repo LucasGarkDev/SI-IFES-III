@@ -4,18 +4,26 @@
  */
 package model.domain;
 
+import jakarta.persistence.*;
+
 /**
  *
  * @author lucas
  */
+@Entity
+@Table(name = "atores")
 public class Ator {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(nullable = false)
     private String nome;
 
     public Ator() {}
 
-    public Ator(int id, String nome) {
-        this.id = id;
+    public Ator(String nome) {
         this.nome = nome;
     }
 

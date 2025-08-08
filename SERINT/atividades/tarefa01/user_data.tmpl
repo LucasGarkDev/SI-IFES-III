@@ -1,0 +1,14 @@
+#cloud-config
+write_files:
+  - path: /etc/netplan/01-netcfg.yaml
+    content: |
+      network:
+        version: 2
+        renderer: networkd
+        ethernets:
+          enp0s3:
+            dhcp4: no
+            addresses:
+              - ${ip}/24
+runcmd:
+  - netplan apply

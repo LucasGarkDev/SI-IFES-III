@@ -7,42 +7,61 @@ package model.application;
 import java.util.ArrayList;
 import java.util.List;
 import model.domain.Ator;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
 
 /**
  *
  * @author lucas
  */
 public class AplCadastrarAtor {
-    private static List<Ator> atores = new ArrayList<>();
-    private static int contadorId = 1;
+    public void adicionarAtor(String nome) {
+        if (nome != null && !nome.trim().isEmpty()) {
+            Ator ator = new Ator(nome.trim());
 
-    public void adicionar(String nome) {
-        atores.add(new Ator(contadorId++, nome));
-    }
-
-    public List<Ator> listar() {
-        return new ArrayList<>(atores);
-    }
-
-    public void remover(int id) {
-        atores.removeIf(ator -> ator.getId() == id);
-    }
-
-    public void atualizar(int id, String nome) {
-        for (Ator ator : atores) {
-            if (ator.getId() == id) {
-                ator.setNome(nome);
-                break;
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                Transaction tx = session.beginTransaction();
+                session.persist(ator);
+                tx.commit();
             }
         }
     }
 
-    public Ator buscar(int id) {
-        for (Ator ator : atores) {
-            if (ator.getId() == id) {
-                return ator;
+    public void atualizarAtor(int id, String novoNome) {
+        if (novoNome != null && !novoNome.trim().isEmpty()) {
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                Transaction tx = session.beginTransaction();
+                Ator ator = session.get(Ator.class, id);
+                if (ator != null) {
+                    ator.setNome(novoNome.trim());
+                    session.merge(ator);
+                }
+                tx.commit();
             }
         }
-        return null;
+    }
+
+    public void removerAtor(int id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            Ator ator = session.get(Ator.class, id);
+            if (ator != null) {
+                session.remove(ator);
+            }
+            tx.commit();
+        }
+    }
+
+    public Ator buscarAtor(int id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(Ator.class, id);
+        }
+    }
+
+    public List<Ator> listarAtores() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Ator", Ator.class).list();
+        }
     }
 }

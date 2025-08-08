@@ -12,28 +12,24 @@
     if ("POST".equalsIgnoreCase(metodo)) {
         if ("alterar".equals(acao)) {
             int id = Integer.parseInt(request.getParameter("id"));
-            String novoNome = request.getParameter("nome");
-            aplicacao.atualizar(id, novoNome);
-            response.sendRedirect("index.jsp");
-            return;
+            String nome = request.getParameter("nome");
+            aplicacao.atualizarAtor(id, nome); // ? nome correto do método
         } else {
             String nome = request.getParameter("nome");
-            if (nome != null && !nome.trim().isEmpty()) {
-                aplicacao.adicionar(nome.trim());
-            }
-            response.sendRedirect("index.jsp");
-            return;
+            aplicacao.adicionarAtor(nome); // ? nome correto
         }
-    }
-
-    if ("excluir".equals(acao)) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        aplicacao.remover(id);
         response.sendRedirect("index.jsp");
         return;
     }
 
-    List<Ator> lista = aplicacao.listar();
+    if ("excluir".equals(acao)) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        aplicacao.removerAtor(id); // ? nome correto
+        response.sendRedirect("index.jsp");
+        return;
+    }
+
+    List<Ator> lista = aplicacao.listarAtores(); // ? nome correto
 %>
 
 <!DOCTYPE html>
@@ -43,13 +39,6 @@
     <title>Locadora - Atores</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
-    <script>
-        function confirmarExclusao(id) {
-            if (confirm("Deseja realmente excluir este ator?")) {
-                window.location.href = "index.jsp?acao=excluir&id=" + id;
-            }
-        }
-    </script>
 </head>
 <body>
     <header>

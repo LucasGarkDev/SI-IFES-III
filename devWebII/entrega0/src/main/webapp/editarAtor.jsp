@@ -15,6 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Ator</title>
+    <link rel="stylesheet" href="css/styleEditor.css">
 </head>
 <body>
     <h2>Editar Ator</h2>
