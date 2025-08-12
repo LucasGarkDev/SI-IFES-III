@@ -11,8 +11,8 @@ package meuclienteudp;
 public class MeuClienteUDP {
 
 
-    public static void main(String[] args) {
-        
-    }
+//    public static void main(String[] args) {
+//        
+//    }
     
 }
