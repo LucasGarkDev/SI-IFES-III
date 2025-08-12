@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 1.0"
   required_providers {
     virtualbox = {
       source  = "terra-farm/virtualbox"
@@ -7,35 +8,36 @@ terraform {
   }
 }
 
+# Provider do VirtualBox (não requer config extra)
 provider "virtualbox" {}
 
-# Lista de IPs para cada node
-locals {
-  node_ips = [
-    "192.168.100.10",
-    "192.168.100.11",
-    "192.168.100.12",
-    "192.168.100.13"
-  ]
+############################
+# PARÂMETROS EDITÁVEIS
+############################
+# Quantidade de nós (VMs)
+variable "nodes" {
+  type    = number
+  default = 4
 }
 
+# Nome lógico da rede interna (apenas documentação).
+locals {
+  internal_network_name = "rede01" # informativo
+}
+
+# Recursos: VMs idênticas, conectadas à rede "internal"
 resource "virtualbox_vm" "node" {
-  count     = 4
-  name      = format("node-%02d", count.index + 1)
+  count  = var.nodes
+  name   = format("node-%02d", count.index + 1)
+  image = "https://app.vagrantup.com/bento/boxes/ubuntu-20.04/versions/202401.25.0/providers/virtualbox.box"
+  cpus   = 1
+  memory = "1024 mib"
 
-  # Caminho RELATIVO ao .vdi
-  image     = "${path.module}/../ubuntu-focal.vdi"
   
-  cpus      = 1
-  memory    = "1024 mib"
-
-  user_data = templatefile("${path.module}/user_data.tmpl", {
-    ip = local.node_ips[count.index]
-  })
-
   network_adapter {
-    type           = "intnet"
-    host_interface = "rede01"
+    type = "internal"
   }
 }
+
+# Sem outputs de IP porque em "internal" não há DHCP automático.
 
