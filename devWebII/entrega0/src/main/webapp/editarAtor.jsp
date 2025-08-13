@@ -7,7 +7,7 @@
     }
 
     int id = Integer.parseInt(request.getParameter("id"));
-    Ator ator = aplicacao.buscar(id);
+    Ator ator = aplicacao.buscarAtor(id);
 %>
 
 <!DOCTYPE html>
