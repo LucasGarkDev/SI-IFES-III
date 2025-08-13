@@ -16,3 +16,8 @@
 /SISTDIS/AplicacaoUDP/build/
 /SISTDIS/ControladorContador/nbproject/private/
 /SISTDIS/ControladorContador/build/
+
+# Arquivos grandes/VMs
+*.vdi
+*.box
+SERINT/atividades/
