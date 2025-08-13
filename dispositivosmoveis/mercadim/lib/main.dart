@@ -40,21 +40,49 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+final formkey = GlobalKey<FormState>();
+final controlador1 = TextEditingController();
+final controlador2 = TextEditingController();
+
 _body() {
-  return Container(
-  margin: EdgeInsets.only(top:16,left: 40, right: 20),
-  padding: EdgeInsets.all(10),
-  color: Colors.yellow,
-  child: Text("Ola, mundo! Ola, mundo! Ola, mundo! Ola, mundo!",
-    textAlign: TextAlign.center,
-    overflow: TextOverflow.ellipsis,
-    maxLines: 3,
-    style: TextStyle(
-      fontSize: 20,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-      fontStyle: FontStyle.italic,
-      ),
+  return Form(
+    key: formkey,
+    child: Container(
+      margin: EdgeInsets.all(16.0),
+      child: ListView(
+        children: [
+          TextFormField(
+            validator: (String? texto){
+              if (texto == null || texto.isEmpty) {
+                return "Campo obrigatório";
+              }
+              return null;
+            },
+            controller: controlador1,
+          ),
+          TextFormField(
+            validator: (String? texto){
+              if (texto == null || texto.isEmpty) {
+                return "Campo obrigatório";
+              }
+              return null;
+            },
+            controller: controlador2,
+          ),
+          SizedBox(
+            height: 16.0
+          ),
+          ElevatedButton(
+            onPressed: (){
+              if(formkey.currentState!.validate()) {
+                print("O valor do campo 1 é: ${controlador1.text} e o valor do campo 2 é: ${controlador2.text}");
+                
+              }
+            },
+            child: Text("Imprime campos"),
+          )
+        ],
+      )
     ),
   );
 }

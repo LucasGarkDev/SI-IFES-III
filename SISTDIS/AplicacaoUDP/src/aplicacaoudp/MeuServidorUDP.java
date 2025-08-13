@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.time.LocalTime;
 
 /**
  *
@@ -30,8 +31,13 @@ public class MeuServidorUDP {
                 aSocket.receive(request);
                 
                 String mensagem = new String(request.getData());
+                mensagem = mensagem.trim();
                 
-                bd.insere(mensagem.toUpperCase());
+                if(!mensagem.equalsIgnoreCase("***ATUALIZE***")){
+                    System.out.println("\nINSERIDO: "+mensagem+"  TEMPO: "+LocalTime.now());
+                    bd.insere(mensagem.toUpperCase());
+                }
+                
                 String resposta = bd.le();
                 byte[] todasMsg = resposta.getBytes();
                 
