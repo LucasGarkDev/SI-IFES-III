@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Usando Container"),
+        title: Text("Componentes Visuais - Parte 2"),
       ),
       body: _body(),
     );
@@ -45,44 +45,13 @@ final controlador1 = TextEditingController();
 final controlador2 = TextEditingController();
 
 _body() {
-  return Form(
-    key: formkey,
-    child: Container(
-      margin: EdgeInsets.all(16.0),
-      child: ListView(
-        children: [
-          TextFormField(
-            validator: (String? texto){
-              if (texto == null || texto.isEmpty) {
-                return "Campo obrigatório";
-              }
-              return null;
-            },
-            controller: controlador1,
-          ),
-          TextFormField(
-            validator: (String? texto){
-              if (texto == null || texto.isEmpty) {
-                return "Campo obrigatório";
-              }
-              return null;
-            },
-            controller: controlador2,
-          ),
-          SizedBox(
-            height: 16.0
-          ),
-          ElevatedButton(
-            onPressed: (){
-              if(formkey.currentState!.validate()) {
-                print("O valor do campo 1 é: ${controlador1.text} e o valor do campo 2 é: ${controlador2.text}");
-                
-              }
-            },
-            child: Text("Imprime campos"),
-          )
-        ],
-      )
-    ),
+  return Stack(
+    fit: StackFit.expand,
+    children: <Widget>[
+      Image.asset(
+        "assets/imagem.jpg",
+        fit: BoxFit.fill,
+      ),
+    ],
   );
 }
