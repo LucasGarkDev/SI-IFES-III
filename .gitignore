@@ -21,3 +21,5 @@
 *.vdi
 *.box
 SERINT/atividades/
+/SISTDIS/AplicacaoContaCorrenteEx/nbproject/private/
+/SISTDIS/AplicacaoContaCorrenteEx/build/
