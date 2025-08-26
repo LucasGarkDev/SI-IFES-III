@@ -64,11 +64,15 @@ public class ClienteUDP {
                         String usuario = partes[1];
                         String conteudo = partes[2];
                         tela.exibirMensagem(usuario + ": " + conteudo);
-                    } else if (partes[0].equals("RANK") && partes.length == 2) {
+                    }else if (partes[0].equals("RANK") && partes.length == 2) {
                         String[] usuarios = partes[1].split(",");
                         DefaultListModel<String> modelo = new DefaultListModel<>();
                         for (String u : usuarios) {
-                            modelo.addElement(u.replace("=", ": "));
+                            // Exemplo de u: Lucas=5(online)
+                            String[] info = u.split("=");
+                            if (info.length == 2) {
+                                modelo.addElement(info[0] + ": " + info[1] + " mensagens");
+                            }
                         }
                         tela.atualizarListaUsuarios(modelo);
                     }else {

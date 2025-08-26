@@ -109,16 +109,25 @@ public class ServidorUDP {
             case "RANK":
                 StringBuilder resposta = new StringBuilder("RANK;");
                 for (Map.Entry<String, Integer> entry : mensagensPorUsuario.entrySet()) {
-                    resposta.append(entry.getKey()).append("=").append(entry.getValue()).append(",");
+                    String nome = entry.getKey(); // Nome do usuário
+                    int total = entry.getValue();
+                    boolean online = usuariosOnline.containsKey(nome);
+
+                    resposta.append(nome)
+                            .append("=")
+                            .append(total)
+                            .append(online ? "(online)" : "(offline)")
+                            .append(",");
                 }
-                // remover última vírgula
+
                 if (resposta.charAt(resposta.length() - 1) == ',') {
                     resposta.deleteCharAt(resposta.length() - 1);
                 }
+
                 byte[] respostaBytes = resposta.toString().getBytes();
                 DatagramPacket respostaPacote = new DatagramPacket(respostaBytes, respostaBytes.length, remetente);
                 socket.send(respostaPacote);
-                break;    
+                break;
                
         }
     }
