@@ -1,6 +1,6 @@
 plugins {
     id "com.android.application"
-    id "kotlin-android"
+    id "org.jetbrains.kotlin.android"        // <- aqui é o ponto crucial
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -12,43 +12,46 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
-
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode') ?: '1'
+def flutterVersionName = localProperties.getProperty('flutter.versionName') ?: '1.0'
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
     namespace 'com.example.somawebservice'
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
+    // Você pode manter os valores do Flutter (ok)...
+    // compileSdkVersion flutter.compileSdkVersion
+    // targetSdkVersion  flutter.targetSdkVersion
+    // ...ou fixar explicitamente p/ evitar avisos com AGP 8.6:
+    compileSdkVersion 35
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.somawebservice"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 35
+
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // lintOptions foi substituído por "lint" nas versões novas
+    lint {
+        disable 'InvalidPackage'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+    }
+
+    // (Opcional, mas ajuda) alinhar o target da JVM ao JDK 17
+    kotlinOptions {
+        jvmTarget = '17'
     }
 }
 
@@ -57,7 +60,7 @@ flutter {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

@@ -41,7 +41,9 @@ Widget build(BuildContext context) {
       ),
       // Definindo padrào para TabBar
       tabBarTheme: TabBarThemeData(
+        // Cor da Tab selecionada
         labelColor: Colors.white,
+        // Cor de Tab não selecionada
         unselectedLabelColor: Colors.white,
       ),
       colorScheme: ColorScheme.fromSeed(
