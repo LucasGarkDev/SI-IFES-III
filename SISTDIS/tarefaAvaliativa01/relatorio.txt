@@ -1,4 +1,4 @@
 Relatório de mensagens por usuário:
-Lucas: 8 mensagens
-Caio: 5 mensagens
-Maria: 3 mensagens
+João: 4 mensagens
+Lucas: 6 mensagens
+Maria: 4 mensagens
