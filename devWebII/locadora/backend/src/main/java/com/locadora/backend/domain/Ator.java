@@ -1,4 +1,4 @@
-package com.example.locadora.domain;
+package com.locadora.backend.domain;
 
 import jakarta.persistence.*;
 

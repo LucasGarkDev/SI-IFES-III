@@ -1,9 +1,10 @@
-package com.example.locadora.service;
+package com.locadora.backend.service;
 
-import com.example.locadora.domain.Ator;
-import com.example.locadora.repository.AtorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.locadora.backend.domain.Ator;
+import com.locadora.backend.repository.AtorRepository;
 
 import java.util.List;
 import java.util.Optional;

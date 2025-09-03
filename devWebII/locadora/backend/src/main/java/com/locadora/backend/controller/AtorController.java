@@ -1,9 +1,10 @@
-package com.example.locadora.controller;
+package com.locadora.backend.controller;
 
-import com.example.locadora.domain.Ator;
-import com.example.locadora.service.AtorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.locadora.backend.domain.Ator;
+import com.locadora.backend.service.AtorService;
 
 import java.util.List;
 
