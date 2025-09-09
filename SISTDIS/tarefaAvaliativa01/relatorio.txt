@@ -1,3 +1,4 @@
 Relatório de mensagens por usuário:
-Lucas: 2 mensagens
-Pedro: 1 mensagens
+Lucas: 7 mensagens
+Pedro: 6 mensagens
+????: 2 mensagens
