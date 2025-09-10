@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "859442683473",
+    "project_id": "teste-29485",
+    "storage_bucket": "teste-29485.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859442683473:android:fbc78b939d67283878e270",
+        "android_client_info": {
+          "package_name": "com.example.mercadim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLcENMiw9ghy-g2iyghU8WPDlZBnRNNbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

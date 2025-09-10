@@ -21,6 +21,8 @@
 *.vdi
 *.box
 SERINT/atividades/
+# Ignora todo o diretório SERINT e seu conteúdo
+SERINT/
 /SISTDIS/AplicacaoContaCorrenteEx/nbproject/private/
 /SISTDIS/AplicacaoContaCorrenteEx/build/
 /SISTDIS/tarefaAvaliativa01/nbproject/private/
