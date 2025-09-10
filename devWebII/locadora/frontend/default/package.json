@@ -1,7 +1,9 @@
 {
-  "name": "s",
+  "name": "sistema-de-video-locadora",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "LUIS DAS ARTIMANHAS & LUCAS GARCIA",
+  "contact": "luisaugustodesouza785@gmail.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
