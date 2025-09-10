@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+/* eslint-disable no-unused-vars */
+import React from "react";
+import Header from "./components/Header.jsx";
+import Home from "./pages/Home.jsx"
+import Artists from "./pages/Artists.jsx"
+import Artist from "./pages/Artist.jsx"
+import Songs from "./pages/Songs.jsx"
+import Song from "./pages/Song.jsx"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <BrowserRouter>
+        <Header />
 
-export default App
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/artists" element={<Artists/>}/>
+          <Route path="/artist/:id" element={<Artist/>}/>
+          <Route path="/songs" element={<Songs/>}/>
+          <Route path="/song/:id" element={<Song/>}/>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+};
+
+export default App;
