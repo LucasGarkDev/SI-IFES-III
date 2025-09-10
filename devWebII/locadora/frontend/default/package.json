@@ -6,7 +6,7 @@
   "contact": "luisaugustodesouza785@gmail.com",
   "type": "module",
   "scripts": {
-    "dev": "vite && npm run update",
+    "dev": "set NO_COLOR=1 && vite",
     "build": "npm run update && vite build",
     "lint": "eslint .",
     "preview": "npm run update && vite preview",
