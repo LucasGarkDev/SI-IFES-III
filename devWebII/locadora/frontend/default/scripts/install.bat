@@ -1,1 +1,1 @@
-npm run update && start /wait /realtime autogitUpdate.cmd
+npm run update && start /wait /realtime scripts\autogitUpdate.cmd
