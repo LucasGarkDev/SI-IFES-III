@@ -1,34 +1,39 @@
 package com.locadora.backend.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "atores")
+@Table(name = "atores",
+       uniqueConstraints = @UniqueConstraint(name = "uk_ator_nome_nascimento",
+                                             columnNames = {"nome", "data_nascimento"}))
 public class Ator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 120)
     private String nome;
 
-    // Construtores
-    public Ator() {}
+    @Column(length = 80)
+    private String nacionalidade;
 
-    public Ator(String nome) {
-        this.nome = nome;
-    }
+    @Column(name = "data_nascimento")
+    private LocalDate dataNascimento;
 
-    // Getters e Setters
-    public Long getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private Boolean ativo = true;
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    // getters/setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+    public String getNacionalidade() { return nacionalidade; }
+    public void setNacionalidade(String nacionalidade) { this.nacionalidade = nacionalidade; }
+    public LocalDate getDataNascimento() { return dataNascimento; }
+    public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
+    public Boolean getAtivo() { return ativo; }
+    public void setAtivo(Boolean ativo) { this.ativo = ativo; }
 }
