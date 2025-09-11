@@ -19,37 +19,56 @@ public class AplCadastrarAtor {
     public void adicionarAtor(String nome) {
         if (nome != null && !nome.trim().isEmpty()) {
             Ator ator = new Ator(nome.trim());
+            Transaction tx = null;
 
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                Transaction tx = session.beginTransaction();
+                tx = session.beginTransaction();
                 session.persist(ator);
                 tx.commit();
+            } catch (Exception e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                throw e; 
             }
         }
     }
 
+
     public void atualizarAtor(int id, String novoNome) {
         if (novoNome != null && !novoNome.trim().isEmpty()) {
+            Transaction tx = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                Transaction tx = session.beginTransaction();
+                tx = session.beginTransaction();
                 Ator ator = session.get(Ator.class, id);
                 if (ator != null) {
                     ator.setNome(novoNome.trim());
                     session.merge(ator);
                 }
                 tx.commit();
+            } catch (Exception e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                throw e; // ou logar a exceção
             }
         }
     }
 
     public void removerAtor(int id) {
+        Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             Ator ator = session.get(Ator.class, id);
             if (ator != null) {
                 session.remove(ator);
             }
             tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            throw e;
         }
     }
 
@@ -64,4 +83,5 @@ public class AplCadastrarAtor {
             return session.createQuery("from Ator", Ator.class).list();
         }
     }
+
 }
