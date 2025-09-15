@@ -6,7 +6,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 1,
+    _id: 1,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02af41105c5cd91b28f2cf219d",
@@ -15,7 +15,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 2,
+    _id: 2,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02656f8291d741ad247ef330fe",
@@ -24,7 +24,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 3,
+    _id: 3,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e022774b00531d558bc19e12a24",
@@ -33,7 +33,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 4,
+    _id: 4,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e022774b00531d558bc19e12a24",
@@ -42,7 +42,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 5,
+    _id: 5,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0299c540c0f78793fcea84a920",
@@ -51,7 +51,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 6,
+    _id: 6,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0299c540c0f78793fcea84a920",
@@ -60,7 +60,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 7,
+    _id: 7,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0299c540c0f78793fcea84a920",
@@ -69,7 +69,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 8,
+    _id: 8,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e025bb6668a856035550a66fc31",
@@ -78,7 +78,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 9,
+    _id: 9,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e022774b00531d558bc19e12a24",
@@ -87,7 +87,7 @@ export const songsArray = [
     artist: "Henrique & Juliano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-saudade.mp3",
-    id: 10,
+    _id: 10,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d8bfb4567b1b5e5bc4da915b",
@@ -95,7 +95,7 @@ export const songsArray = [
     duration: "2:46",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 11,
+    _id: 11,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02f412f43fad4c3ffab163287c",
@@ -103,7 +103,7 @@ export const songsArray = [
     duration: "3:12",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 12,
+    _id: 12,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02905f574e927e59ada3fc2c97",
@@ -111,7 +111,7 @@ export const songsArray = [
     duration: "3:13",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 13,
+    _id: 13,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02dc16c0b3939b95e09076ec5e",
@@ -119,7 +119,7 @@ export const songsArray = [
     duration: "4:43",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 14,
+    _id: 14,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0299ca4be43858f41a3bad9728",
@@ -127,7 +127,7 @@ export const songsArray = [
     duration: "2:52",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 15,
+    _id: 15,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02a8e9382ce68ad5d8758bd998",
@@ -135,7 +135,7 @@ export const songsArray = [
     duration: "2:14",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 16,
+    _id: 16,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e022d1affc39c1329a4e3138424",
@@ -143,7 +143,7 @@ export const songsArray = [
     duration: "4:26",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 17,
+    _id: 17,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02320f4a08913b939a8637c301",
@@ -151,15 +151,15 @@ export const songsArray = [
     duration: "7:04",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 18,
+    _id: 18,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02700a3fcafbd8498c78f16cb0",
-    name: "Vida de Artista",
+    name: "V_ida de Artista",
     duration: "3:16",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 19,
+    _id: 19,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0212d096992d1a94a34672ecd2",
@@ -167,7 +167,7 @@ export const songsArray = [
     duration: "4:16",
     artist: "MC Tuto",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/barbie.mp3",
-    id: 20,
+    _id: 20,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02af41105c5cd91b28f2cf219d",
@@ -176,7 +176,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 21,
+    _id: 21,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02af41105c5cd91b28f2cf219d",
@@ -185,7 +185,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 22,
+    _id: 22,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02af41105c5cd91b28f2cf219d",
@@ -194,7 +194,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 23,
+    _id: 23,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02afcda189d3e44b4abefddecb",
@@ -203,7 +203,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 24,
+    _id: 24,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e028aca7c95468481cf5411060e",
@@ -212,16 +212,16 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 25,
+    _id: 25,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c0e0704dbc02116c26cfea45",
-    name: "Marca Evidente",
+    name: "Marca Ev_idente",
     duration: "3:09",
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 26,
+    _id: 26,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d50fbb2113e9d82d0677abce",
@@ -230,7 +230,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 27,
+    _id: 27,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02047ad702243f8d6ff1318fe0",
@@ -239,7 +239,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 28,
+    _id: 28,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02af41105c5cd91b28f2cf219d",
@@ -248,7 +248,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 29,
+    _id: 29,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d50fbb2113e9d82d0677abce",
@@ -257,7 +257,7 @@ export const songsArray = [
     artist: "Jorge & Mateus",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/cantada-boba.mp3",
-    id: 30,
+    _id: 30,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0235bc4bc847696d28e2882b16",
@@ -266,7 +266,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 31,
+    _id: 31,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0231f12348a3c599711764f399",
@@ -275,7 +275,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 32,
+    _id: 32,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02430015276203dca5020dab68",
@@ -284,7 +284,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 33,
+    _id: 33,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0235bc4bc847696d28e2882b16",
@@ -293,7 +293,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 34,
+    _id: 34,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0235bc4bc847696d28e2882b16",
@@ -302,7 +302,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 35,
+    _id: 35,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0274345b842e1757d896e17efc",
@@ -311,7 +311,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 36,
+    _id: 36,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d5356fc9a130d1aba8ed8529",
@@ -320,7 +320,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 37,
+    _id: 37,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02e4393f87095008e8108c27aa",
@@ -329,7 +329,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 38,
+    _id: 38,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0233b914605980a1bd62e540a0",
@@ -338,7 +338,7 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 39,
+    _id: 39,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0281311177234ecc9aa518cbcc",
@@ -347,15 +347,15 @@ export const songsArray = [
     artist: "NATTAN",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ultima-noite.mp3",
-    id: 40,
+    _id: 40,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e025645e61562deebdda78755b6",
-    name: "Coração Partido (Corazón Partío) - Ao Vivo",
+    name: "Coração Part_ido (Corazón Partío) - Ao Vivo",
     duration: "3:15",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 41,
+    _id: 41,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d2fc1ee38f06c4c760380925",
@@ -363,7 +363,7 @@ export const songsArray = [
     duration: "2:41",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 42,
+    _id: 42,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0251e655c934f5bed04f867335",
@@ -371,7 +371,7 @@ export const songsArray = [
     duration: "2:39",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 43,
+    _id: 43,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02bff274fbb1ae44381674a053",
@@ -379,7 +379,7 @@ export const songsArray = [
     duration: "2:34",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 44,
+    _id: 44,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02625ae5aac6877af40cbe60a3",
@@ -387,7 +387,7 @@ export const songsArray = [
     duration: "2:54",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 45,
+    _id: 45,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e026610a107e9ea9ed0b1a496af",
@@ -395,7 +395,7 @@ export const songsArray = [
     duration: "2:56",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 46,
+    _id: 46,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02b548a20a597a88b29932513b",
@@ -403,7 +403,7 @@ export const songsArray = [
     duration: "8:41",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 47,
+    _id: 47,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0247955b951c6a89e1e5a6777a",
@@ -411,7 +411,7 @@ export const songsArray = [
     duration: "3:36",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 48,
+    _id: 48,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02f8d7d1ab89742bc023f6fe2f",
@@ -419,15 +419,15 @@ export const songsArray = [
     duration: "2:59",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 49,
+    _id: 49,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e025645e61562deebdda78755b6",
-    name: "Jejum de Amor / Caixa Postal / Vida Vazia - Ao Vivo",
+    name: "Jejum de Amor / Caixa Postal / V_ida Vazia - Ao Vivo",
     duration: "5:11",
     artist: "Grupo Menos É Mais",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/adorei.mp3",
-    id: 50,
+    _id: 50,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02625ae5aac6877af40cbe60a3",
@@ -436,7 +436,7 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 51,
+    _id: 51,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0239833b5940945cf013e8406c",
@@ -445,7 +445,7 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 52,
+    _id: 52,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c4796946a89b9ca6c525fd65",
@@ -454,16 +454,16 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 53,
+    _id: 53,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02a2248f44da4d5fa4cd2647dc",
-    name: "Sombra Desconhecida - Ao Vivo",
+    name: "Sombra Desconhec_ida - Ao Vivo",
     duration: "2:40",
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 54,
+    _id: 54,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0273f044b863be0033982cd767",
@@ -472,16 +472,16 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 55,
+    _id: 55,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ff93ff99ca25cbd3607247bb",
-    name: "Notificação Preferida - Ao Vivo",
+    name: "Notificação Prefer_ida - Ao Vivo",
     duration: "3:02",
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 56,
+    _id: 56,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0273f044b863be0033982cd767",
@@ -490,7 +490,7 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 57,
+    _id: 57,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ff93ff99ca25cbd3607247bb",
@@ -499,7 +499,7 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 58,
+    _id: 58,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02eb1117ed6a411587785d7ae4",
@@ -508,7 +508,7 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 59,
+    _id: 59,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0239833b5940945cf013e8406c",
@@ -517,7 +517,7 @@ export const songsArray = [
     artist: "Zé Neto & Cristiano",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/amizade-com-ex.mp3",
-    id: 60,
+    _id: 60,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02489e68ca16ec1777e954bdb9",
@@ -525,7 +525,7 @@ export const songsArray = [
     duration: "3:10",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 61,
+    _id: 61,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0213fd8e80d5b8fc0936cf9cc6",
@@ -533,7 +533,7 @@ export const songsArray = [
     duration: "2:45",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 62,
+    _id: 62,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02216f5c1f9c0923ed13f5b2c8",
@@ -541,7 +541,7 @@ export const songsArray = [
     duration: "2:58",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 63,
+    _id: 63,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02616d92fbae47d54b05897623",
@@ -549,7 +549,7 @@ export const songsArray = [
     duration: "3:01",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 64,
+    _id: 64,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0284bc28fabab28025e3d6a98c",
@@ -557,7 +557,7 @@ export const songsArray = [
     duration: "2:59",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 65,
+    _id: 65,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e029135c41b1da1eecd682c4dc6",
@@ -565,7 +565,7 @@ export const songsArray = [
     duration: "3:44",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 66,
+    _id: 66,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e028a730a04d2bd719ebf688110",
@@ -573,7 +573,7 @@ export const songsArray = [
     duration: "2:29",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 67,
+    _id: 67,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e029135c41b1da1eecd682c4dc6",
@@ -581,15 +581,15 @@ export const songsArray = [
     duration: "3:09",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 68,
+    _id: 68,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e027d96c3456ae2572847148954",
-    name: "Decide Aí - Na Praia / Ao Vivo",
+    name: "Dec_ide Aí - Na Praia / Ao Vivo",
     duration: "2:42",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 69,
+    _id: 69,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02971d3cfd684cdda409b2fd0e",
@@ -597,7 +597,7 @@ export const songsArray = [
     duration: "2:47",
     artist: "Matheus & Kauan",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/universo.mp3",
-    id: 70,
+    _id: 70,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d8bfb4567b1b5e5bc4da915b",
@@ -605,7 +605,7 @@ export const songsArray = [
     duration: "2:46",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 71,
+    _id: 71,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e022641dabf71490db793d28b40",
@@ -613,7 +613,7 @@ export const songsArray = [
     duration: "11:43",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 72,
+    _id: 72,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02f860aaca835fcec2e6a79449",
@@ -621,7 +621,7 @@ export const songsArray = [
     duration: "3:12",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 73,
+    _id: 73,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02498d6200d0dc31e20ad696dd",
@@ -629,7 +629,7 @@ export const songsArray = [
     duration: "4:06",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 74,
+    _id: 74,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e029fe1c4dea8fdbb452b66b271",
@@ -637,7 +637,7 @@ export const songsArray = [
     duration: "10:28",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 75,
+    _id: 75,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02e41fa5b33e0b7829d79f3a1a",
@@ -645,7 +645,7 @@ export const songsArray = [
     duration: "4:54",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 76,
+    _id: 76,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d80ab0f7ef4e3f2b8d4666ae",
@@ -653,7 +653,7 @@ export const songsArray = [
     duration: "3:12",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 77,
+    _id: 77,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e029fe1c4dea8fdbb452b66b271",
@@ -661,7 +661,7 @@ export const songsArray = [
     duration: "11:20",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 78,
+    _id: 78,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02011ebdf7237a1ad220a23f13",
@@ -669,7 +669,7 @@ export const songsArray = [
     duration: "4:14",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 79,
+    _id: 79,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02e466cf38272114ec6cb18c51",
@@ -677,7 +677,7 @@ export const songsArray = [
     duration: "2:53",
     artist: "Oruam",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/oh-garota.mp3",
-    id: 80,
+    _id: 80,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02758869a0a0c15010dae72426",
@@ -686,7 +686,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 81,
+    _id: 81,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c61b4691d0ba09631399ffd3",
@@ -695,7 +695,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 82,
+    _id: 82,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e024c8656adecdb34cdbd119617",
@@ -704,7 +704,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 83,
+    _id: 83,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021b390eda1e4ed3e1528d8cb7",
@@ -713,7 +713,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 84,
+    _id: 84,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021b390eda1e4ed3e1528d8cb7",
@@ -722,7 +722,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 85,
+    _id: 85,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02f780a237b116b5decb468d75",
@@ -731,7 +731,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 86,
+    _id: 86,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02e16b9a0cfbb3d7259ed01b27",
@@ -740,7 +740,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 87,
+    _id: 87,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e024f661bf90b04b29935a931a1",
@@ -749,7 +749,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 88,
+    _id: 88,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021b390eda1e4ed3e1528d8cb7",
@@ -758,7 +758,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 89,
+    _id: 89,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02462239ad51bf390607c6854f",
@@ -767,7 +767,7 @@ export const songsArray = [
     artist: "Murilo Huff",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/peca-intima.mp3",
-    id: 90,
+    _id: 90,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02e295ee75598a12d933800298",
@@ -775,7 +775,7 @@ export const songsArray = [
     duration: "2:45",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 91,
+    _id: 91,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cff9134ad2ce6516f50e8e31",
@@ -783,7 +783,7 @@ export const songsArray = [
     duration: "2:37",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 92,
+    _id: 92,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cc97936e407973a912dd75cb",
@@ -791,7 +791,7 @@ export const songsArray = [
     duration: "3:24",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 93,
+    _id: 93,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e024c8656adecdb34cdbd119617",
@@ -799,7 +799,7 @@ export const songsArray = [
     duration: "2:29",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 94,
+    _id: 94,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ca0a5889a7c1110f9654607b",
@@ -807,7 +807,7 @@ export const songsArray = [
     duration: "2:38",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 95,
+    _id: 95,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0278b03b7534ce5a81046d36da",
@@ -815,7 +815,7 @@ export const songsArray = [
     duration: "2:46",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 96,
+    _id: 96,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0278b03b7534ce5a81046d36da",
@@ -823,7 +823,7 @@ export const songsArray = [
     duration: "2:44",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 97,
+    _id: 97,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cc97936e407973a912dd75cb",
@@ -831,7 +831,7 @@ export const songsArray = [
     duration: "3:19",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 98,
+    _id: 98,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021b390eda1e4ed3e1528d8cb7",
@@ -839,7 +839,7 @@ export const songsArray = [
     duration: "5:16",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 99,
+    _id: 99,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02589da421f5679c437c3f6b63",
@@ -847,7 +847,7 @@ export const songsArray = [
     duration: "2:57",
     artist: "Hugo & Guilherme",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/mentirosa.mp3",
-    id: 100,
+    _id: 100,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023c4401cf203d79e03976be97",
@@ -856,7 +856,7 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 101,
+    _id: 101,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e027bb613913eb23bdea44fe255",
@@ -865,7 +865,7 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 102,
+    _id: 102,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0212d096992d1a94a34672ecd2",
@@ -874,7 +874,7 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 103,
+    _id: 103,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023c4401cf203d79e03976be97",
@@ -883,7 +883,7 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 104,
+    _id: 104,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ae79921170b53d5ee1a6620f",
@@ -892,16 +892,16 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 105,
+    _id: 105,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023c4401cf203d79e03976be97",
-    name: "Sempre na Simplicidade",
+    name: "Sempre na Simplic_idade",
     duration: "5:00",
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 106,
+    _id: 106,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023c4401cf203d79e03976be97",
@@ -910,7 +910,7 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 107,
+    _id: 107,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023c4401cf203d79e03976be97",
@@ -919,7 +919,7 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 108,
+    _id: 108,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021caaf0b2d235f200990fc7ad",
@@ -928,7 +928,7 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 109,
+    _id: 109,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02a6967475e3ee7d2ed48381fb",
@@ -937,15 +937,15 @@ export const songsArray = [
     artist: "MC LUUKY",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/malvadinho.mp3",
-    id: 110,
+    _id: 110,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cadc0764596a80c6fd2c4b8c",
-    name: "Cópia Proibida",
+    name: "Cópia Proib_ida",
     duration: "2:39",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 111,
+    _id: 111,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cadc0764596a80c6fd2c4b8c",
@@ -953,7 +953,7 @@ export const songsArray = [
     duration: "2:34",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 112,
+    _id: 112,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02971d3cfd684cdda409b2fd0e",
@@ -961,7 +961,7 @@ export const songsArray = [
     duration: "2:18",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 113,
+    _id: 113,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0235bc4bc847696d28e2882b16",
@@ -969,7 +969,7 @@ export const songsArray = [
     duration: "2:37",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 114,
+    _id: 114,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c654c27a61041f4ba5dc228e",
@@ -977,7 +977,7 @@ export const songsArray = [
     duration: "2:22",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 115,
+    _id: 115,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cadc0764596a80c6fd2c4b8c",
@@ -985,7 +985,7 @@ export const songsArray = [
     duration: "2:27",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 116,
+    _id: 116,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cadc0764596a80c6fd2c4b8c",
@@ -993,7 +993,7 @@ export const songsArray = [
     duration: "2:56",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 117,
+    _id: 117,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cadc0764596a80c6fd2c4b8c",
@@ -1001,7 +1001,7 @@ export const songsArray = [
     duration: "2:25",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 118,
+    _id: 118,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cadc0764596a80c6fd2c4b8c",
@@ -1009,7 +1009,7 @@ export const songsArray = [
     duration: "2:13",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 119,
+    _id: 119,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cadc0764596a80c6fd2c4b8c",
@@ -1017,7 +1017,7 @@ export const songsArray = [
     duration: "2:40",
     artist: "Léo Foguete",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/um-palmo.mp3",
-    id: 120,
+    _id: 120,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e028fb74b037de7c899f12ed199",
@@ -1026,7 +1026,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 121,
+    _id: 121,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02376d7c9f79569d0a24db5c53",
@@ -1035,7 +1035,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 122,
+    _id: 122,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e028fb74b037de7c899f12ed199",
@@ -1044,7 +1044,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 123,
+    _id: 123,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e025840f88453448723ce907a53",
@@ -1053,7 +1053,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 124,
+    _id: 124,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0200fdf13c7847364bc106a640",
@@ -1062,7 +1062,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 125,
+    _id: 125,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0278a62cd11c719962d1d36aba",
@@ -1071,7 +1071,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 126,
+    _id: 126,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02a028f7cac4c091981f87e669",
@@ -1080,7 +1080,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 127,
+    _id: 127,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0249e34499a2fe0834f879ac18",
@@ -1089,7 +1089,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 128,
+    _id: 128,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0278a62cd11c719962d1d36aba",
@@ -1098,7 +1098,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 129,
+    _id: 129,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ab7c9976c44bfbe90f93dbdc",
@@ -1107,7 +1107,7 @@ export const songsArray = [
     artist: "Gusttavo Lima",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/embaixador.mp3",
-    id: 130,
+    _id: 130,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0247cbd521916fc422be1a5c9a",
@@ -1115,7 +1115,7 @@ export const songsArray = [
     duration: "2:54",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 131,
+    _id: 131,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c85fa2e60afc7883d372af4b",
@@ -1123,7 +1123,7 @@ export const songsArray = [
     duration: "2:29",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 132,
+    _id: 132,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02a9e219620673d2538903ff42",
@@ -1131,7 +1131,7 @@ export const songsArray = [
     duration: "1:46",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 133,
+    _id: 133,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0291283a0e9a7c6a329e768c50",
@@ -1139,7 +1139,7 @@ export const songsArray = [
     duration: "2:08",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 134,
+    _id: 134,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023b4601ac40b3bf6208744093",
@@ -1147,7 +1147,7 @@ export const songsArray = [
     duration: "2:41",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 135,
+    _id: 135,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cd79eddeee972fe633a1d70e",
@@ -1155,7 +1155,7 @@ export const songsArray = [
     duration: "3:27",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 136,
+    _id: 136,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02e9a953a49142cb530d6c3fed",
@@ -1163,7 +1163,7 @@ export const songsArray = [
     duration: "3:41",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 137,
+    _id: 137,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02751391b4c3cd10e94aa648d5",
@@ -1171,7 +1171,7 @@ export const songsArray = [
     duration: "1:36",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 138,
+    _id: 138,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0245b867536aed4c0ade37adb3",
@@ -1179,7 +1179,7 @@ export const songsArray = [
     duration: "2:17",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 139,
+    _id: 139,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ddf45c5c53aec81dc3b18188",
@@ -1187,7 +1187,7 @@ export const songsArray = [
     duration: "3:30",
     artist: "Nilo",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/fui-mlk.mp3",
-    id: 140,
+    _id: 140,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02971d3cfd684cdda409b2fd0e",
@@ -1196,7 +1196,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 141,
+    _id: 141,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e025149293f9363bf98647d6636",
@@ -1205,7 +1205,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 142,
+    _id: 142,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e028918fa0c3cf355061519f67c",
@@ -1214,7 +1214,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 143,
+    _id: 143,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e027793aab53413a2d1c45179b3",
@@ -1223,7 +1223,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 144,
+    _id: 144,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02971d3cfd684cdda409b2fd0e",
@@ -1232,7 +1232,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 145,
+    _id: 145,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02462239ad51bf390607c6854f",
@@ -1241,7 +1241,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 146,
+    _id: 146,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e024f661bf90b04b29935a931a1",
@@ -1250,7 +1250,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 147,
+    _id: 147,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02674119092640472d8e59c2c8",
@@ -1259,7 +1259,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 148,
+    _id: 148,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02971d3cfd684cdda409b2fd0e",
@@ -1268,7 +1268,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 149,
+    _id: 149,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02f72284893884b5bb83353a3b",
@@ -1277,7 +1277,7 @@ export const songsArray = [
     artist: "Luan Pereira",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/body-splash.mp3",
-    id: 150,
+    _id: 150,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0265bf696c1df34686746b73c4",
@@ -1286,7 +1286,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 151,
+    _id: 151,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0231f12348a3c599711764f399",
@@ -1295,7 +1295,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 152,
+    _id: 152,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0268669c389be5d24e7d22f750",
@@ -1304,7 +1304,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 153,
+    _id: 153,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021941a0bf9eab9be2ee17d4b0",
@@ -1313,7 +1313,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 154,
+    _id: 154,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02f5b0de3662611ca2985cae11",
@@ -1322,7 +1322,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 155,
+    _id: 155,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c92447425bf70c686c93c514",
@@ -1331,7 +1331,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 156,
+    _id: 156,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021941a0bf9eab9be2ee17d4b0",
@@ -1340,7 +1340,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 157,
+    _id: 157,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0269b7ad43c232770044b8e107",
@@ -1349,7 +1349,7 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 158,
+    _id: 158,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0206592b394c38e8fc7c01ff61",
@@ -1358,16 +1358,16 @@ export const songsArray = [
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 159,
+    _id: 159,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02462d242561ae2ceac784fe18",
-    name: "Vestido Curto - Ao Vivo",
+    name: "Vest_ido Curto - Ao Vivo",
     duration: "2:31",
     artist: "Guilherme & Benuto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/sujeito-homem.mp3",
-    id: 160,
+    _id: 160,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02cca35237571dbce12a43fbb4",
@@ -1376,7 +1376,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 161,
+    _id: 161,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02f780a237b116b5decb468d75",
@@ -1385,7 +1385,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 162,
+    _id: 162,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e025eba99fd76c96ae206756326",
@@ -1394,7 +1394,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 163,
+    _id: 163,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e027b4293f65f8fe7003c29279c",
@@ -1403,7 +1403,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 164,
+    _id: 164,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e027b4293f65f8fe7003c29279c",
@@ -1412,7 +1412,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 165,
+    _id: 165,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021e23e8a7efc947b1d7e5836e",
@@ -1421,7 +1421,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 166,
+    _id: 166,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021e8897179af39a4aaa591be7",
@@ -1430,7 +1430,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 167,
+    _id: 167,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023e31e22966bafac96b433824",
@@ -1439,7 +1439,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 168,
+    _id: 168,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0292aaf0254618b4de33029ab1",
@@ -1448,7 +1448,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 169,
+    _id: 169,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e024ed454af2f9a6719f4155241",
@@ -1457,7 +1457,7 @@ export const songsArray = [
     artist: "Marília Mendonça",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/dois-enganados.mp3",
-    id: 170,
+    _id: 170,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0272f5ede1b025cf73249c83ce",
@@ -1465,7 +1465,7 @@ export const songsArray = [
     duration: "2:24",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 171,
+    _id: 171,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0272f5ede1b025cf73249c83ce",
@@ -1473,7 +1473,7 @@ export const songsArray = [
     duration: "2:44",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 172,
+    _id: 172,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0272f5ede1b025cf73249c83ce",
@@ -1481,7 +1481,7 @@ export const songsArray = [
     duration: "3:08",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 173,
+    _id: 173,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0273f044b863be0033982cd767",
@@ -1489,7 +1489,7 @@ export const songsArray = [
     duration: "2:57",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 174,
+    _id: 174,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0282344e9572ebd4236160c6fb",
@@ -1497,7 +1497,7 @@ export const songsArray = [
     duration: "3:06",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 175,
+    _id: 175,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0293b7f0d53b20302ee6e28f13",
@@ -1505,7 +1505,7 @@ export const songsArray = [
     duration: "4:09",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 176,
+    _id: 176,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021711f153c860d22a47e70893",
@@ -1513,7 +1513,7 @@ export const songsArray = [
     duration: "3:07",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 177,
+    _id: 177,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02e035c09f33e2a896edef4bdb",
@@ -1521,7 +1521,7 @@ export const songsArray = [
     duration: "3:19",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 178,
+    _id: 178,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02845b7e5dfb634d609b154e7a",
@@ -1529,7 +1529,7 @@ export const songsArray = [
     duration: "2:55",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 179,
+    _id: 179,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c847c97de21b491fc0daf8b5",
@@ -1537,7 +1537,7 @@ export const songsArray = [
     duration: "3:06",
     artist: "Luan Santana",
     audio: "https://jornada-fullstack.s3.us-east-2.amazonaws.com/parece.mp3",
-    id: 180,
+    _id: 180,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02d2fc1ee38f06c4c760380925",
@@ -1546,7 +1546,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 181,
+    _id: 181,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02c61b4691d0ba09631399ffd3",
@@ -1555,7 +1555,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 182,
+    _id: 182,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0262af36bd5c8f7c12a5b0c6d8",
@@ -1564,7 +1564,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 183,
+    _id: 183,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02047ad702243f8d6ff1318fe0",
@@ -1573,7 +1573,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 184,
+    _id: 184,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0219bb2fb697a42c1084d71f6c",
@@ -1582,7 +1582,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 185,
+    _id: 185,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e024abfa282f55d62fcf562de69",
@@ -1591,7 +1591,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 186,
+    _id: 186,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ffd2d660deff5b892388b8db",
@@ -1600,7 +1600,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 187,
+    _id: 187,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02047ad702243f8d6ff1318fe0",
@@ -1609,7 +1609,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 188,
+    _id: 188,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0247084e79f27e97b3b4f21ba0",
@@ -1618,7 +1618,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 189,
+    _id: 189,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0234be7f78f89236075cc69c56",
@@ -1627,7 +1627,7 @@ export const songsArray = [
     artist: "Gustavo Mioto",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/nada-com-nada.mp3",
-    id: 190,
+    _id: 190,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e028594dca64e3bb87aa620362e",
@@ -1636,7 +1636,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 191,
+    _id: 191,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02ae682a9f57cbb545e5d20a17",
@@ -1645,7 +1645,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 192,
+    _id: 192,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e023a4e35b91f953a8be1848c2e",
@@ -1654,7 +1654,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 193,
+    _id: 193,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e028594dca64e3bb87aa620362e",
@@ -1663,7 +1663,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 194,
+    _id: 194,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02606797e233df5f9099190dc9",
@@ -1672,7 +1672,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 195,
+    _id: 195,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021f2dfab84eb482d552e15826",
@@ -1681,7 +1681,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 196,
+    _id: 196,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e029bb5775ce0dfc66b855f9bda",
@@ -1690,7 +1690,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 197,
+    _id: 197,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e0276a4c1b1067d49c85c151351",
@@ -1699,16 +1699,16 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 198,
+    _id: 198,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e02926e93b1e9507dc027ab7f90",
-    name: "Novinha Bandida",
+    name: "Novinha Band_ida",
     duration: "2:46",
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 199,
+    _id: 199,
   },
   {
     image: "https://i.scdn.co/image/ab67616d00001e021a28c191d45f61eb7b7af3b1",
@@ -1717,7 +1717,7 @@ export const songsArray = [
     artist: "Henry Freitas",
     audio:
       "https://jornada-fullstack.s3.us-east-2.amazonaws.com/ima-de-problema.mp3",
-    id: 200,
+    _id: 200,
   },
 ];
 
