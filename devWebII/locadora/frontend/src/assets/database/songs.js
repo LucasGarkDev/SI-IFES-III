@@ -1,4 +1,10 @@
-export const songsArray = [
+import { songsArray as importedSongArray } from "../../api/api.js";
+
+
+let songsArray = importedSongArray; // cria cópia local mutável
+
+if (!songsArray || songsArray.length === 0) {
+songsArray = [
   {
     image: "https://i.scdn.co/image/ab67616d00001e022774b00531d558bc19e12a24",
     name: "Última Saudade - Ao Vivo",
@@ -1720,7 +1726,6 @@ export const songsArray = [
     _id: 200,
   },
 ];
+}
 
-// import { songsArray } from "../../api/api.js";
-
-// export { songsArray };
+export { songsArray };
