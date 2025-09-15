@@ -1,57 +1,22 @@
 import 'package:flutter/material.dart';
+import 'presentation/pages/signup_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MercadimApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MercadimApp extends StatelessWidget {
+  const MercadimApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mercadim',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-      ),
-      home: const MyHomePage(),
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.green),
+      routes: {
+        '/': (_) => const SignUpPage(),
+        // '/home': (_) => const HomePage(), // próximo passo do fluxo
+      },
     );
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Componentes Visuais - Parte 2"),
-      ),
-      body: _body(),
-    );
-  }
-}
-
-final formkey = GlobalKey<FormState>();
-final controlador1 = TextEditingController();
-final controlador2 = TextEditingController();
-
-_body() {
-  return Stack(
-    fit: StackFit.expand,
-    children: <Widget>[
-      Image.asset(
-        "assets/imagem.jpg",
-        fit: BoxFit.fill,
-      ),
-    ],
-  );
 }
