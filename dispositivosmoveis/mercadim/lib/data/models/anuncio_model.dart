@@ -1,3 +1,5 @@
+import '../../domain/entities/anuncio.dart';
+
 class AnuncioModel {
   final String id;
   final String titulo;
@@ -12,7 +14,7 @@ class AnuncioModel {
   final bool destaque;
   final List<String> imagens;
 
-  AnuncioModel({
+  const AnuncioModel({
     required this.id,
     required this.titulo,
     required this.descricao,
@@ -27,37 +29,39 @@ class AnuncioModel {
     required this.imagens,
   });
 
-  factory AnuncioModel.fromMap(Map<String, dynamic> map) {
+  // 🔽 conversor entidade → model
+  factory AnuncioModel.fromEntity(Anuncio e) {
     return AnuncioModel(
-      id: map['id'],
-      titulo: map['titulo'],
-      descricao: map['descricao'],
-      preco: (map['preco'] ?? 0).toDouble(),
-      categoria: map['categoria'],
-      cidade: map['cidade'],
-      bairro: map['bairro'],
-      dataCriacao: DateTime.parse(map['dataCriacao']),
-      imagemPrincipalUrl: map['imagemPrincipalUrl'],
-      usuarioId: map['usuarioId'],
-      destaque: map['destaque'] ?? false,
-      imagens: List<String>.from(map['imagens'] ?? []),
+      id: e.id,
+      titulo: e.titulo,
+      descricao: e.descricao,
+      preco: e.preco,
+      categoria: e.categoria,
+      cidade: e.cidade,
+      bairro: e.bairro,
+      dataCriacao: e.dataCriacao,
+      imagemPrincipalUrl: e.imagemPrincipalUrl,
+      usuarioId: e.usuarioId,
+      destaque: e.destaque,
+      imagens: e.imagens,
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'titulo': titulo,
-      'descricao': descricao,
-      'preco': preco,
-      'categoria': categoria,
-      'cidade': cidade,
-      'bairro': bairro,
-      'dataCriacao': dataCriacao.toIso8601String(),
-      'imagemPrincipalUrl': imagemPrincipalUrl,
-      'usuarioId': usuarioId,
-      'destaque': destaque,
-      'imagens': imagens,
-    };
+  // 🔽 conversor model → entidade
+  Anuncio toEntity() {
+    return Anuncio(
+      id: id,
+      titulo: titulo,
+      descricao: descricao,
+      preco: preco,
+      categoria: categoria,
+      cidade: cidade,
+      bairro: bairro,
+      dataCriacao: dataCriacao,
+      imagemPrincipalUrl: imagemPrincipalUrl,
+      usuarioId: usuarioId,
+      destaque: destaque,
+      imagens: imagens,
+    );
   }
 }

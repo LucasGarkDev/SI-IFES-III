@@ -28,5 +28,35 @@ class Anuncio {
     required this.destaque,
     required this.imagens,
   });
-}
 
+  // 🔽 adiciona isso
+  Anuncio copyWith({
+    String? id,
+    String? titulo,
+    String? descricao,
+    double? preco,
+    String? categoria,
+    String? cidade,
+    String? bairro,
+    DateTime? dataCriacao,
+    String? imagemPrincipalUrl,
+    String? usuarioId,
+    bool? destaque,
+    List<String>? imagens,
+  }) {
+    return Anuncio(
+      id: id ?? this.id,
+      titulo: titulo ?? this.titulo,
+      descricao: descricao ?? this.descricao,
+      preco: preco ?? this.preco,
+      categoria: categoria ?? this.categoria,
+      cidade: cidade ?? this.cidade,
+      bairro: bairro ?? this.bairro,
+      dataCriacao: dataCriacao ?? this.dataCriacao,
+      imagemPrincipalUrl: imagemPrincipalUrl ?? this.imagemPrincipalUrl,
+      usuarioId: usuarioId ?? this.usuarioId,
+      destaque: destaque ?? this.destaque,
+      imagens: imagens ?? this.imagens,
+    );
+  }
+}

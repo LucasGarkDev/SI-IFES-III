@@ -36,4 +36,36 @@ class AuthLocalDataSource {
   }
 
   Future<UserModel?> current() async => _current;
+
+  Future<UserModel> login({
+    required String email,
+    required String password,
+  }) async {
+    final user = _usersById.values.firstWhere(
+      (u) => u.email.toLowerCase() == email.toLowerCase(),
+      orElse: () => throw const AppException('Usuário não encontrado'),
+    );
+
+    final storedPass = _passwordByUserId[user.id];
+    if (storedPass != password) {
+      throw const AppException('Senha incorreta');
+    }
+
+    _current = user;
+    return user;
+  }
+
+  Future<UserModel> updateProfile(UserModel updated) async {
+    final exists = _usersById[updated.id];
+    if (exists == null) {
+      throw const AppException('Usuário não encontrado');
+    }
+    _usersById[updated.id] = updated;
+    _current = updated;
+    return updated;
+  }
+
+  Future<UserModel?> getById(String id) async {
+    return _usersById[id];
+  }
 }
