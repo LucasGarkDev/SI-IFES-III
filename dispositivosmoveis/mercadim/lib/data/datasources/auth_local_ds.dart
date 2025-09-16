@@ -68,4 +68,14 @@ class AuthLocalDataSource {
   Future<UserModel?> getById(String id) async {
     return _usersById[id];
   }
+
+  Future<UserModel> entrarComoVisitante() async {
+    final guest = UserModel(
+      id: 'guest_${DateTime.now().millisecondsSinceEpoch}',
+      name: 'Visitante',
+      email: 'visitante@mercadim.com',
+    );
+    _current = guest;
+    return guest;
+  }
 }

@@ -34,6 +34,7 @@ import '../../domain/usecases/listar_favoritos.dart';
 import '../../data/datasources/localizacao_device_ds.dart';
 import '../../data/repositories/localizacao_repository_impl.dart';
 import '../../domain/usecases/detectar_localizacao.dart';
+import '../../domain/usecases/entrar_como_visitante.dart';
 
 
 // ====== Serviços base ======
@@ -135,4 +136,6 @@ final _localizacaoRepositoryProvider =
 // usecase
 final detectarLocalizacaoProvider =
     Provider((ref) => DetectarLocalizacao(ref.read(_localizacaoRepositoryProvider)));
-    
+
+final entrarComoVisitanteProvider =
+    Provider((ref) => EntrarComoVisitante(ref.read(_authRepositoryProvider))); 
