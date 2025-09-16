@@ -32,4 +32,10 @@ class AuthRepositoryImpl implements AuthRepository {
     final u = await ds.login(email: email, password: password);
     return u.toEntity();
   }
+
+  @override
+  Future<User> entrarComoVisitante() async {
+    final u = await ds.entrarComoVisitante();
+    return u.toEntity();
+  }
 }

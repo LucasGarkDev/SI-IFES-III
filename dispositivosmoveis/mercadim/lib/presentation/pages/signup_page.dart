@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers/usecase_providers.dart';
 import '../viewmodels/signup_viewmodel.dart';
+import '../viewmodels/visitante_viewmodel.dart';
+import 'feed_page.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
@@ -19,8 +21,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    // casos de uso
     final signUpUseCase = ref.read(signUpUserProvider);
     final vm = SignUpViewModel(signUpUseCase);
+
+    final visitanteUC = ref.read(entrarComoVisitanteProvider);
+    final visitanteVM = VisitanteViewModel(visitanteUC);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Criar conta')),
@@ -56,8 +62,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   if (vm.state.error != null)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
-                      child: Text(vm.state.error!,
-                          style: const TextStyle(color: Colors.red)),
+                      child: Text(
+                        vm.state.error!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
                     ),
                   FilledButton(
                     onPressed: vm.state.loading
@@ -77,7 +85,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                   content: Text('Bem-vindo, ${user.name}!'),
                                 ),
                               );
-                              // Navigator.pushReplacementNamed(context, '/home');
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const FeedPage(),
+                                ),
+                              );
                             }
                           },
                     child: vm.state.loading
@@ -87,6 +100,44 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             child: CircularProgressIndicator(),
                           )
                         : const Text('Criar conta'),
+                  ),
+                  const SizedBox(height: 20),
+                  const Divider(),
+                  const SizedBox(height: 12),
+                  Center(
+                    child: Text(
+                      'Ou continue sem criar conta',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  FilledButton.tonalIcon(
+                    icon: const Icon(Icons.person_outline),
+                    label: visitanteVM.state.loading
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(),
+                          )
+                        : const Text('Entrar como Visitante'),
+                    onPressed: visitanteVM.state.loading
+                        ? null
+                        : () async {
+                            final user = await visitanteVM.entrar();
+                            if (user != null && mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Entrou como Visitante'),
+                                ),
+                              );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const FeedPage(),
+                                ),
+                              );
+                            }
+                          },
                   ),
                 ],
               ),
