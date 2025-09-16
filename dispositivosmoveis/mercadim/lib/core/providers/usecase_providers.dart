@@ -35,6 +35,10 @@ import '../../data/datasources/localizacao_device_ds.dart';
 import '../../data/repositories/localizacao_repository_impl.dart';
 import '../../domain/usecases/detectar_localizacao.dart';
 import '../../domain/usecases/entrar_como_visitante.dart';
+import '../../presentation/viewmodels/auth_viewmodel.dart';
+import '../../domain/usecases/login_user.dart';
+import '../../domain/usecases/entrar_como_visitante.dart';
+import '../../domain/usecases/signup_user.dart';
 
 
 // ====== Serviços base ======
@@ -139,3 +143,13 @@ final detectarLocalizacaoProvider =
 
 final entrarComoVisitanteProvider =
     Provider((ref) => EntrarComoVisitante(ref.read(_authRepositoryProvider))); 
+
+
+// auth global
+final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
+  return AuthViewModel(
+    ref.read(signUpUserProvider),
+    ref.read(entrarComoVisitanteProvider),
+    ref.read(loginUserProvider), // UC02 já implementado
+  );
+});
