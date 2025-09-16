@@ -4,7 +4,7 @@ import '../../core/services/id_service.dart';
 import '../../domain/entities/anuncio.dart';
 import '../../domain/repositories/anuncio_repository.dart';
 import '../datasources/anuncio_remote_data_source.dart';
-import '../mappers/anuncio_mapper.dart';
+// import '../mappers/anuncio_mapper.dart';
 
 class AnuncioRepositoryImpl implements AnuncioRepository {
   final AnuncioRemoteDataSource ds;
@@ -27,5 +27,18 @@ class AnuncioRepositoryImpl implements AnuncioRepository {
     final created = await ds.criarAnuncio(model);
     return created.toEntity();
   }
+
+  @override
+  Future<Anuncio> editarAnuncio(Anuncio anuncio) async {
+    final model = AnuncioModel.fromEntity(anuncio);
+    final updated = await ds.editarAnuncio(model);
+    return updated.toEntity();
+  }
+
+  @override
+  Future<void> excluirAnuncio(String id) async {
+    await ds.excluirAnuncio(id);
+  }
+
 }
 

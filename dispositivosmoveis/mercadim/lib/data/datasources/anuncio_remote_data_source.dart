@@ -6,5 +6,8 @@ abstract class AnuncioRemoteDataSource {
 
   /// UC07 – Criar novo anúncio
   Future<AnuncioModel> criarAnuncio(AnuncioModel anuncio);
+   // 🔑 novo
+  Future<AnuncioModel> editarAnuncio(AnuncioModel anuncio);
+  Future<void> excluirAnuncio(String id);
 }
 

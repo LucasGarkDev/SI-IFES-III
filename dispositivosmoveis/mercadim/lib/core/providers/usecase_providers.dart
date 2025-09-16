@@ -19,6 +19,8 @@ import '../../domain/usecases/update_profile.dart';
 import '../../data/repositories/user_repository_impl.dart';
 import '../../domain/usecases/criar_anuncio.dart';
 import '../../domain/repositories/anuncio_repository.dart';
+import '../../domain/usecases/editar_anuncio.dart';
+import '../../domain/usecases/excluir_anuncio.dart';
 
 
 // ====== Serviços base ======
@@ -42,7 +44,10 @@ final _anuncioRemoteDSProvider =
 // Se for a real: Provider((ref) => AnuncioRemoteDataSourceImpl());
 
 final _anuncioRepositoryProvider =
-    Provider((ref) => AnuncioRepositoryImpl(ref.read(_anuncioRemoteDSProvider)));
+    Provider((ref) => AnuncioRepositoryImpl(
+          ref.read(_anuncioRemoteDSProvider),
+          ref.read(_idServiceProvider),
+        ));
 
 final getAnunciosUseCaseProvider =
     Provider((ref) => GetAnunciosUseCase(ref.read(_anuncioRepositoryProvider)));
@@ -68,3 +73,9 @@ final anuncioRepositoryProvider = Provider<AnuncioRepository>(
 
 final criarAnuncioProvider =
     Provider((ref) => CriarAnuncio(ref.read(anuncioRepositoryProvider)));
+
+final editarAnuncioProvider =
+    Provider((ref) => EditarAnuncio(ref.read(_anuncioRepositoryProvider)));
+
+final excluirAnuncioProvider =
+    Provider((ref) => ExcluirAnuncio(ref.read(_anuncioRepositoryProvider)));
