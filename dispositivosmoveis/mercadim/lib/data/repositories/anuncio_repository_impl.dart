@@ -1,16 +1,31 @@
+import 'package:mercadim/data/models/anuncio_model.dart';
+
+import '../../core/services/id_service.dart';
 import '../../domain/entities/anuncio.dart';
 import '../../domain/repositories/anuncio_repository.dart';
 import '../datasources/anuncio_remote_data_source.dart';
 import '../mappers/anuncio_mapper.dart';
 
 class AnuncioRepositoryImpl implements AnuncioRepository {
-  final AnuncioRemoteDataSource remote;
+  final AnuncioRemoteDataSource ds;
+  final IdService _id;
 
-  AnuncioRepositoryImpl(this.remote);
+  AnuncioRepositoryImpl(this.ds, this._id);
 
   @override
   Future<List<Anuncio>> obterAnunciosPorCidade(String cidade) async {
-    final models = await remote.fetchAnunciosPorCidade(cidade);
+    final models = await ds.fetchAnunciosPorCidade(cidade);
     return models.map((e) => e.toEntity()).toList();
   }
+
+  @override
+  Future<Anuncio> criarAnuncio(Anuncio anuncio) async {
+    final model = AnuncioModel.fromEntity(anuncio.copyWith(
+      id: _id.make('ad_'),
+      dataCriacao: DateTime.now(),
+    ));
+    final created = await ds.criarAnuncio(model);
+    return created.toEntity();
+  }
 }
+

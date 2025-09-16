@@ -21,4 +21,15 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<User?> currentUser() async => (await ds.current())?.toEntity();
+
+  @override
+  Future<User> login({
+    required String email,
+    required String password,
+  }) async {
+    if (email.trim().isEmpty) throw const AppException('E-mail é obrigatório');
+    if (password.trim().isEmpty) throw const AppException('Senha é obrigatória');
+    final u = await ds.login(email: email, password: password);
+    return u.toEntity();
+  }
 }

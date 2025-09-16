@@ -6,5 +6,13 @@ abstract class AuthRepository {
     required String email,
     required String password,
   });
+  
   Future<User?> currentUser();
+
+  // 🔑 novo método UC02
+  Future<User> login({
+    required String email,
+    required String password,
+  });
 }
+

@@ -14,6 +14,12 @@ import '../../data/datasources/anuncio_remote_data_source_mock.dart';
 
 import '../../data/repositories/anuncio_repository_impl.dart';
 import '../../domain/usecases/get_anuncios_usecase.dart';
+import '../../domain/usecases/login_user.dart';
+import '../../domain/usecases/update_profile.dart';
+import '../../data/repositories/user_repository_impl.dart';
+import '../../domain/usecases/criar_anuncio.dart';
+import '../../domain/repositories/anuncio_repository.dart';
+
 
 // ====== Serviços base ======
 final _idServiceProvider = Provider((ref) => IdService());
@@ -40,3 +46,25 @@ final _anuncioRepositoryProvider =
 
 final getAnunciosUseCaseProvider =
     Provider((ref) => GetAnunciosUseCase(ref.read(_anuncioRepositoryProvider)));
+
+// ====== Auth (UC02 - Login) ======
+final loginUserProvider =
+    Provider((ref) => LoginUser(ref.read(_authRepositoryProvider)));
+
+// ====== User (UC04 - Atualizar Perfil) ======
+final _userRepositoryProvider =
+    Provider((ref) => UserRepositoryImpl(ref.read(_authLocalDSProvider)));
+
+final updateProfileProvider =
+    Provider((ref) => UpdateProfile(ref.read(_userRepositoryProvider)));
+    
+
+final anuncioRepositoryProvider = Provider<AnuncioRepository>(
+  (ref) => AnuncioRepositoryImpl(
+    ref.read(_anuncioRemoteDSProvider),
+    ref.read(_idServiceProvider),
+  ),
+);
+
+final criarAnuncioProvider =
+    Provider((ref) => CriarAnuncio(ref.read(anuncioRepositoryProvider)));
