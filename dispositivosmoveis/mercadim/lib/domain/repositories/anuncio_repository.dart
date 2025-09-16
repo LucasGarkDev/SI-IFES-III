@@ -6,4 +6,15 @@ abstract class AnuncioRepository {
 
   Future<Anuncio> editarAnuncio(Anuncio anuncio);              // UC08
   Future<void> excluirAnuncio(String id);                      // UC10
+  Future<List<Anuncio>> buscarPorTitulo(String titulo);          // UC16
+  
+  // 🔑 novo
+  Future<List<Anuncio>> filtrar({
+    String? categoria,
+    double? precoMin,
+    double? precoMax,
+    double? distanciaKm,
+    double? userLat,
+    double? userLng,
+  });
 }

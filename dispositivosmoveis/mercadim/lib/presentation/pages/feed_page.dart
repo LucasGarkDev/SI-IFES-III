@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../viewmodels/feed_viewmodel.dart';
 import '../widgets/anuncio_card.dart';
+import 'detalhes_anuncio_page.dart'; // 🔑 importa a tela de detalhes
+// import '../../domain/entities/anuncio.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -30,9 +32,22 @@ class _FeedPageState extends ConsumerState<FeedPage> {
             ? const Center(child: Text('Nenhum anúncio encontrado.'))
             : ListView.builder(
                 itemCount: anuncios.length,
-                itemBuilder: (context, index) => AnuncioCard(anuncio: anuncios[index]),
+                itemBuilder: (context, index) {
+                  final anuncio = anuncios[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetalhesAnuncioPage(anuncio: anuncio),
+                        ),
+                      );
+                    },
+                    child: AnuncioCard(anuncio: anuncio),
+                  );
+                },
               ),
-        _ => const SizedBox.shrink(), // Handles any other FeedState cases
+        _ => const SizedBox.shrink(),
       },
     );
   }
