@@ -68,4 +68,25 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
     _storage.add(anuncio);
     return anuncio;
   }
+
+  @override
+  Future<AnuncioModel> editarAnuncio(AnuncioModel anuncio) async {
+    await Future.delayed(const Duration(milliseconds: 150));
+    final index = _storage.indexWhere((a) => a.id == anuncio.id);
+    if (index == -1) {
+      throw const AppException('Anúncio não encontrado');
+    }
+    _storage[index] = anuncio;
+    return anuncio;
+  }
+
+  @override
+  Future<void> excluirAnuncio(String id) async {
+    await Future.delayed(const Duration(milliseconds: 150));
+    final index = _storage.indexWhere((a) => a.id == id);
+    if (index == -1) {
+      throw const AppException('Anúncio não encontrado');
+    }
+    _storage.removeAt(index);
+  }
 }
