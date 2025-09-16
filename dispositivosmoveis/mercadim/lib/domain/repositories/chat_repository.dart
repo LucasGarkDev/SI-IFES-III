@@ -1,4 +1,5 @@
 import '../entities/conversa.dart';
+import '../entities/mensagem.dart';
 
 abstract class ChatRepository {
   Future<Conversa> iniciarConversa({
@@ -8,4 +9,7 @@ abstract class ChatRepository {
   });
 
   Future<List<Conversa>> listarConversasDoUsuario(String usuarioId);
+
+  Future<Mensagem> enviarMensagem(Mensagem mensagem);
+  Future<List<Mensagem>> listarMensagens(String conversaId);
 }

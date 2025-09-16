@@ -1,10 +1,14 @@
 import '../models/conversa_model.dart';
 import '../../core/exceptions/app_exception.dart';
+import '../models/conversa_model.dart';
+import '../models/mensagem_model.dart';
 
 /// DataSource in-memory para gerenciar conversas.
 /// Funciona como mock no MVP.
 class ChatLocalDataSource {
   final List<ConversaModel> _storage = [];
+  final List<ConversaModel> _conversas = [];
+  final List<MensagemModel> _mensagens = [];
 
   Future<ConversaModel> iniciarConversa({
     required String usuarioAtualId,
@@ -39,4 +43,14 @@ class ChatLocalDataSource {
         .where((c) => c.usuario1Id == usuarioId || c.usuario2Id == usuarioId)
         .toList();
   }
+
+  Future<MensagemModel> enviarMensagem(MensagemModel msg) async {
+    _mensagens.add(msg);
+    return msg;
+  }
+
+  Future<List<MensagemModel>> listarMensagens(String conversaId) async {
+    return _mensagens.where((m) => m.conversaId == conversaId).toList();
+  }
+
 }
