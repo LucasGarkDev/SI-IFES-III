@@ -9,5 +9,15 @@ abstract class AnuncioRemoteDataSource {
    // 🔑 novo
   Future<AnuncioModel> editarAnuncio(AnuncioModel anuncio);
   Future<void> excluirAnuncio(String id);
+  Future<List<AnuncioModel>> buscarPorTitulo(String titulo);
+
+  Future<List<AnuncioModel>> filtrar({
+    String? categoria,
+    double? precoMin,
+    double? precoMax,
+    double? distanciaKm,
+    double? userLat,
+    double? userLng,
+  });
 }
 

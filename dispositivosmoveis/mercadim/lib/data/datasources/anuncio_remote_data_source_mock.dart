@@ -89,4 +89,48 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
     }
     _storage.removeAt(index);
   }
+
+  @override
+  Future<List<AnuncioModel>> buscarPorTitulo(String titulo) async {
+    await Future.delayed(const Duration(milliseconds: 200));
+    final termo = titulo.trim().toLowerCase();
+    return _storage
+        .where((a) => a.titulo.toLowerCase().contains(termo))
+        .toList();
+  }
+
+  @override
+  Future<List<AnuncioModel>> filtrar({
+    String? categoria,
+    double? precoMin,
+    double? precoMax,
+    double? distanciaKm,
+    double? userLat,
+    double? userLng,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 200));
+
+    Iterable<AnuncioModel> results = _storage;
+
+    if (categoria != null && categoria.isNotEmpty) {
+      results = results.where((a) =>
+          a.categoria.toLowerCase() == categoria.toLowerCase());
+    }
+
+    if (precoMin != null) {
+      results = results.where((a) => a.preco >= precoMin);
+    }
+
+    if (precoMax != null) {
+      results = results.where((a) => a.preco <= precoMax);
+    }
+
+    // ⚠️ Distância é mockada por enquanto (sem lat/lng em AnuncioModel)
+    if (distanciaKm != null && userLat != null && userLng != null) {
+      // aqui entraria cálculo de haversine se tivéssemos coords
+      // por enquanto, apenas retorna sem filtro
+    }
+
+    return results.toList();
+  }
 }

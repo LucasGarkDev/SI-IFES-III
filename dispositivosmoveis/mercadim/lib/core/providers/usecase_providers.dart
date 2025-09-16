@@ -21,6 +21,11 @@ import '../../domain/usecases/criar_anuncio.dart';
 import '../../domain/repositories/anuncio_repository.dart';
 import '../../domain/usecases/editar_anuncio.dart';
 import '../../domain/usecases/excluir_anuncio.dart';
+import '../../domain/usecases/buscar_anuncios_por_titulo.dart';
+import '../../domain/usecases/filtrar_anuncios.dart';
+import '../../data/datasources/chat_local_ds.dart';
+import '../../data/repositories/chat_repository_impl.dart';
+import '../../domain/usecases/iniciar_conversa.dart';
 
 
 // ====== Serviços base ======
@@ -79,3 +84,17 @@ final editarAnuncioProvider =
 
 final excluirAnuncioProvider =
     Provider((ref) => ExcluirAnuncio(ref.read(_anuncioRepositoryProvider)));
+
+final buscarAnunciosPorTituloProvider =
+    Provider((ref) => BuscarAnunciosPorTitulo(ref.read(_anuncioRepositoryProvider)));
+
+final filtrarAnunciosProvider =
+    Provider((ref) => FiltrarAnuncios(ref.read(_anuncioRepositoryProvider)));
+
+final _chatLocalDSProvider = Provider((ref) => ChatLocalDataSource());
+
+final _chatRepositoryProvider =
+    Provider((ref) => ChatRepositoryImpl(ref.read(_chatLocalDSProvider)));
+
+final iniciarConversaProvider =
+    Provider((ref) => IniciarConversa(ref.read(_chatRepositoryProvider)));

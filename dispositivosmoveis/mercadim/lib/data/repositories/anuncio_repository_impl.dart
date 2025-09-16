@@ -40,5 +40,30 @@ class AnuncioRepositoryImpl implements AnuncioRepository {
     await ds.excluirAnuncio(id);
   }
 
+  @override
+  Future<List<Anuncio>> buscarPorTitulo(String titulo) async {
+    final models = await ds.buscarPorTitulo(titulo);
+    return models.map((e) => e.toEntity()).toList();
+  }
+
+  @override
+  Future<List<Anuncio>> filtrar({
+    String? categoria,
+    double? precoMin,
+    double? precoMax,
+    double? distanciaKm,
+    double? userLat,
+    double? userLng,
+  }) async {
+    final models = await ds.filtrar(
+      categoria: categoria,
+      precoMin: precoMin,
+      precoMax: precoMax,
+      distanciaKm: distanciaKm,
+      userLat: userLat,
+      userLng: userLng,
+    );
+    return models.map((e) => e.toEntity()).toList();
+  }
 }
 
