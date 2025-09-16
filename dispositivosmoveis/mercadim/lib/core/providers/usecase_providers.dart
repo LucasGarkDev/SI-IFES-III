@@ -26,6 +26,11 @@ import '../../domain/usecases/filtrar_anuncios.dart';
 import '../../data/datasources/chat_local_ds.dart';
 import '../../data/repositories/chat_repository_impl.dart';
 import '../../domain/usecases/iniciar_conversa.dart';
+import '../../domain/usecases/enviar_mensagem.dart';
+import '../../data/datasources/favorito_local_ds.dart';
+import '../../data/repositories/favorito_repository_impl.dart';
+import '../../domain/usecases/toggle_favorito.dart';
+import '../../domain/usecases/listar_favoritos.dart';
 
 
 // ====== Serviços base ======
@@ -98,3 +103,21 @@ final _chatRepositoryProvider =
 
 final iniciarConversaProvider =
     Provider((ref) => IniciarConversa(ref.read(_chatRepositoryProvider)));
+
+final enviarMensagemProvider =
+    Provider((ref) => EnviarMensagem(ref.read(_chatRepositoryProvider)));
+
+final _favoritoLocalDSProvider = Provider((ref) => FavoritoLocalDataSource());
+
+final _favoritoRepositoryProvider =
+    Provider((ref) => FavoritoRepositoryImpl(ref.read(_favoritoLocalDSProvider)));
+
+final toggleFavoritoProvider =
+    Provider((ref) => ToggleFavorito(ref.read(_favoritoRepositoryProvider)));
+
+final listarFavoritosProvider = Provider(
+  (ref) => ListarFavoritos(
+    ref.read(_favoritoRepositoryProvider),
+    ref.read(_anuncioRepositoryProvider),
+  ),
+);
