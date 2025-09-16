@@ -31,6 +31,9 @@ import '../../data/datasources/favorito_local_ds.dart';
 import '../../data/repositories/favorito_repository_impl.dart';
 import '../../domain/usecases/toggle_favorito.dart';
 import '../../domain/usecases/listar_favoritos.dart';
+import '../../data/datasources/localizacao_device_ds.dart';
+import '../../data/repositories/localizacao_repository_impl.dart';
+import '../../domain/usecases/detectar_localizacao.dart';
 
 
 // ====== Serviços base ======
@@ -121,3 +124,15 @@ final listarFavoritosProvider = Provider(
     ref.read(_anuncioRepositoryProvider),
   ),
 );
+
+// datasource
+final _localizacaoDSProvider = Provider((ref) => LocalizacaoDeviceDataSource());
+
+// repository
+final _localizacaoRepositoryProvider =
+    Provider((ref) => LocalizacaoRepositoryImpl(ref.read(_localizacaoDSProvider)));
+
+// usecase
+final detectarLocalizacaoProvider =
+    Provider((ref) => DetectarLocalizacao(ref.read(_localizacaoRepositoryProvider)));
+    
