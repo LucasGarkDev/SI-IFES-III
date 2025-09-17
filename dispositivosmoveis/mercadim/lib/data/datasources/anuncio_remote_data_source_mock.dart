@@ -6,7 +6,6 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
   final List<AnuncioModel> _storage = [];
 
   AnuncioRemoteDataSourceMock() {
-    // garante que sempre exista pelo menos 1 anúncio inicial
     if (_storage.isEmpty) {
       _storage.add(
         AnuncioModel(
@@ -15,7 +14,7 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
           descricao: 'Ótimo para estudos e trabalho remoto.',
           preco: 2500.0,
           categoria: 'Eletrônicos',
-          cidade: 'Baixo Guandu',
+          cidade: 'Baixo Guandu', // ⚠️ bate com o FeedPage
           bairro: 'Centro',
           dataCriacao: DateTime.now(),
           imagemPrincipalUrl: 'https://via.placeholder.com/300x200?text=Notebook',
@@ -32,10 +31,11 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
   @override
   Future<List<AnuncioModel>> fetchAnunciosPorCidade(String cidade) async {
     await Future.delayed(const Duration(milliseconds: 200));
-    final c = cidade.trim().toLowerCase();
-    return _storage
-        .where((a) => a.cidade.trim().toLowerCase() == c)
-        .toList();
+    final results = _storage.where(
+      (a) => a.cidade.toLowerCase() == cidade.toLowerCase(),
+    );
+    // se não achar nada, devolve todos mesmo assim
+    return results.isNotEmpty ? results.toList() : _storage;
   }
 
   @override
