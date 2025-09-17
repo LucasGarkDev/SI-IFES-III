@@ -1,65 +1,41 @@
-import 'package:mercadim/core/exceptions/app_exception.dart';
 import 'anuncio_remote_data_source.dart';
 import '../models/anuncio_model.dart';
+import 'package:mercadim/core/exceptions/app_exception.dart';
 
-/// Mock em memória para simular anúncios.
 class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
   final List<AnuncioModel> _storage = [];
+
+  AnuncioRemoteDataSourceMock() {
+    // garante que sempre exista pelo menos 1 anúncio inicial
+    if (_storage.isEmpty) {
+      _storage.add(
+        AnuncioModel(
+          id: 'seed_1',
+          titulo: 'Notebook Dell i5',
+          descricao: 'Ótimo para estudos e trabalho remoto.',
+          preco: 2500.0,
+          categoria: 'Eletrônicos',
+          cidade: 'Baixo Guandu',
+          bairro: 'Centro',
+          dataCriacao: DateTime.now(),
+          imagemPrincipalUrl: 'https://via.placeholder.com/300x200?text=Notebook',
+          usuarioId: 'u_seed',
+          destaque: false,
+          imagens: [
+            'https://via.placeholder.com/300x200?text=Notebook',
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Future<List<AnuncioModel>> fetchAnunciosPorCidade(String cidade) async {
     await Future.delayed(const Duration(milliseconds: 200));
-
-    // simula erro em cidade inválida
-    if (cidade.toLowerCase() == 'inexistente') {
-      throw const AppException('Cidade sem suporte no momento.');
-    }
-
     final c = cidade.trim().toLowerCase();
-    final filtrados = _storage
+    return _storage
         .where((a) => a.cidade.trim().toLowerCase() == c)
         .toList();
-
-    // se ainda não houver anúncios criados, retorna alguns mocks fixos
-    if (filtrados.isEmpty) {
-      return [
-        AnuncioModel(
-          id: '1',
-          titulo: 'Bicicleta Aro 29',
-          descricao: 'Pouco usada, em ótimo estado.',
-          preco: 850.0,
-          categoria: 'Esportes',
-          cidade: cidade,
-          bairro: 'Centro',
-          dataCriacao: DateTime.now(),
-          imagemPrincipalUrl: 'https://via.placeholder.com/300x200',
-          usuarioId: 'u1',
-          destaque: true,
-          imagens: [
-            'https://via.placeholder.com/300x200',
-            'https://via.placeholder.com/300x200?text=2',
-          ],
-        ),
-        AnuncioModel(
-          id: '2',
-          titulo: 'Sofá Retrátil',
-          descricao: 'Sofá 3 lugares, excelente estado.',
-          preco: 1200.0,
-          categoria: 'Móveis',
-          cidade: cidade,
-          bairro: 'Bela Vista',
-          dataCriacao: DateTime.now().subtract(const Duration(hours: 5)),
-          imagemPrincipalUrl: 'https://via.placeholder.com/300x200?text=Sofa',
-          usuarioId: 'u2',
-          destaque: false,
-          imagens: [
-            'https://via.placeholder.com/300x200?text=Sofa',
-          ],
-        ),
-      ];
-    }
-
-    return filtrados;
   }
 
   @override
@@ -83,11 +59,7 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
   @override
   Future<void> excluirAnuncio(String id) async {
     await Future.delayed(const Duration(milliseconds: 150));
-    final index = _storage.indexWhere((a) => a.id == id);
-    if (index == -1) {
-      throw const AppException('Anúncio não encontrado');
-    }
-    _storage.removeAt(index);
+    _storage.removeWhere((a) => a.id == id);
   }
 
   @override
@@ -113,24 +85,18 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
     Iterable<AnuncioModel> results = _storage;
 
     if (categoria != null && categoria.isNotEmpty) {
-      results = results.where((a) =>
-          a.categoria.toLowerCase() == categoria.toLowerCase());
+      results = results.where(
+        (a) => a.categoria.toLowerCase() == categoria.toLowerCase(),
+      );
     }
-
     if (precoMin != null) {
       results = results.where((a) => a.preco >= precoMin);
     }
-
     if (precoMax != null) {
       results = results.where((a) => a.preco <= precoMax);
     }
 
-    // ⚠️ Distância é mockada por enquanto (sem lat/lng em AnuncioModel)
-    if (distanciaKm != null && userLat != null && userLng != null) {
-      // aqui entraria cálculo de haversine se tivéssemos coords
-      // por enquanto, apenas retorna sem filtro
-    }
-
+    // por enquanto, sem filtro real de distância
     return results.toList();
   }
 }
