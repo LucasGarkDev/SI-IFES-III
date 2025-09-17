@@ -6,13 +6,8 @@
   "contact": "luisaugustodesouza785@gmail.com",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
     "lint": "eslint .",
-    "start": "node --watch server.js",
-    "dev-node": "node --watch --env-file=.env server.js",
-    "prepare-env": "node src/js/createEnvIfMissing.js"
+    "dev-node": "node --watch --env-file=.env server.js"
   },
   "engines": {
     "node": ">=20",
