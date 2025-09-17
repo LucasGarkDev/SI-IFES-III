@@ -6,15 +6,15 @@
   "contact": "luisaugustodesouza785@gmail.com",
   "type": "module",
   "scripts": {
-    "dev": "set NO_COLOR=1 && npm run install && vite",
+    "dev": "set NO_COLOR=1 && npm run auto-install && vite",
     "build": "npm run update && vite build",
     "lint": "eslint .",
     "preview": "npm run update && vite preview",
     "start": "npm run update && node --watch server.js",
-    "update": "node -v && npm run install && npx npm-check-updates -u && npm install",
+    "update": "npm run auto-install && npx npm-check-updates -u",
     "dev-node": "node --watch --env-file=.env server.js",
-    "prepare-env": "node -v && node src/js/createEnvIfMissing.js",
-    "install":" npm install && node -v && npm run prepare-env"
+    "prepare-env": "node src/js/createEnvIfMissing.js",
+    "auto-install":" npm install && node -v && npm run prepare-env"
   },
   "engines": {
     "node": "20.x"
