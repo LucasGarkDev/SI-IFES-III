@@ -1,15 +1,12 @@
+import MovieCard from "./MovieCard";
+
 const MovieRow = ({ title, movies }) => {
   return (
-    <section>
+    <section className="mb-8">
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <div className="flex gap-3 overflow-x-scroll">
+      <div className="flex gap-3 overflow-x-auto">
         {movies.length > 0 ? (
-          movies.map((movie) => (
-            <div key={movie.id} className="w-40 flex-shrink-0">
-              <img src={movie.posterUrl || "https://via.placeholder.com/160x240"} alt={movie.nome} className="rounded" />
-              <p className="mt-1 text-sm">{movie.nome}</p>
-            </div>
-          ))
+          movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
         ) : (
           <p className="text-gray-400">Nenhum filme disponível</p>
         )}
@@ -17,4 +14,5 @@ const MovieRow = ({ title, movies }) => {
     </section>
   );
 };
+
 export default MovieRow;
