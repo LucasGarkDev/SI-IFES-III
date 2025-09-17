@@ -6,21 +6,19 @@
   "contact": "luisaugustodesouza785@gmail.com",
   "type": "module",
   "scripts": {
-    "dev": "set NO_COLOR=1 && npm run install && vite",
-    "build": "npm run update && vite build",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "npm run update && vite preview",
-    "start": "npm run update && node --watch server.js",
-    "update": "node -v && npm run install && npx npm-check-updates -u && npm install",
+    "start": "node --watch server.js",
     "dev-node": "node --watch --env-file=.env server.js",
-    "prepare-env": "node -v && node src/js/createEnvIfMissing.js",
-    "install":" npm install && node -v && npm run prepare-env"
+    "prepare-env": "node src/js/createEnvIfMissing.js"
   },
   "engines": {
-    "node": "20.x"
+    "node": ">=20",
+    "npm": ">=10"
   },
   "dependencies": {
-    "@eslint/js": "^9.35.0",
     "@fortawesome/fontawesome-svg-core": "^7.0.1",
     "@fortawesome/free-brands-svg-icons": "^7.0.1",
     "@fortawesome/free-regular-svg-icons": "^7.0.1",
@@ -31,11 +29,6 @@
     "@vitejs/plugin-react": "^5.0.2",
     "axios": "^1.12.2",
     "dotenv": "^17.2.2",
-    "eslint": "^9.35.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.4.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
@@ -51,7 +44,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
-    "react-scripts": "^0.0.0",
     "vite": "^7.1.5"
   }
 }
