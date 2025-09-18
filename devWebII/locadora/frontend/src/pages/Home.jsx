@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import Main from "../components/Main.jsx"
+import Home from "../components/Home.jsx"
 
-const Home = () => {
-  return <Main/>;
+const HomePage = () => {
+  return <Home/>;
 };
 
-export default Home;
+export default HomePage;

@@ -1,4 +1,4 @@
-import { songsArray as importedSongArray } from "../../api/api.js";
+import { songsArray as importedSongArray } from "../../service/api.js";
 
 
 let songsArray = importedSongArray; // cria cópia local mutável

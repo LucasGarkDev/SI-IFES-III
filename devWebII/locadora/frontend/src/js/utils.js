@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { artistArray } from "../assets/database/artists";
+import { artistArray } from "../assets/database/atores2";
 import { songsArray } from "../assets/database/songs";
 import axios from "axios";
 import { UNSAFE_getPatchRoutesOnNavigationFunction } from "react-router-dom";

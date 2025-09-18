@@ -1,0 +1,48 @@
+src/
+│
+├── service/                     # Serviços gerais (API, service workers)
+│   ├── serviceWorkerCache.js
+│   └── api.js
+│
+├── assets/                      # Imagens, banco simulado etc.
+│   ├── database/
+│   │   └── localDatabase.js     # Banco simulado para desenvolvimento
+│   └── logos/
+│
+├── components/                 # Componentes reutilizáveis
+│   └── Header.jsx
+│
+├── css/                        # CSS global ou separado (pode renomear para styles se quiser)
+│   └── videoLocadora.css
+│
+├── js/                         # Scripts utilitários (pode renomear para utils/)
+│
+├── pages/
+│   ├── Home.jsx               # Página inicial
+│   ├── NotFound.jsx          # Página 404
+│
+│   ├── auth/                  # Páginas de autenticação
+│       └── (login, signup etc. futuramente)
+│
+│   └── catalog/               # Domínio funcional de catálogo
+│       ├── actor/
+│       │   ├── ActorList.jsx
+│       │   ├── ActorForm.jsx
+│       │   └── ActorDetail.jsx (opcional)
+│       │
+│       ├── class/
+│       │   ├── ClassList.jsx
+│       │   ├── ClassForm.jsx
+│       │   └── ClassDetail.jsx (opcional)
+│       │
+│       └── director/
+│           ├── DirectorList.jsx
+│           ├── DirectorForm.jsx
+│           └── DirectorDetail.jsx (opcional)
+│
+├── routes/
+│   └── AppRoutes.jsx          # Todas as rotas do sistema
+│
+├── global.css                 # Estilos globais
+├── adminSystem.jsx           # Ponto de entrada para admin (?)
+└── videoLocadora.jsx         # Ponto de entrada principal
