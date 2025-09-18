@@ -15,4 +15,5 @@ const MovieRow = ({ title, movies }) => {
   );
 };
 
+
 export default MovieRow;
