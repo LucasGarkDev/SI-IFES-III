@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/providers/usecase_providers.dart';
 import '../viewmodels/chat_viewmodel.dart';
 import '../../domain/entities/conversa.dart';
-import '../../domain/entities/mensagem.dart';
+// import '../../domain/entities/mensagem.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
   final Conversa conversa;

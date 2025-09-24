@@ -1,4 +1,4 @@
-import '../entities/favorito.dart';
+// import '../entities/favorito.dart';
 
 abstract class FavoritoRepository {
   Future<void> toggleFavorito(String usuarioId, String anuncioId);
