@@ -1,13 +1,13 @@
 import '../models/conversa_model.dart';
-import '../../core/exceptions/app_exception.dart';
-import '../models/conversa_model.dart';
+// import '../../core/exceptions/app_exception.dart';
+// import '../models/conversa_model.dart';
 import '../models/mensagem_model.dart';
 
 /// DataSource in-memory para gerenciar conversas.
 /// Funciona como mock no MVP.
 class ChatLocalDataSource {
   final List<ConversaModel> _storage = [];
-  final List<ConversaModel> _conversas = [];
+  // final List<ConversaModel> _conversas = [];
   final List<MensagemModel> _mensagens = [];
 
   Future<ConversaModel> iniciarConversa({
