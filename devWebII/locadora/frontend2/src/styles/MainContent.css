@@ -1,0 +1,16 @@
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  border-left: 2px solid #fff;
+
+  /* Novo estilo para contraste */
+  background-color: #fff;
+  color: #000;
+}
+
+.main-content h2 {
+  border-bottom: 2px dashed #000;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
