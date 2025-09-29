@@ -20,11 +20,12 @@ function ClassesPage() {
   const fetchClasses = async () => {
     try {
       const res = await getClasses();
-      setListaClasses(res.data);
+      setListaClasses(res.data.content);
     } catch (err) {
       console.error("Erro ao carregar classes:", err);
     }
   };
+
 
   const handleAdd = async (novaClasse) => {
     try {

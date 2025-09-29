@@ -20,7 +20,7 @@ function AtoresPage() {
   const fetchAtores = async () => {
     try {
       const res = await getAtores();
-      setAtores(res.data);
+      setAtores(res.data.content); // pega apenas a lista
     } catch (err) {
       console.error("Erro ao carregar atores:", err);
     }
