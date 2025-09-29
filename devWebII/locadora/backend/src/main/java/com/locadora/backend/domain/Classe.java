@@ -1,26 +1,26 @@
 package com.locadora.backend.domain;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "classes", uniqueConstraints = @UniqueConstraint(name = "uk_classe_nome", columnNames = "nome"))
+@Table(name = "classes", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_classe_nome", columnNames = {"nome"})
+})
 public class Classe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 60)
-    private String nome; // ex: "Livre", "12", "Lançamento", "Catálogo"
+    @Column(nullable = false, length = 100)
+    private String nome;
 
-    @Column(length = 200)
-    private String descricao;
+    @Column(nullable = false)
+    private Integer precoDiariaCentavos;
 
-    // se usar como política comercial:
-    @Column(name = "prazo_devolucao_dias")
-    private Integer prazoDevolucaoDias; // ex: 2 para lançamento, 5 catálogo
-
-    @Column(name = "preco_diaria_centavos")
-    private Integer precoDiariaCentavos; // guardar em centavos para evitar ponto flutuante
+    @Column(name = "data_devolucao", nullable = false)
+    private LocalDate dataDevolucao;
 
     @Column(nullable = false)
     private Boolean ativo = true;
@@ -28,14 +28,16 @@ public class Classe {
     // getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
-    public String getDescricao() { return descricao; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
-    public Integer getPrazoDevolucaoDias() { return prazoDevolucaoDias; }
-    public void setPrazoDevolucaoDias(Integer prazoDevolucaoDias) { this.prazoDevolucaoDias = prazoDevolucaoDias; }
+
     public Integer getPrecoDiariaCentavos() { return precoDiariaCentavos; }
     public void setPrecoDiariaCentavos(Integer precoDiariaCentavos) { this.precoDiariaCentavos = precoDiariaCentavos; }
+
+    public LocalDate getDataDevolucao() { return dataDevolucao; }
+    public void setDataDevolucao(LocalDate dataDevolucao) { this.dataDevolucao = dataDevolucao; }
+
     public Boolean getAtivo() { return ativo; }
     public void setAtivo(Boolean ativo) { this.ativo = ativo; }
 }
