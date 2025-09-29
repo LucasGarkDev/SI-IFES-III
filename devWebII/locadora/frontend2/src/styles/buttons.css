@@ -1,0 +1,50 @@
+.action-btn {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 0.3rem 0.8rem;
+  margin: 0 0.3rem;
+  font-family: "Courier New", monospace;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+}
+
+.action-btn.default {
+  border-color: #aaa;
+}
+
+.action-btn.add {
+  border-color: #0f0;
+  color: #0f0;
+}
+
+.action-btn.add:hover {
+  background-color: #0f0;
+  color: #000;
+}
+
+.action-btn.edit {
+  border-color: #ff0;
+  color: #ff0;
+}
+
+.action-btn.edit:hover {
+  background-color: #ff0;
+  color: #000;
+}
+
+.action-btn.delete {
+  border-color: #f00;
+  color: #f00;
+}
+
+.action-btn.delete:hover {
+  background-color: #f00;
+  color: #000;
+}
