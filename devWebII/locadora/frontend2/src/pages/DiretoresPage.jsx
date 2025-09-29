@@ -20,11 +20,12 @@ function DiretoresPage() {
   const fetchDiretores = async () => {
     try {
       const res = await getDiretores();
-      setDiretores(res.data);
+      setDiretores(res.data.content);
     } catch (err) {
       console.error("Erro ao carregar diretores:", err);
     }
   };
+
 
   const handleAdd = async (diretor) => {
     try {
