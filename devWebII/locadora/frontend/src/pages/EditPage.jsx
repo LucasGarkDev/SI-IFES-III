@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import ConfirmModal from "../components/ConfirmModal.jsx";
 import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
+import { extractKeys, getItemFromId } from "../js/utils.js";
 
 const EditPage = ({ moduleConfig, id }) => {
   const [showModal, setShowModal] = useState(false);
+  const atualItem = getItemFromId(id, moduleConfig.data); // Ajuste para acessar o item correto
   const [initialValues, setInitialValues] = useState({
-  ...moduleConfig.data[0],        // pega todos os campos
-  nome: moduleConfig.data[0].name // opcional, sobrescreve se quiser
-});
-  alert("ID do item a ser editado: " + id);
+    ...moduleConfig.data, // pega todos os campos
+    nome: atualItem.name, // opcional, sobrescreve se quiser
+  });
+  console.log("atualItem:", atualItem);
 
   const handleSave = () => {
     // chama o modal antes de salvar
@@ -28,7 +30,7 @@ const EditPage = ({ moduleConfig, id }) => {
 
       <Form
         btnTextContent="Editar"
-        fields={moduleConfig.fields}
+        fields={extractKeys(atualItem)}
         onSubmit={handleSave}
         initialValues={initialValues}
       />
