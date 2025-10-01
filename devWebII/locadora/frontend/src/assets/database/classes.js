@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import apiData from "../../service/api.js";
 
 let classesArray = apiData.classesArray; // cria cópia local mutável
@@ -6,11 +7,15 @@ if (!classesArray || classesArray.length === 0) {
   classesArray = [
     {
       _id: 1,
-      name: "maiores de 18",
+      nome: "lancamento",
+      valor: 5.0,
+      dataDevolucao: "01/10/2025",
     },
     {
       _id: 2,
-      name: "menores de 18",
+      nome: "comum",
+      valor: 3.0,
+      dataDevolucao: "02/10/2025",
     },
   ];
 }
