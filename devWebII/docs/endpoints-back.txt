@@ -1,0 +1,52 @@
+📌 Endpoints disponíveis (até agora)
+🎭 Atores (/api/atores)
+
+GET /api/atores → lista paginada de atores (com filtros nome, nacionalidade, ativo).
+
+GET /api/atores/{id} → busca um ator por ID.
+
+POST /api/atores → cria novo ator.
+
+PUT /api/atores/{id} → atualiza ator existente.
+
+DELETE /api/atores/{id} → exclui ator.
+
+🎬 Diretores (/api/diretores)
+
+GET /api/diretores → lista paginada de diretores (com filtros nome, nacionalidade, ativo).
+
+GET /api/diretores/{id} → busca um diretor por ID.
+
+POST /api/diretores → cria novo diretor.
+
+PUT /api/diretores/{id} → atualiza diretor existente.
+
+DELETE /api/diretores/{id} → exclui diretor.
+
+📦 Classes (/api/classes)
+
+GET /api/classes → lista paginada de classes (com filtros nome, ativo).
+
+GET /api/classes/{id} → busca uma classe por ID.
+
+POST /api/classes → cria nova classe.
+
+PUT /api/classes/{id} → atualiza classe existente.
+
+DELETE /api/classes/{id} → exclui classe.
+
+📌 Endpoints previstos (próximas sprints)
+
+De acordo com a especificação de casos de uso, ainda teremos:
+
+🎥 Filmes / Títulos (/api/filmes)
+
+GET /api/filmes → lista e consultas (por nome, categoria, ator, diretor).
+
+GET /api/filmes/{id} → consulta filme por ID.
+
+POST /api/filmes → cria novo filme (relacionado a Classe, Diretor, Atores).
+
+PUT /api/filmes/{id} → atualiza filme.
+
+DELETE /api/filmes/{id} → exclui filme (não pode excluir se tiver itens).
