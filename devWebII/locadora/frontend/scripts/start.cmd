@@ -1,1 +1,0 @@
-set NO_COLOR=1 && npm run dev
