@@ -13,7 +13,7 @@ import agente.Agente;
 public class Main {
     public static void main(String[] args) {
         // Exemplo: agente do usuário 0
-        Agente agente = new Agente(2);
+        Agente agente = new Agente(1);
         agente.iniciar();
     }
 }
