@@ -11,7 +11,11 @@ function ClasseForm({ onAdd }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nome.trim() && valor && dataDevolucao) {
-      onAdd({ nome, valor: parseFloat(valor), dataDevolucao });
+      // converter reais para centavos (ex: 10.50 -> 1050)
+      const precoDiariaCentavos = Math.round(parseFloat(valor) * 100);
+
+      onAdd({ nome, precoDiariaCentavos, dataDevolucao });
+
       setNome("");
       setValor("");
       setDataDevolucao("");
