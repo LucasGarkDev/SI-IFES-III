@@ -7,13 +7,23 @@ const url = VITE_ENV === "development" ? "http://localhost:3001/api" : "/api";
 // 👇 Bancos que você quer carregar
 const bancos = ["atores", "classes", "diretores"];
 
+// define as configurações do axios
+  const api = axios.create({
+    baseURL: url,
+    timeout: 10000,
+    headers: {
+      'Authorization': `Bearer ${new Date()}`,
+      'Content-Type': 'application/json'
+    }
+  });
+
 // 🗃 Data store
 const dataStore = {};
 
 // Busca dados da API
 async function get(endpoint) {
   try {
-    const response = await axios.get(`${url}/${endpoint}`, {
+    const response = await api.get(`${endpoint}`, {
       headers: { Accept: "application/json" },
     });
 
@@ -31,7 +41,7 @@ async function get(endpoint) {
 // Envia telemetria
 async function telemetria(error) {
   try {
-    await axios.post(`${url}/telemetria`, {
+    await api.post(`/telemetria`, {
       mensagem: "Erro ao buscar dados da API",
       erro: error,
       timestamp: new Date().toISOString(),
