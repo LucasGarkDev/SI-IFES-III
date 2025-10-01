@@ -1,6 +1,6 @@
 // src/VideoLocadora.jsx
 import React, { useState, useEffect } from "react";
-import "./css/videoLocadora.css";
+import "./css/VideoLocadora.css";
 import Header from "./components/Header.jsx";
 import AppRoutes from "./routes/VideoLocadoraRoutes.jsx";
 import { BrowserRouter } from "react-router-dom";
