@@ -35,18 +35,3 @@ PUT /api/classes/{id} → atualiza classe existente.
 
 DELETE /api/classes/{id} → exclui classe.
 
-📌 Endpoints previstos (próximas sprints)
-
-De acordo com a especificação de casos de uso, ainda teremos:
-
-🎥 Filmes / Títulos (/api/filmes)
-
-GET /api/filmes → lista e consultas (por nome, categoria, ator, diretor).
-
-GET /api/filmes/{id} → consulta filme por ID.
-
-POST /api/filmes → cria novo filme (relacionado a Classe, Diretor, Atores).
-
-PUT /api/filmes/{id} → atualiza filme.
-
-DELETE /api/filmes/{id} → exclui filme (não pode excluir se tiver itens).
