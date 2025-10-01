@@ -10,9 +10,9 @@ function ClasseTable({ listaClasses, onEdit, onDelete }) {
       <td>{classe.id}</td>
       <td>{classe.nome}</td>
       <td>
-        {typeof classe.valor === "number"
-          ? classe.valor.toFixed(2)
-          : classe.valor}
+        {typeof classe.precoDiariaCentavos === "number"
+          ? (classe.precoDiariaCentavos / 100).toFixed(2) // divide por 100 para exibir em R$
+          : classe.precoDiariaCentavos}
       </td>
       <td>{classe.dataDevolucao || "-"}</td>
       <td>
