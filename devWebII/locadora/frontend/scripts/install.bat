@@ -1,1 +1,0 @@
-npm run update && start /wait /realtime scripts\autogitUpdate.cmd
