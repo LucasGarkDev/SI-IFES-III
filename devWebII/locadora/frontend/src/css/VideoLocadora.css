@@ -1,0 +1,26 @@
+.modal-backdrop-fade {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* escurece a tela */
+	opacity: 0;
+	animation: fadeInBackdrop 0.3s forwards;
+	z-index: 1040; /* abaixo do modal */
+}
+
+@keyframes fadeInBackdrop {
+	to {
+		opacity: 1;
+	}
+}
+
+.auto-alert {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1050; /* acima do conteúdo normal, abaixo de modals que usam 1055+ */
+	min-width: 250px;
+	box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
