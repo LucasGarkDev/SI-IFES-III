@@ -6,12 +6,12 @@ function ClasseTable({ listaClasses, onEdit, onDelete }) {
   const headers = ["ID", "Nome", "Valor (R$)", "Data de Devolução", "Ações"];
 
   const rows = listaClasses.map((classe) => (
-    <>
+    <tr key={classe.id}>
       <td>{classe.id}</td>
       <td>{classe.nome}</td>
       <td>
         {typeof classe.precoDiariaCentavos === "number"
-          ? (classe.precoDiariaCentavos / 100).toFixed(2) // divide por 100 para exibir em R$
+          ? (classe.precoDiariaCentavos / 100).toFixed(2) // exibe em reais
           : classe.precoDiariaCentavos}
       </td>
       <td>{classe.dataDevolucao || "-"}</td>
@@ -27,7 +27,7 @@ function ClasseTable({ listaClasses, onEdit, onDelete }) {
           onClick={() => onDelete(classe.id)}
         />
       </td>
-    </>
+    </tr>
   ));
 
   return <Table headers={headers} rows={rows} />;
