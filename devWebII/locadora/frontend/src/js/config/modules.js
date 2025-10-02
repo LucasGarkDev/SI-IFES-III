@@ -9,19 +9,16 @@ const modules = [
     name: "atores",
     label: "Atores",
     data: atoresArray,
-    newPageFields: ["id", "nome", "nacionalidade"], // usado para a criar novas paginas
   },
   {
     name: "classes",
     label: "Classes",
     data: classesArray,
-    newPageFields: ["id", "descricao"],
   },
   {
     name: "diretores",
     label: "Diretores",
     data: diretoresArray,
-    newPageFields: ["id", "nome", "idade"],
   },
 ];
 
