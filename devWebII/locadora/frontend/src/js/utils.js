@@ -36,6 +36,10 @@ function getRamdomIdFromArtist(artist) {
   return songsArrayFromArtist[ramdomIndex]._id;
 }
 
+function getItemFromId(id, array) {
+  return array.find((item) => item._id === Number(id));
+}
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -88,6 +92,50 @@ function findModuleConfig(moduleName) {
   return modules.find((mod) => mod.name == moduleName);
 }
 
+function extractKeys(input) {
+  if (Array.isArray(input)) {
+    // Caso: array de objetos
+    if (input.length > 0 && typeof input[0] === "object" && input[0] !== null) {
+      console.log("[extractKeys] input[0]:", input[0]);
+      return Object.keys(input[0]);
+    }
+  } else if (typeof input === "object" && input !== null) {
+    // Caso: objeto com propriedade `newPageFields`
+    if (Array.isArray(input.newPageFields)) {
+      console.log("[extractKeys] input.newPageFields:", input.newPageFields);
+      return input.newPageFields;
+    }
+
+    // Caso: objeto com `data` que é array de objetos
+    if (Array.isArray(input.data) && input.data.length > 0 && typeof input.data[0] === "object") {
+      console.log("[extractKeys] input.data[0]:", input.data[0]);
+      return Object.keys(input.data[0]);
+    }
+
+    // ✅ Caso: objeto plano
+    console.log("[extractKeys] input:", input);
+    return Object.keys(input);
+  }
+
+  // Caso nenhum foi válido
+  console.warn("[extractKeys] Formato de input inesperado:", input);
+  return [];
+}
+
+function removeIDs(params) {
+  const processedFields = isValidArrayOfStrings
+  ? fields
+      .filter((field) => !/id/i.test(field)) // 🧠 Ignora qualquer campo que tenha "id"
+      .map((field) => ({
+        name: field,
+        label: field
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase()),
+        type: "text",
+      }))
+  : [];
+
+}
 export {
   getRandomInt,
   getRandomBin,
@@ -101,5 +149,7 @@ export {
   getSongById,
   getRamdomIdFromArtist,
   onErrorTelemetria,
-  findModuleConfig
+  findModuleConfig,
+  extractKeys,
+  getItemFromId,
 };
