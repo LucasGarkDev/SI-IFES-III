@@ -1,6 +1,6 @@
 // src/components/Header.jsx
 import React from "react";
-import logoSpotify from "../assets/logo/spotify-logo.png";
+import logo  from "../assets/logo/video-locadora-retro-logo.png";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -8,7 +8,7 @@ const Header = () => {
     <header className="navbar navbar-dark bg-dark px-3">
       <Link to="/" className="navbar-brand d-flex align-items-center">
         <img
-          src={logoSpotify}
+          src={logo }
           alt="VideoLocadora"
           style={{ height: "40px", marginRight: "10px" }}
         />

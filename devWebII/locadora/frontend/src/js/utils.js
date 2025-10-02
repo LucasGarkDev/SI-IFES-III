@@ -1,43 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-// import { artistArray } from "../assets/database/atores2";
-// import { songsArray } from "../assets/database/songs";
 import axios from "axios";
 import modules from "../js/config/modules.js";
 import { UNSAFE_getPatchRoutesOnNavigationFunction } from "react-router-dom";
 
-function getSongsArrayFromArtist(artist) {
-  return songsArray.filter((currSongObj) => currSongObj.artist === artist);
-}
-
-function getSongById(id) {
-  const song = songsArray.filter(
-    (currSongObj) => currSongObj._id === Number(id)
-  )[0];
-  return song;
-}
-
-// get artists
-function getArtistById(id) {
-  const artist = artistArray.filter(
-    (currArtistObj) => currArtistObj._id === Number(id)
-  )[0];
-  return artist;
-}
-
-function getArtistByName(name) {
-  return artistArray.filter((currArtistObj) => currArtistObj.name === name)[0];
-}
-
-function getRamdomIdFromArtist(artist) {
-  const songsArrayFromArtist = getSongsArrayFromArtist(artist);
-  const ramdomIndex = getRandomInt(songsArrayFromArtist.length - 1);
-
-  return songsArrayFromArtist[ramdomIndex]._id;
-}
-
 function getItemFromId(id, array) {
-  return array.find((item) => item._id === Number(id));
+  const foundItem = array.find((item) => item._id === Number(id));
+  return foundItem;
 }
 
 function getRandomInt(max) {
@@ -136,20 +105,23 @@ function removeIDs(params) {
   : [];
 
 }
+
+function getTitleItem(selectedItem) {
+  if (selectedItem) {
+    return selectedItem.nome || selectedItem.name || selectedItem.titulo || selectedItem.id || selectedItem._id || "Item Selecionado";
+  }
+  return "";
+}
+
 export {
   getRandomInt,
   getRandomBin,
   getRandomHex,
   formatTime,
   formatTimeInSeconds,
-  getAudioProgress,
-  getArtistByName,
-  getArtistById,
-  getSongsArrayFromArtist,
-  getSongById,
-  getRamdomIdFromArtist,
   onErrorTelemetria,
   findModuleConfig,
   extractKeys,
   getItemFromId,
+  getTitleItem
 };

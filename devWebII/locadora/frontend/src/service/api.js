@@ -7,13 +7,22 @@ const url = VITE_ENV === "development" ? "http://localhost:3001/api" : "/api";
 // 👇 Bancos que você quer carregar
 const bancos = ["atores", "classes", "diretores"];
 
+const api = axios.create({
+  baseURL: url,
+  timeout: 10000,
+  headers: {
+    Authorization: `Bearer ${new Date()}`,
+    "Content-Type": "application/json",
+  },
+});
+
 // 🗃 Data store
 const dataStore = {};
 
-// Busca dados da API
+// ========== FUNÇÕES GENÉRICAS ==========
 async function get(endpoint) {
   try {
-    const response = await axios.get(`${url}/${endpoint}`, {
+    const response = await api.get(`${endpoint}`, {
       headers: { Accept: "application/json" },
     });
 
@@ -24,15 +33,45 @@ async function get(endpoint) {
     return response.data;
   } catch (error) {
     await telemetria(error.message || error.toString());
-    return []; // ⚠️ retorna array vazio
+    return [];
   }
 }
 
-// Envia telemetria
+async function create(endpoint, payload) {
+  try {
+    const response = await api.post(`${endpoint}`, payload);
+    return response.data;
+  } catch (error) {
+    await telemetria(error.message || error.toString());
+    return null;
+  }
+}
+
+async function update(endpoint, id, payload) {
+  try {
+    const response = await api.put(`${endpoint}/${id}`, payload);
+    return response.data;
+  } catch (error) {
+    await telemetria(error.message || error.toString());
+    return null;
+  }
+}
+
+async function remove(endpoint, id) {
+  try {
+    const response = await api.delete(`${endpoint}/${id}`);
+    return response.data;
+  } catch (error) {
+    await telemetria(error.message || error.toString());
+    return null;
+  }
+}
+
+// ========== TELEMETRIA ==========
 async function telemetria(error) {
   try {
-    await axios.post(`${url}/telemetria`, {
-      mensagem: "Erro ao buscar dados da API",
+    await api.post(`/telemetria`, {
+      mensagem: "Erro ao comunicar com API",
       erro: error,
       timestamp: new Date().toISOString(),
     });
@@ -41,12 +80,12 @@ async function telemetria(error) {
   }
 }
 
-// Inicializa os dados (lazy)
+// ========== INICIALIZAÇÃO ==========
 for (const banco of bancos) {
   const varName = `${banco}Array`;
   dataStore[varName] = [];
 
-  // busca dados da API (sem await aqui)
+  // busca dados inicial (lazy load)
   get(banco).then((data) => {
     dataStore[varName] = data;
   });
@@ -62,4 +101,19 @@ export async function initData() {
   );
 }
 
+export { get, create, update, remove };
 export default dataStore;
+// example usage
+// import { get, create, update, remove } from "../service/api";
+
+// // buscar
+// const atores = await get("atores");
+
+// // criar
+// await create("atores", { nome: "Novo Ator", nacionalidade: "Brasileiro" });
+
+// // atualizar
+// await update("atores", 1, { nome: "Ator Atualizado" });
+
+// // deletar
+// await remove("atores", 1);
