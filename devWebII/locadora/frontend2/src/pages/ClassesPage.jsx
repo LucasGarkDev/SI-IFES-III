@@ -38,13 +38,22 @@ function ClassesPage() {
 
   const handleSave = async (classeAtualizada) => {
     try {
-      await updateClasse(classeAtualizada.id, classeAtualizada);
+      const payload = {
+        id: classeAtualizada.id,
+        nome: classeAtualizada.nome,
+        precoDiariaCentavos: Math.round(parseFloat(classeAtualizada.valor) * 100),
+        dataDevolucao: classeAtualizada.dataDevolucao,
+        ativo: classeAtualizada.ativo ?? true,
+      };
+
+      await updateClasse(classeAtualizada.id, payload);
       setClasseEditando(null);
       fetchClasses();
     } catch (err) {
       console.error("Erro ao atualizar classe:", err);
     }
   };
+
 
   const handleDelete = async (id) => {
     try {

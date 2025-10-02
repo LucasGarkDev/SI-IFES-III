@@ -2,20 +2,28 @@ import React, { useState, useEffect } from "react";
 
 function ClasseEditModal({ classe, onSave, onClose }) {
   const [nome, setNome] = useState("");
-  const [valor, setValor] = useState("");
+  const [valor, setValor] = useState(""); // em reais (ex: 12.30)
   const [dataDevolucao, setDataDevolucao] = useState("");
 
   useEffect(() => {
     if (classe) {
       setNome(classe.nome);
-      setValor(classe.valor);
+      // converte do back (centavos) para reais com 2 casas
+      setValor((classe.precoDiariaCentavos / 100).toFixed(2));
       setDataDevolucao(classe.dataDevolucao);
     }
   }, [classe]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...classe, nome, valor: parseFloat(valor), dataDevolucao });
+    const payload = {
+      ...classe,
+      nome,
+      // converte de reais para centavos (inteiro)
+      precoDiariaCentavos: Math.round(parseFloat(valor) * 100),
+      dataDevolucao,
+    };
+    onSave(payload);
   };
 
   if (!classe) return null;
