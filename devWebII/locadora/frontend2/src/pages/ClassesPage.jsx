@@ -40,19 +40,22 @@ function ClassesPage() {
     try {
       const payload = {
         id: classeAtualizada.id,
-        nome: classeAtualizada.nome,
-        precoDiariaCentavos: Math.round(parseFloat(classeAtualizada.valor) * 100),
+        nome: classeAtualizada.nome.trim(),
+        precoDiariaCentavos: classeAtualizada.precoDiariaCentavos, // já vem convertido do modal
         dataDevolucao: classeAtualizada.dataDevolucao,
         ativo: classeAtualizada.ativo ?? true,
       };
+
+      console.log("📤 Enviando atualização para o backend:", payload);
 
       await updateClasse(classeAtualizada.id, payload);
       setClasseEditando(null);
       fetchClasses();
     } catch (err) {
-      console.error("Erro ao atualizar classe:", err);
+      console.error("❌ Erro ao atualizar classe:", err);
     }
   };
+
 
 
   const handleDelete = async (id) => {
