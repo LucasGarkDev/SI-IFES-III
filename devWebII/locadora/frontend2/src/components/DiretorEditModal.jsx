@@ -1,23 +1,50 @@
 import React, { useState, useEffect } from "react";
 
-function DiretorEditModal({ diretor, onSave, onClose }) {
+function ClasseEditModal({ classe, onSave, onClose }) {
   const [nome, setNome] = useState("");
+  const [valor, setValor] = useState("");
+  const [dataDevolucao, setDataDevolucao] = useState("");
 
   useEffect(() => {
-    if (diretor) setNome(diretor.nome);
-  }, [diretor]);
+    if (classe) {
+      setNome(classe.nome || "");
+      setValor(
+        classe.precoDiariaCentavos
+          ? (classe.precoDiariaCentavos / 100).toFixed(2)
+          : ""
+      );
+      setDataDevolucao(classe.dataDevolucao || "");
+    }
+  }, [classe]);
+
+  if (!classe) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...diretor, nome });
-  };
 
-  if (!diretor) return null;
+    const precoDiariaCentavos = Math.round(parseFloat(valor) * 100);
+
+    if (!nome.trim() || isNaN(precoDiariaCentavos) || !dataDevolucao) {
+      alert("Preencha todos os campos corretamente antes de salvar.");
+      return;
+    }
+
+    const payload = {
+      id: classe.id,
+      nome: nome.trim(),
+      precoDiariaCentavos,
+      dataDevolucao,
+      ativo: classe.ativo ?? true,
+    };
+
+    console.log("📤 Atualizando classe:", payload);
+    onSave(payload);
+  };
 
   return (
     <div className="modal">
       <div className="modal-content box">
-        <h3>Editar Diretor</h3>
+        <h3>Editar Classe</h3>
         <form onSubmit={handleSubmit}>
           <label>
             Nome:
@@ -25,7 +52,23 @@ function DiretorEditModal({ diretor, onSave, onClose }) {
               type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
-              required
+            />
+          </label>
+          <label>
+            Valor (R$):
+            <input
+              type="number"
+              step="0.01"
+              value={valor}
+              onChange={(e) => setValor(e.target.value)}
+            />
+          </label>
+          <label>
+            Data de Devolução:
+            <input
+              type="date"
+              value={dataDevolucao}
+              onChange={(e) => setDataDevolucao(e.target.value)}
             />
           </label>
           <button type="submit">Salvar</button>
@@ -38,4 +81,4 @@ function DiretorEditModal({ diretor, onSave, onClose }) {
   );
 }
 
-export default DiretorEditModal;
+export default ClasseEditModal;
