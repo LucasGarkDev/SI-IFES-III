@@ -1,84 +1,57 @@
 import React, { useState, useEffect } from "react";
+import "../styles/modal.css";
 
-function ClasseEditModal({ classe, onSave, onClose }) {
+function DiretorEditModal({ diretor, onSave, onClose }) {
   const [nome, setNome] = useState("");
-  const [valor, setValor] = useState("");
-  const [dataDevolucao, setDataDevolucao] = useState("");
 
   useEffect(() => {
-    if (classe) {
-      setNome(classe.nome || "");
-      setValor(
-        classe.precoDiariaCentavos
-          ? (classe.precoDiariaCentavos / 100).toFixed(2)
-          : ""
-      );
-      setDataDevolucao(classe.dataDevolucao || "");
-    }
-  }, [classe]);
+    if (diretor) setNome(diretor.nome || "");
+  }, [diretor]);
 
-  if (!classe) return null;
+  if (!diretor) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const precoDiariaCentavos = Math.round(parseFloat(valor) * 100);
-
-    if (!nome.trim() || isNaN(precoDiariaCentavos) || !dataDevolucao) {
-      alert("Preencha todos os campos corretamente antes de salvar.");
+    if (!nome.trim()) {
+      alert("O nome do diretor é obrigatório.");
       return;
     }
 
     const payload = {
-      id: classe.id,
+      id: diretor.id,
       nome: nome.trim(),
-      precoDiariaCentavos,
-      dataDevolucao,
-      ativo: classe.ativo ?? true,
+      ativo: diretor.ativo ?? true,
     };
 
-    console.log("📤 Atualizando classe:", payload);
     onSave(payload);
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content box">
-        <h3>Editar Classe</h3>
-        <form onSubmit={handleSubmit}>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+        <h3>Editar Diretor</h3>
+        <form onSubmit={handleSubmit} className="modal-form">
           <label>
-            Nome:
+            Nome do Diretor:
             <input
               type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
             />
           </label>
-          <label>
-            Valor (R$):
-            <input
-              type="number"
-              step="0.01"
-              value={valor}
-              onChange={(e) => setValor(e.target.value)}
-            />
-          </label>
-          <label>
-            Data de Devolução:
-            <input
-              type="date"
-              value={dataDevolucao}
-              onChange={(e) => setDataDevolucao(e.target.value)}
-            />
-          </label>
-          <button type="submit">Salvar</button>
-          <button type="button" onClick={onClose}>
-            Cancelar
-          </button>
+
+          <div className="modal-actions">
+            <button type="submit" className="btn-save">
+              Salvar
+            </button>
+            <button type="button" onClick={onClose} className="btn-cancel">
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
   );
 }
 
-export default ClasseEditModal;
+export default DiretorEditModal;
