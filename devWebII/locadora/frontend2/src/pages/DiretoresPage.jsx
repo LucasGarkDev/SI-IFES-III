@@ -8,10 +8,12 @@ import {
 import DiretorForm from "../components/DiretorForm";
 import DiretorTable from "../components/DiretorTable";
 import DiretorEditModal from "../components/DiretorEditModal";
+import ConfirmModal from "../components/ui/ConfirmModal";
 
 function DiretoresPage() {
   const [diretores, setDiretores] = useState([]);
   const [diretorEditando, setDiretorEditando] = useState(null);
+  const [diretorExcluindo, setDiretorExcluindo] = useState(null);
 
   useEffect(() => {
     fetchDiretores();
@@ -25,7 +27,6 @@ function DiretoresPage() {
       console.error("Erro ao carregar diretores:", err);
     }
   };
-
 
   const handleAdd = async (diretor) => {
     try {
@@ -55,6 +56,17 @@ function DiretoresPage() {
     }
   };
 
+  const confirmarExclusao = (diretor) => {
+    setDiretorExcluindo(diretor);
+  };
+
+  const confirmarDelete = async () => {
+    if (diretorExcluindo) {
+      await handleDelete(diretorExcluindo.id);
+      setDiretorExcluindo(null);
+    }
+  };
+
   return (
     <div>
       <h2>Listagem de Diretores (CRUD)</h2>
@@ -62,12 +74,18 @@ function DiretoresPage() {
       <DiretorTable
         diretores={diretores}
         onEdit={setDiretorEditando}
-        onDelete={handleDelete}
+        onDelete={confirmarExclusao}
       />
       <DiretorEditModal
         diretor={diretorEditando}
         onSave={handleSave}
         onClose={() => setDiretorEditando(null)}
+      />
+      <ConfirmModal
+        isOpen={!!diretorExcluindo}
+        onConfirm={confirmarDelete}
+        onCancel={() => setDiretorExcluindo(null)}
+        itemName={diretorExcluindo?.nome}
       />
     </div>
   );
