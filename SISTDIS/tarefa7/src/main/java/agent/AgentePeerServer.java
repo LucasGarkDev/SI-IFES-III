@@ -49,6 +49,8 @@ public class AgentePeerServer extends Thread {
                 int[] doSolicitante = req.getAvaliacoes();
                 List<Integer> sugerir = new ArrayList<>();
 
+                // Recomenda artistas que o solicitante não avaliou (0)
+                // e que este agente avaliou como "GOSTA MUITO" (>=3)
                 for (int i = 0; i < avaliacoesLocais.length; i++) {
                     if (doSolicitante[i] == 0 && avaliacoesLocais[i] >= 3) {
                         sugerir.add(i);
@@ -67,4 +69,3 @@ public class AgentePeerServer extends Thread {
         }
     }
 }
-

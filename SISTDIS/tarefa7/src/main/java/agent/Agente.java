@@ -164,10 +164,11 @@ public class Agente {
             if (op == 0) break;
 
             switch (op) {
-                case 1 -> {System.out.println("Minhas Avaliações:");
-                        for (int i = 0; i < minhasAvaliacoes.length; i++) {
-                            System.out.printf("%2d - %-20s : %d%n", i, Constantes.NOMES_ARTISTAS[i], minhasAvaliacoes[i]);
-                        }
+                case 1 -> {
+                    System.out.println("Minhas Avaliações:");
+                    for (int i = 0; i < minhasAvaliacoes.length; i++) {
+                        System.out.printf("%2d - %-20s : %d%n", i, Constantes.NOMES_ARTISTAS[i], minhasAvaliacoes[i]);
+                    }
                 }
                 case 2 -> {
                     System.out.print("Artista (0-19): ");
@@ -192,13 +193,14 @@ public class Agente {
                             ip = sc.nextLine().trim();
                         }
                         int[] recs = pedirRecomendacoes(ip, id);
-                        if (recs.length == 0)
+                        if (recs.length == 0) {
                             System.out.println("Sem recomendações.");
-                        else
+                        } else {
                             System.out.println("Recomendações recebidas:");
                             for (int i : recs) {
                                 System.out.println(" - " + Constantes.NOMES_ARTISTAS[i] + " (índice " + i + ")");
                             }
+                        }
                     });
                 }
                 default -> System.out.println("Opção inválida.");
@@ -207,3 +209,4 @@ public class Agente {
         sc.close();
     }
 }
+
