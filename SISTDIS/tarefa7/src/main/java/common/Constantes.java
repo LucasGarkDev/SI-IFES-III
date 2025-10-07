@@ -10,7 +10,7 @@ package common;
  */
 public class Constantes {
     // --- Configurações de rede ---
-    public static final String HOST_SERVIDOR = "127.0.0.1"; // altere para IP real da máquina do servidor
+    public static final String HOST_SERVIDOR = "127.0.0.1"; // altere para IP real se for testar em rede
     public static final int PORTA_TCP_SERVIDOR = 9090;
     public static final int PORTA_TCP_PEER = 9091;
 
@@ -27,27 +27,12 @@ public class Constantes {
     public static final int NAO_GOSTA = 1;
     public static final int GOSTA_POUCO = 2;
     public static final int GOSTA_MUITO = 3;
-    
+
+    // --- Nomes dos artistas ---
     public static final String[] NOMES_ARTISTAS = {
-        "The Beatles",
-        "Queen",
-        "Michael Jackson",
-        "Madonna",
-        "Nirvana",
-        "Coldplay",
-        "Imagine Dragons",
-        "Linkin Park",
-        "Eminem",
-        "BTS",
-        "Taylor Swift",
-        "Ed Sheeran",
-        "Metallica",
-        "AC/DC",
-        "The Weeknd",
-        "Adele",
-        "Arctic Monkeys",
-        "Bruno Mars",
-        "Billie Eilish",
-        "Shakira"
+        "The Beatles", "Queen", "Michael Jackson", "Madonna", "Nirvana",
+        "Coldplay", "Imagine Dragons", "Linkin Park", "Eminem", "BTS",
+        "Taylor Swift", "Ed Sheeran", "Metallica", "AC/DC", "The Weeknd",
+        "Adele", "Arctic Monkeys", "Bruno Mars", "Billie Eilish", "Shakira"
     };
 }
