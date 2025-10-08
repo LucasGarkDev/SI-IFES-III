@@ -123,5 +123,5 @@ export {
   findModuleConfig,
   extractKeys,
   getItemFromId,
-  getTitleItem
+  getTitleItem,
 };

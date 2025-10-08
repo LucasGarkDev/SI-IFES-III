@@ -1,4 +1,3 @@
-// src/VideoLocadora.jsx
 import React, { useState, useEffect } from "react";
 import "./css/VideoLocadora.css";
 import Header from "./components/Header.jsx";
@@ -7,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import Aside from "./components/Aside.jsx";
 import modules from "./js/config/modules.js";
 import { initData } from "./service/api.js";
+import Loading from "./components/Loading.jsx";
 
 const VideoLocadora = () => {
   const [loaded, setLoaded] = useState(false);
@@ -17,8 +17,6 @@ const VideoLocadora = () => {
       setLoaded(true);
     })();
   }, []);
-
-  if (!loaded) return <p>Carregando Banco de dados...</p>;
 
   const asideLinks = [
     { path: "/", label: "Início" },
@@ -44,6 +42,9 @@ const VideoLocadora = () => {
           </div>
         </div>
       </div>
+
+      {/* Overlay de Loading */}
+      {!loaded && <Loading />}
     </BrowserRouter>
   );
 };
