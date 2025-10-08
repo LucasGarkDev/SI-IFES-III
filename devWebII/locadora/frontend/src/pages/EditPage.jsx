@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import { extractKeys, getItemFromId, getTitleItem } from "../js/utils.js";
 import { update } from "../service/api.js";
+import Loading from "../components/Loading.jsx";
 
 const EditPage = ({ moduleConfig, id }) => {
   const atualItem = getItemFromId(id, moduleConfig.data);
 
   // Faz checagem de segurança
   const [initialValues, setInitialValues] = useState(atualItem || {});
-
+  const [loading, setLoading] = useState(false); // Estado para controlar o overlay
   const [formData, setFormData] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -26,13 +27,16 @@ const EditPage = ({ moduleConfig, id }) => {
 
   const handleConfirm = async () => {
     try {
+      setLoading(true); // Ativa o overlay
       setShowModal(false);
+
       console.log("[HANDLE_CONFIRM] Atualizando item:", formData);
       await update(moduleConfig.name, id, formData);
       console.log("[HANDLE_CONFIRM] Item salvo com sucesso!");
     } catch (err) {
       console.error("[HANDLE_CONFIRM] Erro ao salvar item:", err);
-      setShowModal(false);
+    } finally {
+      setLoading(false); // Desativa o overlay mesmo se der erro
     }
   };
 
@@ -56,10 +60,15 @@ const EditPage = ({ moduleConfig, id }) => {
       <ConfirmModal
         show={showModal}
         title="Confirmação"
-        message={`Deseja realmente editar ${getTitleItem(atualItem)} para ${getTitleItem(formData)}?`}
+        message={`Deseja realmente editar ${getTitleItem(
+          atualItem
+        )} para ${getTitleItem(formData)}?`}
         onConfirm={handleConfirm}
         onCancel={() => setShowModal(false)}
       />
+
+      {/* Overlay de Loading */}
+      {loading && <Loading message={`Editando ${moduleConfig.name}`} />}
     </div>
   );
 };
