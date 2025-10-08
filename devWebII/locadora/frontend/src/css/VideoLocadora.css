@@ -229,7 +229,7 @@ form.p-3.border.rounded.bg-light {
 	/* Aplica ao .card e ao seu Form.jsx */
 	background-color: rgba(42, 14, 91, 0.8) !important;
 	/* Fundo semi-transparente para cards e formulários */
-	border: 2px solid var(--retro-green) !important;
+	border: 2px solid var(--retro-blue) !important;
 	border-radius: 10px !important;
 	box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
 	margin-bottom: 20px;
@@ -239,7 +239,7 @@ form.p-3.border.rounded.bg-light {
 .card:hover,
 form.p-3.border.rounded.bg-light:hover {
 	transform: translateY(-5px);
-	box-shadow: 0 0 20px var(--retro-green), 0 0 30px var(--retro-green);
+	box-shadow: 0 0 20px var(--retro-pink), 0 0 30px var(--retro-pink);
 }
 
 .card-header {
@@ -309,7 +309,7 @@ form.p-3.border.rounded.bg-light:hover {
 .form-control:focus {
 	background-color: rgba(0, 0, 0, 0.6) !important;
 	border-color: var(--retro-green) !important;
-	box-shadow: 0 0 8px rgba(0, 255, 0, 0.5) !important;
+	box-shadow: 0 0 8px rgba(37, 41, 37, 0.5) !important;
 	color: var(--retro-text-color) !important;
 }
 
