@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const { VITE_ENV } = import.meta.env;
-const url = VITE_ENV === "development" ? "http://localhost:8085/api" : "/api";
+const url = VITE_ENV === "development" ? "https://my-json-server.typicode.com/typicode/demo/" : "/api";
 
 // 👇 Bancos que você quer carregar
 const bancos = ["atores", "classes", "diretores"];
@@ -17,12 +17,12 @@ const api = axios.create({
 });
 
 // 🗃 Data store
-const dataStore = {};
+let dataStore = {};
 
 // ========== FUNÇÕES GENÉRICAS ==========
 async function get(endpoint) {
   try {
-    const response = await api.get(`${endpoint}`, {
+    const response = await api.get(`db`, {
       headers: { Accept: "application/json" },
     });
 
@@ -81,30 +81,22 @@ async function telemetria(error) {
 }
 
 // ========== INICIALIZAÇÃO ==========
-for (const banco of bancos) {
-  const varName = `${banco}Array`;
-  dataStore[varName] = [];
+export async function initData(){
 
-  // busca dados inicial (lazy load)
-  get(banco).then((data) => {
-    dataStore[varName] = data;
-  });
-}
-
-export async function initData() {
-  console.log("Iniciando...");
-  await Promise.all(
-    bancos.map(async (banco) => {
-      const varName = `${banco}Array`;
-      const data = await get(banco);
+  for (const banco of bancos) {
+    const varName = `${banco}Array`;
+    dataStore[varName] = [];
+    
+    // busca dados inicial (lazy load)
+    await get(banco).then((data) => {
       dataStore[varName] = data;
-    })
-  );
-  console.log("[INIT DATA]: ",dataStore);
+    });
+    console.log(dataStore)
+  }
 }
+await initData();
 
-export { get, create, update, remove };
-export default dataStore;
+export { get, create, update, remove,dataStore };
 // example usage
 // import { get, create, update, remove } from "../service/api";
 
