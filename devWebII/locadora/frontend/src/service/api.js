@@ -30,7 +30,7 @@ async function get(endpoint) {
       throw new Error(`Resposta inválida da API: ${response.data}`);
     }
 
-    return response.data;
+    return response.data.content;
   } catch (error) {
     await telemetria(error.message || error.toString());
     return [];
