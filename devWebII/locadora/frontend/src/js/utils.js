@@ -1,43 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-// import { artistArray } from "../assets/database/atores2";
-// import { songsArray } from "../assets/database/songs";
 import axios from "axios";
 import modules from "../js/config/modules.js";
 import { UNSAFE_getPatchRoutesOnNavigationFunction } from "react-router-dom";
 
-function getSongsArrayFromArtist(artist) {
-  return songsArray.filter((currSongObj) => currSongObj.artist === artist);
-}
-
-function getSongById(id) {
-  const song = songsArray.filter(
-    (currSongObj) => currSongObj._id === Number(id)
-  )[0];
-  return song;
-}
-
-// get artists
-function getArtistById(id) {
-  const artist = artistArray.filter(
-    (currArtistObj) => currArtistObj._id === Number(id)
-  )[0];
-  return artist;
-}
-
-function getArtistByName(name) {
-  return artistArray.filter((currArtistObj) => currArtistObj.name === name)[0];
-}
-
-function getRamdomIdFromArtist(artist) {
-  const songsArrayFromArtist = getSongsArrayFromArtist(artist);
-  const ramdomIndex = getRandomInt(songsArrayFromArtist.length - 1);
-
-  return songsArrayFromArtist[ramdomIndex]._id;
-}
-
 function getItemFromId(id, array) {
-  return array.find((item) => item._id === Number(id));
+  const foundItem = array.find((item) => item._id === Number(id));
+  return foundItem;
 }
 
 function getRandomInt(max) {
@@ -107,7 +76,11 @@ function extractKeys(input) {
     }
 
     // Caso: objeto com `data` que é array de objetos
-    if (Array.isArray(input.data) && input.data.length > 0 && typeof input.data[0] === "object") {
+    if (
+      Array.isArray(input.data) &&
+      input.data.length > 0 &&
+      typeof input.data[0] === "object"
+    ) {
       console.log("[extractKeys] input.data[0]:", input.data[0]);
       return Object.keys(input.data[0]);
     }
@@ -124,32 +97,63 @@ function extractKeys(input) {
 
 function removeIDs(params) {
   const processedFields = isValidArrayOfStrings
-  ? fields
-      .filter((field) => !/id/i.test(field)) // 🧠 Ignora qualquer campo que tenha "id"
-      .map((field) => ({
-        name: field,
-        label: field
-          .replace(/_/g, " ")
-          .replace(/\b\w/g, (l) => l.toUpperCase()),
-        type: "text",
-      }))
-  : [];
-
+    ? fields
+        .filter((field) => !/id/i.test(field)) // 🧠 Ignora qualquer campo que tenha "id"
+        .map((field) => ({
+          name: field,
+          label: field
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase()),
+          type: "text",
+        }))
+    : [];
 }
+
+function getTitleItem(selectedItem) {
+  if (selectedItem) {
+    return (
+      selectedItem.nome ||
+      selectedItem.name ||
+      selectedItem.titulo ||
+      selectedItem.id ||
+      selectedItem._id ||
+      "Item Selecionado"
+    );
+  }
+  return "";
+}
+
+function filtrarCampos(filtros, dados) {
+  // Caso seja um array de objetos
+  if (Array.isArray(dados)) {
+    return dados.map((item) =>
+      Object.fromEntries(
+        Object.entries(item).filter(([chave]) => !filtros.includes(chave))
+      )
+    );
+  }
+
+  // Caso seja um objeto individual
+  if (typeof dados === "object" && dados !== null) {
+    return Object.fromEntries(
+      Object.entries(dados).filter(([chave]) => !filtros.includes(chave))
+    );
+  }
+
+  // Se não for objeto nem array, retorna como está (ou pode lançar erro)
+  return dados;
+}
+
 export {
   getRandomInt,
   getRandomBin,
   getRandomHex,
   formatTime,
   formatTimeInSeconds,
-  getAudioProgress,
-  getArtistByName,
-  getArtistById,
-  getSongsArrayFromArtist,
-  getSongById,
-  getRamdomIdFromArtist,
   onErrorTelemetria,
   findModuleConfig,
   extractKeys,
   getItemFromId,
+  getTitleItem,
+  filtrarCampos,
 };
