@@ -1,6 +1,6 @@
 import {dataStore} from "../../service/api.js";
 
-console.log(dataStore);
+console.log("[DB CONTROLER ATORES]: ", dataStore);
 let atoresArray = dataStore.atoresArray; // cria cópia local mutável
 // if (!atoresArray || atoresArray.length === 0) {
 //   console.log("Usando dados locais para atores.js");

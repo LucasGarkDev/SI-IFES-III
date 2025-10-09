@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const { VITE_ENV } = import.meta.env;
-const url = VITE_ENV === "development" ? "https://my-json-server.typicode.com/typicode/demo/" : "/api";
+const url = VITE_ENV === "development" ? "http://localhost:8085" : "/api";
 
 // 👇 Bancos que você quer carregar
 const bancos = ["atores", "classes", "diretores"];
@@ -86,7 +86,7 @@ export async function initData(){
   for (const banco of bancos) {
     const varName = `${banco}Array`;
     dataStore[varName] = [];
-    
+
     // busca dados inicial (lazy load)
     await get(banco).then((data) => {
       dataStore[varName] = data;
