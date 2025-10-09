@@ -22,7 +22,7 @@ let dataStore = {};
 // ========== FUNÇÕES GENÉRICAS ==========
 async function get(endpoint) {
   try {
-    const response = await api.get(`db`, {
+    const response = await api.get(`${endpoint}`, {
       headers: { Accept: "application/json" },
     });
 
