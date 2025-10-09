@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const { VITE_ENV } = import.meta.env;
-const url = VITE_ENV === "development" ? "http://localhost:8085" : "/api";
+const url = VITE_ENV === "development" ? "http://localhost:8085/api" : "/api";
 
 // 👇 Bancos que você quer carregar
 const bancos = ["atores", "classes", "diretores"];
@@ -30,7 +30,7 @@ async function get(endpoint) {
       throw new Error(`Resposta inválida da API: ${response.data}`);
     }
 
-    return response.data;
+    return response.data.content;
   } catch (error) {
     await telemetria(error.message || error.toString());
     return [];
