@@ -14,11 +14,6 @@ const DynamicTable = ({ data, fields }) => {
   if (!data || data.length === 0)
     return <p className="text-muted">Nenhum dado disponível.</p>;
 
-  // pega os campos dinamicamente ou usa os fornecidos
-  const excludeFields = ["id", "_id", "ativo"];
-
-const detectedFields = fields || Object.keys(data[0]).filter((f) => !excludeFields.includes(f));
-
 
   // pega o moduleName da URL (ator, filme, etc.)
   const { moduleName } = useParams();
@@ -62,7 +57,7 @@ const detectedFields = fields || Object.keys(data[0]).filter((f) => !excludeFiel
       <table className="table table-striped table-bordered table-hover">
         <thead className="table-dark">
           <tr>
-            {detectedFields.map((field) => (
+            {fields.map((field) => (
               <th key={field}>
                 {field
                   .replace(/_/g, " ")
