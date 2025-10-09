@@ -1,11 +1,19 @@
 // src/service/api.js
 import axios from "axios";
+import { filtrarCampos } from "../js/utils";
 
 const { VITE_ENV } = import.meta.env;
 const url = VITE_ENV === "development" ? "http://localhost:8085/api" : "/api";
 
 // 👇 Bancos que você quer carregar
 const bancos = ["atores", "classes", "diretores"];
+const excludeFields = [
+  "id",
+  "_id",
+  "ativo",
+  "data_nascimento",
+  "nacionalidade",
+];
 
 const api = axios.create({
   baseURL: url,
@@ -81,22 +89,21 @@ async function telemetria(error) {
 }
 
 // ========== INICIALIZAÇÃO ==========
-export async function initData(){
-
+export async function initData() {
   for (const banco of bancos) {
     const varName = `${banco}Array`;
     dataStore[varName] = [];
 
     // busca dados inicial (lazy load)
     await get(banco).then((data) => {
-      dataStore[varName] = data;
+      dataStore[varName] = filtrarCampos(excludeFields,data);
     });
-    console.log(dataStore)
+    console.log(dataStore);
   }
 }
 await initData();
 
-export { get, create, update, remove,dataStore };
+export { get, create, update, remove, dataStore };
 // example usage
 // import { get, create, update, remove } from "../service/api";
 
