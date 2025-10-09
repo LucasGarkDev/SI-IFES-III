@@ -76,7 +76,11 @@ function extractKeys(input) {
     }
 
     // Caso: objeto com `data` que é array de objetos
-    if (Array.isArray(input.data) && input.data.length > 0 && typeof input.data[0] === "object") {
+    if (
+      Array.isArray(input.data) &&
+      input.data.length > 0 &&
+      typeof input.data[0] === "object"
+    ) {
       console.log("[extractKeys] input.data[0]:", input.data[0]);
       return Object.keys(input.data[0]);
     }
@@ -93,32 +97,52 @@ function extractKeys(input) {
 
 function removeIDs(params) {
   const processedFields = isValidArrayOfStrings
-  ? fields
-      .filter((field) => !/id/i.test(field)) // 🧠 Ignora qualquer campo que tenha "id"
-      .map((field) => ({
-        name: field,
-        label: field
-          .replace(/_/g, " ")
-          .replace(/\b\w/g, (l) => l.toUpperCase()),
-        type: "text",
-      }))
-  : [];
-
+    ? fields
+        .filter((field) => !/id/i.test(field)) // 🧠 Ignora qualquer campo que tenha "id"
+        .map((field) => ({
+          name: field,
+          label: field
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase()),
+          type: "text",
+        }))
+    : [];
 }
 
 function getTitleItem(selectedItem) {
   if (selectedItem) {
-    return selectedItem.nome || selectedItem.name || selectedItem.titulo || selectedItem.id || selectedItem._id || "Item Selecionado";
+    return (
+      selectedItem.nome ||
+      selectedItem.name ||
+      selectedItem.titulo ||
+      selectedItem.id ||
+      selectedItem._id ||
+      "Item Selecionado"
+    );
   }
   return "";
 }
 
-function filtrarCampos(filtros, objeto) {
-  return Object.fromEntries(
-    Object.entries(objeto).filter(([chave]) => !filtros.includes(chave))
-  );
-}
+function filtrarCampos(filtros, dados) {
+  // Caso seja um array de objetos
+  if (Array.isArray(dados)) {
+    return dados.map((item) =>
+      Object.fromEntries(
+        Object.entries(item).filter(([chave]) => !filtros.includes(chave))
+      )
+    );
+  }
 
+  // Caso seja um objeto individual
+  if (typeof dados === "object" && dados !== null) {
+    return Object.fromEntries(
+      Object.entries(dados).filter(([chave]) => !filtros.includes(chave))
+    );
+  }
+
+  // Se não for objeto nem array, retorna como está (ou pode lançar erro)
+  return dados;
+}
 
 export {
   getRandomInt,
@@ -131,5 +155,5 @@ export {
   extractKeys,
   getItemFromId,
   getTitleItem,
-  filtrarCampos
+  filtrarCampos,
 };
