@@ -92,6 +92,7 @@ for (const banco of bancos) {
 }
 
 export async function initData() {
+  console.log("Iniciando...");
   await Promise.all(
     bancos.map(async (banco) => {
       const varName = `${banco}Array`;
@@ -99,6 +100,7 @@ export async function initData() {
       dataStore[varName] = data;
     })
   );
+  console.log("[INIT DATA]: ",dataStore);
 }
 
 export { get, create, update, remove };
