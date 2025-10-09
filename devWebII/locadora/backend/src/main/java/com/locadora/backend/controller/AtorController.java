@@ -3,6 +3,9 @@ package com.locadora.backend.controller;
 import com.locadora.backend.dto.*;
 import com.locadora.backend.service.AtorService;
 import jakarta.validation.Valid;
+
+import java.net.URI;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,7 +22,8 @@ public class AtorController {
     @PostMapping
     public ResponseEntity<AtorDTO> criar(@Valid @RequestBody AtorCreateDTO dto) {
         AtorDTO criado = service.criar(dto);
-        return ResponseEntity.ok(criado);
+        URI location = URI.create("/api/atores/" + criado.getId());
+        return ResponseEntity.created(location).body(criado);
     }
 
     @GetMapping("/{id}")

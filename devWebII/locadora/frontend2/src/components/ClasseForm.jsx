@@ -10,16 +10,32 @@ function ClasseForm({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (nome.trim() && valor && dataDevolucao) {
-      // converter reais para centavos (ex: 10.50 -> 1050)
-      const precoDiariaCentavos = Math.round(parseFloat(valor) * 100);
 
-      onAdd({ nome, precoDiariaCentavos, dataDevolucao });
-
-      setNome("");
-      setValor("");
-      setDataDevolucao("");
+    if (!nome.trim() || !valor || !dataDevolucao) {
+      alert("Preencha todos os campos antes de cadastrar.");
+      return;
     }
+
+    const precoDiariaCentavos = Math.round(parseFloat(valor) * 100);
+
+    if (isNaN(precoDiariaCentavos) || precoDiariaCentavos <= 0) {
+      alert("O valor deve ser um número maior que zero.");
+      return;
+    }
+
+    const novaClasse = {
+      nome: nome.trim(),
+      precoDiariaCentavos,
+      dataDevolucao,
+      ativo: true,
+    };
+
+    console.log("📤 Enviando para criação:", novaClasse);
+    onAdd(novaClasse);
+
+    setNome("");
+    setValor("");
+    setDataDevolucao("");
   };
 
   return (
@@ -32,6 +48,7 @@ function ClasseForm({ onAdd }) {
       <InputField
         label="Valor (R$)"
         type="number"
+        step="0.01"
         value={valor}
         onChange={(e) => setValor(e.target.value)}
       />

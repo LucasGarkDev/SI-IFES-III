@@ -11,7 +11,7 @@ function DiretorTable({ diretores, onEdit, onDelete }) {
       <td>{d.nome}</td>
       <td>
         <ActionButton label="Editar" variant="edit" onClick={() => onEdit(d)} />
-        <ActionButton label="Excluir" variant="delete" onClick={() => onDelete(d.id)} />
+        <ActionButton label="Excluir" variant="delete" onClick={() => onDelete(d)} />
       </td>
     </>
   ));
