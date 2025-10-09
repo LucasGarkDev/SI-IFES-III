@@ -18,7 +18,7 @@ function AtorTable({ atores, onEdit, onDelete }) {
         <ActionButton
           label="Excluir"
           variant="delete"
-          onClick={() => onDelete(ator.id)}
+          onClick={() => onDelete(ator)} // ✅ passa o ator inteiro
         />
       </td>
     </>
