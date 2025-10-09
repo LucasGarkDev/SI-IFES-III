@@ -24,7 +24,7 @@ function ClasseTable({ listaClasses, onEdit, onDelete }) {
         <ActionButton
           label="Excluir"
           variant="delete"
-          onClick={() => onDelete(classe.id)}
+          onClick={() => onDelete(classe)}
         />
       </td>
     </>
