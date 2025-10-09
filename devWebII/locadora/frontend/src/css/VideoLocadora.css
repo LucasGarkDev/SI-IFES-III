@@ -3,395 +3,475 @@
 
 /* Variáveis CSS para cores e fontes */
 :root {
-    --retro-purple: #8A2BE2; /* Azul violeta */
-    --retro-pink: #FF69B4; /* Rosa choque */
-    --retro-blue: #00FFFF; /* Ciano elétrico */
-    --retro-yellow: #FFFF00; /* Amarelo neon */
-    --retro-green: #00FF00; /* Verde neon */
-    --retro-dark-bg: #1a0f3d; /* Fundo escuro roxo/azulado */
-    --retro-text-color: #f0f0f0; /* Cor do texto claro */
-    --retro-accent-color: #FF00FF; /* Magenta para detalhes */
-    --retro-table-header: #2b0e6e; /* Fundo para thead */
-    --retro-table-row-odd: rgba(43, 14, 110, 0.5); /* Linhas ímpares da tabela */
-    --retro-table-row-even: rgba(26, 15, 61, 0.5); /* Linhas pares da tabela */
+	--retro-purple: #8A2BE2;
+	/* Azul violeta */
+	--retro-pink: #FF69B4;
+	/* Rosa choque */
+	--retro-blue: #00FFFF;
+	/* Ciano elétrico */
+	--retro-yellow: #FFFF00;
+	/* Amarelo neon */
+	--retro-green: #00FF00;
+	/* Verde neon */
+	--retro-dark-bg: #1a0f3d;
+	/* Fundo escuro roxo/azulado */
+	--retro-text-color: #f0f0f0;
+	/* Cor do texto claro */
+	--retro-accent-color: #FF00FF;
+	/* Magenta para detalhes */
+	--retro-table-header: #2b0e6e;
+	/* Fundo para thead */
+	--retro-table-row-odd: rgba(43, 14, 110, 0.5);
+	/* Linhas ímpares da tabela */
+	--retro-table-row-even: rgba(26, 15, 61, 0.5);
+	/* Linhas pares da tabela */
 
-    --font-pixel: 'Press Start 2P', cursive;
-    --font-arcade: 'VT323', monospace;
-    --font-default: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	--font-pixel: 'Press Start 2P', cursive;
+	--font-arcade: 'VT323', monospace;
+	--font-default: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, var(--retro-dark-bg) 0%, #2b0e6e 100%); /* Fundo gradiente escuro */
-    color: var(--retro-text-color);
-    font-family: var(--font-default);
-    min-height: 100vh;
-    margin: 0;
-    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
-    position: relative;
+	background: linear-gradient(135deg, var(--retro-dark-bg) 0%, #2b0e6e 100%);
+	/* Fundo gradiente escuro */
+	color: var(--retro-text-color);
+	font-family: var(--font-default);
+	min-height: 100vh;
+	margin: 0;
+	overflow-x: hidden;
+	/* Evita rolagem horizontal indesejada */
+	position: relative;
 }
 
 /* Efeito de scanlines para simular tela de CRT */
 body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.1) 0px,
-        rgba(0, 0, 0, 0.1) 1px,
-        transparent 1px,
-        transparent 2px
-    );
-    pointer-events: none;
-    z-index: 1000;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: repeating-linear-gradient(to bottom,
+			rgba(0, 0, 0, 0.1) 0px,
+			rgba(0, 0, 0, 0.1) 1px,
+			transparent 1px,
+			transparent 2px);
+	pointer-events: none;
+	z-index: 1000;
 }
 
 
 /* Estilo para o cabeçalho (Header.jsx) */
 .navbar {
-    background: linear-gradient(90deg, var(--retro-purple) 0%, var(--retro-accent-color) 100%) !important;
-    border-bottom: 3px solid var(--retro-blue);
-    box-shadow: 0 0 15px var(--retro-blue); /* Brilho neon na borda */
+	background: linear-gradient(90deg, var(--retro-purple) 0%, var(--retro-accent-color) 100%) !important;
+	border-bottom: 3px solid var(--retro-blue);
+	box-shadow: 0 0 15px var(--retro-blue);
+	/* Brilho neon na borda */
 }
 
 .navbar-brand {
-    color: var(--retro-text-color) !important;
-    font-family: var(--font-pixel); /* Fonte pixel para o branding */
-    text-shadow: 2px 2px 5px rgba(0, 255, 255, 0.7); /* Sombra neon */
-    transition: all 0.3s ease;
+	color: var(--retro-text-color) !important;
+	font-family: var(--font-pixel);
+	/* Fonte pixel para o branding */
+	text-shadow: 2px 2px 5px rgba(0, 255, 255, 0.7);
+	/* Sombra neon */
+	transition: all 0.3s ease;
 }
 
 /* Estilo para a barra lateral (Aside.jsx) - Ajustado para suas classes Bootstrap */
-aside.bg-light { /* Seleciona especificamente seu componente Aside */
-    background: #2a0e5b !important; /* Fundo mais escuro para o aside */
-    padding: 20px 10px !important;
-    border: 2px solid var(--retro-pink) !important;
-    border-radius: 10px !important;
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); /* Brilho rosa */
-    min-height: calc(100vh - 70px); /* Ajuste com base na altura do header */
-    margin-top: 20px; /* Adiciona um pouco de margem superior */
+aside.bg-light {
+	/* Seleciona especificamente seu componente Aside */
+	background: #2a0e5b !important;
+	/* Fundo mais escuro para o aside */
+	padding: 20px 10px !important;
+	border: 2px solid var(--retro-pink) !important;
+	border-radius: 10px !important;
+	box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+	/* Brilho rosa */
+	min-height: calc(100vh - 70px);
+	/* Ajuste com base na altura do header */
+	margin-top: 20px;
+	/* Adiciona um pouco de margem superior */
 }
 
-aside.bg-light h4.mb-3 { /* Título do Aside */
-    color: var(--retro-yellow);
-    font-family: var(--font-pixel);
-    text-shadow: 1px 1px 3px var(--retro-yellow);
-    margin-bottom: 20px !important;
-    text-align: center;
+aside.bg-light h4.mb-3 {
+	/* Título do Aside */
+	color: var(--retro-yellow);
+	font-family: var(--font-pixel);
+	text-shadow: 1px 1px 3px var(--retro-yellow);
+	margin-bottom: 20px !important;
+	text-align: center;
 }
 
-.list-group-item { /* Links do Aside */
-    background-color: transparent !important; /* Remove o fundo padrão do list-group-item */
-    border: none !important; /* Remove as bordas padrão */
-    padding: 0 !important; /* Remove o padding padrão */
-    margin-bottom: 5px; /* Espaçamento entre os links */
+.list-group-item {
+	/* Links do Aside */
+	background-color: transparent !important;
+	/* Remove o fundo padrão do list-group-item */
+	border: none !important;
+	/* Remove as bordas padrão */
+	padding: 0 !important;
+	/* Remove o padding padrão */
+	margin-bottom: 5px;
+	/* Espaçamento entre os links */
 }
 
 .list-group-item a {
-    display: block;
-    color: var(--retro-blue) !important; /* Cor do texto do link */
-    text-decoration: none !important;
-    padding: 10px 15px !important;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    font-family: var(--font-arcade);
-    border: 1px solid rgba(0, 255, 255, 0.3);
+	display: block;
+	color: var(--retro-blue) !important;
+	/* Cor do texto do link */
+	text-decoration: none !important;
+	padding: 10px 15px !important;
+	border-radius: 5px;
+	transition: all 0.3s ease;
+	font-family: var(--font-arcade);
+	border: 1px solid rgba(0, 255, 255, 0.3);
 }
 
 .list-group-item a:hover,
-.list-group-item a.active { /* Para o estado ativo do link */
-    background: var(--retro-blue) !important;
-    color: var(--retro-dark-bg) !important;
-    box-shadow: 0 0 10px var(--retro-blue), 0 0 20px var(--retro-blue);
-    transform: scale(1.02);
+.list-group-item a.active {
+	/* Para o estado ativo do link */
+	background: var(--retro-blue) !important;
+	color: var(--retro-dark-bg) !important;
+	box-shadow: 0 0 10px var(--retro-blue), 0 0 20px var(--retro-blue);
+	transform: scale(1.02);
 }
 
 /* Estilo para o conteúdo principal */
 .col-md-9.col-lg-10 {
-    padding: 20px;
+	padding: 20px;
 }
 
 /* Títulos gerais */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--retro-pink);
-    font-family: var(--font-pixel);
-    text-shadow: 2px 2px 4px var(--retro-accent-color);
-    margin-bottom: 20px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--retro-pink);
+	font-family: var(--font-pixel);
+	text-shadow: 2px 2px 4px var(--retro-accent-color);
+	margin-bottom: 20px;
 }
 
 /* Estilo para DynamicTable.jsx */
 .table {
-    background-color: rgba(42, 14, 91, 0.7); /* Fundo semi-transparente para a tabela */
-    border: 2px solid var(--retro-green);
-    border-radius: 10px;
-    overflow: hidden; /* Para as bordas arredondadas funcionarem bem */
-    color: var(--retro-text-color);
+	background-color: rgba(42, 14, 91, 0.7);
+	/* Fundo semi-transparente para a tabela */
+	border: 2px solid var(--retro-green);
+	border-radius: 10px;
+	overflow: hidden;
+	/* Para as bordas arredondadas funcionarem bem */
+	color: var(--retro-text-color);
 }
 
-.table-dark thead th { /* Cabeçalho da tabela */
-    background: linear-gradient(90deg, var(--retro-pink) 0%, var(--retro-yellow) 100%) !important;
-    color: var(--retro-dark-bg) !important;
-    font-family: var(--font-arcade);
-    border-color: var(--retro-accent-color) !important;
-    text-shadow: none; /* Remove a sombra de texto do header da tabela */
+.table-dark thead th {
+	/* Cabeçalho da tabela */
+	background: linear-gradient(90deg, var(--retro-pink) 0%, var(--retro-yellow) 100%) !important;
+	color: var(--retro-dark-bg) !important;
+	font-family: var(--font-arcade);
+	border-color: var(--retro-accent-color) !important;
+	text-shadow: none;
+	/* Remove a sombra de texto do header da tabela */
 }
 
-.table-striped tbody tr:nth-of-type(odd) { /* Linhas ímpares */
-    background-color: var(--retro-table-row-odd);
+.table-striped tbody tr:nth-of-type(odd) {
+	/* Linhas ímpares */
+	background-color: var(--retro-table-row-odd);
 }
 
-.table-striped tbody tr:nth-of-type(even) { /* Linhas pares */
-    background-color: var(--retro-table-row-even);
+.table-striped tbody tr:nth-of-type(even) {
+	/* Linhas pares */
+	background-color: var(--retro-table-row-even);
 }
 
-.table-hover tbody tr:hover { /* Hover nas linhas da tabela */
-    background-color: rgba(0, 255, 255, 0.2); /* Ciano claro no hover */
-    box-shadow: inset 0 0 10px var(--retro-blue);
+.table-hover tbody tr:hover {
+	/* Hover nas linhas da tabela */
+	background-color: rgba(0, 255, 255, 0.2);
+	/* Ciano claro no hover */
+	box-shadow: inset 0 0 10px var(--retro-blue);
 }
 
 /* Ajuste para botões de ação na tabela */
 .table .btn-warning {
-    background-color: var(--retro-yellow);
-    border-color: var(--retro-yellow);
-    color: var(--retro-dark-bg);
-    box-shadow: 0 0 5px rgba(255, 255, 0, 0.7);
+	background-color: var(--retro-yellow);
+	border-color: var(--retro-yellow);
+	color: var(--retro-dark-bg);
+	box-shadow: 0 0 5px rgba(255, 255, 0, 0.7);
 }
 
 .table .btn-warning:hover {
-    background-color: #FFD700; /* Dourado */
-    border-color: #FFD700;
-    box-shadow: 0 0 10px #FFD700;
+	background-color: #FFD700;
+	/* Dourado */
+	border-color: #FFD700;
+	box-shadow: 0 0 10px #FFD700;
 }
 
 .table .btn-danger {
-    background-color: #FF0000; /* Vermelho vibrante */
-    border-color: #FF0000;
-    color: var(--retro-text-color);
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+	background-color: #FF0000;
+	/* Vermelho vibrante */
+	border-color: #FF0000;
+	color: var(--retro-text-color);
+	box-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
 }
 
 .table .btn-danger:hover {
-    background-color: #DC143C; /* Crimson */
-    border-color: #DC143C;
-    box-shadow: 0 0 10px #DC143C;
+	background-color: #DC143C;
+	/* Crimson */
+	border-color: #DC143C;
+	box-shadow: 0 0 10px #DC143C;
 }
 
 
 /* Estilo para Cards do Bootstrap (Form.jsx também usa card-like structure) */
-.card, form.p-3.border.rounded.bg-light { /* Aplica ao .card e ao seu Form.jsx */
-    background-color: rgba(42, 14, 91, 0.8) !important; /* Fundo semi-transparente para cards e formulários */
-    border: 2px solid var(--retro-green) !important;
-    border-radius: 10px !important;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-    margin-bottom: 20px;
-    transition: transform 0.2s ease-in-out;
+.card,
+form.p-3.border.rounded.bg-light {
+	/* Aplica ao .card e ao seu Form.jsx */
+	background-color: rgba(42, 14, 91, 0.8) !important;
+	/* Fundo semi-transparente para cards e formulários */
+	border: 2px solid var(--retro-blue) !important;
+	border-radius: 10px !important;
+	box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+	margin-bottom: 20px;
+	transition: transform 0.2s ease-in-out;
 }
 
-.card:hover, form.p-3.border.rounded.bg-light:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px var(--retro-green), 0 0 30px var(--retro-green);
+.card:hover,
+form.p-3.border.rounded.bg-light:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 0 20px var(--retro-pink), 0 0 30px var(--retro-pink);
 }
 
 .card-header {
-    background: linear-gradient(90deg, var(--retro-pink) 0%, var(--retro-yellow) 100%) !important;
-    color: var(--retro-dark-bg) !important;
-    font-family: var(--font-arcade);
-    border-bottom: 2px solid var(--retro-accent-color) !important;
-    padding: 10px 15px !important;
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 8px !important;
+	background: linear-gradient(90deg, var(--retro-pink) 0%, var(--retro-yellow) 100%) !important;
+	color: var(--retro-dark-bg) !important;
+	font-family: var(--font-arcade);
+	border-bottom: 2px solid var(--retro-accent-color) !important;
+	padding: 10px 15px !important;
+	border-top-left-radius: 8px !important;
+	border-top-right-radius: 8px !important;
 }
 
 .card-body {
-    color: var(--retro-text-color);
+	color: var(--retro-text-color);
 }
 
 /* Botões do Bootstrap */
 .btn {
-    font-family: var(--font-arcade);
-    border-radius: 5px;
-    padding: 8px 15px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
+	font-family: var(--font-arcade);
+	border-radius: 5px;
+	padding: 8px 15px;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
 }
 
 .btn-primary {
-    background-color: var(--retro-blue) !important;
-    border-color: var(--retro-blue) !important;
-    box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+	background-color: var(--retro-blue) !important;
+	border-color: var(--retro-blue) !important;
+	box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
 }
 
 .btn-primary:hover {
-    background-color: var(--retro-green) !important;
-    border-color: var(--retro-green) !important;
-    box-shadow: 0 0 12px var(--retro-green), 0 0 20px var(--retro-green);
-    transform: scale(1.05);
+	background-color: var(--retro-green) !important;
+	border-color: var(--retro-green) !important;
+	box-shadow: 0 0 12px var(--retro-green), 0 0 20px var(--retro-green);
+	transform: scale(1.05);
 }
 
 .btn-secondary {
-    background-color: var(--retro-accent-color) !important;
-    border-color: var(--retro-accent-color) !important;
-    box-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
+	background-color: var(--retro-accent-color) !important;
+	border-color: var(--retro-accent-color) !important;
+	box-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
 }
 
 .btn-secondary:hover {
-    background-color: var(--retro-pink) !important;
-    border-color: var(--retro-pink) !important;
-    box-shadow: 0 0 12px var(--retro-pink), 0 0 20px var(--retro-pink);
-    transform: scale(1.05);
+	background-color: var(--retro-pink) !important;
+	border-color: var(--retro-pink) !important;
+	box-shadow: 0 0 12px var(--retro-pink), 0 0 20px var(--retro-pink);
+	transform: scale(1.05);
 }
 
 /* Formulários */
-.form-label { /* Label dos formulários */
-    color: var(--retro-yellow);
-    font-family: var(--font-arcade);
-    text-shadow: 1px 1px 2px rgba(255, 255, 0, 0.5);
+.form-label {
+	/* Label dos formulários */
+	color: var(--retro-yellow);
+	font-family: var(--font-arcade);
+	text-shadow: 1px 1px 2px rgba(255, 255, 0, 0.5);
 }
 
 .form-control {
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid var(--retro-blue) !important;
-    color: var(--retro-text-color) !important;
-    border-radius: 5px !important;
+	background-color: rgba(0, 0, 0, 0.4) !important;
+	border: 1px solid var(--retro-blue) !important;
+	color: var(--retro-text-color) !important;
+	border-radius: 5px !important;
 }
 
 .form-control:focus {
-    background-color: rgba(0, 0, 0, 0.6) !important;
-    border-color: var(--retro-green) !important;
-    box-shadow: 0 0 8px rgba(0, 255, 0, 0.5) !important;
-    color: var(--retro-text-color) !important;
+	background-color: rgba(0, 0, 0, 0.6) !important;
+	border-color: var(--retro-green) !important;
+	box-shadow: 0 0 8px rgba(37, 41, 37, 0.5) !important;
+	color: var(--retro-text-color) !important;
 }
 
 /* Links em geral (não no Aside ou Navbar) */
 a {
-    color: var(--retro-yellow);
-    text-decoration: none;
-    text-shadow: 1px 1px 2px rgba(255, 255, 0, 0.5);
+	color: var(--retro-yellow);
+	text-decoration: none;
+	text-shadow: 1px 1px 2px rgba(255, 255, 0, 0.5);
 }
 
 a:hover {
-    color: var(--retro-pink);
-    text-shadow: 0 0 5px var(--retro-pink);
+	color: var(--retro-pink);
+	text-shadow: 0 0 5px var(--retro-pink);
 }
 
 /* Utilitários - Se você tiver algum loading */
 p {
-    font-family: var(--font-default);
-    color: var(--retro-text-color);
+	font-family: var(--font-default);
+	color: var(--retro-text-color);
 }
 
 /* Loading message */
-p:has(~ .col-md-9.col-lg-10) { /* Seleciona o "Carregando Banco de dados..." */
-    text-align: center;
-    font-family: var(--font-pixel);
-    color: var(--retro-yellow);
-    text-shadow: 0 0 5px var(--retro-yellow);
-    margin-top: 50px;
-    font-size: 1.5rem;
+p:has(~ .col-md-9.col-lg-10) {
+	/* Seleciona o "Carregando Banco de dados..." */
+	text-align: center;
+	font-family: var(--font-pixel);
+	color: var(--retro-yellow);
+	text-shadow: 0 0 5px var(--retro-yellow);
+	margin-top: 50px;
+	font-size: 1.5rem;
 }
 
 
 /* Estilos para Modal (ConfirmModal.jsx) */
 .modal-backdrop-fade {
-    background-color: rgba(0, 0, 0, 0.7) !important; /* Fundo mais escuro para o modal */
+	background-color: rgba(0, 0, 0, 0.7) !important;
+	/* Fundo mais escuro para o modal */
 }
 
 .modal-content {
-    background: linear-gradient(135deg, #2a0e5b 0%, #4a1c8d 100%) !important; /* Fundo gradiente para o conteúdo do modal */
-    border: 2px solid var(--retro-blue) !important;
-    box-shadow: 0 0 20px var(--retro-blue) !important;
-    color: var(--retro-text-color) !important;
+	background: linear-gradient(135deg, #2a0e5b 0%, #4a1c8d 100%) !important;
+	/* Fundo gradiente para o conteúdo do modal */
+	border: 2px solid var(--retro-blue) !important;
+	box-shadow: 0 0 20px var(--retro-blue) !important;
+	color: var(--retro-text-color) !important;
 }
 
 .modal-header {
-    background: linear-gradient(90deg, var(--retro-accent-color) 0%, var(--retro-purple) 100%) !important;
-    border-bottom: 1px solid var(--retro-pink) !important;
-    color: var(--retro-text-color) !important;
-    font-family: var(--font-pixel);
-    text-shadow: 1px 1px 3px var(--retro-text-color);
+	background: linear-gradient(90deg, var(--retro-accent-color) 0%, var(--retro-purple) 100%) !important;
+	border-bottom: 1px solid var(--retro-pink) !important;
+	color: var(--retro-text-color) !important;
+	font-family: var(--font-pixel);
+	text-shadow: 1px 1px 3px var(--retro-text-color);
 }
 
 .modal-title {
-    color: var(--retro-text-color) !important;
-    font-family: var(--font-pixel) !important;
+	color: var(--retro-text-color) !important;
+	font-family: var(--font-pixel) !important;
 }
 
 .modal-body {
-    color: var(--retro-text-color) !important;
-    font-family: var(--font-default);
+	color: var(--retro-text-color) !important;
+	font-family: var(--font-default);
 }
 
 .modal-footer {
-    border-top: 1px solid var(--retro-pink) !important;
-    background-color: rgba(42, 14, 91, 0.5) !important;
+	border-top: 1px solid var(--retro-pink) !important;
+	background-color: rgba(42, 14, 91, 0.5) !important;
 }
 
-.btn-close { /* Botão de fechar do modal */
-    filter: invert(1) brightness(1.5) hue-rotate(180deg); /* Faz o X ser visível em fundo escuro */
-    opacity: 1; /* Garante que o X é visível */
+.btn-close {
+	/* Botão de fechar do modal */
+	filter: invert(1) brightness(1.5) hue-rotate(180deg);
+	/* Faz o X ser visível em fundo escuro */
+	opacity: 1;
+	/* Garante que o X é visível */
 }
+
 .btn-close:hover {
-    opacity: 0.75;
+	opacity: 0.75;
 }
 
 
 /* Estilos para Alerta (AutoDismissAlert.jsx) */
 .auto-alert {
-    font-family: var(--font-arcade);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    border-width: 2px !important; /* Borda mais grossa */
+	font-family: var(--font-arcade);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	border-width: 2px !important;
+	/* Borda mais grossa */
 }
 
 .alert-success {
-    background-color: rgba(0, 255, 0, 0.7) !important; /* Verde neon semi-transparente */
-    border-color: var(--retro-green) !important;
-    color: var(--retro-dark-bg) !important; /* Texto escuro para contraste */
-    box-shadow: 0 0 10px var(--retro-green);
+	background-color: rgba(0, 255, 0, 0.7) !important;
+	/* Verde neon semi-transparente */
+	border-color: var(--retro-green) !important;
+	color: var(--retro-dark-bg) !important;
+	/* Texto escuro para contraste */
+	box-shadow: 0 0 10px var(--retro-green);
 }
 
 .alert-danger {
-    background-color: rgba(255, 0, 0, 0.7) !important; /* Vermelho neon semi-transparente */
-    border-color: #FF0000 !important;
-    color: var(--retro-text-color) !important;
-    box-shadow: 0 0 10px #FF0000;
+	background-color: rgba(255, 0, 0, 0.7) !important;
+	/* Vermelho neon semi-transparente */
+	border-color: #FF0000 !important;
+	color: var(--retro-text-color) !important;
+	box-shadow: 0 0 10px #FF0000;
 }
 
-.alert-info { /* Caso você use um alerta de informação */
-    background-color: rgba(0, 0, 255, 0.7) !important;
-    border-color: #0000FF !important;
-    color: var(--retro-text-color) !important;
-    box-shadow: 0 0 10px #0000FF;
+.alert-info {
+	/* Caso você use um alerta de informação */
+	background-color: rgba(0, 0, 255, 0.7) !important;
+	border-color: #0000FF !important;
+	color: var(--retro-text-color) !important;
+	box-shadow: 0 0 10px #0000FF;
 }
 
-.alert-warning { /* Caso você use um alerta de aviso */
-    background-color: rgba(255, 255, 0, 0.7) !important;
-    border-color: var(--retro-yellow) !important;
-    color: var(--retro-dark-bg) !important; /* Texto escuro para contraste */
-    box-shadow: 0 0 10px var(--retro-yellow);
+.alert-warning {
+	/* Caso você use um alerta de aviso */
+	background-color: rgba(255, 255, 0, 0.7) !important;
+	border-color: var(--retro-yellow) !important;
+	color: var(--retro-dark-bg) !important;
+	/* Texto escuro para contraste */
+	box-shadow: 0 0 10px var(--retro-yellow);
 }
 
 
 /* Responsividade básica para o aside em telas menores */
 @media (max-width: 767.98px) {
-    aside.bg-light {
-        min-height: auto;
-        border-right: 2px solid var(--retro-pink); /* Mantém a borda na lateral em mobile */
-        border-bottom: none !important; /* Remove a borda inferior */
-        margin-bottom: 20px;
-        margin-right: 0; /* Remove margens que podem surgir */
-        margin-left: 0;
-    }
+	aside.bg-light {
+		min-height: auto;
+		border-right: 2px solid var(--retro-pink);
+		/* Mantém a borda na lateral em mobile */
+		border-bottom: none !important;
+		/* Remove a borda inferior */
+		margin-bottom: 20px;
+		margin-right: 0;
+		/* Remove margens que podem surgir */
+		margin-left: 0;
+	}
 }
 
 /* Estilo para o componente "Carregando Banco de dados..." */
-.col-12.col-md-3.col-lg-2 + .col-12.col-md-9.col-lg-10 + p {
-    text-align: center;
-    font-family: var(--font-pixel);
-    color: var(--retro-yellow);
-    text-shadow: 0 0 5px var(--retro-yellow);
-    margin-top: 50px;
-    font-size: 1.5rem;
+.col-12.col-md-3.col-lg-2+.col-12.col-md-9.col-lg-10+p {
+	text-align: center;
+	font-family: var(--font-pixel);
+	color: var(--retro-yellow);
+	text-shadow: 0 0 5px var(--retro-yellow);
+	margin-top: 50px;
+	font-size: 1.5rem;
+}
+
+.loading-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	/* fundo escuro semi-transparente */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
 }

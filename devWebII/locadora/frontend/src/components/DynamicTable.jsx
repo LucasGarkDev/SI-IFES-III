@@ -4,10 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
 import { remove } from "../service/api";
 import { getTitleItem } from "../js/utils";
+import Loading from "./Loading";
 
 const DynamicTable = ({ data, fields }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [loading, setLoading] = useState(false); // Estado para controlar o overlay
 
   if (!data || data.length === 0)
     return <p className="text-muted">Nenhum dado disponível.</p>;
@@ -36,11 +38,14 @@ const DynamicTable = ({ data, fields }) => {
   const tryDelete = async (data) => {
     console.log("[DYNAMIC TABLE] Tentando deletar item...");
     try {
+      setLoading(true); // Ativa o overlay
       // usa moduleConfig.name como endpoint
       await remove(moduleName, data._id);
       console.log("[DYNAMIC TABLE] Item deletado com sucesso!");
     } catch (err) {
       console.error("[DYNAMIC TABLE] Erro ao deletar item:", err);
+    } finally {
+      setLoading(false); // Desativa o overlay mesmo se der erro
     }
   };
 
@@ -97,18 +102,20 @@ const DynamicTable = ({ data, fields }) => {
       <ConfirmModal
         show={showModal}
         title="Confirmação de exclusão"
-        message={`Deseja realmente excluir o item "${
-          getTitleItem(selectedItem)
-        }"?`}
+        message={`Deseja realmente excluir o item "${getTitleItem(
+          selectedItem
+        )}"?`}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancel}
       />
+
+      {/* Overlay de Loading */}
+      {loading && <Loading message={`Deletando ${moduleName}`} />}
     </>
   );
 };
 
 export default DynamicTable;
-
 
 // example usage:
 // <DynamicTable
