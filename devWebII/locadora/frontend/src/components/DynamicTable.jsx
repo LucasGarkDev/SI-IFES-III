@@ -2,34 +2,54 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
+import { remove } from "../service/api";
+import { getTitleItem } from "../js/utils";
+import Loading from "./Loading";
 
-const DynamicTable = ({ data, fields, onDelete }) => {
+const DynamicTable = ({ data, fields }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [loading, setLoading] = useState(false); // Estado para controlar o overlay
 
   if (!data || data.length === 0)
     return <p className="text-muted">Nenhum dado disponível.</p>;
 
   // pega os campos dinamicamente ou usa os fornecidos
-  const detectedFields = fields || Object.keys(data[0]).filter(f => f !== "id" && f !== "_id");
+  const detectedFields = fields || Object.keys(data[0]);
 
   // pega o moduleName da URL (ator, filme, etc.)
   const { moduleName } = useParams();
 
   const handleDeleteClick = (item) => {
+    console.log("[DYNAMIC TABLE] Solicitando exclusão de:", item);
     setSelectedItem(item);
     setShowModal(true);
   };
 
   const handleConfirmDelete = () => {
-    if (onDelete && selectedItem) {
-      onDelete(selectedItem);
+    if (selectedItem) {
+      tryDelete(selectedItem);
     }
     setShowModal(false);
     setSelectedItem(null);
   };
 
+  const tryDelete = async (data) => {
+    console.log("[DYNAMIC TABLE] Tentando deletar item...");
+    try {
+      setLoading(true); // Ativa o overlay
+      // usa moduleConfig.name como endpoint
+      await remove(moduleName, data._id);
+      console.log("[DYNAMIC TABLE] Item deletado com sucesso!");
+    } catch (err) {
+      console.error("[DYNAMIC TABLE] Erro ao deletar item:", err);
+    } finally {
+      setLoading(false); // Desativa o overlay mesmo se der erro
+    }
+  };
+
   const handleCancel = () => {
+    console.log("[DYNAMIC TABLE] Exclusão cancelada");
     setShowModal(false);
     setSelectedItem(null);
   };
@@ -41,9 +61,9 @@ const DynamicTable = ({ data, fields, onDelete }) => {
           <tr>
             {detectedFields.map((field) => (
               <th key={field}>
-                {field.replace(/_/g, " ").replace(/\b\w/g, (l) =>
-                  l.toUpperCase()
-                )}
+                {field
+                  .replace(/_/g, " ")
+                  .replace(/\b\w/g, (l) => l.toUpperCase())}
               </th>
             ))}
             <th>Ações</th>
@@ -81,12 +101,15 @@ const DynamicTable = ({ data, fields, onDelete }) => {
       <ConfirmModal
         show={showModal}
         title="Confirmação de exclusão"
-        message={`Deseja realmente excluir o item "${
-          selectedItem ? selectedItem.nome || selectedItem.titulo || selectedItem.id : ""
-        }"?`}
+        message={`Deseja realmente excluir o item "${getTitleItem(
+          selectedItem
+        )}"?`}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancel}
       />
+
+      {/* Overlay de Loading */}
+      {loading && <Loading message={`Deletando ${moduleName}`} />}
     </>
   );
 };
@@ -99,6 +122,5 @@ export default DynamicTable;
 //   fields={moduleConfig.fields}
 //   onDelete={(item) => {
 //     console.log("Excluir:", item);
-    // aqui você pode abrir o ConfirmModal antes de excluir de verdade
 //   }}
 // />

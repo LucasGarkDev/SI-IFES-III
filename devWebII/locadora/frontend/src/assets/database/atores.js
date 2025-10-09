@@ -1,6 +1,7 @@
-import apiData from "../../service/api.js";
+import { dataStore } from "../../service/api.js";
 
-let atoresArray = apiData.atoresArray; // cria cópia local mutável
+console.log("[DB CONTROLLER ATORES]: ", dataStore);
+let atoresArray = dataStore.atoresArray; // cria cópia local mutável
 if (!atoresArray || atoresArray.length === 0) {
   console.log("Usando dados locais para atores.js");
   atoresArray = [
