@@ -113,6 +113,13 @@ function getTitleItem(selectedItem) {
   return "";
 }
 
+function filtrarCampos(filtros, objeto) {
+  return Object.fromEntries(
+    Object.entries(objeto).filter(([chave]) => !filtros.includes(chave))
+  );
+}
+
+
 export {
   getRandomInt,
   getRandomBin,
@@ -124,4 +131,5 @@ export {
   extractKeys,
   getItemFromId,
   getTitleItem,
+  filtrarCampos
 };
