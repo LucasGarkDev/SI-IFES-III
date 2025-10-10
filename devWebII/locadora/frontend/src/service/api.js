@@ -1,19 +1,11 @@
 // src/service/api.js
 import axios from "axios";
-import { filtrarCampos } from "../js/utils";
 
 const { VITE_ENV } = import.meta.env;
 const url = VITE_ENV === "development" ? "http://localhost:8085/api" : "/api";
 
 // 👇 Bancos que você quer carregar
 const bancos = ["atores", "classes", "diretores"];
-const excludeFields = [
-  "id",
-  "_id",
-  "ativo",
-  "data_nascimento",
-  "nacionalidade",
-];
 
 const api = axios.create({
   baseURL: url,
@@ -96,7 +88,7 @@ export async function initData() {
 
     // busca dados inicial (lazy load)
     await get(banco).then((data) => {
-      dataStore[varName] = filtrarCampos(excludeFields,data);
+      dataStore[varName] = data;
     });
     console.log(dataStore);
   }
