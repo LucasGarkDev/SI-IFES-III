@@ -40,11 +40,6 @@ function formatTimeInSeconds(timeString) {
   return seconds + minutes * 60;
 }
 
-function getAudioProgress(currentTimeInSeconds, durationInSeconds) {
-  const progress = currentTimeInSeconds / durationInSeconds;
-  return `${progress * 100}%`;
-}
-
 async function onErrorTelemetria(error) {
   console.error("Erro ao detectado: ", error);
   await axios
@@ -95,20 +90,6 @@ function extractKeys(input) {
   return [];
 }
 
-function removeIDs(params) {
-  const processedFields = isValidArrayOfStrings
-    ? fields
-        .filter((field) => !/id/i.test(field)) // 🧠 Ignora qualquer campo que tenha "id"
-        .map((field) => ({
-          name: field,
-          label: field
-            .replace(/_/g, " ")
-            .replace(/\b\w/g, (l) => l.toUpperCase()),
-          type: "text",
-        }))
-    : [];
-}
-
 function getTitleItem(selectedItem) {
   if (selectedItem) {
     return (
@@ -123,9 +104,23 @@ function getTitleItem(selectedItem) {
   return "";
 }
 
+/**
+ * Filtra campos de acordo com os filtros fornecidos.
+ * Funciona tanto para arrays de strings (nomes de campos)
+ * quanto para arrays/objetos contendo dados completos.
+ *
+ * @param {string[]} filtros - Campos a serem excluídos.
+ * @param {object[]|object|string[]} dados - Dados ou lista de chaves a filtrar.
+ * @return {object[]|object|string[]} Dados filtrados.
+ */
 function filtrarCampos(filtros, dados) {
-  // Caso seja um array de objetos
-  if (Array.isArray(dados)) {
+  // ✅ Caso 1: Array de strings (ex: ['_id', 'name', 'email'])
+  if (Array.isArray(dados) && typeof dados[0] === "string") {
+    return dados.filter((campo) => !filtros.includes(campo));
+  }
+
+  // ✅ Caso 2: Array de objetos (ex: [{id:1, name:'a'}])
+  if (Array.isArray(dados) && typeof dados[0] === "object") {
     return dados.map((item) =>
       Object.fromEntries(
         Object.entries(item).filter(([chave]) => !filtros.includes(chave))
@@ -133,14 +128,15 @@ function filtrarCampos(filtros, dados) {
     );
   }
 
-  // Caso seja um objeto individual
+  // ✅ Caso 3: Objeto individual
   if (typeof dados === "object" && dados !== null) {
     return Object.fromEntries(
       Object.entries(dados).filter(([chave]) => !filtros.includes(chave))
     );
   }
 
-  // Se não for objeto nem array, retorna como está (ou pode lançar erro)
+  // ❌ Caso não identificado — retorna como está
+  console.warn("[filtrarCampos] Tipo de dados inesperado:", dados);
   return dados;
 }
 
