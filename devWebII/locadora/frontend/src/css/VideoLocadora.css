@@ -391,48 +391,77 @@ p:has(~ .col-md-9.col-lg-10) {
 .btn-close:hover {
 	opacity: 0.75;
 }
-
-
-/* Estilos para Alerta (AutoDismissAlert.jsx) */
+/* === ALERTA RETRÔ NEON VISÍVEL === */
 .auto-alert {
-	font-family: var(--font-arcade);
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-	border-width: 2px !important;
-	/* Borda mais grossa */
+  font-family: var(--font-arcade);
+  border: 2px solid var(--retro-accent-color);
+  border-radius: 8px;
+  padding: 12px 24px;
+  margin: 10px auto;
+  width: fit-content;
+  min-width: 280px;
+  text-align: center;
+  font-size: 1.2rem;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 20px var(--retro-accent-color);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  animation: alertIn 0.4s ease;
+  backdrop-filter: blur(6px);
+  background: rgba(10, 10, 10, 0.85); /* fundo escuro base */
+  color: #fff;
+  z-index: 99999;
 }
 
+/* Efeito de entrada */
+@keyframes alertIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* === Tipos de alerta com brilho neon forte === */
 .alert-success {
-	background-color: rgba(0, 255, 0, 0.7) !important;
-	/* Verde neon semi-transparente */
-	border-color: var(--retro-green) !important;
-	color: var(--retro-dark-bg) !important;
-	/* Texto escuro para contraste */
-	box-shadow: 0 0 10px var(--retro-green);
+  border-color: var(--retro-green);
+  color: var(--retro-green);
+  box-shadow: 0 0 15px var(--retro-green);
+  background: rgba(0, 255, 0, 0.15);
 }
 
 .alert-danger {
-	background-color: rgba(255, 0, 0, 0.7) !important;
-	/* Vermelho neon semi-transparente */
-	border-color: #FF0000 !important;
-	color: var(--retro-text-color) !important;
-	box-shadow: 0 0 10px #FF0000;
+  border-color: #ff3333;
+  color: #ff6666;
+  box-shadow: 0 0 15px #ff0000;
+  background: rgba(255, 0, 0, 0.15);
 }
 
 .alert-info {
-	/* Caso você use um alerta de informação */
-	background-color: rgba(0, 0, 255, 0.7) !important;
-	border-color: #0000FF !important;
-	color: var(--retro-text-color) !important;
-	box-shadow: 0 0 10px #0000FF;
+  border-color: var(--retro-blue);
+  color: var(--retro-blue);
+  box-shadow: 0 0 15px var(--retro-blue);
+  background: rgba(0, 200, 255, 0.15);
 }
 
 .alert-warning {
-	/* Caso você use um alerta de aviso */
-	background-color: rgba(255, 255, 0, 0.7) !important;
-	border-color: var(--retro-yellow) !important;
-	color: var(--retro-dark-bg) !important;
-	/* Texto escuro para contraste */
-	box-shadow: 0 0 10px var(--retro-yellow);
+  border-color: var(--retro-yellow);
+  color: var(--retro-yellow);
+  box-shadow: 0 0 15px var(--retro-yellow);
+  background: rgba(255, 255, 0, 0.15);
+}
+
+/* Container fixo */
+.alert-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10000;
 }
 
 

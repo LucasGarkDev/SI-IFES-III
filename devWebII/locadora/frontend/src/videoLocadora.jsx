@@ -7,6 +7,7 @@ import Aside from "./components/Aside.jsx";
 import modules from "./js/config/modules.js";
 import { initData } from "./service/api.js";
 import Loading from "./components/Loading.jsx";
+import AlertManager from "./components/AlertManager.jsx";
 
 const VideoLocadora = () => {
   const [loaded, setLoaded] = useState(false);
@@ -45,6 +46,9 @@ const VideoLocadora = () => {
 
       {/* Overlay de Loading */}
       {!loaded && <Loading />}
+
+      {/* ✅ AlertManager global — sempre visível e fora da grid */}
+      <AlertManager />
     </BrowserRouter>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Form from "../../components/Form";
-import { create } from "../../service/api";
+import { create } from "../../service/apiFunctions";
 
 const authPage = ({ moduleConfig }) => {
 	const [formData, setFormData] = useState(null);
