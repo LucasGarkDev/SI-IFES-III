@@ -26,13 +26,14 @@ export async function initData() {
     const varName = `${banco}Array`;
     dataStore[varName] = [];
 
+    window.addAlert(`🔄 Sincronizando dados...`, "info");
     // busca dados inicial (lazy load)
     await get(banco).then((data) => {
       dataStore[varName] = data;
     });
+    window.addAlert("✅ Os dados foram sincronizados!", "success");
     console.log(dataStore);
   }
 }
-await initData();
 
 export { api,dataStore };

@@ -24,16 +24,16 @@ const NewPage = ({ moduleConfig }) => {
       setLoading(true);
       setShowModal(false);
 
-      window.addAlert(`🔄 Criando ${moduleConfig.name}...`, "info");
+      window.addAlert(`🔄 Criando ${getTitleItem(formData)}...`, "info");
 
       console.log("[NewPage] Criando item:", formData);
       window.addAlert("📤 Enviando dados ao servidor...", "info");
       await create(moduleConfig.name, formData);
 
-      window.addAlert(`✅ ${moduleConfig.name} criado com sucesso!`, "success");
+      window.addAlert(`✅ ${getTitleItem(formData)} criado com sucesso!`, "success");
       console.log("[NewPage] Item salvo com sucesso!");
     } catch (err) {
-      window.addAlert("❌ Falha ao criar item!", "danger");
+      window.addAlert(`❌ Falha ao criar! ${err}`, "danger");
       console.error("[NewPage] Erro ao salvar item:", err);
     } finally {
       window.addAlert("✅ Processo finalizado", "success");

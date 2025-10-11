@@ -14,13 +14,18 @@ const VideoLocadora = () => {
 
   useEffect(() => {
     (async () => {
+      try {
       await initData();
-      setLoaded(true);
+    } catch (err) {
+      window.addAlert(`❌ Falha ao sincronizar dados! ${err}`, "danger");
+    } finally {
+      setLoaded(true); // sempre carregar o app
+    }
     })();
   }, []);
 
   const asideLinks = [
-    { path: "/", label: "Início" },
+    { path: "/home", label: "Início" },
     ...modules.flatMap(({ name, label }) => [
       { path: `/${name}`, label },
       { path: `/${name}/novo`, label: `Novo ${label}` },

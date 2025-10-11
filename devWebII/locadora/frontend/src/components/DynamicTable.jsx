@@ -43,7 +43,7 @@ const DynamicTable = ({ data, fields }) => {
       window.addAlert(`✅ ${getTitleItem(item)} removido com sucesso!`, "success");
       console.log("[DynamicTable] Item deletado com sucesso!");
     } catch (err) {
-      window.addAlert("❌ Erro ao excluir item!", "danger");
+      window.addAlert(`❌ Erro ao excluir! ${err}`, "danger");
       console.error("[DynamicTable] Erro ao deletar item:", err);
     } finally {
       window.addAlert("🏁 Processo de exclusão concluído", "success");
