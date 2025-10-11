@@ -6,11 +6,13 @@ import ListPage from "../pages/ListPage";
 import NewPage from "../pages/NewPage";
 import EditPage from "../pages/EditPage";
 import ModuleWrapper from "../components/ModuleWrapper";
+import AuthPage from "../pages/auth/login";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<AuthPage />} />
+      <Route path="/home" element={<Home />} />
 
       {/* Cada rota que usa módulo dinâmico vai envolver o componente com o ModuleWrapper */}
       <Route
