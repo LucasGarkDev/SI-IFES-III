@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import ConfirmModal from "../components/ConfirmModal.jsx";
-import { create } from "../service/api.js";
 import { getTitleItem } from "../js/utils.js";
 import Loading from "../components/Loading.jsx"; // Importar o overlay
+import { create } from "../service/apiFunctions.js";
 
 const NewPage = ({ moduleConfig }) => {
   const firstItem = moduleConfig.data?.[0] || {};
@@ -21,17 +21,23 @@ const NewPage = ({ moduleConfig }) => {
 
   const handleConfirm = async () => {
     try {
-      setLoading(true); // Ativa o overlay
+      setLoading(true);
       setShowModal(false);
 
+      window.addAlert(`🔄 Criando ${moduleConfig.name}...`, "info");
+
       console.log("[NewPage] Criando item:", formData);
+      window.addAlert("📤 Enviando dados ao servidor...", "info");
       await create(moduleConfig.name, formData);
 
+      window.addAlert(`✅ ${moduleConfig.name} criado com sucesso!`, "success");
       console.log("[NewPage] Item salvo com sucesso!");
     } catch (err) {
+      window.addAlert("❌ Falha ao criar item!", "danger");
       console.error("[NewPage] Erro ao salvar item:", err);
     } finally {
-      setLoading(false); // Desativa o overlay mesmo se der erro
+      window.addAlert("✅ Processo finalizado", "success");
+      setLoading(false);
     }
   };
 

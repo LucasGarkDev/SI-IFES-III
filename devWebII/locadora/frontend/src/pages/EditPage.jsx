@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import ConfirmModal from "../components/ConfirmModal.jsx";
 import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
-import { extractKeys, getItemFromId, getTitleItem } from "../js/utils.js";
-import { update } from "../service/api.js";
+import { getItemFromId, getTitleItem } from "../js/utils.js";
 import Loading from "../components/Loading.jsx";
+import { update } from "../service/apiFunctions.js";
 
 const EditPage = ({ moduleConfig, id }) => {
   const atualItem = getItemFromId(id, moduleConfig.data);
 
-  // Faz checagem de segurança
-  const [initialValues, setInitialValues] = useState(atualItem || {});
-  const [loading, setLoading] = useState(false); // Estado para controlar o overlay
+  const [initialValues] = useState(atualItem || {});
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -27,16 +26,22 @@ const EditPage = ({ moduleConfig, id }) => {
 
   const handleConfirm = async () => {
     try {
-      setLoading(true); // Ativa o overlay
+      setLoading(true);
       setShowModal(false);
 
-      console.log("[HANDLE_CONFIRM] Atualizando item:", formData);
+      window.addAlert(`✏️ Atualizando ${moduleConfig.name}...`, "info");
+      window.addAlert("📡 Enviando dados ao servidor...", "info");
+
       await update(moduleConfig.name, id, formData);
-      console.log("[HANDLE_CONFIRM] Item salvo com sucesso!");
+
+      window.addAlert(`✅ ${moduleConfig.name} atualizado com sucesso!`, "success");
+      console.log("[EditPage] Item atualizado com sucesso!");
     } catch (err) {
-      console.error("[HANDLE_CONFIRM] Erro ao salvar item:", err);
+      window.addAlert("❌ Falha ao atualizar item!", "danger");
+      console.error("[EditPage] Erro ao salvar item:", err);
     } finally {
-      setLoading(false); // Desativa o overlay mesmo se der erro
+      window.addAlert("🏁 Processo finalizado", "success");
+      setLoading(false);
     }
   };
 
@@ -67,7 +72,6 @@ const EditPage = ({ moduleConfig, id }) => {
         onCancel={() => setShowModal(false)}
       />
 
-      {/* Overlay de Loading */}
       {loading && <Loading message={`Editando ${moduleConfig.name}`} />}
     </div>
   );
