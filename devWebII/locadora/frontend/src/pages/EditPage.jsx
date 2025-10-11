@@ -26,18 +26,19 @@ const EditPage = ({ moduleConfig, id }) => {
 
   const handleConfirm = async () => {
     try {
+      const title =getTitleItem(formData)
       setLoading(true);
       setShowModal(false);
 
-      window.addAlert(`✏️ Atualizando ${moduleConfig.name}...`, "info");
+      window.addAlert(`✏️ Atualizando ${getTitleItem(formData)}...`, "info");
       window.addAlert("📡 Enviando dados ao servidor...", "info");
 
       await update(moduleConfig.name, id, formData);
 
-      window.addAlert(`✅ ${moduleConfig.name} atualizado com sucesso!`, "success");
+      window.addAlert(`✅ ${getTitleItem(formData)} atualizado com sucesso!`, "success");
       console.log("[EditPage] Item atualizado com sucesso!");
     } catch (err) {
-      window.addAlert("❌ Falha ao atualizar item!", "danger");
+      window.addAlert(`❌ Falha ao atualizar! ${err}`, "danger");
       console.error("[EditPage] Erro ao salvar item:", err);
     } finally {
       window.addAlert("🏁 Processo finalizado", "success");

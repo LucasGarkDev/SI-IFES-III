@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Form from "../../components/Form";
 import { create } from "../../service/apiFunctions";
 
-const authPage = ({ moduleConfig }) => {
+const AuthPage = ({ moduleConfig }) => {
 	const [formData, setFormData] = useState(null);
-	console.log("Rendering authPage for module:", moduleConfig);
-  const exampleFields = { usuario: "string", senha: "string" };
+  const exampleFields = { "usuario": "string", "senha": "string" };
 
 
   const handleFormSubmit = async (data) => {
@@ -29,11 +28,12 @@ const authPage = ({ moduleConfig }) => {
         btnTextContent="Entrar"
         exampleObject={exampleFields}
         onSubmit={handleFormSubmit}
+        initialValues={{}}
       />
 
-      <Link to={`/`}>Go to Home</Link>
+      <Link to={`/home`}>Go to Home</Link>
     </div>
   );
 };
 
-export default authPage;
+export default AuthPage;
