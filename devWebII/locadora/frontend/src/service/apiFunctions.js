@@ -29,7 +29,8 @@ async function handleRequest(fn, ...args) {
     if (!response || typeof response.data !== 'object') {
       throw new Error(`Resposta inválida da API: ${response}`);
     }
-    return response.data;
+    const data =response.data;
+    return data.content;
   } catch (err) {
     await telemetria(err.message || err.toString());
     throw err; // <--- lança o erro, o componente vai capturar
