@@ -7,19 +7,25 @@ import Aside from "./components/Aside.jsx";
 import modules from "./js/config/modules.js";
 import { initData } from "./service/api.js";
 import Loading from "./components/Loading.jsx";
+import AlertManager from "./components/AlertManager.jsx";
 
 const VideoLocadora = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
+      try {
       await initData();
-      setLoaded(true);
+    } catch (err) {
+      window.addAlert(`❌ Falha ao sincronizar dados! ${err}`, "danger");
+    } finally {
+      setLoaded(true); // sempre carregar o app
+    }
     })();
   }, []);
 
   const asideLinks = [
-    { path: "/", label: "Início" },
+    { path: "/home", label: "Início" },
     ...modules.flatMap(({ name, label }) => [
       { path: `/${name}`, label },
       { path: `/${name}/novo`, label: `Novo ${label}` },
@@ -45,6 +51,9 @@ const VideoLocadora = () => {
 
       {/* Overlay de Loading */}
       {!loaded && <Loading />}
+
+      {/* ✅ AlertManager global — sempre visível e fora da grid */}
+      <AlertManager />
     </BrowserRouter>
   );
 };
