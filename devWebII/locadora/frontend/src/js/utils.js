@@ -40,11 +40,6 @@ function formatTimeInSeconds(timeString) {
   return seconds + minutes * 60;
 }
 
-function getAudioProgress(currentTimeInSeconds, durationInSeconds) {
-  const progress = currentTimeInSeconds / durationInSeconds;
-  return `${progress * 100}%`;
-}
-
 async function onErrorTelemetria(error) {
   console.error("Erro ao detectado: ", error);
   await axios
@@ -76,7 +71,11 @@ function extractKeys(input) {
     }
 
     // Caso: objeto com `data` que é array de objetos
-    if (Array.isArray(input.data) && input.data.length > 0 && typeof input.data[0] === "object") {
+    if (
+      Array.isArray(input.data) &&
+      input.data.length > 0 &&
+      typeof input.data[0] === "object"
+    ) {
       console.log("[extractKeys] input.data[0]:", input.data[0]);
       return Object.keys(input.data[0]);
     }
@@ -91,34 +90,55 @@ function extractKeys(input) {
   return [];
 }
 
-function removeIDs(params) {
-  const processedFields = isValidArrayOfStrings
-  ? fields
-      .filter((field) => !/id/i.test(field)) // 🧠 Ignora qualquer campo que tenha "id"
-      .map((field) => ({
-        name: field,
-        label: field
-          .replace(/_/g, " ")
-          .replace(/\b\w/g, (l) => l.toUpperCase()),
-        type: "text",
-      }))
-  : [];
-
-}
-
 function getTitleItem(selectedItem) {
   if (selectedItem) {
-    return selectedItem.nome || selectedItem.name || selectedItem.titulo || selectedItem.id || selectedItem._id || "Item Selecionado";
+    return (
+      selectedItem.nome ||
+      selectedItem.name ||
+      selectedItem.titulo ||
+      selectedItem.id ||
+      selectedItem._id ||
+      "Item Selecionado"
+    );
   }
   return "";
 }
 
-function filtrarCampos(filtros, objeto) {
-  return Object.fromEntries(
-    Object.entries(objeto).filter(([chave]) => !filtros.includes(chave))
-  );
-}
+/**
+ * Filtra campos de acordo com os filtros fornecidos.
+ * Funciona tanto para arrays de strings (nomes de campos)
+ * quanto para arrays/objetos contendo dados completos.
+ *
+ * @param {string[]} filtros - Campos a serem excluídos.
+ * @param {object[]|object|string[]} dados - Dados ou lista de chaves a filtrar.
+ * @return {object[]|object|string[]} Dados filtrados.
+ */
+function filtrarCampos(filtros, dados) {
+  // ✅ Caso 1: Array de strings (ex: ['_id', 'name', 'email'])
+  if (Array.isArray(dados) && typeof dados[0] === "string") {
+    return dados.filter((campo) => !filtros.includes(campo));
+  }
 
+  // ✅ Caso 2: Array de objetos (ex: [{id:1, name:'a'}])
+  if (Array.isArray(dados) && typeof dados[0] === "object") {
+    return dados.map((item) =>
+      Object.fromEntries(
+        Object.entries(item).filter(([chave]) => !filtros.includes(chave))
+      )
+    );
+  }
+
+  // ✅ Caso 3: Objeto individual
+  if (typeof dados === "object" && dados !== null) {
+    return Object.fromEntries(
+      Object.entries(dados).filter(([chave]) => !filtros.includes(chave))
+    );
+  }
+
+  // ❌ Caso não identificado — retorna como está
+  console.warn("[filtrarCampos] Tipo de dados inesperado:", dados);
+  return dados;
+}
 
 export {
   getRandomInt,
@@ -131,5 +151,5 @@ export {
   extractKeys,
   getItemFromId,
   getTitleItem,
-  filtrarCampos
+  filtrarCampos,
 };
