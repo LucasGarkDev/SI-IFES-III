@@ -16,7 +16,7 @@ public class ClasseUpdateDTO {
     @NotNull(message = "Data de devolução é obrigatória")
     private LocalDate dataDevolucao;
 
-    private Boolean ativo;
+//    private Boolean ativo;
 
     // getters/setters
     public String getNome() { return nome; }
@@ -28,6 +28,6 @@ public class ClasseUpdateDTO {
     public LocalDate getDataDevolucao() { return dataDevolucao; }
     public void setDataDevolucao(LocalDate dataDevolucao) { this.dataDevolucao = dataDevolucao; }
 
-    public Boolean getAtivo() { return ativo; }
-    public void setAtivo(Boolean ativo) { this.ativo = ativo; }
+//    public Boolean getAtivo() { return ativo; }
+//    public void setAtivo(Boolean ativo) { this.ativo = ativo; }
 }

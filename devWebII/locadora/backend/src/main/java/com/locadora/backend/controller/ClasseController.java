@@ -33,7 +33,6 @@ public class ClasseController {
             @RequestParam(required = false) Boolean ativo
     ) {
         ClasseFiltro f = new ClasseFiltro();
-        f.setNome(nome); f.setAtivo(ativo);
         return ResponseEntity.ok(service.listar(f, pageable));
     }
 

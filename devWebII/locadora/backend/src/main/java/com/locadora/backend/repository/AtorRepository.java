@@ -9,5 +9,5 @@ import java.time.LocalDate;
 
 public interface AtorRepository extends JpaRepository<Ator, Long> {
     Page<Ator> findByNomeContainingIgnoreCase(String nome, Pageable pageable);
-    boolean existsByNomeAndDataNascimento(String nome, LocalDate dataNascimento);
+    boolean existsByNomeIgnoreCase(String nome);
 }

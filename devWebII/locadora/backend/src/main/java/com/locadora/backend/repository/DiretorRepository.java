@@ -9,5 +9,5 @@ import java.time.LocalDate;
 
 public interface DiretorRepository extends JpaRepository<Diretor, Long> {
     Page<Diretor> findByNomeContainingIgnoreCase(String nome, Pageable pageable);
-    boolean existsByNomeAndDataNascimento(String nome, LocalDate dataNascimento);
+    boolean existsByNomeIgnoreCase(String nome);
 }

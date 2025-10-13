@@ -7,41 +7,56 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
 import java.util.List;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 
 @Service
 public class DiretorService {
 
     private final DiretorRepository repo;
 
-    public DiretorService(DiretorRepository repo) { this.repo = repo; }
+    public DiretorService(DiretorRepository repo) {
+        this.repo = repo;
+    }
 
+    /* ================================================================
+       CRIAR NOVO DIRETOR
+       - Valida duplicidade de nome
+       - Define o diretor como ativo por padrão (campo fixo na entidade)
+    ================================================================ */
     @Transactional
     public DiretorDTO criar(DiretorCreateDTO dto) {
-        if (dto.getDataNascimento() != null &&
-            repo.existsByNomeAndDataNascimento(dto.getNome().trim(), dto.getDataNascimento())) {
-            throw new BusinessException("Já existe diretor com este nome e data de nascimento.");
+        if (repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
+            throw new BusinessException("Já existe diretor com este nome.");
         }
+
         Diretor d = new Diretor();
         d.setNome(dto.getNome().trim());
-        d.setNacionalidade(dto.getNacionalidade());
-        d.setDataNascimento(dto.getDataNascimento());
         d.setAtivo(true);
+
         return toDTO(repo.save(d));
     }
 
+    /* ================================================================
+       BUSCAR POR ID
+       - Retorna DTO se encontrado
+       - Lança NotFoundException se não existir
+    ================================================================ */
     @Transactional(readOnly = true)
     public DiretorDTO buscarPorId(Long id) {
-        Diretor d = repo.findById(id).orElseThrow(() -> new NotFoundException("Diretor não encontrado"));
+        Diretor d = repo.findById(id)
+                .orElseThrow(() -> new NotFoundException("Diretor não encontrado"));
         return toDTO(d);
     }
 
+    /* ================================================================
+       LISTAR COM FILTRO E PAGINAÇÃO
+       - Busca paginada e filtrada apenas por nome
+    ================================================================ */
     @Transactional(readOnly = true)
     public Page<DiretorDTO> listar(DiretorFiltro filtro, Pageable pageable) {
         Page<Diretor> page;
+
         if (filtro != null && StringUtils.hasText(filtro.getNome())) {
             page = repo.findByNomeContainingIgnoreCase(filtro.getNome().trim(), pageable);
         } else {
@@ -50,50 +65,50 @@ public class DiretorService {
 
         List<DiretorDTO> content = page.getContent().stream()
                 .map(this::toDTO)
-                .filter(dto -> {
-                    if (filtro == null) return true;
-                    if (filtro.getAtivo() != null && !filtro.getAtivo().equals(dto.getAtivo())) return false;
-                    if (StringUtils.hasText(filtro.getNacionalidade())) {
-                        if (dto.getNacionalidade() == null) return false;
-                        if (!dto.getNacionalidade().equalsIgnoreCase(filtro.getNacionalidade())) return false;
-                    }
-                    return true;
-                })
                 .toList();
 
-        return new PageImpl<>(content, pageable, content.size());
+        return new PageImpl<>(content, pageable, page.getTotalElements());
     }
 
-
+    /* ================================================================
+       ATUALIZAR DIRETOR
+       - Atualiza apenas o nome
+       - Valida duplicidade
+    ================================================================ */
     @Transactional
     public DiretorDTO atualizar(Long id, DiretorUpdateDTO dto) {
-        Diretor d = repo.findById(id).orElseThrow(() -> new NotFoundException("Diretor não encontrado"));
-        if (dto.getDataNascimento() != null &&
-            repo.existsByNomeAndDataNascimento(dto.getNome().trim(), dto.getDataNascimento())
-            && !(dto.getNome().equalsIgnoreCase(d.getNome())
-                 && dto.getDataNascimento().equals(d.getDataNascimento()))) {
-            throw new BusinessException("Já existe diretor com este nome e data de nascimento.");
+        Diretor d = repo.findById(id)
+                .orElseThrow(() -> new NotFoundException("Diretor não encontrado"));
+
+        if (!d.getNome().equalsIgnoreCase(dto.getNome().trim())
+                && repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
+            throw new BusinessException("Já existe diretor com este nome.");
         }
+
         d.setNome(dto.getNome().trim());
-        d.setNacionalidade(dto.getNacionalidade());
-        d.setDataNascimento(dto.getDataNascimento());
-        if (dto.getAtivo() != null) d.setAtivo(dto.getAtivo());
+
         return toDTO(repo.save(d));
     }
 
+    /* ================================================================
+       EXCLUIR DIRETOR
+       - Verifica existência
+    ================================================================ */
     @Transactional
     public void excluir(Long id) {
-        Diretor d = repo.findById(id).orElseThrow(() -> new NotFoundException("Diretor não encontrado"));
+        Diretor d = repo.findById(id)
+                .orElseThrow(() -> new NotFoundException("Diretor não encontrado"));
         repo.delete(d);
     }
 
+    /* ================================================================
+       CONVERSÃO ENTIDADE → DTO
+    ================================================================ */
     private DiretorDTO toDTO(Diretor d) {
         DiretorDTO dto = new DiretorDTO();
         dto.setId(d.getId());
         dto.setNome(d.getNome());
-        dto.setNacionalidade(d.getNacionalidade());
-        dto.setDataNascimento(d.getDataNascimento());
-        dto.setAtivo(d.getAtivo());
         return dto;
     }
 }
+
