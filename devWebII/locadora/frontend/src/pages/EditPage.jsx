@@ -30,12 +30,12 @@ const EditPage = ({ moduleConfig, id }) => {
       setLoading(true);
       setShowModal(false);
 
-      window.addAlert(`✏️ Atualizando ${getTitleItem(formData)}...`, "info");
+      window.addAlert(`✏️ Atualizando ${title}...`, "info");
       window.addAlert("📡 Enviando dados ao servidor...", "info");
 
       await update(moduleConfig.name, id, formData);
 
-      window.addAlert(`✅ ${getTitleItem(formData)} atualizado com sucesso!`, "success");
+      window.addAlert(`✅ ${title} atualizado com sucesso!`, "success");
       console.log("[EditPage] Item atualizado com sucesso!");
     } catch (err) {
       window.addAlert(`❌ Falha ao atualizar! ${err}`, "danger");

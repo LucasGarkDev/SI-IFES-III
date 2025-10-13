@@ -5,7 +5,7 @@ import modules from "../js/config/modules.js";
 import { UNSAFE_getPatchRoutesOnNavigationFunction } from "react-router-dom";
 
 function getItemFromId(id, array) {
-  const foundItem = array.find((item) => item._id === Number(id));
+  const foundItem = array.find((item) => item.id === Number(id));
   return foundItem;
 }
 
@@ -96,6 +96,7 @@ function getTitleItem(selectedItem) {
       selectedItem.nome ||
       selectedItem.name ||
       selectedItem.titulo ||
+      selectedItem.title ||
       selectedItem.id ||
       selectedItem._id ||
       "Item Selecionado"
