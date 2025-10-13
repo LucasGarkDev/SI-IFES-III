@@ -5,8 +5,8 @@ import { api } from "./api";
  */
 const urls = {
   localhost: "http://localhost:8085/api",
-  development2: "https://my-json-server.typicode.com/typicode/demo/",
-  production: "",
+  development2: "",
+  production: "https://my-json-server.typicode.com/typicode/demo/",
 };
 
 /**
