@@ -1,5 +1,7 @@
-import { data } from "react-router-dom";
-import { dataStore } from "../../service/api.js";
+import { dataStore, carregarBanco } from "../../service/api.js";
+
+// Sincronizar apenas "classes"
+await carregarBanco("classes");
 
 console.log("[DB CONTROLLER CLASSES]: ", dataStore);
 

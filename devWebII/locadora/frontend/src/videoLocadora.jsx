@@ -5,9 +5,9 @@ import AppRoutes from "./routes/VideoLocadoraRoutes.jsx";
 import { BrowserRouter } from "react-router-dom";
 import Aside from "./components/Aside.jsx";
 import modules from "./js/config/modules.js";
-import { initData } from "./service/api.js";
 import Loading from "./components/Loading.jsx";
 import AlertManager from "./components/AlertManager.jsx";
+import { inicializarDados } from "./service/api.js";
 
 const VideoLocadora = () => {
   const [loaded, setLoaded] = useState(false);
@@ -15,7 +15,7 @@ const VideoLocadora = () => {
   useEffect(() => {
     (async () => {
       try {
-      await initData();
+      await inicializarDados();
     } catch (err) {
       window.addAlert(`❌ Falha ao sincronizar dados! ${err}`, "danger");
     } finally {
