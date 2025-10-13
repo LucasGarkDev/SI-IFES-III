@@ -40,8 +40,6 @@ public class AtorController {
     ) {
         AtorFiltro filtro = new AtorFiltro();
         filtro.setNome(nome);
-        filtro.setNacionalidade(nacionalidade);
-        filtro.setAtivo(ativo);
         return ResponseEntity.ok(service.listar(filtro, pageable));
     }
 

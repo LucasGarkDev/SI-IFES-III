@@ -19,6 +19,11 @@ public class ClasseService {
         this.repo = repo;
     }
 
+    /* ================================================================
+       CRIAR NOVA CLASSE
+       - Valida duplicidade de nome
+       - Define valores e salva
+    ================================================================ */
     @Transactional
     public ClasseDTO criar(ClasseCreateDTO dto) {
         if (repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
@@ -29,11 +34,15 @@ public class ClasseService {
         c.setNome(dto.getNome().trim());
         c.setPrecoDiariaCentavos(dto.getPrecoDiariaCentavos());
         c.setDataDevolucao(dto.getDataDevolucao());
-        c.setAtivo(true);
 
         return toDTO(repo.save(c));
     }
 
+    /* ================================================================
+       BUSCAR POR ID
+       - Retorna DTO se encontrada
+       - Lança NotFoundException se não existir
+    ================================================================ */
     @Transactional(readOnly = true)
     public ClasseDTO buscarPorId(Long id) {
         Classe c = repo.findById(id)
@@ -41,9 +50,14 @@ public class ClasseService {
         return toDTO(c);
     }
 
+    /* ================================================================
+       LISTAR COM FILTRO E PAGINAÇÃO
+       - Filtro simples por nome (like)
+    ================================================================ */
     @Transactional(readOnly = true)
     public Page<ClasseDTO> listar(ClasseFiltro filtro, Pageable pageable) {
         Page<Classe> page;
+
         if (filtro != null && StringUtils.hasText(filtro.getNome())) {
             page = repo.findByNomeContainingIgnoreCase(filtro.getNome().trim(), pageable);
         } else {
@@ -52,16 +66,15 @@ public class ClasseService {
 
         List<ClasseDTO> content = page.getContent().stream()
                 .map(this::toDTO)
-                .filter(dto -> {
-                    if (filtro == null) return true;
-                    if (filtro.getAtivo() != null && !filtro.getAtivo().equals(dto.getAtivo())) return false;
-                    return true;
-                })
                 .toList();
 
-        return new PageImpl<>(content, pageable, content.size());
+        return new PageImpl<>(content, pageable, page.getTotalElements());
     }
 
+    /* ================================================================
+       ATUALIZAR CLASSE
+       - Atualiza apenas nome, preço e data de devolução
+    ================================================================ */
     @Transactional
     public ClasseDTO atualizar(Long id, ClasseUpdateDTO dto) {
         Classe c = repo.findById(id)
@@ -75,13 +88,14 @@ public class ClasseService {
         c.setNome(dto.getNome().trim());
         c.setPrecoDiariaCentavos(dto.getPrecoDiariaCentavos());
         c.setDataDevolucao(dto.getDataDevolucao());
-        if (dto.getAtivo() != null) {
-            c.setAtivo(dto.getAtivo());
-        }
 
         return toDTO(repo.save(c));
     }
 
+    /* ================================================================
+       EXCLUIR CLASSE
+       - Verifica existência antes de remover
+    ================================================================ */
     @Transactional
     public void excluir(Long id) {
         Classe c = repo.findById(id)
@@ -89,13 +103,16 @@ public class ClasseService {
         repo.delete(c);
     }
 
+    /* ================================================================
+       CONVERSÃO ENTIDADE → DTO
+    ================================================================ */
     private ClasseDTO toDTO(Classe c) {
         ClasseDTO dto = new ClasseDTO();
         dto.setId(c.getId());
         dto.setNome(c.getNome());
         dto.setPrecoDiariaCentavos(c.getPrecoDiariaCentavos());
         dto.setDataDevolucao(c.getDataDevolucao());
-        dto.setAtivo(c.getAtivo());
         return dto;
     }
 }
+

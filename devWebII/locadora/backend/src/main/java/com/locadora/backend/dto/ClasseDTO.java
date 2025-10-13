@@ -7,7 +7,7 @@ public class ClasseDTO {
     private String nome;
     private Integer precoDiariaCentavos;
     private LocalDate dataDevolucao;
-    private Boolean ativo;
+//    private Boolean ativo;
 
     // getters/setters
     public Long getId() { return id; }
@@ -18,6 +18,6 @@ public class ClasseDTO {
     public void setPrecoDiariaCentavos(Integer precoDiariaCentavos) { this.precoDiariaCentavos = precoDiariaCentavos; }
     public LocalDate getDataDevolucao() { return dataDevolucao; }
     public void setDataDevolucao(LocalDate dataDevolucao) { this.dataDevolucao = dataDevolucao; }
-    public Boolean getAtivo() { return ativo; }
-    public void setAtivo(Boolean ativo) { this.ativo = ativo; }
+//    public Boolean getAtivo() { return ativo; }
+//    public void setAtivo(Boolean ativo) { this.ativo = ativo; }
 }

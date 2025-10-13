@@ -35,7 +35,6 @@ public class DiretorController {
             @RequestParam(required = false) Boolean ativo
     ) {
         DiretorFiltro f = new DiretorFiltro();
-        f.setNome(nome); f.setNacionalidade(nacionalidade); f.setAtivo(ativo);
         return ResponseEntity.ok(service.listar(f, pageable));
     }
 
