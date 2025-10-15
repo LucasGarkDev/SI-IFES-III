@@ -1,5 +1,5 @@
 // src/service/apiFunctions.js
-import { api } from "./api";
+import { api, productionAPI } from "./api";
 /**
  * Mapeamento de ambientes para URLs
  */
@@ -61,7 +61,7 @@ async function handleRequest(fn, ...args) {
 
 // Funções da API usando o wrapper
 export async function getDebug() {
-  return handleRequest(api.get, "posts", {
+  return handleRequest(productionAPI.get, "posts", {
     headers: { Accept: "application/json" },
   });
 }

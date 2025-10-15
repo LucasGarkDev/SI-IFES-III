@@ -18,6 +18,15 @@ const api = axios.create({
   },
 });
 
+export const productionAPI = axios.create({
+  baseURL: getUrl("production"),
+  timeout: 10000,
+  headers: {
+    Authorization: `Bearer ${new Date()}`,
+    "Content-Type": "application/json",
+  },
+});
+
 // Armazena os dados carregados
 let dataStore = {};
 
