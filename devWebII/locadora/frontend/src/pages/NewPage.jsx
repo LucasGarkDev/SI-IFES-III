@@ -5,6 +5,7 @@ import ConfirmModal from "../components/ConfirmModal.jsx";
 import { getTitleItem } from "../js/utils.js";
 import Loading from "../components/Loading.jsx"; // Importar o overlay
 import { create } from "../service/apiFunctions.js";
+import { carregarBanco } from "../service/api.js";
 
 const NewPage = ({ moduleConfig }) => {
   const firstItem = moduleConfig.data?.[0] || {};
@@ -36,6 +37,7 @@ const NewPage = ({ moduleConfig }) => {
       window.addAlert(`❌ Falha ao criar! ${err}`, "danger");
       console.error("[NewPage] Erro ao salvar item:", err);
     } finally {
+      carregarBanco(moduleConfig.name);
       window.addAlert("✅ Processo finalizado", "success");
       setLoading(false);
     }
