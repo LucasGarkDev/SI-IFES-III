@@ -4,8 +4,8 @@ import axios from "axios";
 import modules from "../js/config/modules.js";
 import { UNSAFE_getPatchRoutesOnNavigationFunction } from "react-router-dom";
 
-function getItemFromId(id, array) {
-  const foundItem = array.find((item) => item.id === Number(id));
+export function getItemFromId(id, array) {
+  const foundItem = array.find((item) => getIDtem(item) === Number(id));
   return foundItem;
 }
 
@@ -56,7 +56,7 @@ function findModuleConfig(moduleName) {
   return modules.find((mod) => mod.name == moduleName);
 }
 
-function extractKeys(input) {
+export function extractKeys(input) {
   if (Array.isArray(input)) {
     // Caso: array de objetos
     if (input.length > 0 && typeof input[0] === "object" && input[0] !== null) {
@@ -90,7 +90,7 @@ function extractKeys(input) {
   return [];
 }
 
-function getTitleItem(selectedItem) {
+export function getTitleItem(selectedItem) {
   if (selectedItem) {
     return (
       selectedItem.nome ||
@@ -102,7 +102,18 @@ function getTitleItem(selectedItem) {
       "Item Selecionado"
     );
   }
-  return "";
+  return "[getTitleItem] NO ITEM PROVIDE";
+}
+
+export function getIDtem(selectedItem) {
+  if (selectedItem) {
+    return (
+      selectedItem._id ||
+      selectedItem.id ||
+      null
+    );
+  }
+  return "[getIDtem] NO ITEM PROVIDE";
 }
 
 /**
@@ -114,7 +125,7 @@ function getTitleItem(selectedItem) {
  * @param {object[]|object|string[]} dados - Dados ou lista de chaves a filtrar.
  * @return {object[]|object|string[]} Dados filtrados.
  */
-function filtrarCampos(filtros, dados) {
+export function filtrarCampos(filtros, dados) {
   // ✅ Caso 1: Array de strings (ex: ['_id', 'name', 'email'])
   if (Array.isArray(dados) && typeof dados[0] === "string") {
     return dados.filter((campo) => !filtros.includes(campo));
@@ -149,8 +160,4 @@ export {
   formatTimeInSeconds,
   onErrorTelemetria,
   findModuleConfig,
-  extractKeys,
-  getItemFromId,
-  getTitleItem,
-  filtrarCampos,
 };
