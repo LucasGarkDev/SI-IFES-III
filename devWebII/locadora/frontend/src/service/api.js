@@ -54,7 +54,7 @@ export async function carregarBanco(banco) {
     );
     const localData = await getDebug(); // fallback para dados locais
     dataStore[varName] = localData;
-    safeAlert(`⚠️ Usando dados locais para ${banco}`, "warning");
+    safeAlert(`⚠️ Usando dados APIdemo para ${banco}`, "warning");
     return localData;
   }
 }
