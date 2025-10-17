@@ -5,6 +5,7 @@ import Form from "../components/Form.jsx";
 import { getItemFromId, getTitleItem } from "../js/utils.js";
 import Loading from "../components/Loading.jsx";
 import { update } from "../service/apiFunctions.js";
+import { carregarBanco } from "../service/api.js";
 
 const EditPage = ({ moduleConfig, id }) => {
   const atualItem = getItemFromId(id, moduleConfig.data);
@@ -41,6 +42,7 @@ const EditPage = ({ moduleConfig, id }) => {
       window.addAlert(`❌ Falha ao atualizar! ${err}`, "danger");
       console.error("[EditPage] Erro ao salvar item:", err);
     } finally {
+      carregarBanco(moduleConfig.name);
       window.addAlert("🏁 Processo finalizado", "success");
       setLoading(false);
     }
