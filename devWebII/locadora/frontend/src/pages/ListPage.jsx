@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import DynamicTable from "../components/DynamicTable";
 
 const ListPage = ({ moduleConfig }) => {
-  console.log("Rendering ListPage for module:", moduleConfig);
+  const [tableData, setTableData] = useState(moduleConfig.data);
+
+  // Supondo que você tem alguma função que atualiza moduleConfig.data (ex: após sync)
+  // você pode usar um efeito para atualizar o estado local:
+  useEffect(() => {
+    setTableData(moduleConfig.data);
+  }, [moduleConfig.data]);
+
+  console.log("Rendering ListPage with data:", tableData);
 
   return (
     <div>
@@ -15,7 +23,7 @@ const ListPage = ({ moduleConfig }) => {
         + Inserir novos {moduleConfig.label}
       </Link>
 
-      <DynamicTable data={moduleConfig.data} />
+      <DynamicTable data={tableData} />
     </div>
   );
 };

@@ -34,18 +34,33 @@ export async function telemetria(error) {
 async function handleRequest(fn, ...args) {
   try {
     const response = await fn(...args);
-    if (!response || typeof response.data !== "object") {
+
+    // Se não tem resposta, erro
+    if (!response) {
       throw new Error(`Resposta inválida da API: ${response}`);
+    }
+
+    // Se não tem conteúdo no response.data, pode ser válido para DELETE
+    if (response.status === 204) {
+      return null; // sucesso sem conteúdo
+    }
+
+    // Agora verifica se response.data é objeto, pode aceitar vazio
+    if (
+      response.data === undefined ||
+      response.data === null ||
+      typeof response.data !== "object"
+    ) {
+      throw new Error(`Resposta inválida da API: ${JSON.stringify(response.data)}`);
     }
 
     const data = response.data;
 
-    // 🔍 Detecta automaticamente qual campo contém o conteúdo principal
     const content =
-      data.content ?? // preferência: content
-      data.data ?? // fallback: data
-      data.result ?? // fallback alternativo: result
-      data ?? // se não tiver nada, usa o próprio objeto
+      data.content ??
+      data.data ??
+      data.result ??
+      data ??
       null;
 
     if (content === null) {
@@ -55,9 +70,10 @@ async function handleRequest(fn, ...args) {
     return content;
   } catch (err) {
     await telemetria(err.message || err.toString());
-    throw err; // o componente chamador captura
+    throw err;
   }
 }
+
 
 // Funções da API usando o wrapper
 export async function getDebug() {
