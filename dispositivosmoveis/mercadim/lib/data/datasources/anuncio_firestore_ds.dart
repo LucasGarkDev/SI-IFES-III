@@ -8,20 +8,31 @@ class AnuncioFirestoreDataSource implements AnuncioRemoteDataSource {
   final String _collection = 'anuncios';
 
   @override
-  Future<List<AnuncioModel>> fetchAnunciosPorCidade(String cidade) async {
+  Future<List<AnuncioModel>> fetchAnunciosPorCidade(String? cidade) async {
     try {
+      print('[DEBUG] Buscando anúncios para cidade: $cidade');
+
+      // Evita crash se cidade for nula ou vazia
+      if (cidade == null || cidade.isEmpty) {
+        throw AppException('Cidade do usuário não definida.');
+      }
+
       final snapshot = await _firestore
           .collection(_collection)
           .where('cidade', isEqualTo: cidade)
           .get();
 
+      print('[DEBUG] ${snapshot.docs.length} anúncios encontrados.');
+
       return snapshot.docs
           .map((doc) => AnuncioModel.fromMap(doc.data(), id: doc.id))
           .toList();
-    } catch (e) {
+    } catch (e, s) {
+      print('[ERRO Firestore] $e\n$s');
       throw AppException('Erro ao buscar anúncios: $e');
     }
   }
+
 
   @override
   Future<AnuncioModel> criarAnuncio(AnuncioModel anuncio) async {
