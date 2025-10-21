@@ -34,8 +34,12 @@ class AnuncioModel {
   factory AnuncioModel.fromMap(Map<String, dynamic> map, {required String id}) {
     final ts = map['dataCriacao'];
     DateTime created;
-    if (ts is Timestamp) {
+    if (ts == null) {
+      created = DateTime.now();
+    } else if (ts is Timestamp) {
       created = ts.toDate();
+    } else if (ts is FieldValue) {
+      created = DateTime.now(); // valor ainda pendente no Firestore
     } else if (ts is String) {
       created = DateTime.tryParse(ts) ?? DateTime.now();
     } else if (ts is int) {
@@ -43,6 +47,7 @@ class AnuncioModel {
     } else {
       created = DateTime.now();
     }
+
 
     return AnuncioModel(
       id: id,
