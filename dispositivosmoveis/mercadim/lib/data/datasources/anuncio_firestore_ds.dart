@@ -3,50 +3,34 @@ import '../../core/exceptions/app_exception.dart';
 import '../models/anuncio_model.dart';
 import 'anuncio_remote_data_source.dart';
 
-class AnuncioFirestoreDataSource implements AnuncioRemoteDataSource {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _collection = 'anuncios';
+class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
+  final FirebaseFirestore firestore;
+  AnuncioRemoteDataSourceFirestore(this.firestore);
+
+  CollectionReference<Map<String, dynamic>> get _col =>
+      firestore.collection('anuncios').withConverter<Map<String, dynamic>>(
+            fromFirestore: (snap, _) => snap.data() ?? {},
+            toFirestore: (data, _) => data,
+          );
 
   @override
-  Future<List<AnuncioModel>> fetchAnunciosPorCidade(String? cidade) async {
+  Future<List<AnuncioModel>> fetchAnunciosPorCidade(String cidade) async {
     try {
-      print('[DEBUG] Buscando anúncios para cidade: $cidade');
-
-      // Evita crash se cidade for nula ou vazia
-      if (cidade == null || cidade.isEmpty) {
-        throw AppException('Cidade do usuário não definida.');
-      }
-
-      final snapshot = await _firestore
-          .collection(_collection)
-          .where('cidade', isEqualTo: cidade)
-          .get();
-
-      print('[DEBUG] ${snapshot.docs.length} anúncios encontrados.');
-
-      return snapshot.docs
-          .map((doc) => AnuncioModel.fromMap(doc.data(), id: doc.id))
+      final q = await _col.where('cidade', isEqualTo: cidade).get();
+      return q.docs
+          .map((d) => AnuncioModel.fromJson(d.data()).copyWith(id: d.id))
           .toList();
-    } catch (e, s) {
-      print('[ERRO Firestore] $e\n$s');
+    } catch (e) {
       throw AppException('Erro ao buscar anúncios: $e');
     }
   }
 
-
   @override
   Future<AnuncioModel> criarAnuncio(AnuncioModel anuncio) async {
     try {
-      // usa serverTimestamp para data de criação se quiser
-      final data = anuncio.toMap();
-      data['dataCriacao'] = FieldValue.serverTimestamp();
-
-      final ref = await _firestore.collection(_collection).add(data);
-      // opcional: ler o doc salvo para trazer a data do servidor
-      final snap = await ref.get();
-      final saved = AnuncioModel.fromMap(snap.data()!, id: ref.id);
-
-      return saved;
+      final data = anuncio.toJson();
+      final doc = await _col.add(data);
+      return anuncio.copyWith(id: doc.id);
     } catch (e) {
       throw AppException('Erro ao criar anúncio: $e');
     }
@@ -55,10 +39,10 @@ class AnuncioFirestoreDataSource implements AnuncioRemoteDataSource {
   @override
   Future<AnuncioModel> editarAnuncio(AnuncioModel anuncio) async {
     try {
-      await _firestore
-          .collection(_collection)
-          .doc(anuncio.id)
-          .update(anuncio.toMap());
+      if (anuncio.id.isEmpty) {
+        throw const AppException('ID do anúncio ausente para edição.');
+      }
+      await _col.doc(anuncio.id).update(anuncio.toJson());
       return anuncio;
     } catch (e) {
       throw AppException('Erro ao editar anúncio: $e');
@@ -68,23 +52,22 @@ class AnuncioFirestoreDataSource implements AnuncioRemoteDataSource {
   @override
   Future<void> excluirAnuncio(String id) async {
     try {
-      await _firestore.collection(_collection).doc(id).delete();
+      await _col.doc(id).delete();
     } catch (e) {
       throw AppException('Erro ao excluir anúncio: $e');
     }
   }
 
-    @override
+  @override
   Future<List<AnuncioModel>> buscarPorTitulo(String titulo) async {
     try {
-      final snapshot = await _firestore
-          .collection(_collection)
+      // Busca por prefixo (case-sensitive); se quiser case-insensitive, normalize e salve outro campo.
+      final q = await _col
           .where('titulo', isGreaterThanOrEqualTo: titulo)
           .where('titulo', isLessThanOrEqualTo: '$titulo\uf8ff')
           .get();
-
-      return snapshot.docs
-          .map((doc) => AnuncioModel.fromMap(doc.data(), id: doc.id))
+      return q.docs
+          .map((d) => AnuncioModel.fromJson(d.data()).copyWith(id: d.id))
           .toList();
     } catch (e) {
       throw AppException('Erro ao buscar por título: $e');
@@ -101,27 +84,25 @@ class AnuncioFirestoreDataSource implements AnuncioRemoteDataSource {
     double? userLng,
   }) async {
     try {
-      Query<Map<String, dynamic>> query =
-          _firestore.collection(_collection);
+      Query<Map<String, dynamic>> q = _col;
 
       if (categoria != null && categoria.isNotEmpty) {
-        query = query.where('categoria', isEqualTo: categoria);
+        q = q.where('categoria', isEqualTo: categoria);
       }
       if (precoMin != null) {
-        query = query.where('preco', isGreaterThanOrEqualTo: precoMin);
+        q = q.where('preco', isGreaterThanOrEqualTo: precoMin);
       }
       if (precoMax != null) {
-        query = query.where('preco', isLessThanOrEqualTo: precoMax);
+        q = q.where('preco', isLessThanOrEqualTo: precoMax);
       }
+      // Distância real exige geohash/geoqueries; mantemos fora por ora.
 
-      final snapshot = await query.get();
-      return snapshot.docs
-          .map((doc) => AnuncioModel.fromMap(doc.data(), id: doc.id))
+      final snap = await q.get();
+      return snap.docs
+          .map((d) => AnuncioModel.fromJson(d.data()).copyWith(id: d.id))
           .toList();
     } catch (e) {
       throw AppException('Erro ao filtrar anúncios: $e');
     }
   }
-
 }
-
