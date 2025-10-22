@@ -8,6 +8,8 @@ import '../services/id_service.dart';
 // ====== Firestore ======
 import '../../data/datasources/anuncio_firestore_ds.dart';
 import '../../data/repositories/anuncio_repository_impl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 // ====== Auth ======
 import '../../domain/usecases/login_user.dart';
@@ -58,8 +60,9 @@ final signUpUserProvider =
     Provider((ref) => SignUpUser(ref.read(_authRepositoryProvider)));
 
 // ====== Feed (UC11 - Visualizar anúncios) ======
-final _anuncioRemoteDSProvider =
-    Provider((ref) => AnuncioFirestoreDataSource());
+final _anuncioRemoteDSProvider = Provider(
+  (ref) => AnuncioRemoteDataSourceFirestore(FirebaseFirestore.instance),
+);
 
 final anuncioRepositoryProvider =
     Provider<AnuncioRepository>(
