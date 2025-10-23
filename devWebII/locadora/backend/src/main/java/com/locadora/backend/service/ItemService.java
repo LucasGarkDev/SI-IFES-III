@@ -9,6 +9,10 @@ import com.locadora.backend.domain.Titulo;
 import com.locadora.backend.dto.*;
 import com.locadora.backend.repository.ItemRepository;
 import com.locadora.backend.repository.TituloRepository;
+import com.locadora.backend.exception.BusinessRuleException;
+import com.locadora.backend.exception.NotFoundException;
+import com.locadora.backend.exception.DataIntegrityException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +34,7 @@ public class ItemService {
     @Transactional
     public ItemDTO criar(ItemCreateDTO dto) {
         if (repo.existsByNumSerie(dto.getNumSerie().trim())) {
-            throw new BusinessException("Já existe item com este número de série.");
+            throw new BusinessRuleException("Já existe item com este número de série.");
         }
 
         Titulo titulo = tituloRepo.findById(dto.getTituloId())
@@ -80,7 +84,7 @@ public class ItemService {
 
         if (!i.getNumSerie().equalsIgnoreCase(dto.getNumSerie().trim())
                 && repo.existsByNumSerie(dto.getNumSerie().trim())) {
-            throw new BusinessException("Já existe item com este número de série.");
+            throw new BusinessRuleException("Já existe item com este número de série.");
         }
 
         Titulo titulo = tituloRepo.findById(dto.getTituloId())
@@ -100,9 +104,13 @@ public class ItemService {
                 .orElseThrow(() -> new NotFoundException("Item não encontrado."));
 
         // Aqui será feita a verificação de locações futuramente
-        // if (locacaoRepo.existsByItemId(id)) throw new BusinessException("Item possui locações ativas.");
+        // if (locacaoRepo.existsByItemId(id)) throw new BusinessRuleException("Item possui locações ativas.");
 
-        repo.delete(i);
+        try {
+            repo.delete(i);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir o item, pois ele está vinculado a uma ou mais locações.");
+        }
     }
 
     private ItemDTO toDTO(Item i) {
@@ -116,3 +124,4 @@ public class ItemService {
         return dto;
     }
 }
+

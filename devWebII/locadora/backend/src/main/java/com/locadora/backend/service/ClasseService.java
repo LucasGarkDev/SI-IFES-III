@@ -3,6 +3,10 @@ package com.locadora.backend.service;
 import com.locadora.backend.domain.Classe;
 import com.locadora.backend.dto.*;
 import com.locadora.backend.repository.ClasseRepository;
+import com.locadora.backend.exception.BusinessRuleException;
+import com.locadora.backend.exception.NotFoundException;
+import com.locadora.backend.exception.DataIntegrityException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +31,7 @@ public class ClasseService {
     @Transactional
     public ClasseDTO criar(ClasseCreateDTO dto) {
         if (repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
-            throw new BusinessException("Já existe classe com este nome.");
+            throw new BusinessRuleException("Já existe classe com este nome.");
         }
 
         Classe c = new Classe();
@@ -82,7 +86,7 @@ public class ClasseService {
 
         if (!c.getNome().equalsIgnoreCase(dto.getNome().trim())
                 && repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
-            throw new BusinessException("Já existe classe com este nome.");
+            throw new BusinessRuleException("Já existe classe com este nome.");
         }
 
         c.setNome(dto.getNome().trim());
@@ -95,12 +99,18 @@ public class ClasseService {
     /* ================================================================
        EXCLUIR CLASSE
        - Verifica existência antes de remover
+       - Trata falha de integridade (classe vinculada a filmes)
     ================================================================ */
     @Transactional
     public void excluir(Long id) {
         Classe c = repo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Classe não encontrada"));
-        repo.delete(c);
+
+        try {
+            repo.delete(c);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir a classe, pois ela está vinculada a um ou mais filmes.");
+        }
     }
 
     /* ================================================================
