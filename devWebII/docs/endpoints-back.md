@@ -74,8 +74,6 @@
   - Campo opcional:
     - `dependentes`: lista de até **3** objetos com `nome`, `dtNascimento`, `sexo`.
 - **DELETE** `/api/clientes/{id}` → exclui cliente (se for sócio, exclui dependentes em cascata).
-- *(em desenvolvimento)* **PUT** `/api/clientes/ativar/{id}` → reativa cliente inativo.
-- *(em desenvolvimento)* **PUT** `/api/clientes/desativar/{id}` → desativa cliente ativo.
 
 ---
 
