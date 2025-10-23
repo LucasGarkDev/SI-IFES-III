@@ -1,38 +1,31 @@
-import 'package:mercadim/data/models/anuncio_model.dart';
-
-import '../../core/services/id_service.dart';
 import '../../domain/entities/anuncio.dart';
 import '../../domain/repositories/anuncio_repository.dart';
 import '../datasources/anuncio_remote_data_source.dart';
-// import '../mappers/anuncio_mapper.dart';
+import '../models/anuncio_model.dart';
 
 class AnuncioRepositoryImpl implements AnuncioRepository {
   final AnuncioRemoteDataSource ds;
-  final IdService _id;
 
-  AnuncioRepositoryImpl(this.ds, this._id);
+  AnuncioRepositoryImpl(this.ds);
 
   @override
   Future<List<Anuncio>> obterAnunciosPorCidade(String cidade) async {
     final models = await ds.fetchAnunciosPorCidade(cidade);
-    return models.map((e) => e.toEntity()).toList();
+    return models.map((m) => m.toEntity()).toList();
   }
 
   @override
   Future<Anuncio> criarAnuncio(Anuncio anuncio) async {
-    final model = AnuncioModel.fromEntity(anuncio.copyWith(
-      id: _id.make('ad_'),
-      dataCriacao: DateTime.now(),
-    ));
-    final created = await ds.criarAnuncio(model);
+    final created =
+        await ds.criarAnuncio(AnuncioModel.fromEntity(anuncio));
     return created.toEntity();
   }
 
   @override
   Future<Anuncio> editarAnuncio(Anuncio anuncio) async {
-    final model = AnuncioModel.fromEntity(anuncio);
-    final updated = await ds.editarAnuncio(model);
-    return updated.toEntity();
+    final edited =
+        await ds.editarAnuncio(AnuncioModel.fromEntity(anuncio));
+    return edited.toEntity();
   }
 
   @override
@@ -40,10 +33,10 @@ class AnuncioRepositoryImpl implements AnuncioRepository {
     await ds.excluirAnuncio(id);
   }
 
-  @override
+    @override
   Future<List<Anuncio>> buscarPorTitulo(String titulo) async {
     final models = await ds.buscarPorTitulo(titulo);
-    return models.map((e) => e.toEntity()).toList();
+    return models.map((m) => m.toEntity()).toList();
   }
 
   @override
@@ -63,7 +56,7 @@ class AnuncioRepositoryImpl implements AnuncioRepository {
       userLat: userLat,
       userLng: userLng,
     );
-    return models.map((e) => e.toEntity()).toList();
+    return models.map((m) => m.toEntity()).toList();
   }
-}
 
+}
