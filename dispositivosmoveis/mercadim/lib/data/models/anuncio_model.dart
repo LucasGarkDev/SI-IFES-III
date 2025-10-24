@@ -1,3 +1,4 @@
+// lib/data/models/anuncio_model.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/anuncio.dart';
 
@@ -30,32 +31,29 @@ class AnuncioModel {
     required this.imagens,
   });
 
-  // ====== mapeamentos ======
+  // ============ JSON / MAP COMPATÍVEL COM FIRESTORE ============
+  factory AnuncioModel.fromJson(Map<String, dynamic> json) =>
+      AnuncioModel.fromMap(json, id: json['id'] ?? '');
+
+  Map<String, dynamic> toJson() => toMap();
+
+  // =============================================================
   factory AnuncioModel.fromMap(Map<String, dynamic> map, {required String id}) {
     final ts = map['dataCriacao'];
     DateTime created;
-    if (ts == null) {
-      created = DateTime.now();
-    } else if (ts is Timestamp) {
+    if (ts is Timestamp) {
       created = ts.toDate();
-    } else if (ts is FieldValue) {
-      created = DateTime.now(); // valor ainda pendente no Firestore
     } else if (ts is String) {
       created = DateTime.tryParse(ts) ?? DateTime.now();
-    } else if (ts is int) {
-      created = DateTime.fromMillisecondsSinceEpoch(ts);
     } else {
       created = DateTime.now();
     }
-
 
     return AnuncioModel(
       id: id,
       titulo: map['titulo'] ?? '',
       descricao: map['descricao'] ?? '',
-      preco: (map['preco'] is int)
-          ? (map['preco'] as int).toDouble()
-          : (map['preco'] as num?)?.toDouble() ?? 0.0,
+      preco: (map['preco'] is num) ? (map['preco'] as num).toDouble() : 0.0,
       categoria: map['categoria'] ?? '',
       cidade: map['cidade'] ?? '',
       bairro: map['bairro'] ?? '',
@@ -75,7 +73,6 @@ class AnuncioModel {
       'categoria': categoria,
       'cidade': cidade,
       'bairro': bairro,
-      // use timestamp do servidor quando criar; em update pode manter DateTime
       'dataCriacao': Timestamp.fromDate(dataCriacao),
       'imagemPrincipalUrl': imagemPrincipalUrl,
       'usuarioId': usuarioId,
@@ -84,7 +81,7 @@ class AnuncioModel {
     };
   }
 
-  // ====== conversões domain <-> data ======
+  // Conversão com Entity
   factory AnuncioModel.fromEntity(Anuncio e) => AnuncioModel(
         id: e.id,
         titulo: e.titulo,
@@ -115,7 +112,6 @@ class AnuncioModel {
         imagens: imagens,
       );
 
-  // ====== util ======
   AnuncioModel copyWith({
     String? id,
     String? titulo,
@@ -146,3 +142,4 @@ class AnuncioModel {
     );
   }
 }
+
