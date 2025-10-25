@@ -15,6 +15,7 @@ class AuthFirestoreDataSource {
   Future<UserModel> createUser(UserModel user) async {
     try {
       final data = user.toJson();
+      data['dataCriacao'] = FieldValue.serverTimestamp(); // ✅ adiciona data automática
       final doc = await _col.add(data);
       return user.copyWith(id: doc.id);
     } catch (e) {
