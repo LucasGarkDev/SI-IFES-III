@@ -29,8 +29,9 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final updateProfile = ref.read(updateProfileProvider);
-    final vm = EditProfileViewModel(updateProfile);
+    // ✅ Provider atualizado
+    final updateProfileUseCase = ref.read(updateProfileUseCaseProvider);
+    final vm = EditProfileViewModel(updateProfileUseCase);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Editar Perfil')),
@@ -54,13 +55,19 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                     decoration: const InputDecoration(labelText: 'Cidade'),
                   ),
                   const SizedBox(height: 12),
-                  // Aqui pode adicionar botão de selecionar foto
-                  if (_photoUrl != null)
+
+                  // ✅ Exibição opcional da foto de perfil
+                  if (_photoUrl != null && _photoUrl!.isNotEmpty)
                     Image.network(_photoUrl!, height: 100),
+
                   const SizedBox(height: 20),
+
+                  // ✅ Exibição de erro, se houver
                   if (vm.state.error != null)
                     Text(vm.state.error!,
                         style: const TextStyle(color: Colors.red)),
+
+                  // ✅ Botão de salvar
                   FilledButton(
                     onPressed: vm.state.loading
                         ? null
@@ -68,6 +75,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                             if (!(_form.currentState?.validate() ?? false)) {
                               return;
                             }
+
                             final updated = await vm.submit(
                               widget.currentUser.copyWith(
                                 name: _name.text.trim(),
@@ -77,6 +85,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                                 photoUrl: _photoUrl,
                               ),
                             );
+
                             if (updated != null && mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(

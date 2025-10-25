@@ -16,7 +16,9 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   @override
   void initState() {
     super.initState();
-    ref.read(feedViewModelProvider.notifier).carregarAnuncios('Baixo Guandu');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(feedViewModelProvider.notifier).carregarAnuncios('Baixo Guandu');
+    });
   }
 
   @override
