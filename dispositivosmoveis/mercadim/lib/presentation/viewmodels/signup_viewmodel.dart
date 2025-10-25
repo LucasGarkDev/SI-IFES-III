@@ -9,9 +9,17 @@ class SignUpState {
   final String? error;
   final User? created;
 
-  const SignUpState({this.loading = false, this.error, this.created});
+  const SignUpState({
+    this.loading = false,
+    this.error,
+    this.created,
+  });
 
-  SignUpState copy({bool? loading, String? error, User? created}) =>
+  SignUpState copy({
+    bool? loading,
+    String? error,
+    User? created,
+  }) =>
       SignUpState(
         loading: loading ?? this.loading,
         error: error,
@@ -20,16 +28,18 @@ class SignUpState {
 }
 
 class SignUpViewModel extends ChangeNotifier {
-  final SignUpUser _signUp;
+  final SignupUser _signup; // ✅ tipo atualizado
   SignUpState state = const SignUpState();
 
-  SignUpViewModel(this._signUp);
+  SignUpViewModel(this._signup);
 
+  // ===== Validações =====
   String? validateName(String? v) => Validators.required(v, field: 'Nome');
   String? validateEmail(String? v) => Validators.email(v);
   String? validatePassword(String? v) =>
       Validators.minLen(v, 4, field: 'Senha');
 
+  // ===== Ação principal =====
   Future<User?> submit({
     required String name,
     required String email,
@@ -38,12 +48,21 @@ class SignUpViewModel extends ChangeNotifier {
     state = state.copy(loading: true, error: null, created: null);
     notifyListeners();
     try {
-      final user = await _signUp(name: name, email: email, password: password);
+      // ✅ Criação de entidade User antes de enviar ao usecase Firestore
+      final user = await _signup(
+        User(
+          id: '',
+          name: name,
+          email: email,
+          city: null,
+          photoUrl: null,
+        ),
+      );
+
       state = state.copy(loading: false, created: user);
       notifyListeners();
       return user;
     } on AppException catch (e) {
-      // usamos 'mensagem' porque a nossa AppException define esse campo
       state = state.copy(loading: false, error: e.mensagem);
       notifyListeners();
       return null;

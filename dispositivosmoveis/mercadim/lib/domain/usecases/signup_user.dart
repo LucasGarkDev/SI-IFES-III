@@ -1,15 +1,13 @@
+// lib/domain/usecases/signup_user.dart
 import '../entities/user.dart';
-import '../repositories/auth_repository.dart';
+import '../repositories/user_repository.dart';
 
-class SignUpUser {
-  final AuthRepository repo;
-  const SignUpUser(this.repo);
+class SignupUser {
+  final UserRepository repository;
 
-  Future<User> call({
-    required String name,
-    required String email,
-    required String password,
-  }) {
-    return repo.signUp(name: name, email: email, password: password);
+  const SignupUser(this.repository);
+
+  Future<User> call(User user) async {
+    return await repository.createUser(user);
   }
 }
