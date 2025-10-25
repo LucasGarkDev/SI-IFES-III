@@ -8,24 +8,38 @@ const excludeFields = [
   "ativo",
   "data_nascimento",
   "nacionalidade",
-  "Nacionalidade"
+  "Nacionalidade",
 ];
 
 const modules = [
   {
     name: "atores",
     label: "Atores",
-    data: filtrarCampos(excludeFields,atoresArray),
+    description: "Provavelmente e um ator que faz parte de um filme.",
+    data: filtrarCampos(excludeFields, atoresArray),
+    databaseSchema: { Nome: "" },
   },
   {
     name: "classes",
     label: "Classes",
-    data: filtrarCampos(excludeFields,classesArray),
+    description: null,
+    data: filtrarCampos(excludeFields, classesArray),
+    databaseSchema: {
+      nome: "",
+      dataDevolucao: "25/10/2025",
+      preco_diaria_centavos: 0.4,
+    },
   },
   {
     name: "diretores",
     label: "Diretores",
-    data: filtrarCampos(excludeFields,diretoresArray),
+    description: "Provavelmente e alguem que esta dirigindo ou produzindo um filme.",
+    data: filtrarCampos(excludeFields, diretoresArray),
+    databaseSchema: {
+      nome: "Arnold Schwarzenegger",
+      nacionalidade: "Califórnia",
+      data_nascimento: "30-07-1947",
+    },
   },
 ];
 
