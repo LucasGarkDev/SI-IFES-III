@@ -7,6 +7,10 @@ package com.locadora.backend.service;
 import com.locadora.backend.domain.*;
 import com.locadora.backend.dto.*;
 import com.locadora.backend.repository.*;
+import com.locadora.backend.exception.BusinessRuleException;
+import com.locadora.backend.exception.NotFoundException;
+import com.locadora.backend.exception.DataIntegrityException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +40,7 @@ public class ClienteService {
     @Transactional
     public ClienteDTO criarSocio(SocioCreateDTO dto) {
         if (socioRepo.existsByCpf(dto.getCpf())) {
-            throw new BusinessException("Já existe sócio com este CPF.");
+            throw new BusinessRuleException("Já existe sócio com este CPF.");
         }
 
         Socio socio = new Socio();
@@ -51,7 +55,7 @@ public class ClienteService {
 
         if (dto.getDependentes() != null && !dto.getDependentes().isEmpty()) {
             if (dto.getDependentes().size() > 3)
-                throw new BusinessException("Um sócio não pode ter mais de 3 dependentes ativos.");
+                throw new BusinessRuleException("Um sócio não pode ter mais de 3 dependentes ativos.");
 
             dto.getDependentes().forEach(depDto -> {
                 Dependente d = new Dependente();
@@ -95,11 +99,15 @@ public class ClienteService {
         Cliente cliente = clienteRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cliente não encontrado."));
 
-        if (cliente instanceof Socio socio) {
-            socio.getDependentes().forEach(dependenteRepo::delete);
-        }
+        try {
+            if (cliente instanceof Socio socio) {
+                socio.getDependentes().forEach(dependenteRepo::delete);
+            }
 
-        clienteRepo.delete(cliente);
+            clienteRepo.delete(cliente);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir o cliente, pois ele está vinculado a locações ou outros registros.");
+        }
     }
 
     private ClienteDTO toDTO(Cliente c) {
@@ -114,4 +122,3 @@ public class ClienteService {
         return dto;
     }
 }
-

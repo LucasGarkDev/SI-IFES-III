@@ -3,6 +3,10 @@ package com.locadora.backend.service;
 import com.locadora.backend.domain.Ator;
 import com.locadora.backend.dto.*;
 import com.locadora.backend.repository.AtorRepository;
+import com.locadora.backend.exception.BusinessRuleException;
+import com.locadora.backend.exception.NotFoundException;
+import com.locadora.backend.exception.DataIntegrityException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +31,7 @@ public class AtorService {
     @Transactional
     public AtorDTO criar(AtorCreateDTO dto) {
         if (repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
-            throw new BusinessException("Já existe ator com este nome.");
+            throw new BusinessRuleException("Já existe ator com este nome.");
         }
 
         Ator ator = new Ator();
@@ -81,7 +85,7 @@ public class AtorService {
 
         if (!ator.getNome().equalsIgnoreCase(dto.getNome().trim())
                 && repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
-            throw new BusinessException("Já existe ator com este nome.");
+            throw new BusinessRuleException("Já existe ator com este nome.");
         }
 
         ator.setNome(dto.getNome().trim());
@@ -92,12 +96,18 @@ public class AtorService {
     /* ================================================================
        EXCLUIR ATOR
        - Verifica existência
+       - Trata falha de integridade referencial (ator vinculado a filme)
     ================================================================ */
     @Transactional
     public void excluir(Long id) {
         Ator ator = repo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Ator não encontrado"));
-        repo.delete(ator);
+
+        try {
+            repo.delete(ator);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir o ator, pois ele está vinculado a um ou mais filmes.");
+        }
     }
 
     /* ================================================================
