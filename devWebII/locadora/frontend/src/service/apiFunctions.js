@@ -1,14 +1,6 @@
 // src/service/apiFunctions.js
 import { api, productionAPI } from "./api";
-/**
- * Mapeamento de ambientes para URLs
- */
-const urls = {
-  localhost: "http://localhost:8085/api",
-  development2: "",
-  production: "https://my-json-server.typicode.com/typicode/demo/",
-};
-
+const { VITE_BACKEND_PORT, VITE_BACKEND_DOMAIN, VITE_PRODUCTION_URL } = import.meta.env;
 /**
  * Envia telemetria de erro para a API
  * @param {string} error Mensagem de erro
@@ -51,17 +43,14 @@ async function handleRequest(fn, ...args) {
       response.data === null ||
       typeof response.data !== "object"
     ) {
-      throw new Error(`Resposta inválida da API: ${JSON.stringify(response.data)}`);
+      throw new Error(
+        `Resposta inválida da API: ${JSON.stringify(response.data)}`
+      );
     }
 
     const data = response.data;
 
-    const content =
-      data.content ??
-      data.data ??
-      data.result ??
-      data ??
-      null;
+    const content = data.content ?? data.data ?? data.result ?? data ?? null;
 
     if (content === null) {
       throw new Error("Nenhum campo de conteúdo encontrado em response.data");
@@ -73,7 +62,6 @@ async function handleRequest(fn, ...args) {
     throw err;
   }
 }
-
 
 // Funções da API usando o wrapper
 export async function getDebug() {
@@ -101,10 +89,26 @@ export async function remove(endpoint, id) {
 }
 
 /**
+ * Chama window.addAlert se estiver definido.
+ * @param {string} mensagem - Mensagem a exibir
+ * @param {string} tipo - Tipo do alerta ("info", "success", "warning", "error")
+ */
+export function safeApiAlert(mensagem, tipo = "info") {
+  if (typeof window.addAlert === "function") {
+    window.addAlert(mensagem, tipo);
+  } else {
+    console.warn(`[ALERTA] ${tipo.toUpperCase()}: ${mensagem}`);
+  }
+}
+
+/**
  * Retorna a URL correspondente ao ambiente
- * @param {string} env - Ambiente selecionado
+ * @param {string} type - Ambiente selecionado
  * @return {string} URL da API correspondente
  */
-export function getUrl(env) {
-  return urls[env] || urls.production; // fallback para produção
+export function getUrl(type) {
+  if (type && type == "local"){
+    return `http://${VITE_BACKEND_DOMAIN}:${VITE_BACKEND_PORT}/api`
+  }
+  return VITE_PRODUCTION_URL;
 }
