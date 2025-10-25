@@ -11,6 +11,7 @@ const envPath = path.resolve(__dirname, "../../.env"); // Ajuste o caminho se ne
 const defaultEnvContent = `
 VITE_BACKEND_PORT=48815
 VITE_BACKEND_DOMAIN=147.185.221.212
+VITE_LOCAL_URL=
 VITE_PRODUCTION_URL=https://my-json-server.typicode.com/typicode/demo/
 `.trim();
 
