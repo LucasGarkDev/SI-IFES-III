@@ -1,7 +1,11 @@
 // src/service/apiFunctions.js
 import { api, productionAPI } from "./api";
-const {VITE_LOCAL_URL, VITE_BACKEND_PORT, VITE_BACKEND_DOMAIN, VITE_PRODUCTION_URL } =
-  import.meta.env;
+const {
+  VITE_LOCAL_URL,
+  VITE_BACKEND_PORT,
+  VITE_BACKEND_DOMAIN,
+  VITE_PRODUCTION_URL,
+} = import.meta.env;
 /**
  * Envia telemetria de erro para a API
  * @param {string} error Mensagem de erro
@@ -59,8 +63,28 @@ async function handleRequest(fn, ...args) {
 
     return content;
   } catch (err) {
-    await telemetria(err.message || err.toString());
-    throw err;
+    // Mensagem principal
+    const errorMessage =
+      err.response?.data?.message || err.message || "Erro desconhecido";
+
+    // Array de erros detalhados
+    const arrayErros = err.response?.data?.errors || [];
+
+    // Concatena todos os erros em uma string
+    const detalhesErros = arrayErros
+      .map((e) => `${e.field}: ${e.message}`)
+      .join("; ");
+
+    // Mensagem final
+    const mensagemFinal = detalhesErros
+      ? `${errorMessage} - Detalhes: ${detalhesErros}`
+      : errorMessage;
+
+    // Envia para telemetria
+    await telemetria(err.response?.data || err.toString());
+
+    // Lança a mensagem final
+    throw mensagemFinal;
   }
 }
 

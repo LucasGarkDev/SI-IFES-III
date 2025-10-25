@@ -1,9 +1,10 @@
-// src/components/Header.jsx
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/logo/video-locadora-retro-logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "./AppContext.jsx";
 
-const Header = ({ userLoged, setUserLoged }) => {
+const Header = () => {
+  const { userLoged, setUserLoged, user } = useContext(AppContext); // pega do contexto
   const navigate = useNavigate();
 
   const handleAuthClick = () => {
@@ -13,7 +14,7 @@ const Header = ({ userLoged, setUserLoged }) => {
       navigate("/"); // volta pra login
     } else {
       // Login
-      navigate("/login");
+      navigate("/"); // vai pra página de login
     }
   };
 
@@ -28,12 +29,14 @@ const Header = ({ userLoged, setUserLoged }) => {
         <span>VideoLocadora</span>
       </Link>
 
-      <button
-        className="btn btn-warning"
-        onClick={handleAuthClick}
-      >
-        {userLoged ? "Sair" : "Entrar"}
-      </button>
+      <div className="d-flex align-items-center">
+        {userLoged && user && (
+          <span className="text-light me-3">Bem-vindo, @{user?.name}</span>
+        )}
+        <button className="btn btn-warning" onClick={handleAuthClick}>
+          {userLoged ? "Sair" : "Entrar"}
+        </button>
+      </div>
     </header>
   );
 };

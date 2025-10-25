@@ -6,7 +6,7 @@ import { create } from "../../service/apiFunctions";
 import { AppContext } from "../../components/AppContext.jsx";
 
 const AuthPage = ({ moduleConfig }) => {
-  const { setUserLoged, setUser } = useContext(AppContext);
+  const { userLoged, setUserLoged, setUser } = useContext(AppContext);
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
 
@@ -29,6 +29,20 @@ const AuthPage = ({ moduleConfig }) => {
     }
   };
 
+  const handleFormSubmitDebug = async (data) => {
+    if (!userLoged) {
+      console.log(data)
+      setUser(data)
+      setUserLoged(true);
+    } else {
+      setUser(null)
+      setUserLoged(false);
+    }
+  };
+
+  if (userLoged) {
+    return navigate("/home")
+  }
   return (
     <div className="container flex">
       <h1>Login</h1>
@@ -36,6 +50,13 @@ const AuthPage = ({ moduleConfig }) => {
         btnTextContent="Entrar"
         exampleObject={exampleFields}
         onSubmit={handleFormSubmit}
+        initialValues={{}}
+      />
+
+      <Form
+        btnTextContent="[debug]Entrar"
+        exampleObject={exampleFields}
+        onSubmit={handleFormSubmitDebug}
         initialValues={{}}
       />
     </div>
