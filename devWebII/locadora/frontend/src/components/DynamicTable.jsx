@@ -63,6 +63,7 @@ const DynamicTable = ({ data, fields }) => {
     }
   };
 
+  console.log("DynamicTable renderizou com:", data);
   return (
     <>
       <table className="table table-striped table-bordered table-hover">
