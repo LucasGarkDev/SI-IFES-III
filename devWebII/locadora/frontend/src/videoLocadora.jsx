@@ -5,7 +5,6 @@ import AlertManager from "./components/AlertManager.jsx";
 import { AppProvider } from "./components/AppContext.jsx";
 import "./css/VideoLocadora.css";
 
-
 const VideoLocadora = () => (
   <AppProvider>
     <BrowserRouter>

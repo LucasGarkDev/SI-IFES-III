@@ -7,6 +7,7 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [loaded, setLoaded] = useState(false);
   const [userLoged, setUserLoged] = useState(false);
+  const [user, setUser] = useState(null); // objeto do usuário logado
 
   useEffect(() => {
     (async () => {
@@ -21,7 +22,9 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ loaded, userLoged, setUserLoged }}>
+    <AppContext.Provider
+      value={{ loaded, userLoged, setUserLoged, user, setUser }}
+    >
       {children}
     </AppContext.Provider>
   );
