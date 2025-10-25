@@ -13,7 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ====== Auth ======
 import '../../domain/usecases/login_user.dart';
-import '../../domain/usecases/update_profile.dart';
+// import '../../domain/usecases/update_profile.dart';
 import '../../data/repositories/user_repository_impl.dart';
 
 // ====== Domínio de Anúncios ======
@@ -45,6 +45,8 @@ import '../../domain/usecases/detectar_localizacao.dart';
 // ====== Auth extra ======
 import '../../domain/usecases/entrar_como_visitante.dart';
 import '../../presentation/viewmodels/auth_viewmodel.dart';
+import '../../data/datasources/auth_firestore_ds.dart';
+import '../../domain/usecases/update_profile.dart';
 
 // ====== Serviços base ======
 final _idServiceProvider = Provider((ref) => IdService());
@@ -56,8 +58,15 @@ final _authLocalDSProvider =
 final _authRepositoryProvider =
     Provider((ref) => AuthRepositoryImpl(ref.read(_authLocalDSProvider)));
 
-final signUpUserProvider =
-    Provider((ref) => SignUpUser(ref.read(_authRepositoryProvider)));
+// ====== Signup (UC01 - Criar Conta) ======
+final signupUserUseCaseProvider = Provider(
+  (ref) => SignupUser(ref.read(userRepositoryProvider)),
+);
+
+// ====== Update Profile (UC04 - Editar Perfil) ======
+final updateProfileUseCaseProvider = Provider(
+  (ref) => UpdateProfile(ref.read(userRepositoryProvider)),
+);
 
 // ====== Feed (UC11 - Visualizar anúncios) ======
 final _anuncioRemoteDSProvider = Provider(
@@ -77,12 +86,11 @@ final loginUserProvider =
     Provider((ref) => LoginUser(ref.read(_authRepositoryProvider)));
 
 // ====== User (UC04 - Atualizar Perfil) ======
-final _userRepositoryProvider =
-    Provider((ref) => UserRepositoryImpl(ref.read(_authLocalDSProvider)));
-
-final updateProfileProvider =
-    Provider((ref) => UpdateProfile(ref.read(_userRepositoryProvider)));
-
+final userRepositoryProvider = Provider(
+  (ref) => UserRepositoryImpl(
+    AuthFirestoreDataSource(FirebaseFirestore.instance),
+  ),
+);
 // ====== CRUD Anúncio ======
 final criarAnuncioProvider =
     Provider((ref) => CriarAnuncio(ref.read(anuncioRepositoryProvider)));
@@ -137,10 +145,11 @@ final detectarLocalizacaoProvider =
 final entrarComoVisitanteProvider =
     Provider((ref) => EntrarComoVisitante(ref.read(_authRepositoryProvider)));
 
+
 // ====== Auth Global (ViewModel) ======
 final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
   return AuthViewModel(
-    ref.read(signUpUserProvider),
+    ref.read(signupUserUseCaseProvider), // ✅ nome atualizado
     ref.read(entrarComoVisitanteProvider),
     ref.read(loginUserProvider),
   );

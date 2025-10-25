@@ -1,3 +1,4 @@
+// presetation/viewmodels/auth_viewmodel.dart
 import 'package:flutter/foundation.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/usecases/signup_user.dart';
@@ -32,19 +33,28 @@ class AuthState {
 }
 
 class AuthViewModel extends ChangeNotifier {
-  final SignUpUser _signUp;
+  final SignupUser _signup; // ✅ caso de uso Firestore
   final EntrarComoVisitante _entrarVisitante;
   final LoginUser _login;
 
   AuthState state = const AuthState();
 
-  AuthViewModel(this._signUp, this._entrarVisitante, this._login);
+  AuthViewModel(this._signup, this._entrarVisitante, this._login);
 
+  // ✅ Corrigido: agora cria um User e envia para o caso de uso Firestore
   Future<User?> criarConta(String name, String email, String senha) async {
     state = state.copy(loading: true, error: null);
     notifyListeners();
     try {
-      final user = await _signUp(name: name, email: email, password: senha);
+      final user = await _signup(
+        User(
+          id: '',
+          name: name,
+          email: email,
+          city: null,
+          photoUrl: null,
+        ),
+      );
       state = state.copy(loading: false, user: user);
       notifyListeners();
       return user;
