@@ -4,7 +4,8 @@ import viteImagemin from 'vite-plugin-imagemin' // otimização de imagens
 
 export default defineConfig({
   server: {
-    host: true // or '0.0.0.0' to listen on all addresses
+    host: true, // or '0.0.0.0' to listen on all addresses
+    allowedHosts: true
   },
   plugins: [
     react(),
