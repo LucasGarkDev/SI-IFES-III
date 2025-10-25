@@ -1,3 +1,4 @@
+// src/routes/VideoLocadoraRoutes.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
@@ -6,37 +7,55 @@ import ListPage from "../pages/ListPage";
 import NewPage from "../pages/NewPage";
 import EditPage from "../pages/EditPage";
 import ModuleWrapper from "../components/ModuleWrapper";
-import AuthPage from "../pages/auth/login";
+import AuthPage from "../pages/auth/AuthPage";
+import PrivateRoute from "./PrivateRoute";
 
 const AppRoutes = () => {
   return (
     <Routes>
+      {/* Login */}
       <Route path="/" element={<AuthPage />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<AuthPage />} />
 
-      {/* Cada rota que usa módulo dinâmico vai envolver o componente com o ModuleWrapper */}
+      {/* Home protegido */}
+      <Route
+        path="/home"
+        element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        }
+      />
+
+      {/* Rotas dinâmicas de módulos protegidas */}
       <Route
         path="/:moduleName"
         element={
-          <ModuleWrapper>
-            <ListPage />
-          </ModuleWrapper>
+          <PrivateRoute>
+            <ModuleWrapper>
+              <ListPage />
+            </ModuleWrapper>
+          </PrivateRoute>
         }
       />
       <Route
         path="/:moduleName/novo"
         element={
-          <ModuleWrapper>
-            <NewPage />
-          </ModuleWrapper>
+          <PrivateRoute>
+            <ModuleWrapper>
+              <NewPage />
+            </ModuleWrapper>
+          </PrivateRoute>
         }
       />
       <Route
         path="/:moduleName/editar/:id"
         element={
-          <ModuleWrapper>
-            <EditPage />
-          </ModuleWrapper>
+          <PrivateRoute>
+            <ModuleWrapper>
+              <EditPage />
+            </ModuleWrapper>
+          </PrivateRoute>
         }
       />
 
