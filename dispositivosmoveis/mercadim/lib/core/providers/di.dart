@@ -1,16 +1,20 @@
-import '../../data/datasources/auth_local_ds.dart';
-import '../../data/repositories/auth_repository_impl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../data/datasources/auth_firestore_ds.dart';
+import '../../data/repositories/user_repository_impl.dart';
 import '../../domain/usecases/signup_user.dart';
-import '../services/id_service.dart';
 
 class DI {
   DI._();
   static final DI I = DI._();
 
-  late final IdService id = IdService();
-  late final AuthLocalDataSource authDS = AuthLocalDataSource(id);
-  late final AuthRepositoryImpl authRepo = AuthRepositoryImpl(authDS);
+  // 🔥 DataSource Firestore (autenticação / usuários)
+  late final AuthFirestoreDataSource authDS =
+      AuthFirestoreDataSource(FirebaseFirestore.instance);
 
-  // UC01
-  late final SignUpUser signUpUser = SignUpUser(authRepo);
+  // 💾 Repositório de Usuários baseado no Firestore
+  late final UserRepositoryImpl userRepo = UserRepositoryImpl(authDS);
+
+  // 🧩 UC01 – Criar Conta (Signup)
+  late final SignupUser signupUser = SignupUser(userRepo);
 }

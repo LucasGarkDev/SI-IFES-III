@@ -1,3 +1,4 @@
+// presetation/pages/signup_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,8 +23,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     // casos de uso
-    final signUpUseCase = ref.read(signUpUserProvider);
-    final vm = SignUpViewModel(signUpUseCase);
+    final signupUseCase = ref.read(signupUserUseCaseProvider);
+    final vm = SignUpViewModel(signupUseCase);
 
     final visitanteUC = ref.read(entrarComoVisitanteProvider);
     final visitanteVM = VisitanteViewModel(visitanteUC);
