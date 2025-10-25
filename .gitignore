@@ -33,3 +33,4 @@ SERINT/
 devWebII/locadora/frontend/.env
 /SISTDIS/projeto-ringo/target/
 /SISTDIS/tarefa7/target/
+devWebII/locadora/backend/src/main/resources/application.properties
