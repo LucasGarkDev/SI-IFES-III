@@ -3,9 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import Form from "../../components/Form";
 import { create } from "../../service/apiFunctions";
 
-const AuthPage = ({ moduleConfig }) => {
+const AuthPage = ({ moduleConfig, userLoged, setUserLoged }) => {
 	const [formData, setFormData] = useState(null);
-  const exampleFields = { "usuario": "string", "senha": "string" };
+  const exampleFields = { "usuario": "admin", "senha": "123456" };
 
 
   const handleFormSubmit = async (data) => {
@@ -16,13 +16,15 @@ const AuthPage = ({ moduleConfig }) => {
 			// usa moduleConfig.name como endpoint
 			await create(moduleConfig.name, formData);
 			console.log("Login efetuado com sucesso!");
+      setUserLoged(true);
 		} catch (err) {
+      setUserLoged(false);
 			console.error("Erro ao fazer Login:", err);
 		}
   };
 
   return (
-    <div>
+    <div className="container flex">
       <h1>login</h1>
       <Form
         btnTextContent="Entrar"
