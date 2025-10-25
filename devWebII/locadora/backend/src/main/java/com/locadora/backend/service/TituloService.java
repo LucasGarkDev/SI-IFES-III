@@ -7,6 +7,10 @@ package com.locadora.backend.service;
 import com.locadora.backend.domain.*;
 import com.locadora.backend.dto.*;
 import com.locadora.backend.repository.*;
+import com.locadora.backend.exception.BusinessRuleException;
+import com.locadora.backend.exception.NotFoundException;
+import com.locadora.backend.exception.DataIntegrityException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +39,7 @@ public class TituloService {
     @Transactional
     public TituloDTO criar(TituloCreateDTO dto) {
         if (repo.existsByNomeAndAno(dto.getNome().trim(), dto.getAno())) {
-            throw new BusinessException("Já existe título com este nome e ano.");
+            throw new BusinessRuleException("Já existe título com este nome e ano.");
         }
 
         Classe classe = classeRepo.findById(dto.getClasseId())
@@ -90,7 +94,7 @@ public class TituloService {
 
         if (!t.getNome().equalsIgnoreCase(dto.getNome().trim())
                 && repo.existsByNomeAndAno(dto.getNome().trim(), dto.getAno())) {
-            throw new BusinessException("Já existe título com este nome e ano.");
+            throw new BusinessRuleException("Já existe título com este nome e ano.");
         }
 
         Classe classe = classeRepo.findById(dto.getClasseId())
@@ -116,9 +120,13 @@ public class TituloService {
                 .orElseThrow(() -> new NotFoundException("Título não encontrado."));
 
         // FUTURO: se tiver itens, bloquear exclusão
-        // if (itemRepo.existsByTituloId(id)) throw new BusinessException("Título possui itens cadastrados.");
+        // if (itemRepo.existsByTituloId(id)) throw new BusinessRuleException("Título possui itens cadastrados.");
 
-        repo.delete(t);
+        try {
+            repo.delete(t);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir o título, pois ele está vinculado a um ou mais itens.");
+        }
     }
 
     private TituloDTO toDTO(Titulo t) {
@@ -137,4 +145,3 @@ public class TituloService {
         return dto;
     }
 }
-

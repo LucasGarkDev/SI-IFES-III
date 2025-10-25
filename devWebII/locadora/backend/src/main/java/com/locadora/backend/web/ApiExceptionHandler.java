@@ -1,7 +1,7 @@
 package com.locadora.backend.web;
 
-import com.locadora.backend.service.BusinessException;
-import com.locadora.backend.service.NotFoundException;
+import com.locadora.backend.exception.BusinessRuleException;
+import com.locadora.backend.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,10 +21,10 @@ public class ApiExceptionHandler {
         return problem(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<?> handleBusiness(BusinessException ex) {
-        return problem(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage());
-    }
+//    @ExceptionHandler(BusinessException.class)
+//    public ResponseEntity<?> handleBusiness(BusinessException ex) {
+//        return problem(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage());
+//    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidation(MethodArgumentNotValidException ex) {

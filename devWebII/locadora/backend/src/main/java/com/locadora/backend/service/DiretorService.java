@@ -3,6 +3,10 @@ package com.locadora.backend.service;
 import com.locadora.backend.domain.Diretor;
 import com.locadora.backend.dto.*;
 import com.locadora.backend.repository.DiretorRepository;
+import com.locadora.backend.exception.BusinessRuleException;
+import com.locadora.backend.exception.NotFoundException;
+import com.locadora.backend.exception.DataIntegrityException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +31,7 @@ public class DiretorService {
     @Transactional
     public DiretorDTO criar(DiretorCreateDTO dto) {
         if (repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
-            throw new BusinessException("Já existe diretor com este nome.");
+            throw new BusinessRuleException("Já existe diretor com este nome.");
         }
 
         Diretor d = new Diretor();
@@ -82,7 +86,7 @@ public class DiretorService {
 
         if (!d.getNome().equalsIgnoreCase(dto.getNome().trim())
                 && repo.existsByNomeIgnoreCase(dto.getNome().trim())) {
-            throw new BusinessException("Já existe diretor com este nome.");
+            throw new BusinessRuleException("Já existe diretor com este nome.");
         }
 
         d.setNome(dto.getNome().trim());
@@ -93,12 +97,17 @@ public class DiretorService {
     /* ================================================================
        EXCLUIR DIRETOR
        - Verifica existência
+       - Trata violação de integridade (diretor vinculado a títulos)
     ================================================================ */
     @Transactional
     public void excluir(Long id) {
         Diretor d = repo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Diretor não encontrado"));
-        repo.delete(d);
+        try {
+            repo.delete(d);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir o diretor, pois ele está vinculado a um ou mais títulos.");
+        }
     }
 
     /* ================================================================
