@@ -4,8 +4,8 @@ import Aside from "./Aside.jsx";
 import AppRoutes from "../routes/VideoLocadoraRoutes.jsx";
 import { useContext } from "react";
 import { AppContext } from "../components/AppContext.jsx";
-import Loading from "./Loading.jsx";
 import modules from "../js/config/modules.js";
+import Loading from "./subcomponents/Loading.jsx";
 
 const Layout = () => {
   const { loaded } = useContext(AppContext);

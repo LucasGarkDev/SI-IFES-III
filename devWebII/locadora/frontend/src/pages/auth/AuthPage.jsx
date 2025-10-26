@@ -10,33 +10,25 @@ const AuthPage = ({ moduleConfig }) => {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
 
-  const exampleFields = { usuario: "admin", senha: "123456" };
+  const exampleFields = { usuario: "admin", senha: null };
 
   const handleFormSubmit = async (data) => {
     try {
+      if (!data) {
+        throw "Usuário ou senha inválidos!";
+      }
       // Chama endpoint de login
-      const response = await create("login", data); // ajusta para seu backend
-      console.log("Login efetuado:", response);
+      // const response = await create("login", data); // ajusta para seu backend
+      // console.log("Login efetuado:", response);
 
       setUserLoged(true);
-      setUser(response.user); // salva info do usuário
+      // setUser(response.user); // salva info do usuário
       navigate("/home"); // redireciona para home
     } catch (err) {
       setUserLoged(false);
       setUser(null);
       console.error("Erro ao fazer login:", err);
       alert("Usuário ou senha inválidos!");
-    }
-  };
-
-  const handleFormSubmitDebug = async (data) => {
-    if (!userLoged) {
-      console.log(data)
-      setUser(data)
-      setUserLoged(true);
-    } else {
-      setUser(null)
-      setUserLoged(false);
     }
   };
 
@@ -50,14 +42,7 @@ const AuthPage = ({ moduleConfig }) => {
         btnTextContent="Entrar"
         exampleObject={exampleFields}
         onSubmit={handleFormSubmit}
-        initialValues={{}}
-      />
-
-      <Form
-        btnTextContent="[debug]Entrar"
-        exampleObject={exampleFields}
-        onSubmit={handleFormSubmitDebug}
-        initialValues={{}}
+        initialValues={exampleFields}
       />
     </div>
   );

@@ -1,19 +1,18 @@
+// src/wrappers/ModuleWrapper.jsx
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { findModuleConfig } from "../js/utils";
-import { carregarBanco } from "../service/api";
+import { syncData } from "../service/api";
 
 const ModuleWrapper = ({ children }) => {
   const { moduleName, id } = useParams();
   const baseConfig = findModuleConfig(moduleName);
   const [data, setData] = useState(baseConfig?.data || []);
 
-  // Função para gerar número aleatório
   const getRandomInt = (max) => Math.floor(Math.random() * max);
 
-  // Mensagens engraçadas
   const mensagensVazias = [
-    "Ops! Parece que aqui não tem nada… nem poeira!",
+    "Ops! Parece que aqui não tem nada… nem poeira! 🧹",
     "Nada para mostrar… O fantasma dos dados levou tudo! 👻",
     "Tabela vazia! Hora de adicionar algum conteúdo, antes que ela fique triste 😢",
     "Hmm… nada aqui ainda. Talvez os dados estejam de férias 🌴",
@@ -21,36 +20,40 @@ const ModuleWrapper = ({ children }) => {
     "Atenção! Este espaço está reservado para dados incríveis que ainda não chegaram 🚀",
   ];
 
-  // Atualiza automaticamente do backend
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await carregarBanco(moduleName); // GET /api/{moduleName}
-      setData(result);
-    };
+  // Função local de sincronização para este módulo
+  const syncDataLocal = async () => {
+    try {
+      await syncData(moduleName, setData);
+    } catch (err) {
+      console.error(`[ModuleWrapper] Erro ao sincronizar ${moduleName}:`, err);
+    }
+  };
 
-    fetchData();
-    const interval = setInterval(fetchData, 15000); // sincronia automática
+  useEffect(() => {
+    syncDataLocal();
+    const interval = setInterval(syncDataLocal, 1000*35);
     return () => clearInterval(interval);
   }, [moduleName]);
 
-  // Caso o módulo não exista
   if (!baseConfig) {
-    const mensagemAleatoria = mensagensVazias[getRandomInt(mensagensVazias.length)];
-    return <h2>{mensagemAleatoria} — módulo "{moduleName}" não encontrado.</h2>;
+    const msg = mensagensVazias[getRandomInt(mensagensVazias.length)];
+    return <h2>{msg} — módulo "{moduleName}" não encontrado.</h2>;
   }
 
-  // Caso o módulo exista mas não tenha dados
-  if (data.length === 0) {
-    const mensagemAleatoria = mensagensVazias[getRandomInt(mensagensVazias.length)];
-    return <h2>{mensagemAleatoria}</h2>;
+  if (!data || data.length === 0) {
+    const msg = mensagensVazias[getRandomInt(mensagensVazias.length)];
+    return <h2>{msg}</h2>;
   }
 
-  console.log("ModuleWrapper recebeu novos dados:", baseConfig.data);
-  console.log("ModuleWrapper: Renderizando módulo", moduleName, baseConfig);
+  console.log("🔁 ModuleWrapper sincronizado:", moduleName);
 
-  // Passa moduleConfig atualizado para a página
   return React.cloneElement(children, {
-    moduleConfig: { ...baseConfig, data },
+    moduleConfig: {
+      ...baseConfig,
+      data,
+      syncData: syncDataLocal, // ✅ injetamos a função no config
+    },
+    setData, // opcional, se quiser manipular manualmente
     id,
   });
 };
