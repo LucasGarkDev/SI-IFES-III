@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import AutoDismissAlert from "./AutoDismissAlert";
+import AutoDismissAlert from "./subcomponents/AutoDismissAlert";
 
 /**
  * Gera um ID único e seguro

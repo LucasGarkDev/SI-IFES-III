@@ -1,7 +1,7 @@
 // src/pages/Home.jsx
 import React from "react";
-import AutoDismissAlert from "./AutoDismissAlert";
 import ConfirmModal from "./ConfirmModal";
+import AutoDismissAlert from "./subcomponents/AutoDismissAlert";
 
 const Home = () => {
   return (

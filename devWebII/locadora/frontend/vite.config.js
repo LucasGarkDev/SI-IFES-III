@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import viteImagemin from 'vite-plugin-imagemin' // otimização de imagens
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import viteImagemin from "vite-plugin-imagemin"; // otimização de imagens
 
 export default defineConfig({
   server: {
-    host: true // or '0.0.0.0' to listen on all addresses
+    host: true, // or '0.0.0.0' to listen on all addresses
+    allowedHosts: true,
   },
   plugins: [
     react(),
@@ -14,28 +15,28 @@ export default defineConfig({
       mozjpeg: { quality: 80 },
       svgo: {
         plugins: [
-          { name: 'removeViewBox', active: false },
-          { name: 'removeEmptyAttrs', active: true }
-        ]
-      }
-    })
+          { name: "removeViewBox", active: false },
+          { name: "removeEmptyAttrs", active: true },
+        ],
+      },
+    }),
   ],
-  base: './', // caminhos relativos
+  base: "./", // caminhos relativos
   build: {
-    outDir: 'docs', // pasta de saída
-    assetsDir: 'assets', // pasta para JS/CSS/imagens
+    outDir: "docs", // pasta de saída
+    assetsDir: "assets", // pasta para JS/CSS/imagens
     sourcemap: false, // desativa sourcemaps (menos arquivos)
     rollupOptions: {
       output: {
-        chunkFileNames: 'assets/[name]-[hash].js', // nomes dos chunks
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
+        chunkFileNames: "assets/[name]-[hash].js", // nomes dos chunks
+        entryFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash].[ext]",
         manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor' // separa dependências em vendor.js
+          if (id.includes("node_modules")) {
+            return "vendor"; // separa dependências em vendor.js
           }
-        }
-      }
-    }
-  }
-})
+        },
+      },
+    },
+  },
+});
