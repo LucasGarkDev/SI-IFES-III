@@ -1,14 +1,14 @@
 import '../../core/exceptions/app_exception.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../datasources/auth_firestore_ds.dart'; // ✅ Firestore em vez de local
+import '../datasources/auth_firestore_ds.dart'; // Firestore DataSource
 import '../models/user_model.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final AuthFirestoreDataSource ds;
   UserRepositoryImpl(this.ds);
 
-  /// Cria um novo usuário no Firestore
+  @override
   Future<User> createUser(User user) async {
     try {
       final model = UserModel.fromEntity(user);
@@ -37,9 +37,20 @@ class UserRepositoryImpl implements UserRepository {
     return found.toEntity();
   }
 
-  /// Entrar como visitante (usa o método do datasource)
+  @override
   Future<User> enterAsGuest() async {
     final guest = await ds.enterAsGuest();
     return guest.toEntity();
+  }
+
+  // ✅ Implementação para login via e-mail
+  @override
+  Future<User?> findByEmail(String email) async {
+    try {
+      final found = await ds.findByEmail(email);
+      return found?.toEntity();
+    } catch (e) {
+      throw AppException('Erro ao buscar usuário: $e');
+    }
   }
 }

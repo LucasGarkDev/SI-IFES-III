@@ -82,8 +82,10 @@ final getAnunciosUseCaseProvider =
     Provider((ref) => GetAnunciosUseCase(ref.read(anuncioRepositoryProvider)));
 
 // ====== Auth (UC02 - Login) ======
-final loginUserProvider =
-    Provider((ref) => LoginUser(ref.read(_authRepositoryProvider)));
+// ====== Auth (UC02 - Login) ======
+final loginUserProvider = Provider(
+  (ref) => LoginUser(ref.read(userRepositoryProvider)),
+);
 
 // ====== User (UC04 - Atualizar Perfil) ======
 final userRepositoryProvider = Provider(

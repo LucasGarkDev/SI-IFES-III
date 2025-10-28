@@ -1,3 +1,4 @@
+// lib/presentation/viewmodels/login_viewmodel.dart
 import 'package:flutter/foundation.dart';
 import '../../core/exceptions/app_exception.dart';
 import '../../core/utils/validators.dart';
@@ -11,8 +12,7 @@ class LoginState {
 
   const LoginState({this.loading = false, this.error, this.logged});
 
-  LoginState copy({bool? loading, String? error, User? logged}) =>
-      LoginState(
+  LoginState copy({bool? loading, String? error, User? logged}) => LoginState(
         loading: loading ?? this.loading,
         error: error,
         logged: logged,
@@ -26,8 +26,7 @@ class LoginViewModel extends ChangeNotifier {
   LoginViewModel(this._login);
 
   String? validateEmail(String? v) => Validators.email(v);
-  String? validatePassword(String? v) =>
-      Validators.minLen(v, 4, field: 'Senha');
+  String? validatePassword(String? v) => Validators.minLen(v, 4, field: 'Senha');
 
   Future<User?> submit({
     required String email,

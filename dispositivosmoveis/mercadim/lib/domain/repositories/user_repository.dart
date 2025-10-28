@@ -5,4 +5,7 @@ abstract class UserRepository {
   Future<User> updateProfile(User user);
   Future<User> getById(String id);
   Future<User> enterAsGuest();
+
+  // ✅ Novo método para login via e-mail
+  Future<User?> findByEmail(String email);
 }

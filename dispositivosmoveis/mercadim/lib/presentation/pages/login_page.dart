@@ -1,3 +1,4 @@
+// lib/presentation/pages/login_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -63,18 +64,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             if (user != null && mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                    content: Text('Bem-vindo de volta, ${user.name}!')),
+                                  content: Text('Bem-vindo de volta, ${user.name}!'),
+                                ),
                               );
-                              // Navigator.pushReplacementNamed(context, '/home');
+                              Navigator.pushReplacementNamed(context, '/feed');
                             }
                           },
                     child: vm.state.loading
                         ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(),
-                          )
+                            height: 20, width: 20, child: CircularProgressIndicator())
                         : const Text('Entrar'),
+                  ),
+                  const SizedBox(height: 16),
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/signup'),
+                    child: const Text('Criar conta'),
                   ),
                 ],
               ),
