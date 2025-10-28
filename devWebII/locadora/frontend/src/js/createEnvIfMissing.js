@@ -9,9 +9,10 @@ const __dirname = path.dirname(__filename);
 const envPath = path.resolve(__dirname, "../../.env"); // Ajuste o caminho se necessário
 
 const defaultEnvContent = `
-NODE_ENV=development
-VITE_ENV=development
-REACT_APP_ENV=development
+VITE_BACKEND_PORT=48815
+VITE_BACKEND_DOMAIN=147.185.221.212
+VITE_LOCAL_URL=
+VITE_PRODUCTION_URL=https://my-json-server.typicode.com/typicode/demo/
 `.trim();
 
 if (fs.existsSync(envPath)) {

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import ConfirmModal from "../components/ConfirmModal.jsx";
 import { getTitleItem } from "../js/utils.js";
-import Loading from "../components/Loading.jsx"; // Importar o overlay
 import { create } from "../service/apiFunctions.js";
-import { carregarBanco } from "../service/api.js";
+import Loading from "../components/subcomponents/Loading.jsx";
 
 const NewPage = ({ moduleConfig }) => {
-  const firstItem = moduleConfig.data?.[0] || {};
+  const descricao = moduleConfig.description || "Nenhuma descrição fornecida.";
+  const firstItem = moduleConfig.data?.[0] || moduleConfig.databaseSchema;
   const [initialValues] = useState(firstItem);
   const [formData, setFormData] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -34,10 +34,11 @@ const NewPage = ({ moduleConfig }) => {
       window.addAlert(`✅ ${getTitleItem(formData)} criado com sucesso!`, "success");
       console.log("[NewPage] Item salvo com sucesso!");
     } catch (err) {
+      console.log(err)
       window.addAlert(`❌ Falha ao criar! ${err}`, "danger");
       console.error("[NewPage] Erro ao salvar item:", err);
     } finally {
-      carregarBanco(moduleConfig.name);
+      await moduleConfig.syncData();
       window.addAlert("✅ Processo finalizado", "success");
       setLoading(false);
     }
@@ -53,6 +54,8 @@ const NewPage = ({ moduleConfig }) => {
       >
         + Ver {moduleConfig.label}
       </Link>
+
+      <p>{descricao}</p>
 
       <Form
         btnTextContent={`Inserir ${moduleConfig.label}`}
