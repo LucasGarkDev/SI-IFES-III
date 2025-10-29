@@ -10,6 +10,9 @@ function MainContent({ selected }) {
       {selected === "atores" && <AtoresPage />}
       {selected === "diretores" && <DiretoresPage />}
       {selected === "classes" && <ClassesPage />}
+      {selected === "itens" && <ItensPage />}
+      {selected === "titulos" && <TitulosPage />}
+      {selected === "clientes" && <ClientesPage />}
       {!selected && <h2>Bem-vindo! Selecione uma opção no menu.</h2>}
     </main>
   );

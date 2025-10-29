@@ -10,6 +10,9 @@ function Sidebar({ onSelect }) {
           <li onClick={() => onSelect("atores")}>Atores</li>
           <li onClick={() => onSelect("diretores")}>Diretores</li>
           <li onClick={() => onSelect("classes")}>Classes</li>
+          <li onClick={() => onSelect("itens")}>Itens</li>
+          <li onClick={() => onSelect("titulos")}>Títulos</li>
+          <li onClick={() => onSelect("clientes")}>Clientes</li>
         </ul>
       </nav>
     </aside>
