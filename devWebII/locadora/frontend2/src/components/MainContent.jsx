@@ -1,8 +1,14 @@
+// MainContext.jsx
 import React from "react";
 import "../styles/MainContent.css";
 import AtoresPage from "../pages/AtoresPage";
 import ClassesPage from "../pages/ClassesPage";
 import DiretoresPage from "../pages/DiretoresPage";
+
+// ✅ Adicione estas linhas abaixo
+import ItensPage from "../pages/ItensPage";
+import TitulosPage from "../pages/TitulosPage";
+import ClientesPage from "../pages/ClientesPage";
 
 function MainContent({ selected }) {
   return (
