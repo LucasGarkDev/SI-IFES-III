@@ -9,13 +9,15 @@ if (!atoresArray || atoresArray.length === 0) {
   atoresArray = [
     {
       _id: 1,
-      nome: "ator 1",
-      nacionalidade: "brasileiro",
+      nome: "Linda Hamilton",
     },
     {
       _id: 2,
-      nome: "ator 2",
-      nacionalidade: "americano",
+      nome: "Arnold Schwarzenegger",
+    },
+    {
+      _id: 3,
+      nome: "Robert Patrick",
     },
   ];
 }
