@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormContainer from "./ui/FormContainer";
 import InputField from "./ui/InputField";
 import SubmitButton from "./ui/SubmitButton";
+import "../styles/ClienteForm.css"; // novo estilo só para o botão
 
 function ClienteForm({ onAdd }) {
   const [nome, setNome] = useState("");
@@ -78,7 +79,9 @@ function ClienteForm({ onAdd }) {
             />
           </div>
         ))}
-        <button type="button" onClick={handleAddDependente}>
+
+        {/* botão retrô estilizado */}
+        <button type="button" className="btn-add-dependente" onClick={handleAddDependente}>
           + Adicionar Dependente
         </button>
       </div>

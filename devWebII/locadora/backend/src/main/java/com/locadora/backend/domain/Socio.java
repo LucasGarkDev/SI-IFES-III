@@ -12,13 +12,13 @@ import java.util.Set;
 @DiscriminatorValue("SOCIO")
 public class Socio extends Cliente {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true) // ✅ antes era false
     private String cpf;
 
-    @Column(nullable = false)
+    @Column(nullable = true) // ✅ antes era false
     private String endereco;
 
-    @Column(nullable = false)
+    @Column(nullable = true) // ✅ antes era false
     private String telefone;
 
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
