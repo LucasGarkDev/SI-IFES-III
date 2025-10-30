@@ -10,12 +10,13 @@ import jakarta.persistence.*;
 @DiscriminatorValue("DEPENDENTE")
 public class Dependente extends Cliente {
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "socio_id", nullable = false)
+    @ManyToOne(optional = true) // <-- agora permite nulo
+    @JoinColumn(name = "socio_id", nullable = true) // <-- idem aqui
     private Socio socio;
 
     // Getters e Setters
     public Socio getSocio() { return socio; }
     public void setSocio(Socio socio) { this.socio = socio; }
 }
+
 
