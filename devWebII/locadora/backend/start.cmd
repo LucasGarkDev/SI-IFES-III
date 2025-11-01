@@ -1,10 +1,14 @@
 @echo off
-git reset --hard HEAD
+setlocal
+
+rem Atualiza o repositório
 git pull
 
-set "id=%random%"
- gradlew clean bootRun --no-daemon --info >> %random%-WINDOWS-SERVER-%COMPUTERNAME%.txt 2>&1
- git add *.txt
+rem Adiciona logs e envia para o GitHub
+git add *.txt
 git commit -m "WINDOWS SERVER CRASH LOGS"
-git pull
 git push origin main
+
+rem Executa o servidor e gera log único
+set "id=%random%"
+gradlew clean bootRun --no-daemon --info >> "%id%-WINDOWS-SERVER-%COMPUTERNAME%.txt" 2>&1
