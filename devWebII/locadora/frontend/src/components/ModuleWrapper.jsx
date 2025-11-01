@@ -19,7 +19,7 @@ const ModuleWrapper = ({ children }) => {
   const [data, setData] = useState(baseConfig?.data || []);
 
   // Função local de sincronização para este módulo
-  const syncDataLocal = async () => {
+  const WARPSync = async () => {
     try {
       await syncData(moduleName, setData);
     } catch (err) {
@@ -28,33 +28,40 @@ const ModuleWrapper = ({ children }) => {
   };
 
   useEffect(() => {
-    syncDataLocal();
-    const interval = setInterval(syncDataLocal, 1000 * 35);
+    WARPSync();
+    const interval = setInterval(WARPSync, 1000 * 35);
     return () => clearInterval(interval);
   }, [moduleName]);
 
-  // caso o modulo não exista
-  if (!baseConfig) {
+    try {
+    // caso o modulo não exista
+    if (!baseConfig) {
+      const msg = errorMessages[getRandomInt(errorMessages.length)];
+      return (
+        <h2>
+          {msg} — módulo "{moduleName}" não encontrado.
+        </h2>
+      );
+    }
+
+    console.log("🔁 ModuleWrapper sincronizado:", moduleName);
+
+    return React.cloneElement(children, {
+      moduleConfig: {
+        ...baseConfig,
+        data,
+        syncData: WARPSync, // ✅ injetamos a função no config
+        errorMessages,
+      },
+      setData, // opcional, se quiser manipular manualmente
+      id,
+    });
+  } catch (err) {
+    console.error(`[ModuleWrapper] Erro no render de ${moduleName}:`, err);
+    setRenderError(err);
     const msg = errorMessages[getRandomInt(errorMessages.length)];
-    return (
-      <h2>
-        {msg} — módulo "{moduleName}" não encontrado.
-      </h2>
-    );
+    return <h2>{msg} — algo deu errado ao carregar o módulo.</h2>;
   }
-
-  console.log("🔁 ModuleWrapper sincronizado:", moduleName);
-
-  return React.cloneElement(children, {
-    moduleConfig: {
-      ...baseConfig,
-      data,
-      syncData: syncDataLocal, // ✅ injetamos a função no config
-      errorMessages,
-    },
-    setData, // opcional, se quiser manipular manualmente
-    id,
-  });
 };
 
 export default ModuleWrapper;
