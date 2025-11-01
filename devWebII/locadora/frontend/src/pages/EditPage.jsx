@@ -4,10 +4,24 @@ import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import { getItemFromId, getTitleItem } from "../js/utils.js";
 import { update } from "../service/apiFunctions.js";
-import { carregarBanco } from "../service/api.js";
 import Loading from "../components/subcomponents/Loading.jsx";
+import SubMenu from "../components/SubMenu.jsx";
 
 const EditPage = ({ moduleConfig, id }) => {
+  //  moduleConfig e gerado pelo warper que retorna isso
+  //   return React.cloneElement(children, {
+  //     moduleConfig: {
+  //       ...baseConfig,
+  //       data,
+  //       syncData: WARPSync, // ✅ injetamos a função no config
+  //       errorMessages,
+  //     },
+  //     setData, // opcional, se quiser manipular manualmente
+  //     id,
+  //   });
+  // };
+  // moduleConfig.data e o que vem do banco
+  // Retorna um item de um array pelo ID.
   const atualItem = getItemFromId(id, moduleConfig.data);
 
   const [initialValues] = useState(atualItem || {});
@@ -48,15 +62,18 @@ const EditPage = ({ moduleConfig, id }) => {
     }
   };
 
+   // Links do submenu
+  const submenuLinks = [
+    { path: `/${moduleConfig.name}`, label: "Listagem" },
+    { path: `/${moduleConfig.name}/novo`, label: "Novo" },
+    { path: `/${moduleConfig.name}/editar/${id}`, label: "Uau voce esta Editando! " },
+    // Você pode adicionar mais links específicos do módulo aqui
+  ];
   return (
     <div className="container flex flex-column align-items-center">
       <h2>Editar {moduleConfig.label}</h2>
-      <Link
-        to={`/${moduleConfig.name}/novo`}
-        style={{ display: "inline-block", marginBottom: "20px" }}
-      >
-        + Inserir novos {moduleConfig.label}
-      </Link>
+      {/* Submenu horizontal */}
+      <SubMenu links={submenuLinks} />
 
       <Form
         btnTextContent="Editar"

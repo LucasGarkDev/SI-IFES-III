@@ -5,6 +5,7 @@ import ConfirmModal from "../components/ConfirmModal.jsx";
 import { getTitleItem } from "../js/utils.js";
 import { create } from "../service/apiFunctions.js";
 import Loading from "../components/subcomponents/Loading.jsx";
+import SubMenu from "../components/SubMenu.jsx";
 
 const NewPage = ({ moduleConfig }) => {
   const descricao = moduleConfig.description || "Nenhuma descrição fornecida.";
@@ -31,10 +32,13 @@ const NewPage = ({ moduleConfig }) => {
       window.addAlert("📤 Enviando dados ao servidor...", "info");
       await create(moduleConfig.name, formData);
 
-      window.addAlert(`✅ ${getTitleItem(formData)} criado com sucesso!`, "success");
+      window.addAlert(
+        `✅ ${getTitleItem(formData)} criado com sucesso!`,
+        "success"
+      );
       console.log("[NewPage] Item salvo com sucesso!");
     } catch (err) {
-      console.log(err)
+      console.log(err);
       window.addAlert(`❌ Falha ao criar! ${err}`, "danger");
       console.error("[NewPage] Erro ao salvar item:", err);
     } finally {
@@ -44,16 +48,19 @@ const NewPage = ({ moduleConfig }) => {
     }
   };
 
+  // Links do submenu
+  const submenuLinks = [
+    { path: `/${moduleConfig.name}`, label: "Listagem" },
+    { path: `/${moduleConfig.name}/novo`, label: "Novo" },
+    // Você pode adicionar mais links específicos do módulo aqui
+  ];
+
   return (
     <div>
       <h2>Inserir novos {moduleConfig.label}</h2>
 
-      <Link
-        to={`/${moduleConfig.name}`}
-        style={{ display: "inline-block", marginBottom: "20px" }}
-      >
-        + Ver {moduleConfig.label}
-      </Link>
+      {/* Submenu horizontal */}
+      <SubMenu links={submenuLinks} />
 
       <p>{descricao}</p>
 
