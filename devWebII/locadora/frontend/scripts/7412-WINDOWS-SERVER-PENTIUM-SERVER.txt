@@ -61,3 +61,12 @@ v24.11.0
   ➜  press h + enter to show help
 16:45:55 [vite] (client) ✨ new dependencies optimized: react-dom/client, react-router-dom, prop-types, axios
 16:45:55 [vite] (client) ✨ optimized dependencies changed. reloading
+16:47:20 [vite] .env changed, restarting server...
+16:47:20 [vite] server restarted.
+16:49:29 [vite] (client) hmr update /src/components/AppContext.jsx, /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx, /src/pages/auth/AuthPage.jsx
+16:49:29 [vite] (client) hmr invalidate /src/components/AppContext.jsx Could not Fast Refresh ("AppContext" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+16:49:29 [vite] (client) hmr update /src/videoLocadora.jsx, /src/components/Layout.jsx, /src/components/Header.jsx, /src/routes/PrivateRoute.jsx, /src/pages/auth/AuthPage.jsx
+16:50:24 [vite] (client) hmr update /src/components/AppContext.jsx, /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx, /src/pages/auth/AuthPage.jsx
+16:50:24 [vite] (client) Pre-transform error: Failed to load url /src/service/api.js (resolved id: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/service/api.js) in D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/components/AppContext.jsx. Does the file exist?
+16:50:24 [vite] (client) Pre-transform error: Failed to load url /src/service/api.js (resolved id: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/service/api.js) in D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/components/AppContext.jsx. Does the file exist?
+16:50:24 [vite] (client) hmr update /src/components/AppContext.jsx, /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx, /src/pages/auth/AuthPage.jsx
