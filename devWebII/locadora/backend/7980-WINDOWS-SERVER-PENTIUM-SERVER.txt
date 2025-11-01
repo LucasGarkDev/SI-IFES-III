@@ -169,3 +169,112 @@ Successfully started process 'command 'C:\Program Files\Java\jdk-17\bin\java.exe
 2025-11-01T16:43:24.464-03:00  INFO 15896 --- [backend] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-11-01T16:43:24.466-03:00  INFO 15896 --- [backend] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 2025-11-01T16:43:26.263-03:00  INFO 15896 --- [backend] [nio-8085-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 1049 ms
+2025-11-01T16:45:14.703-03:00  INFO 15896 --- [backend] [nio-8085-exec-3] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [320x000xb10x8cV0xe80xb70xe60xa260x13;k0x080x1ad70xf90xad0x150xdbr0xdd8k0xf50x860xe3AvC2P0x043680x000x9b0xc30xc60xbc0x070x830xd10x060xaa0x7f0x13g~0xbe0xb00x810xf00x88t"0x12/0xc20xf30xc20x97V0xff0xf70xadq0xa30x9d0xf00x08{0xec]0xc4u0x0c0xa30xd3f0x91jhT0xbc]0xe9_VFop0xf0u0x1c0xb60xa6-0xbb0xae90xe0_0xe60x150xd6Or0x09I0xb20x9e0xeb0xf40xb600x1dg,0xf80x820x0e0xb90xebl0x99Q0xf00xeb0xedL)\l0xf10xbc0x9c0xb7|0xda)0x18~P0xd7n0x9a0xd5-[0xc0l10xf9`0x110xca0xffw0x040x0e0xd5/0x890x91!0xeb0x93@0xc0O0x80i0x8e0x83|0xe50x95R0x810xa70xd70xdc0x050xc00xc4^0xcb0xa8B0x940x8d0xaf0x820x1b0xe9.0xa60xd60xb90xbd0x97-+M70xe30xba0x040x930x9f0x84M0x9a0x030xa60xa10xe00xe8(#u0xa00xaa0x150x0760xe9s0xf10xee0xa20x970xee0xb7!0xd550xfdK0x180xf5/0x8eFe0x060xee3F0xa90xb9O3`p9+rR=0xd80xb10x130xfb0xc7\0xf70xf80xe7"0x980xcb0xc0T:CJ0x940xe30x850xd1~?{$0x1buk>0xaaIQ0x890x150xba0x1fF0x170xc5%0x04_=0x190x950x8d,r0x1f0xda0x830x870xeb0x040xc7$0x8a0xc90x030x910x0c\0x0b0xd30xf00xbeu0xc20xc9<?0xdc0x8bv-a[0xb10x13%0xe10xd80x89i0xc8<30x8f0xba0x080x93h0xc90xae00x1bN0xb620xfaW10xb00xa70xe90x950xad0xecZ0x0d0xacDF0x8d0x82%0xd60xa60x9350xb7j0xfc0x9d0xaa0x0eO;0x87@0xb5?0xd90xbb0xc80x8f0xabW0xba0x000x8b0xd4?...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:406) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-11-01T16:47:22.108-03:00  WARN 15896 --- [backend] [nio-8085-exec-4] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
