@@ -1,6 +1,6 @@
 import { carregarBanco, dataStore } from "../../service/api.js";
 
-// Sincronizar apenas "atores"
+// Sincronizar apenas o banco necessario
 await carregarBanco("atores");
 console.log("[DB CONTROLLER ATORES]: ", dataStore);
 let atoresArray = dataStore.atoresArray; // cria cópia local mutável
