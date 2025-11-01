@@ -1506,3 +1506,230 @@ v24.11.0
      |                         ^
   4  |  
   5  |  /**
+19:28:08 [vite] Internal server error: Failed to resolve import "../config/modules" from "src/js/modulesUtils.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/modulesUtils.js:3:21
+  1  |  // utils/modulesUtils.js
+  2  |  
+  3  |  import modules from "../config/modules";
+     |                         ^
+  4  |  
+  5  |  /**
+      at TransformPluginContext._formatLog (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31105:43)
+      at TransformPluginContext.error (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31102:14)
+      at normalizeUrl (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:29589:18)
+      at async file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:29647:32
+      at async Promise.all (index 0)
+      at async TransformPluginContext.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:29615:4)
+      at async EnvironmentPluginContainer.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:30904:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26042:26)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+19:28:35 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx, /src/components/subcomponents/TableActions.jsx
+19:30:39 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx, /src/components/subcomponents/TableActions.jsx
+19:30:40 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx, /src/components/subcomponents/TableActions.jsx
+19:31:09 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:34:56 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:36:46 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+19:36:47 [vite] (client) page reload src/js/utils.js
+19:37:12 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:39:23 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:39:26 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:47:02 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:48:27 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:48:42 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:48:44 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:48:48 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+19:50:02 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:50:05 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:50:07 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:50:08 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:50:09 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:50:10 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:50:13 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:50:16 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:51:23 [vite] (client) hmr update /src/pages/NewPage.jsx
+19:51:47 [vite] (client) hmr update /src/pages/NewPage.jsx
+19:51:53 [vite] (client) hmr update /src/pages/NewPage.jsx
+19:52:35 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:52:51 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:53:01 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:53:16 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:54:17 [vite] (client) hmr update /src/css/VideoLocadora.css
+19:56:26 [vite] (client) hmr update /src/components/ModuleWrapper.jsx
+19:56:28 [vite] (client) hmr update /src/components/ModuleWrapper.jsx
+19:56:31 [vite] (client) hmr update /src/components/ModuleWrapper.jsx
+19:56:36 [vite] (client) hmr update /src/components/ModuleWrapper.jsx
+19:57:06 [vite] (client) hmr update /src/components/ModuleWrapper.jsx
+19:58:52 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:58:53 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:58:56 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:58:58 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:59:08 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:59:10 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:59:15 [vite] (client) hmr update /src/components/DynamicTable.jsx
+19:59:19 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:59:21 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:59:27 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:59:28 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:59:31 [vite] (client) hmr update /src/pages/EditPage.jsx
+19:59:39 [vite] (client) hmr update /src/pages/NewPage.jsx
+19:59:52 [vite] (client) hmr update /src/pages/NewPage.jsx
+19:59:54 [vite] (client) hmr update /src/pages/NewPage.jsx
+19:59:57 [vite] (client) hmr update /src/pages/NewPage.jsx
+19:59:59 [vite] (client) hmr update /src/pages/NewPage.jsx
+20:00:02 [vite] (client) hmr update /src/pages/NewPage.jsx
+20:00:10 [vite] (client) hmr update /src/pages/NewPage.jsx
+20:00:12 [vite] (client) hmr update /src/pages/NewPage.jsx
+20:00:13 [vite] (client) hmr update /src/pages/NewPage.jsx
+20:00:15 [vite] (client) hmr update /src/pages/NewPage.jsx
+20:03:18 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:04:39 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:05:30 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:12 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:18 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:20 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:22 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:22 [vite] Internal server error: D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\pages\EditPage.jsx: Unexpected token (70:83)
+
+  68 |     { path: `/${moduleConfig.name}`, label: "Listagem" },
+  69 |     { path: `/${moduleConfig.name}/novo`, label: "Novo" },
+> 70 |     { path: `/${moduleConfig.name}/editar/${id}`, label: `Uau voce esta Editando ${}get}! ` },
+     |                                                                                    ^
+  71 |     // Você pode adicionar mais links específicos do módulo aqui
+  72 |   ];
+  73 |   return (
+  Plugin: vite:react-babel
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/pages/EditPage.jsx:70:83
+  69 |      { path: `/${moduleConfig.name}/novo`, label: "Novo" },
+  70 |      { path: `/${moduleConfig.name}/editar/${id}`, label: `Uau voce esta Editando ${}get}! ` },
+  71 |      // Você pode adicionar mais links específicos do módulo aqui
+     |                                                           ^
+  72 |    ];
+  73 |    return (
+      at constructor (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:367:19)
+      at JSXParserMixin.raise (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:6630:19)
+      at JSXParserMixin.unexpected (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:6650:16)
+      at JSXParserMixin.parseExprAtom (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11451:16)
+      at JSXParserMixin.parseExprAtom (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11085:23)
+      at JSXParserMixin.parseUpdate (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10903:61)
+      at JSXParserMixin.parseExprOps (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10788:23)
+      at D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10784:39
+      at JSXParserMixin.allowInAnd (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:12436:12)
+      at JSXParserMixin.parseExpression (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10784:17)
+      at JSXParserMixin.parseTemplateSubstitution (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11813:17)
+      at JSXParserMixin.parseTemplate (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11804:31)
+      at JSXParserMixin.parseExprAtom (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11355:21)
+      at JSXParserMixin.parseExprAtom (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11085:23)
+      at JSXParserMixin.parseUpdate (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10903:61)
+      at JSXParserMixin.parseExprOps (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10835:21)
+      at D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10804:39
+      at JSXParserMixin.allowInAnd (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:12503:17)
+      at JSXParserMixin.parseObjectProperty (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11960:83)
+      at JSXParserMixin.parseObjPropValue (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11988:100)
+      at JSXParserMixin.parsePropertyDefinition (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11925:17)
+      at JSXParserMixin.parseObjectLike (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11840:21)
+      at JSXParserMixin.parseExprAtom (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11343:23)
+      at JSXParserMixin.parseExprAtom (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11085:23)
+      at JSXParserMixin.parseUpdate (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10903:61)
+      at JSXParserMixin.parseExprOps (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10835:21)
+      at D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10804:39
+      at JSXParserMixin.allowInAnd (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:12503:17)
+      at JSXParserMixin.parseExprListItem (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:12185:18)
+      at JSXParserMixin.parseExprList (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\@babel\parser\lib\index.js:12160:22)
+20:09:24 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:30 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:42 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:09:46 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:10:01 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:10:04 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:10:06 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:10:09 [vite] (client) hmr update /src/pages/EditPage.jsx
+20:13:40 [vite] (client) hmr update /src/pages/NotFound.jsx
+20:17:11 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:13 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:13 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:17:13 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:17:27 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:29 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:17:29 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:17:29 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:31 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:17:31 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:17:32 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:32 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:15:13
+  14 |    "Nacionalidade",
+  15 |    CclasseId",
+  16 |    "diretorId"
+     |               ^
+  17 |  ];
+  18 |  
+20:17:32 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:15:13
+  14 |    "Nacionalidade",
+  15 |    CclasseId",
+  16 |    "diretorId"
+     |               ^
+  17 |  ];
+  18 |  
+20:17:32 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:15:13
+  14 |    "Nacionalidade",
+  15 |    CclasseId",
+  16 |    "diretorId"
+     |               ^
+  17 |  ];
+  18 |  
+20:17:33 [vite] Internal server error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:15:13
+  14 |    "Nacionalidade",
+  15 |    CclasseId",
+  16 |    "diretorId"
+     |               ^
+  17 |  ];
+  18 |  
+      at TransformPluginContext._formatLog (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31105:43)
+      at TransformPluginContext.error (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31102:14)
+      at TransformPluginContext.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:29552:10)
+      at async EnvironmentPluginContainer.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:30904:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26042:26)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+20:17:34 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:36 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:17:36 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:17:39 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:41 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:17:41 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:17:42 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:17:44 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:17:44 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:18:15 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:18:17 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:18:17 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:18:17 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:18:19 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:18:19 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx

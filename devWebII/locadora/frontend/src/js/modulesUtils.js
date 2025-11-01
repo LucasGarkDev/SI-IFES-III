@@ -1,6 +1,6 @@
 // utils/modulesUtils.js
 
-import modules from "../config/modules";
+import modules from "./config/modules";
 
 /**
  * @description Retorna todos os módulos.

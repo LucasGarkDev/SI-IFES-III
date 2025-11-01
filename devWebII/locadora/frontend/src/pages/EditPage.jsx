@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import ConfirmModal from "../components/ConfirmModal.jsx";
 import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
-import { getItemFromId, getTitleItem } from "../js/utils.js";
 import { update } from "../service/apiFunctions.js";
 import Loading from "../components/subcomponents/Loading.jsx";
 import SubMenu from "../components/SubMenu.jsx";
+import { getItemById } from "../js/modulesItensFilterUtils.js";
+import { getNomeItem } from "../js/modulesDataUtils.js";
 
 const EditPage = ({ moduleConfig, id }) => {
   //  moduleConfig e gerado pelo warper que retorna isso
@@ -22,7 +23,7 @@ const EditPage = ({ moduleConfig, id }) => {
   // };
   // moduleConfig.data e o que vem do banco
   // Retorna um item de um array pelo ID.
-  const atualItem = getItemFromId(id, moduleConfig.data);
+  const atualItem = getItemById(moduleConfig.data, id);
 
   const [initialValues] = useState(atualItem || {});
   const [loading, setLoading] = useState(false);
@@ -41,7 +42,7 @@ const EditPage = ({ moduleConfig, id }) => {
 
   const handleConfirm = async () => {
     try {
-      const title =getTitleItem(formData)
+      const title =getNomeItem(formData)
       setLoading(true);
       setShowModal(false);
 
@@ -66,7 +67,7 @@ const EditPage = ({ moduleConfig, id }) => {
   const submenuLinks = [
     { path: `/${moduleConfig.name}`, label: "Listagem" },
     { path: `/${moduleConfig.name}/novo`, label: "Novo" },
-    { path: `/${moduleConfig.name}/editar/${id}`, label: "Uau voce esta Editando! " },
+    { path: `/${moduleConfig.name}/editar/${id}`, label: `Uau! Editando ${getNomeItem(atualItem)}! ` },
     // Você pode adicionar mais links específicos do módulo aqui
   ];
   return (
@@ -85,9 +86,9 @@ const EditPage = ({ moduleConfig, id }) => {
       <ConfirmModal
         show={showModal}
         title="Confirmação"
-        message={`Deseja realmente editar ${getTitleItem(
+        message={`Deseja realmente editar ${getNomeItem(
           atualItem
-        )} para ${getTitleItem(formData)}?`}
+        )} para ${getNomeItem(formData)}?`}
         onConfirm={handleConfirm}
         onCancel={() => setShowModal(false)}
       />

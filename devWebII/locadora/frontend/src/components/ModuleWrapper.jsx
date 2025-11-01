@@ -1,8 +1,9 @@
 // src/wrappers/ModuleWrapper.jsx
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { findModuleConfig, getRandomInt } from "../js/utils";
+import {getRandomInt } from "../js/utils";
 import { syncData } from "../service/api";
+import { getModuleByName } from "../js/modulesUtils";
 
 export const errorMessages = [
   "Ops! Parece que aqui não tem nada… nem poeira! 🧹",
@@ -15,7 +16,7 @@ export const errorMessages = [
 
 const ModuleWrapper = ({ children }) => {
   const { moduleName, id } = useParams();
-  const baseConfig = findModuleConfig(moduleName);
+  const baseConfig = getModuleByName(moduleName);
   const [data, setData] = useState(baseConfig?.data || []);
 
   // Função local de sincronização para este módulo
