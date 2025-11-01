@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import ConfirmModal from "../components/ConfirmModal.jsx";
-import { getTitleItem } from "../js/utils.js";
 import { create } from "../service/apiFunctions.js";
 import Loading from "../components/subcomponents/Loading.jsx";
 import SubMenu from "../components/SubMenu.jsx";
+import { getNomeItem } from "../js/modulesDataUtils.js";
 
 const NewPage = ({ moduleConfig }) => {
   const descricao = moduleConfig.description || "Nenhuma descrição fornecida.";
@@ -26,14 +26,14 @@ const NewPage = ({ moduleConfig }) => {
       setLoading(true);
       setShowModal(false);
 
-      window.addAlert(`🔄 Criando ${getTitleItem(formData)}...`, "info");
+      window.addAlert(`🔄 Criando ${getNomeItem(formData)}...`, "info");
 
       console.log("[NewPage] Criando item:", formData);
       window.addAlert("📤 Enviando dados ao servidor...", "info");
       await create(moduleConfig.name, formData);
 
       window.addAlert(
-        `✅ ${getTitleItem(formData)} criado com sucesso!`,
+        `✅ ${getNomeItem(formData)} criado com sucesso!`,
         "success"
       );
       console.log("[NewPage] Item salvo com sucesso!");
@@ -74,7 +74,7 @@ const NewPage = ({ moduleConfig }) => {
       <ConfirmModal
         show={showModal}
         title="Confirmação"
-        message={`Deseja realmente inserir ${getTitleItem(formData)}?`}
+        message={`Deseja realmente inserir ${getNomeItem(formData)}?`}
         onConfirm={handleConfirm}
         onCancel={() => setShowModal(false)}
       />

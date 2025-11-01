@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { getIDtem } from "../../js/utils";
+import { getIDItem } from "../../js/modulesDataUtils";
 
 const TableActions = ({ item, onDelete }) => {
   const { moduleName } = useParams();
@@ -8,7 +8,7 @@ const TableActions = ({ item, onDelete }) => {
   return (
     <>
       <Link
-        to={`/${moduleName}/editar/${getIDtem(item)}`}
+        to={`/${moduleName}/editar/${getIDItem(item)}`}
         className="btn btn-sm btn-warning me-2"
       >
         Editar

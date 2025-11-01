@@ -2,102 +2,135 @@
 import React from "react";
 import axios from "axios";
 import modules, { excludeFields } from "../js/config/modules.js";
-import { getModuleData, getModuleSchema } from "./modulesUtils.js";
 
 /* ============================================================
  * 🔧 Funções utilitárias gerais
  * ============================================================ */
 
 /**
- * Retorna um item de um array pelo ID.
- * @param {string|number} id - ID a ser buscado.
- * @param {Array<Object>} array - Array de objetos.
- * @returns {Object|undefined} Item encontrado.
- */
-export const getItemFromId = (id, array) =>
-  array.find((item) => item.id === Number(id));
-
-/**
  * Retorna inteiro aleatório até o valor máximo.
  * @param {number} max
  * @returns {number}
  */
-export const getRandomInt = (max) => Math.floor(Math.random() * max);
+export function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 /**
  * Retorna número binário aleatório até o valor máximo.
  * @param {number} max
  * @returns {string}
  */
-export const getRandomBin = (max) => Math.floor(Math.random() * max).toString(2);
+export function getRandomBin(max) {
+  return Math.floor(Math.random() * max).toString(2);
+}
 
 /**
  * Retorna número hexadecimal aleatório até o valor máximo.
  * @param {number} max
  * @returns {string}
  */
-export const getRandomHex = (max) => Math.floor(Math.random() * max).toString(16);
+export function getRandomHex(max) {
+  return Math.floor(Math.random() * max).toString(16);
+}
 
 /**
  * Formata segundos no formato MM:SS.
  * @param {number} timeinSeconds
  * @returns {string}
  */
-export const formatTime = (timeinSeconds) => {
-  const minutes = Math.floor(timeinSeconds / 60).toString().padStart(2, "0");
-  const seconds = Math.floor(timeinSeconds % 60).toString().padStart(2, "0");
+export function formatTime(timeinSeconds) {
+  const minutes = Math.floor(timeinSeconds / 60)
+    .toString()
+    .padStart(2, "0");
+  const seconds = Math.floor(timeinSeconds - minutes * 60)
+    .toString()
+    .padStart(2, "0");
   return `${minutes}:${seconds}`;
-};
+}
 
 /**
  * Converte tempo no formato MM:SS para segundos.
  * @param {string} timeString
  * @returns {number}
  */
-export const formatTimeInSeconds = (timeString) => {
+export function formatTimeInSeconds(timeString) {
   const [minutes, seconds] = timeString.split(":").map(Number);
-  return minutes * 60 + seconds;
-};
+  return seconds + minutes * 60;
+}
 
 /**
  * Envia erro de telemetria.
  * @param {Error|string} error
  */
-export const onErrorTelemetria = async (error) => {
+export async function onErrorTelemetria(error) {
   console.error("Erro detectado: ", error);
   try {
     await axios.post(`${url}/telemetria`, "Erro detectado: " + error);
   } catch (e) {
     console.error(e);
   }
-};
+}
+
+/**
+ * Extrai chaves de um objeto ou array.
+ * @param {Object|Array} input
+ * @returns {string[]}
+ */
+export function extractKeys(input) {
+  if (Array.isArray(input)) {
+    if (input.length > 0 && typeof input[0] === "object" && input[0] !== null) {
+      return Object.keys(input[0]);
+    }
+  } else if (typeof input === "object" && input !== null) {
+    if (Array.isArray(input.newPageFields)) return input.newPageFields;
+    if (Array.isArray(input.data) && input.data.length > 0)
+      return Object.keys(input.data[0]);
+    return Object.keys(input);
+  }
+  console.warn("[extractKeys] Formato inesperado:", input);
+  return [];
+}
+
+/**
+ * Filtra campos de acordo com filtros fornecidos.
+ * @param {string[]} filtros
+ * @param {object[]|object|string[]} dados
+ * @returns {object[]|object|string[]}
+ */
+export function filtrarCampos(filtros, dados) {
+  if (Array.isArray(dados) && typeof dados[0] === "string") {
+    return dados.filter((campo) => !filtros.includes(campo));
+  }
+  if (Array.isArray(dados) && typeof dados[0] === "object") {
+    return dados.map((item) =>
+      Object.fromEntries(
+        Object.entries(item).filter(([chave]) => !filtros.includes(chave))
+      )
+    );
+  }
+  if (typeof dados === "object" && dados !== null) {
+    return Object.fromEntries(
+      Object.entries(dados).filter(([chave]) => !filtros.includes(chave))
+    );
+  }
+  console.warn("[filtrarCampos] Tipo inesperado:", dados);
+  return dados;
+}
 
 /* ============================================================
  * 🧩 Sistema de geração de campos de formulário
  * ============================================================ */
 
-/**
- * Detecta se o valor é uma data no formato DD/MM/YYYY ou DD-MM-YYYY
- * @param {string} value
- * @returns {boolean}
- */
-const isDateString = (value) =>
-  typeof value === "string" && /^(\d{2}[\/-]\d{2}[\/-]\d{4})$/.test(value);
+function isDateString(value) {
+  return typeof value === "string" && /^(\d{2}[\/-]\d{2}[\/-]\d{4})$/.test(value);
+}
 
-/**
- * Detecta se o campo parece senha
- * @param {string} key
- * @returns {boolean}
- */
-const isPasswordField = (key) => key.toLowerCase().includes("senha");
+function isPasswordField(key) {
+  return key.toLowerCase().includes("senha");
+}
 
-/**
- * Define tipo de campo e opções baseado no valor e nome
- * @param {*} value
- * @param {string} key
- * @returns {{ type: string, options: Array|null }}
- */
-export const getFieldType = (value, key) => {
+export function getFieldType(value, key) {
   if (Array.isArray(value)) return { type: "select", options: value };
   if (typeof value === "boolean") return { type: "checkbox", options: null };
   if (typeof value === "number") return { type: "number", options: null };
@@ -107,26 +140,28 @@ export const getFieldType = (value, key) => {
     return { type: "date", options: null, defaultValue: `${y}-${m}-${d}` };
   }
   return { type: "text", options: null };
-};
+}
 
-/**
- * Converte chave em rótulo legível
- * @param {string} key
- * @returns {string}
- */
-const formatLabel = (key) => key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+function formatLabel(key) {
+  return key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+}
 
-/**
- * Gera campos de formulário a partir de objeto
- * @param {Object} obj
- * @returns {Array<{ name: string, label: string, type: string, options: Array|null }>}
- */
-export const generateFormFields = (obj) =>
-  Object.keys(obj)
+function getOptionsFromModules(fieldName) {
+  const mod = modules.find((m) =>
+    m.name.toLowerCase().includes(fieldName.toLowerCase())
+  );
+  if (!mod || !Array.isArray(mod.data)) return [];
+  return mod.data.map(
+    (item) => item.nome || item.titulo || item.name || item.id || "Desconhecido"
+  );
+}
+
+export function generateFormFields(obj) {
+  return Object.keys(obj)
     .filter((key) => !excludeFields.includes(key))
     .map((key) => {
       let type = "text";
-      let options = null;
+      let options = [];
 
       if (key.toLowerCase().endsWith("id")) {
         type = "select";
@@ -140,52 +175,9 @@ export const generateFormFields = (obj) =>
 
       return {
         name: key,
-        label: formatLabel(key),
+        label: key[0].toUpperCase() + key.slice(1),
         type,
         options,
       };
     });
-
-/* ============================================================
- * 🧩 Getters dinâmicos para cada campo do databaseSchema
- * ============================================================ */
-
-/**
- * Cria getters dinâmicos baseados no schema de cada módulo
- * @param {Array<Object>} array
- * @param {string} field
- * @returns {Function} Função de filtro
- */
-export const createGetter = (array, field) => (value) =>
-  array.filter((item) => {
-    if (!item[field]) return false;
-    if (Array.isArray(item[field])) {
-      if (typeof item[field][0] === "object") {
-        // Array de objetos (ex: dependentes)
-        return item[field].some((el) =>
-          Object.values(el).some((v) => typeof v === "string" && v.toLowerCase() === value.toLowerCase())
-        );
-      }
-      // Array de valores simples (ex: atoresIds)
-      return item[field].includes(value);
-    }
-    if (typeof item[field] === "string") return item[field].toLowerCase() === value.toLowerCase();
-    return item[field] === value;
-  });
-
-/**
- * Gera todos os getters para um módulo
- * @param {string} moduleName
- * @returns {Object<string, Function>} Objeto com funções getter por campo
- */
-export const generateModuleGetters = (moduleName) => {
-  const schema = getModuleSchema(moduleName);
-  const data = getModuleData(moduleName) || [];
-  if (!schema) return {};
-
-  const getters = {};
-  Object.keys(schema).forEach((field) => {
-    getters[`getBy${field[0].toUpperCase() + field.slice(1)}`] = createGetter(data, field);
-  });
-  return getters;
-};
+}

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { extractKeys, filtrarCampos, getRandomInt, getTitleItem } from "../js/utils";
+import { extractKeys, filtrarCampos, getRandomInt } from "../js/utils";
 import ConfirmModal from "./ConfirmModal";
 import { remove } from "../service/apiFunctions";
 import TableHeader from "./subcomponents/TableHeader";
 import TableRow from "./subcomponents/TableRow";
 import Loading from "./subcomponents/Loading";
+import { getIDItem, getNomeItem } from "../js/modulesDataUtils";
 
 
 const DynamicTable = ({ moduleConfig, data, fields }) => {
@@ -46,8 +47,8 @@ const DynamicTable = ({ moduleConfig, data, fields }) => {
     try {
       setLoading(true);
       window.addAlert(`🗑️ Excluindo item...`, "warning");
-      await remove(path, item.id);
-      window.addAlert(`✅ ${getTitleItem(item)} removido com sucesso!`, "success");
+      await remove(path, getIDItem(item));
+      window.addAlert(`✅ ${getNomeItem(item)} removido com sucesso!`, "success");
     } catch (err) {
       window.addAlert(`❌ Erro ao excluir! ${err}`, "danger");
     } finally {
@@ -75,7 +76,7 @@ const DynamicTable = ({ moduleConfig, data, fields }) => {
       <ConfirmModal
         show={showModal}
         title="Confirmação de exclusão"
-        message={`Deseja realmente excluir o item "${getTitleItem(selectedItem)}"?`}
+        message={`Deseja realmente excluir o item "${getNomeItem(selectedItem)}"?`}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancel}
       />

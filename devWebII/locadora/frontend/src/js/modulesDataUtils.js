@@ -1,79 +1,119 @@
 /**
- * Utils para buscar dados nos arrays de cada módulo
+ * Utils para pegar valores de campos de itens de módulos
  */
 
-/* === Campos simples === */
-export const getItemById = (array, id) => array.find((item) => item.id === id);
+/* === Campos gerais === */
 
-export const getByNome = (array, nome) =>
-  array.filter((item) => item.nome?.toLowerCase() === nome.toLowerCase());
+/**
+ * Retorna o ID do item (procura por 'id' ou '_id').
+ * @param {Object} item
+ * @returns {number|string|null}
+ */
+export const getIDItem = (item) => item?.id ?? item?._id ?? null;
 
-export const getByAno = (array, ano) => array.filter((item) => item.ano === ano);
+/**
+ * Retorna o nome
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getNomeItem = (item) => item?.nome ?? null;
 
-export const getBySinopse = (array, sinopse) =>
-  array.filter((item) => item.sinopse?.toLowerCase().includes(sinopse.toLowerCase()));
+/**
+ * Retorna o ano
+ * @param {Object} item
+ * @returns {number|null}
+ */
+export const getAnoItem = (item) => item?.ano ?? null;
 
-export const getByCategoria = (array, categoria) =>
-  array.filter((item) => item.categoria?.toLowerCase() === categoria.toLowerCase());
+/**
+ * Retorna a sinopse
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getSinopseItem = (item) => item?.sinopse ?? null;
 
-export const getByDataDevolucao = (array, data) =>
-  array.filter((item) => item.dataDevolucao === data);
+/**
+ * Retorna a categoria
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getCategoriaItem = (item) => item?.categoria ?? null;
 
-export const getByPrecoDiariaCentavos = (array, preco) =>
-  array.filter((item) => item.precoDiariaCentavos === preco);
+/**
+ * Retorna o ID da classe
+ * @param {Object} item
+ * @returns {number|null}
+ */
+export const getClasseIdItem = (item) => item?.classeId ?? null;
 
-export const getByNumSerie = (array, numSerie) =>
-  array.filter((item) => item.numSerie?.toLowerCase() === numSerie.toLowerCase());
+/**
+ * Retorna o ID do diretor
+ * @param {Object} item
+ * @returns {number|null}
+ */
+export const getDiretorIdItem = (item) => item?.diretorId ?? null;
 
-export const getByTipoItem = (array, tipo) =>
-  array.filter((item) => item.tipoItem?.toLowerCase() === tipo.toLowerCase());
+/**
+ * Retorna os IDs de atores
+ * @param {Object} item
+ * @returns {Array<number>}
+ */
+export const getAtoresIdsItem = (item) => item?.atoresIds ?? [];
 
-export const getByTituloId = (array, id) => array.filter((item) => item.tituloId === id);
+/**
+ * Retorna a data de nascimento
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getDtNascimentoItem = (item) => item?.dtNascimento ?? null;
 
-export const getByTituloNome = (array, nome) =>
-  array.filter((item) => item.tituloNome?.toLowerCase() === nome.toLowerCase());
+/**
+ * Retorna o sexo
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getSexoItem = (item) => item?.sexo ?? null;
 
-export const getByClasseId = (array, id) => array.filter((item) => item.classeId === id);
+/**
+ * Retorna o CPF
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getCpfItem = (item) => item?.cpf ?? null;
 
-export const getByClasseNome = (array, nome) =>
-  array.filter((item) => item.classeNome?.toLowerCase() === nome.toLowerCase());
+/**
+ * Retorna o endereço
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getEnderecoItem = (item) => item?.endereco ?? null;
 
-export const getByDiretorId = (array, id) => array.filter((item) => item.diretorId === id);
+/**
+ * Retorna o telefone
+ * @param {Object} item
+ * @returns {string|null}
+ */
+export const getTelefoneItem = (item) => item?.telefone ?? null;
 
-export const getByDiretorNome = (array, nome) =>
-  array.filter((item) => item.diretorNome?.toLowerCase() === nome.toLowerCase());
+/**
+ * Retorna os dependentes (array de objetos)
+ * @param {Object} item
+ * @returns {Array<Object>}
+ */
+export const getDependentesItem = (item) => item?.dependentes ?? [];
 
-export const getByDtNascimento = (array, data) =>
-  array.filter((item) => item.dtNascimento === data);
+/**
+ * Retorna um dependente específico pelo índice
+ * @param {Object} item
+ * @param {number} index
+ * @returns {Object|null}
+ */
+export const getDependenteItem = (item, index) => item?.dependentes?.[index] ?? null;
 
-export const getBySexo = (array, sexo) =>
-  array.filter((item) => item.sexo?.toLowerCase() === sexo.toLowerCase());
-
-export const getByCpf = (array, cpf) =>
-  array.filter((item) => item.cpf?.toLowerCase() === cpf.toLowerCase());
-
-export const getByEndereco = (array, endereco) =>
-  array.filter((item) => item.endereco?.toLowerCase() === endereco.toLowerCase());
-
-export const getByTelefone = (array, telefone) =>
-  array.filter((item) => item.telefone === telefone);
-
-/* === Arrays de valores simples (ex: atoresIds) === */
-export const getByAtoresIds = (array, atorId) =>
-  array.filter((item) => item.atoresIds?.includes(atorId));
-
-/* === Arrays de objetos (ex: dependentes) === */
-export const getByDependenteNome = (array, nome) =>
-  array.filter((item) =>
-    item.dependentes?.some((d) => d.nome?.toLowerCase() === nome.toLowerCase())
-  );
-
-export const getByDependenteDtNascimento = (array, dt) =>
-  array.filter((item) =>
-    item.dependentes?.some((d) => d.dtNascimento === dt)
-  );
-
-export const getByDependenteSexo = (array, sexo) =>
-  array.filter((item) =>
-    item.dependentes?.some((d) => d.sexo?.toLowerCase() === sexo.toLowerCase())
-  );
+/**
+ * Retorna um campo específico de um dependente
+ * @param {Object} dependente
+ * @param {string} field
+ * @returns {*}
+ */
+export const getDependenteField = (dependente, field) => dependente?.[field] ?? null;

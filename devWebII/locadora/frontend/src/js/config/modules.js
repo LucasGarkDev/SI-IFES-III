@@ -12,7 +12,10 @@ export const excludeFields = [
   "data_nascimento",
   "nacionalidade",
   "Nacionalidade",
-  "TituloId"
+  "classeId",
+  "classeId",
+  "diretorId",
+  "tituloId"
 ];
 
 // auto form maker usa databaseSchema para criar os formularios
