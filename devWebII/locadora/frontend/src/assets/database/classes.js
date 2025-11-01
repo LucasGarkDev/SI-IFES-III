@@ -1,6 +1,6 @@
 import { dataStore, carregarBanco } from "../../service/api.js";
 
-// Sincronizar apenas "classes"
+// Sincronizar apenas o banco necessario
 await carregarBanco("classes");
 
 console.log("[DB CONTROLLER CLASSES]: ", dataStore);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { extractKeys, filtrarCampos, getTitleItem } from "../js/utils";
+import { extractKeys, filtrarCampos, getRandomInt, getTitleItem } from "../js/utils";
 import ConfirmModal from "./ConfirmModal";
 import { remove } from "../service/apiFunctions";
 import TableHeader from "./subcomponents/TableHeader";
@@ -12,11 +12,14 @@ const DynamicTable = ({ moduleConfig, data, fields }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const path = moduleConfig.label.toLowerCase();
+  const errorMessages = moduleConfig.errorMessages;
 
   const tableFiltros = ["id", "_id"];
 
-  if (!data || data.length === 0)
-    return <p className="text-muted">Nenhum dado disponível.</p>;
+  if (!data || data.length === 0) {
+    const msg = errorMessages[getRandomInt(errorMessages.length)];
+    return <h2>{msg}</h2>;
+  }
 
   const detectedFields = fields || extractKeys(data);
   const filteredFields = filtrarCampos(tableFiltros, detectedFields);

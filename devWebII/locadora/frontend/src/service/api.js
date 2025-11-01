@@ -2,7 +2,7 @@
 import axios from "axios";
 import { get, getDebug, getUrl, safeApiAlert } from "./apiFunctions";
 
-const bancos = ["atores", "classes", "diretores"];
+const bancos = ["atores", "classes", "diretores","titulos","itens"];
 
 const api = axios.create({
   baseURL: getUrl("local"),

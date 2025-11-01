@@ -70,3 +70,142 @@ v24.11.0
 16:50:24 [vite] (client) Pre-transform error: Failed to load url /src/service/api.js (resolved id: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/service/api.js) in D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/components/AppContext.jsx. Does the file exist?
 16:50:24 [vite] (client) Pre-transform error: Failed to load url /src/service/api.js (resolved id: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/service/api.js) in D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/components/AppContext.jsx. Does the file exist?
 16:50:24 [vite] (client) hmr update /src/components/AppContext.jsx, /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx, /src/pages/auth/AuthPage.jsx
+16:53:47 [vite] vite.config.js changed, restarting server...
+X [ERROR] EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\vite.config.js' [plugin inject-file-scope-variables]
+
+failed to load config from D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\vite.config.js
+16:53:47 [vite] Build failed with 1 error:
+error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\vite.config.js'
+16:53:47 [vite] server restart failed
+16:53:47 [vite] (client) hmr update /src/videoLocadora.jsx
+16:53:47 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx
+16:53:47 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx
+16:53:48 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx
+16:53:48 [vite] (client) hmr update /src/components/Header.jsx
+16:53:48 [vite] (client) hmr update /src/components/Header.jsx
+16:53:48 [vite] (client) hmr update /src/components/AlertManager.jsx
+16:53:48 [vite] (client) hmr update /src/components/AppContext.jsx
+16:53:48 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\AppContext.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:48 [vite] (client) hmr update /src/components/Aside.jsx
+16:53:48 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\Aside.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:48 [vite] (client) hmr update /src/components/ConfirmModal.jsx
+16:53:48 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\ConfirmModal.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:48 [vite] (client) hmr update /src/components/DynamicTable.jsx
+16:53:48 [vite] (client) hmr update /src/components/Form.jsx
+16:53:48 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\Form.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:48 [vite] (client) hmr update /src/components/Header.jsx
+16:53:48 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\Header.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:48 [vite] (client) hmr update /src/components/Home.jsx
+16:53:48 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\Home.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/components/Layout.jsx
+16:53:49 [vite] (client) hmr update /src/components/ModuleWrapper.jsx
+16:53:49 [vite] (client) hmr update /src/components/subcomponents/AutoDismissAlert.jsx
+16:53:49 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\subcomponents\AutoDismissAlert.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/components/subcomponents/FormButton.jsx
+16:53:49 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\subcomponents\FormButton.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/components/subcomponents/FormField.jsx
+16:53:49 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\subcomponents\FormField.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/components/subcomponents/Loading.jsx
+16:53:49 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\subcomponents\Loading.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx
+16:53:49 [vite] (client) hmr update /src/components/subcomponents/TableHeader.jsx
+16:53:49 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\components\subcomponents\TableHeader.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/components/subcomponents/TableRow.jsx
+16:53:49 [vite] (client) hmr update /src/css/NotFound.css
+16:53:49 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\css\NotFound.css'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/css/VideoLocadora.css
+16:53:49 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\css\VideoLocadora.css'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:49 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx
+16:53:49 [vite] (client) hmr update /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx
+16:53:50 [vite] (client) hmr update /src/pages/EditPage.jsx
+16:53:50 [vite] (client) hmr update /src/pages/Home.jsx
+16:53:50 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\pages\Home.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:50 [vite] (client) hmr update /src/pages/ListPage.jsx
+16:53:50 [vite] (client) hmr update /src/pages/NewPage.jsx
+16:53:50 [vite] (client) hmr update /src/pages/NotFound.jsx
+16:53:50 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\pages\NotFound.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:50 [vite] (client) hmr update /src/pages/auth/AuthPage.jsx
+16:53:50 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\pages\auth\AuthPage.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:50 [vite] (client) hmr update /src/routes/PrivateRoute.jsx
+16:53:50 [vite] Internal server error: EBUSY: resource busy or locked, open 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\src\routes\PrivateRoute.jsx'
+      at async open (node:internal/fs/promises:642:25)
+      at async Object.readFile (node:internal/fs/promises:1279:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26005:12)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+16:53:50 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx
+16:53:50 [vite] (client) hmr update /src/components/AppContext.jsx, /src/components/Layout.jsx, /src/pages/NewPage.jsx, /src/components/ModuleWrapper.jsx, /src/pages/EditPage.jsx, /src/components/DynamicTable.jsx, /src/components/subcomponents/TableActions.jsx, /src/pages/auth/AuthPage.jsx
+16:53:50 [vite] (client) hmr update /src/pages/NewPage.jsx, /src/pages/EditPage.jsx, /src/pages/auth/AuthPage.jsx, /src/components/DynamicTable.jsx, /src/components/AppContext.jsx, /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/subcomponents/TableActions.jsx, /src/components/Form.jsx
+16:53:50 [vite] (client) hmr invalidate /src/components/AppContext.jsx Could not Fast Refresh ("AppContext" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+16:53:50 [vite] (client) hmr update /src/videoLocadora.jsx, /src/components/Layout.jsx, /src/components/Header.jsx, /src/routes/PrivateRoute.jsx, /src/pages/auth/AuthPage.jsx
+16:53:51 [vite] .env changed, restarting server...
+16:53:51 [vite] server restarted.
+16:53:51 [vite] (client) page reload index.html
+16:53:51 [vite] (client) page reload index.html
+16:53:51 [vite] (client) page reload main.jsx
+16:53:51 [vite] (client) page reload main.jsx
+16:54:23 [vite] .env changed, restarting server...
+16:54:23 [vite] server restarted.
