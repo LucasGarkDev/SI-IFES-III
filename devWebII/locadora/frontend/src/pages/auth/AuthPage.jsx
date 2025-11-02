@@ -19,10 +19,10 @@ const AuthPage = ({ moduleConfig }) => {
       }
       // Chama endpoint de login
       // const response = await create("login", data); // ajusta para seu backend
-      // console.log("Login efetuado:", response);
+      console.log("Login efetuado:", data);
 
       setUserLoged(true);
-      // setUser(response.user); // salva info do usuário
+      setUser(data.usuario); // salva info do usuário
       navigate("/home"); // redireciona para home
     } catch (err) {
       setUserLoged(false);

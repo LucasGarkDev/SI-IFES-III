@@ -2,6 +2,7 @@
 import React from "react";
 import axios from "axios";
 import modules, { excludeFields } from "../js/config/modules.js";
+import { getLabelByItem } from "./modulesDataUtils.js";
 
 /* ============================================================
  * 🔧 Funções utilitárias gerais
@@ -156,26 +157,63 @@ function getOptionsFromModules(fieldName) {
   );
 }
 
+/**
+ * Gera os campos do formulário automaticamente com base na estrutura de um objeto exemplo.
+ * @param {Object} obj - Objeto exemplo.
+ * @returns {Array<{ name: string, label: string, type: string, options: any[] | null }>}
+ */
 export function generateFormFields(obj) {
   return Object.keys(obj)
     .filter((key) => !excludeFields.includes(key))
     .map((key) => {
+      const value = obj[key];
       let type = "text";
-      let options = [];
+      let options = null;
 
-      if (key.toLowerCase().endsWith("id")) {
+      // 🔹 Se for um array de strings → select
+      if (Array.isArray(value) && value.every((v) => typeof v === "string")) {
         type = "select";
-        options = getOptionsFromModules(key);
+        options = value;
       }
 
-      if (Array.isArray(obj[key]) && obj[key].length === 1 && typeof obj[key][0] === "number") {
-        type = "select-multiple";
+      // 🔹 Se for array de números → select também (ou select múltiplo se quiser)
+      else if (Array.isArray(value) && value.every((v) => typeof v === "number")) {
+        type = "select";
+        options = value;
+      }
+
+      // 🔹 Se for booleano → checkbox
+      else if (typeof value === "boolean") {
+        type = "checkbox";
+      }
+
+      // 🔹 Se for número → number
+      else if (typeof value === "number") {
+        type = "number";
+      }
+
+      // 🔹 Se o nome do campo contiver "senha" → password
+      else if (key.toLowerCase().includes("senha")) {
+        type = "password";
+      }
+
+      // 🔹 Se for data no formato dd/mm/yyyy ou yyyy-mm-dd → date
+      else if (
+        typeof value === "string" &&
+        /^(\d{4}-\d{2}-\d{2}|\d{2}[\/-]\d{2}[\/-]\d{4})$/.test(value)
+      ) {
+        type = "date";
+      }
+
+      // 🔹 Se o nome termina em "id" → select baseado em outro módulo
+      else if (key.toLowerCase().endsWith("id")) {
+        type = "select";
         options = getOptionsFromModules(key);
       }
 
       return {
         name: key,
-        label: key[0].toUpperCase() + key.slice(1),
+        label: getLabelByItem(key),
         type,
         options,
       };

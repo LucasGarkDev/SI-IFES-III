@@ -1733,3 +1733,268 @@ v24.11.0
 20:18:17 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
 20:18:19 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
 20:18:19 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:26:20 [vite] (client) hmr update /src/pages/auth/AuthPage.jsx
+20:26:29 [vite] (client) hmr update /src/pages/auth/AuthPage.jsx
+20:26:38 [vite] (client) hmr update /src/pages/auth/AuthPage.jsx
+20:26:40 [vite] (client) hmr update /src/pages/auth/AuthPage.jsx
+20:27:16 [vite] (client) hmr update /src/pages/auth/AuthPage.jsx
+20:28:18 [vite] (client) hmr update /src/components/Header.jsx
+20:28:43 [vite] (client) hmr update /src/components/Header.jsx
+20:29:55 [vite] (client) hmr update /src/components/Header.jsx
+20:31:02 [vite] (client) hmr update /src/components/Header.jsx
+20:31:26 [vite] (client) hmr update /src/components/Header.jsx
+20:31:52 [vite] (client) hmr update /src/components/Header.jsx
+20:33:05 [vite] (client) hmr update /src/components/Header.jsx
+20:33:21 [vite] (client) hmr update /src/components/Header.jsx
+20:33:52 [vite] (client) hmr update /src/components/Header.jsx
+20:34:10 [vite] (client) hmr update /src/components/Header.jsx
+20:35:00 [vite] (client) hmr update /src/components/Header.jsx
+20:35:25 [vite] (client) hmr update /src/css/VideoLocadora.css
+20:35:26 [vite] Internal server error: [postcss] D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:574:1: Unknown word .text
+  Plugin: vite:css
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:574:0
+  572 |  }
+  573 |  
+  574 |  .text
+      |  ^
+      at Input.error (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\input.js:135:16)
+      at Parser.unknownWord (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:595:22)
+      at Parser.other (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:437:12)
+      at Parser.parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:472:16)
+      at parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parse.js:11:12)
+      at new LazyResult (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\lazy-result.js:165:16)
+      at Processor.process (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\processor.js:53:14)
+      at runPostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32051:68)
+      at async compilePostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32035:6)
+      at async compileCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31965:26)
+      at async TransformPluginContext.handler (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31498:54)
+      at async EnvironmentPluginContainer.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:30904:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26042:26)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+20:35:26 [vite] Internal server error: [postcss] D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:574:1: Unknown word .text
+  Plugin: vite:css
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:574:0
+  572 |  }
+  573 |  
+  574 |  .text
+      |  ^
+      at Input.error (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\input.js:135:16)
+      at Parser.unknownWord (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:595:22)
+      at Parser.other (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:437:12)
+      at Parser.parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:472:16)
+      at parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parse.js:11:12)
+      at new LazyResult (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\lazy-result.js:165:16)
+      at Processor.process (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\processor.js:53:14)
+      at runPostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32051:68)
+      at async compilePostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32035:6)
+      at async compileCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31965:26)
+      at async TransformPluginContext.handler (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31498:54)
+      at async EnvironmentPluginContainer.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:30904:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26042:26)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+20:35:27 [vite] (client) hmr update /src/css/VideoLocadora.css
+20:35:31 [vite] (client) hmr update /src/css/VideoLocadora.css
+20:35:31 [vite] Internal server error: [postcss] D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:575:2: Unknown word color
+  Plugin: vite:css
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:575:1
+  573 |  
+  574 |  .text{
+  575 |  	color
+      |   ^
+  576 |  }
+      at Input.error (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\input.js:135:16)
+      at Parser.unknownWord (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:595:22)
+      at Parser.other (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:437:12)
+      at Parser.parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:472:16)
+      at parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parse.js:11:12)
+      at new LazyResult (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\lazy-result.js:165:16)
+      at Processor.process (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\processor.js:53:14)
+      at runPostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32051:68)
+      at async compilePostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32035:6)
+      at async compileCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31965:26)
+      at async TransformPluginContext.handler (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31498:54)
+      at async EnvironmentPluginContainer.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:30904:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26042:26)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+20:35:31 [vite] Internal server error: [postcss] D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:575:2: Unknown word color
+  Plugin: vite:css
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/css/VideoLocadora.css:575:1
+  573 |  
+  574 |  .text{
+  575 |  	color
+      |   ^
+  576 |  }
+      at Input.error (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\input.js:135:16)
+      at Parser.unknownWord (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:595:22)
+      at Parser.other (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:437:12)
+      at Parser.parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parser.js:472:16)
+      at parse (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\parse.js:11:12)
+      at new LazyResult (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\lazy-result.js:165:16)
+      at Processor.process (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\frontend\node_modules\postcss\lib\processor.js:53:14)
+      at runPostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32051:68)
+      at async compilePostCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:32035:6)
+      at async compileCSS (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31965:26)
+      at async TransformPluginContext.handler (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31498:54)
+      at async EnvironmentPluginContainer.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:30904:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26042:26)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+20:35:32 [vite] (client) hmr update /src/css/VideoLocadora.css
+20:35:33 [vite] (client) hmr update /src/css/VideoLocadora.css
+20:45:30 [vite] (client) hmr update /src/components/subcomponents/FormField.jsx
+20:45:31 [vite] (client) hmr update /src/components/subcomponents/FormField.jsx
+20:45:53 [vite] (client) hmr update /src/css/VideoLocadora.css
+20:47:49 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:47:51 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:47:51 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:48:44 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:48:46 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:48:46 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:49:15 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:16 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:49:16 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:49:22 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:23 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:49:23 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:49:25 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:26 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:26 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:87:25
+  89 |        tipoItem: "string",
+  90 |        tituloId: 0,
+  91 |        tituloNome: "string",
+     |         ^
+  92 |      },
+  93 |      backendPayloadMinimalRequired: {
+20:49:27 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:87:25
+  89 |        tipoItem: "string",
+  90 |        tituloId: 0,
+  91 |        tituloNome: "string",
+     |         ^
+  92 |      },
+  93 |      backendPayloadMinimalRequired: {
+20:49:27 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:28 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:49:28 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:49:42 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:44 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:44 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:89:26
+  91 |        tituloNome: "string",
+  92 |      },
+  93 |      backendPayloadMinimalRequired: {
+     |                                   ^
+  94 |        numSerie: "string",
+  95 |        dtAquisicao: "2025-11-01",
+20:49:44 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:89:26
+  91 |        tituloNome: "string",
+  92 |      },
+  93 |      backendPayloadMinimalRequired: {
+     |                                   ^
+  94 |        numSerie: "string",
+  95 |        dtAquisicao: "2025-11-01",
+20:49:46 [vite] Internal server error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:89:26
+  91 |        tituloNome: "string",
+  92 |      },
+  93 |      backendPayloadMinimalRequired: {
+     |                                   ^
+  94 |        numSerie: "string",
+  95 |        dtAquisicao: "2025-11-01",
+      at TransformPluginContext._formatLog (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31105:43)
+      at TransformPluginContext.error (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:31102:14)
+      at TransformPluginContext.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:29552:10)
+      at async EnvironmentPluginContainer.transform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:30904:14)
+      at async loadAndTransform (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:26042:26)
+      at async viteTransformMiddleware (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:27117:20)
+20:49:46 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:49:46 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:49:46 [vite] (client) Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+  Plugin: vite:import-analysis
+  File: D:/Meus Projetos do VSCode/SI-IFES-III/devWebII/locadora/frontend/src/js/config/modules.js:89:26
+  91 |        tituloNome: "string",
+  92 |      },
+  93 |      backendPayloadMinimalRequired: {
+     |                                   ^
+  94 |        numSerie: "string",
+  95 |        dtAquisicao: "2025-11-01",
+20:49:46 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:52 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:54 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:49:54 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:49:55 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:49:57 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:49:57 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:49:59 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:50:00 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:50:02 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:50:02 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:50:06 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:50:08 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:50:08 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:50:08 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:50:10 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:50:11 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:50:11 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:50:13 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:50:15 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:50:15 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:51:17 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:51:20 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:51:20 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:51:21 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:51:23 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:51:23 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:56:30 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx, /src/components/DynamicTable.jsx, /src/pages/EditPage.jsx, /src/pages/NewPage.jsx
+20:56:32 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx, /src/components/DynamicTable.jsx, /src/pages/EditPage.jsx, /src/pages/NewPage.jsx
+20:56:38 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx, /src/components/DynamicTable.jsx, /src/pages/EditPage.jsx, /src/pages/NewPage.jsx
+20:56:56 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:56:57 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:56:59 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:56:59 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:57:01 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:57:03 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:57:03 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:57:03 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:57:05 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:57:05 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:58:57 [vite] (client) hmr update /src/components/subcomponents/TableActions.jsx, /src/components/DynamicTable.jsx, /src/pages/EditPage.jsx, /src/pages/NewPage.jsx, /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/Form.jsx
+20:58:59 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:58:59 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:59:26 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:59:27 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:59:27 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+20:59:52 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:59:54 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+20:59:56 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+20:59:56 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+21:00:02 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:00:03 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+21:00:03 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+21:01:12 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:01:14 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+21:01:14 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+21:01:44 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:01:47 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:01:50 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:01:53 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:01:55 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+21:01:55 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+21:02:26 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:02:29 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+21:02:29 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+21:04:31 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:04:33 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+21:04:33 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+21:04:35 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:04:36 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+21:04:36 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+21:04:57 [vite] (client) hmr update /src/components/Layout.jsx, /src/components/ModuleWrapper.jsx, /src/components/DynamicTable.jsx, /src/components/Form.jsx
+21:04:59 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+21:04:59 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
