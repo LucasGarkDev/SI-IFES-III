@@ -15,7 +15,8 @@ export const excludeFields = [
   "classeId",
   "classeId",
   "diretorId",
-  "tituloId"
+  "tituloId",
+  "atoresIds"
 ];
 
 // auto form maker usa databaseSchema para criar os formularios
@@ -37,7 +38,7 @@ const modules = [
     data: filtrarCampos(excludeFields, atoresArray),
     databaseSchema: {
       id: 0,
-      nome: "string",
+      nome: "Arnold Schwarzenegger",
     },
     backendPayloadMinimalRequired: {
       nome: "string",
@@ -84,11 +85,10 @@ const modules = [
     data: filtrarCampos(excludeFields, itensArray),
     databaseSchema: {
       id: 0,
-      numSerie: "string",
-      dtAquisicao: "2025-11-01",
-      tipoItem: "string",
-      tituloId: 0,
-      tituloNome: "string",
+      numSerie: 7415872,
+      dtAquisicao: "30-08-1991",
+      tipoItem: ["DVD","fita","Blue Ray"],
+      titulo: ["Terminator 2"],
     },
     backendPayloadMinimalRequired: {
       numSerie: "string",
@@ -105,24 +105,32 @@ const modules = [
     data: filtrarCampos(excludeFields, titulosArray),
     databaseSchema: {
       id: 0,
-      nome: "string",
-      ano: 0,
-      sinopse: "string",
-      categoria: "string",
-      classeId: 0,
-      classeNome: "string",
-      diretorId: 0,
-      diretorNome: "string",
-      atoresNomes: ["string"],
-      atoresIds: [0],
+      nome: "Terminator 2",
+      ano: 1991,
+      sinopse: "O jovem John Connor é a chave para a vitória da humanidade sobre a rebelião das máquinas no futuro. O garoto é alvo de T-1000, um exterminador feito de metal líquido que pode assumir a forma que desejar e que foi enviado do futuro para matá-lo. Outro exterminador, o renovado T-800, também é mandado de volta para proteger o menino. Enquanto John e sua mãe, Sarah Connor, fogem com o T-800, o garoto cria um vínculo afetivo inesperado com o robô.",
+      categoria: "Ficção Científica",
+      // classeId: 0,
+      classeNome: ["Lançamento"],
+      // diretorId: 0,
+      diretorNome: ["James Cameron"],
+      atoresNomes: [
+        "Arnold Schwarzenegger",
+        "Linda Hamilton",
+        "Edward Furlong",
+        "Robert Patrick",
+      ],
+      // atoresIds: [0],
     },
     backendPayloadMinimalRequired: {
       nome: "string",
       ano: 1900,
       sinopse: "string",
       categoria: "string",
+      // id da classe
       classeId: 0,
+      // id do diretor
       diretorId: 0,
+      // id dos N atores
       atoresIds: [0],
     },
   },

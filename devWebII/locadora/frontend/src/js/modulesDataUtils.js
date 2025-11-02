@@ -108,7 +108,8 @@ export const getDependentesItem = (item) => item?.dependentes ?? [];
  * @param {number} index
  * @returns {Object|null}
  */
-export const getDependenteItem = (item, index) => item?.dependentes?.[index] ?? null;
+export const getDependenteItem = (item, index) =>
+	item?.dependentes?.[index] ?? null;
 
 /**
  * Retorna um campo específico de um dependente
@@ -116,4 +117,21 @@ export const getDependenteItem = (item, index) => item?.dependentes?.[index] ?? 
  * @param {string} field
  * @returns {*}
  */
-export const getDependenteField = (dependente, field) => dependente?.[field] ?? null;
+export const getDependenteField = (dependente, field) =>
+	dependente?.[field] ?? null;
+
+/**
+ * @function getLabelByItem
+ * @description Separa palavras em camelCase ou PascalCase, mantendo o texto original.
+ * @param {string} key - Nome da propriedade (ex: "DiretorNome").
+ * @returns {string} Texto legível (ex: "Diretor Nome").
+ */
+export function getLabelByItem(key) {
+  if (!key || typeof key !== "string") return "";
+
+  // Adiciona espaço antes de cada letra maiúscula (exceto a primeira)
+  const label = key.replace(/([a-z])([A-Z])/g, "$1 $2");
+
+  // Opcional: capitalizar a primeira letra da string inteira
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
