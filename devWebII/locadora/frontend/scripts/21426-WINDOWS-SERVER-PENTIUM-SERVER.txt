@@ -764,3 +764,4 @@ v24.11.0
 12:31:32 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
 12:33:22 [vite] (client) hmr update /src/pages/EditPage.jsx
 12:33:57 [vite] (client) hmr update /src/pages/NewPage.jsx
+Deseja finalizar o arquivo em lotes (S/N)? 
