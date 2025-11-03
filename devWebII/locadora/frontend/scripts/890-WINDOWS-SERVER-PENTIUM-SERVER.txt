@@ -31,7 +31,7 @@ npm warn EBADENGINE   required: { node: '^22.x' },
 npm warn EBADENGINE   current: { node: 'v24.11.0', npm: '11.6.1' }
 npm warn EBADENGINE }
 
-added 66 packages, and audited 1777 packages in 32s
+added 66 packages, and audited 1777 packages in 9s
 
 304 packages are looking for funding
   run `npm fund` for details
@@ -51,14 +51,13 @@ v24.11.0
 > node src/js/createEnvIfMissing.js
 
 .env já existe. Nenhuma ação necessária.
-Port 5173 is in use, trying another one...
 
-  VITE v7.1.10  ready in 1796 ms
+  VITE v7.1.10  ready in 1905 ms
 
-  ➜  Local:   http://localhost:5174/
-  ➜  Network: http://26.106.30.88:5174/
-  ➜  Network: http://192.168.6.100:5174/
-  ➜  Network: http://172.27.192.1:5174/
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://26.106.30.88:5173/
+  ➜  Network: http://192.168.6.100:5173/
+  ➜  Network: http://172.27.192.1:5173/
   ➜  press h + enter to show help
 15:31:46 [vite] (client) page reload index.html
 15:31:49 [vite] (client) page reload index.html
