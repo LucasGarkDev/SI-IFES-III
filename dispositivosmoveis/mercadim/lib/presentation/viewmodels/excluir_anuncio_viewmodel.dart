@@ -1,3 +1,4 @@
+// lib/presentation/viewmodels/excluir_anuncio_viewmodel.dart
 import 'package:flutter/foundation.dart';
 import '../../core/exceptions/app_exception.dart';
 import '../../domain/usecases/excluir_anuncio.dart';
@@ -5,12 +6,12 @@ import '../../domain/usecases/excluir_anuncio.dart';
 class ExcluirAnuncioState {
   final bool loading;
   final String? error;
-  final bool success;
+  final bool? success;
 
   const ExcluirAnuncioState({
     this.loading = false,
     this.error,
-    this.success = false,
+    this.success,
   });
 
   ExcluirAnuncioState copy({
@@ -32,8 +33,9 @@ class ExcluirAnuncioViewModel extends ChangeNotifier {
   ExcluirAnuncioViewModel(this._excluir);
 
   Future<bool> submit(String id) async {
-    state = state.copy(loading: true, error: null, success: false);
+    state = state.copy(loading: true, error: null, success: null);
     notifyListeners();
+
     try {
       await _excluir(id);
       state = state.copy(loading: false, success: true);
