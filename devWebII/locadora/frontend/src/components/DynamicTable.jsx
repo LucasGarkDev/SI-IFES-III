@@ -46,11 +46,7 @@ const DynamicTable = ({ moduleConfig, data, fields }) => {
   const tryDelete = async (item) => {
     try {
       setLoading(true);
-      window.addAlert(`🗑️ Excluindo item...`, "warning");
       await remove(path, getIDItem(item));
-      window.addAlert(`✅ ${getNomeItem(item)} removido com sucesso!`, "success");
-    } catch (err) {
-      window.addAlert(`❌ Erro ao excluir! ${err}`, "danger");
     } finally {
       await moduleConfig.syncData();
       setLoading(false);

@@ -33,10 +33,9 @@ let dataStore = {};
 export async function carregarBanco(banco) {
   const varName = `${banco}Array`;
   try {
-    safeApiAlert(`🔄 Carregando ${banco} da API...`, "info");
+    safeApiAlert(`🔄 Buscando ${banco} da API...`, "info");
     const data = await get(banco);
     dataStore[varName] = data;
-    safeApiAlert(`✅ ${banco} carregado com sucesso!`, "success");
     console.log(`[API] Dados carregados de ${banco}:`, data);
     return data;
   } catch (err) {
@@ -73,7 +72,7 @@ export async function syncData(banco, setData) {
   }
 
   const varName = `${banco}Array`;
-  safeApiAlert(`🔁 Sincronizando ${banco}...`, "info");
+  console.log(`[SYNC] Sincronizando ${banco}...`);
 
   try {
     const data = await get(banco);
@@ -83,7 +82,6 @@ export async function syncData(banco, setData) {
       setData(data); // 🔥 Atualiza tabela instantaneamente
     }
 
-    safeApiAlert(`✅ ${banco} sincronizado!`, "success");
     console.log(`[SYNC] ${banco} sincronizado:`, data);
   } catch (err) {
     console.warn(`[SYNC] Falha ao sincronizar ${banco}. Usando demo.`);
@@ -94,7 +92,7 @@ export async function syncData(banco, setData) {
       setData(localData);
     }
 
-    safeApiAlert(`❌ Falha ao sincronizar ${banco}`, "error");
+    safeApiAlert(`❌ Falha ao sincronizar ${banco}`, "danger");
   }
 }
 
