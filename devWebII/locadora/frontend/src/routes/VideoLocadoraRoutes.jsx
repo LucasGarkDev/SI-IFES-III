@@ -7,6 +7,7 @@ import ListPage from "../pages/ListPage";
 import NewPage from "../pages/NewPage";
 import EditPage from "../pages/EditPage";
 import ModuleWrapper from "../components/ModuleWrapper";
+import ErrorBoundary from "../components/ErrorBoundary"; // ⚠️ Importa o ErrorBoundary
 import AuthPage from "../pages/auth/AuthPage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -32,33 +33,42 @@ const AppRoutes = () => {
         path="/:moduleName"
         element={
           <PrivateRoute>
-            <ModuleWrapper>
-              <ListPage />
-            </ModuleWrapper>
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/:moduleName/novo"
-        element={
-          <PrivateRoute>
-            <ModuleWrapper>
-              <NewPage />
-            </ModuleWrapper>
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/:moduleName/editar/:id"
-        element={
-          <PrivateRoute>
-            <ModuleWrapper>
-              <EditPage />
-            </ModuleWrapper>
+            <ErrorBoundary>
+              <ModuleWrapper>
+                <ListPage />
+              </ModuleWrapper>
+            </ErrorBoundary>
           </PrivateRoute>
         }
       />
 
+      <Route
+        path="/:moduleName/novo"
+        element={
+          <PrivateRoute>
+            <ErrorBoundary>
+              <ModuleWrapper>
+                <NewPage />
+              </ModuleWrapper>
+            </ErrorBoundary>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/:moduleName/editar/:id"
+        element={
+          <PrivateRoute>
+            <ErrorBoundary>
+              <ModuleWrapper>
+                <EditPage />
+              </ModuleWrapper>
+            </ErrorBoundary>
+          </PrivateRoute>
+        }
+      />
+
+      {/* Página 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
