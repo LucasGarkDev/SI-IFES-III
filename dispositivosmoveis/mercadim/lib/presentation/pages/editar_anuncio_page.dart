@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:flutter/services.dart'; // ✅ necessário para TextInputFormatter
 import '../../core/providers/usecase_providers.dart';
 import '../viewmodels/editar_anuncio_viewmodel.dart';
 import '../../domain/entities/anuncio.dart';
@@ -63,8 +63,11 @@ class _EditarAnuncioPageState extends ConsumerState<EditarAnuncioPage> {
                   ),
                   TextFormField(
                     controller: _preco,
-                    decoration: const InputDecoration(labelText: 'Preço'),
-                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(labelText: 'Preço (R\$)'),
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+                    ],
                     validator: vm.validatePreco,
                   ),
                   TextFormField(

@@ -31,18 +31,21 @@ class AnuncioModel {
     required this.imagens,
   });
 
-  // ============ JSON / MAP COMPATÍVEL COM FIRESTORE ============
-  factory AnuncioModel.fromJson(Map<String, dynamic> json) =>
-      AnuncioModel.fromMap(json, id: json['id'] ?? '');
+  // =============================================================
+  // ✅ JSON / MAP COMPATÍVEL COM FIRESTORE
+  // =============================================================
+  factory AnuncioModel.fromJson(Map<String, dynamic> json, {String? id}) =>
+      AnuncioModel.fromMap(json, id: id ?? '');
 
   Map<String, dynamic> toJson() => toMap();
 
-  // =============================================================
   factory AnuncioModel.fromMap(Map<String, dynamic> map, {required String id}) {
     final ts = map['dataCriacao'];
-    DateTime created;
+    late DateTime created;
     if (ts is Timestamp) {
       created = ts.toDate();
+    } else if (ts is DateTime) {
+      created = ts;
     } else if (ts is String) {
       created = DateTime.tryParse(ts) ?? DateTime.now();
     } else {
@@ -61,7 +64,10 @@ class AnuncioModel {
       imagemPrincipalUrl: map['imagemPrincipalUrl'] ?? '',
       usuarioId: map['usuarioId'] ?? '',
       destaque: map['destaque'] ?? false,
-      imagens: (map['imagens'] as List?)?.map((e) => e.toString()).toList() ?? const [],
+      imagens: (map['imagens'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          const [],
     );
   }
 
@@ -81,7 +87,9 @@ class AnuncioModel {
     };
   }
 
-  // Conversão com Entity
+  // =============================================================
+  // ✅ Conversão com Entity
+  // =============================================================
   factory AnuncioModel.fromEntity(Anuncio e) => AnuncioModel(
         id: e.id,
         titulo: e.titulo,
@@ -142,4 +150,3 @@ class AnuncioModel {
     );
   }
 }
-

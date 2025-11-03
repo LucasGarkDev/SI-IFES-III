@@ -69,19 +69,16 @@ final updateProfileUseCaseProvider = Provider(
 );
 
 // ====== Feed (UC11 - Visualizar anúncios) ======
-final _anuncioRemoteDSProvider = Provider(
+// ====== Firestore: DataSource de Anúncios ======
+final anuncioFirestoreDSProvider = Provider(
   (ref) => AnuncioRemoteDataSourceFirestore(FirebaseFirestore.instance),
 );
 
-final anuncioRepositoryProvider =
-    Provider<AnuncioRepository>(
-      (ref) => AnuncioRepositoryImpl(ref.read(_anuncioRemoteDSProvider)),
-    );
+// ====== Repositório de Anúncios ======
+final anuncioRepositoryProvider = Provider<AnuncioRepository>(
+  (ref) => AnuncioRepositoryImpl(ref.read(anuncioFirestoreDSProvider)),
+);
 
-final getAnunciosUseCaseProvider =
-    Provider((ref) => GetAnunciosUseCase(ref.read(anuncioRepositoryProvider)));
-
-// ====== Auth (UC02 - Login) ======
 // ====== Auth (UC02 - Login) ======
 final loginUserProvider = Provider(
   (ref) => LoginUser(ref.read(userRepositoryProvider)),
@@ -94,6 +91,9 @@ final userRepositoryProvider = Provider(
   ),
 );
 // ====== CRUD Anúncio ======
+final getAnunciosUseCaseProvider =
+    Provider((ref) => GetAnunciosUseCase(ref.read(anuncioRepositoryProvider)));
+
 final criarAnuncioProvider =
     Provider((ref) => CriarAnuncio(ref.read(anuncioRepositoryProvider)));
 
@@ -102,7 +102,6 @@ final editarAnuncioProvider =
 
 final excluirAnuncioProvider =
     Provider((ref) => ExcluirAnuncio(ref.read(anuncioRepositoryProvider)));
-
 // ====== Buscar e Filtrar Anúncios ======
 final buscarAnunciosPorTituloProvider =
     Provider((ref) => BuscarAnunciosPorTitulo(ref.read(anuncioRepositoryProvider)));
