@@ -7,7 +7,7 @@ const NotFound = () => {
     <main className="main not-found">
       <h1>404 - Página Não Encontrada</h1>
       <p>A página que você tentou acessar não existe ou foi removida.</p>
-      <Link to="/" className="back-home">← Voltar para a página inicial</Link>
+      <Link to="/home" className="back-home">← Voltar para a página inicial</Link>
     </main>
   );
 };

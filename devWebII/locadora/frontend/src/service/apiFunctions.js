@@ -84,6 +84,7 @@ async function handleRequest(fn, ...args) {
     await telemetria(err.response?.data || err.toString());
 
     // Lança a mensagem final
+    safeApiAlert(`[handleRequest] ❌ ${mensagemFinal}`,"danger");
     throw mensagemFinal;
   }
 }

@@ -1,0 +1,1 @@
+cloudflared tunnel --url http://localhost:8085/ --no-tls-verify --protocol http2 --loglevel debug

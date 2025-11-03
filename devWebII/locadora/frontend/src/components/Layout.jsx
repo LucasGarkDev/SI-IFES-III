@@ -14,7 +14,7 @@ const Layout = () => {
     { path: "/home", label: "Início" },
     ...modules.flatMap(({ name, label }) => [
       { path: `/${name}`, label },
-      { path: `/${name}/novo`, label: `Novo ${label}` },
+      // { path: `/${name}/novo`, label: `Novo ${label}` },
     ]),
   ];
 

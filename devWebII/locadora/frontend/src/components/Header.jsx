@@ -31,7 +31,7 @@ const Header = () => {
 
       <div className="d-flex align-items-center">
         {userLoged && user && (
-          <span className="text-light me-3">Bem-vindo, @{user?.name}</span>
+          <span className="text fw-bold fst-italic fs-5 me-3">Bem-vindo, @{user}</span>
         )}
         <button className="btn btn-warning" onClick={handleAuthClick}>
           {userLoged ? "Sair" : "Entrar"}

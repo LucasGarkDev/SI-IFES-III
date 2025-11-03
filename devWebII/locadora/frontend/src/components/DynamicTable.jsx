@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { extractKeys, filtrarCampos, getTitleItem } from "../js/utils";
+import { extractKeys, filtrarCampos, getRandomInt } from "../js/utils";
 import ConfirmModal from "./ConfirmModal";
 import { remove } from "../service/apiFunctions";
 import TableHeader from "./subcomponents/TableHeader";
 import TableRow from "./subcomponents/TableRow";
 import Loading from "./subcomponents/Loading";
+import { getIDItem, getNomeItem } from "../js/modulesDataUtils";
 
 
 const DynamicTable = ({ moduleConfig, data, fields }) => {
@@ -12,11 +13,14 @@ const DynamicTable = ({ moduleConfig, data, fields }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const path = moduleConfig.label.toLowerCase();
+  const errorMessages = moduleConfig.errorMessages;
 
   const tableFiltros = ["id", "_id"];
 
-  if (!data || data.length === 0)
-    return <p className="text-muted">Nenhum dado disponível.</p>;
+  if (!data || data.length === 0) {
+    const msg = errorMessages[getRandomInt(errorMessages.length)];
+    return <h2>{msg}</h2>;
+  }
 
   const detectedFields = fields || extractKeys(data);
   const filteredFields = filtrarCampos(tableFiltros, detectedFields);
@@ -42,11 +46,7 @@ const DynamicTable = ({ moduleConfig, data, fields }) => {
   const tryDelete = async (item) => {
     try {
       setLoading(true);
-      window.addAlert(`🗑️ Excluindo item...`, "warning");
-      await remove(path, item.id);
-      window.addAlert(`✅ ${getTitleItem(item)} removido com sucesso!`, "success");
-    } catch (err) {
-      window.addAlert(`❌ Erro ao excluir! ${err}`, "danger");
+      await remove(path, getIDItem(item));
     } finally {
       await moduleConfig.syncData();
       setLoading(false);
@@ -72,7 +72,7 @@ const DynamicTable = ({ moduleConfig, data, fields }) => {
       <ConfirmModal
         show={showModal}
         title="Confirmação de exclusão"
-        message={`Deseja realmente excluir o item "${getTitleItem(selectedItem)}"?`}
+        message={`Deseja realmente excluir o item "${getNomeItem(selectedItem)}"?`}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancel}
       />
