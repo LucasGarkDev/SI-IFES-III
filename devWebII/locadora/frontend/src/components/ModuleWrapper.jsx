@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import {getRandomInt } from "../js/utils";
 import { syncData } from "../service/api";
 import { getModuleByName } from "../js/modulesUtils";
+import { safeApiAlert } from "../service/apiFunctions";
 
 export const errorMessages = [
   "Ops! Parece que aqui não tem nada… nem poeira! 🧹",
@@ -24,6 +25,7 @@ const ModuleWrapper = ({ children }) => {
     try {
       await syncData(moduleName, setData);
     } catch (err) {
+      safeApiAlert(`[ModuleWrapper] Erro ao sincronizar ${moduleName}: ${err}`, "danger");
       console.error(`[ModuleWrapper] Erro ao sincronizar ${moduleName}:`, err);
     }
   };

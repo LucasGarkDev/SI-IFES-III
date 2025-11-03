@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ConfirmModal from "../components/ConfirmModal.jsx";
 import { Link } from "react-router-dom";
 import Form from "../components/Form.jsx";
-import { update } from "../service/apiFunctions.js";
 import Loading from "../components/subcomponents/Loading.jsx";
 import SubMenu from "../components/SubMenu.jsx";
 import { getItemById } from "../js/modulesItensFilterUtils.js";
 import { getNomeItem } from "../js/modulesDataUtils.js";
+import { update } from "../service/apiFunctions.js";
 
 const EditPage = ({ moduleConfig, id }) => {
   //  moduleConfig e gerado pelo warper que retorna isso
@@ -42,32 +42,25 @@ const EditPage = ({ moduleConfig, id }) => {
 
   const handleConfirm = async () => {
     try {
-      const title =getNomeItem(formData)
       setLoading(true);
       setShowModal(false);
 
-      window.addAlert(`✏️ Atualizando ${title}...`, "info");
-      window.addAlert("📡 Enviando dados ao servidor...", "info");
-
       await update(moduleConfig.name, id, formData);
-
-      window.addAlert(`✅ ${title} atualizado com sucesso!`, "success");
       console.log("[EditPage] Item atualizado com sucesso!");
-    } catch (err) {
-      window.addAlert(`❌ Falha ao atualizar! ${err}`, "danger");
-      console.error("[EditPage] Erro ao salvar item:", err);
-    } finally {
+    }finally {
       await moduleConfig.syncData();
-      window.addAlert("🏁 Processo finalizado", "success");
-      setLoading(false);
+        setLoading(false);
     }
   };
 
-   // Links do submenu
+  // Links do submenu
   const submenuLinks = [
     { path: `/${moduleConfig.name}`, label: "Listagem" },
     { path: `/${moduleConfig.name}/novo`, label: "Novo" },
-    { path: `/${moduleConfig.name}/editar/${id}`, label: `Uau! Editando ${getNomeItem(atualItem)}! ` },
+    {
+      path: `/${moduleConfig.name}/editar/${id}`,
+      label: `Uau! Editando ${getNomeItem(atualItem)}! `,
+    },
     // Você pode adicionar mais links específicos do módulo aqui
   ];
   return (
