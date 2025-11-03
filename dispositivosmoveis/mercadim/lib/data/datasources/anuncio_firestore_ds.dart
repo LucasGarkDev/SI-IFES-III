@@ -8,22 +8,26 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
   AnuncioRemoteDataSourceFirestore(this.firestore);
 
   CollectionReference<Map<String, dynamic>> get _col =>
-      firestore.collection('anuncios').withConverter<Map<String, dynamic>>(
-            fromFirestore: (snap, _) => snap.data() ?? {},
-            toFirestore: (data, _) => data,
-          );
+    firestore.collection('anuncios');
 
   @override
   Future<List<AnuncioModel>> fetchAnunciosPorCidade(String cidade) async {
     try {
-      final q = await _col.where('cidade', isEqualTo: cidade).get();
-      return q.docs
+      Query<Map<String, dynamic>> q = _col;
+      if (cidade.isNotEmpty) {
+        q = q.where('cidade', isEqualTo: cidade);
+      }
+
+      final snapshot = await q.get();
+
+      return snapshot.docs
           .map((d) => AnuncioModel.fromJson(d.data()).copyWith(id: d.id))
           .toList();
     } catch (e) {
       throw AppException('Erro ao buscar anúncios: $e');
     }
   }
+
 
   @override
   Future<AnuncioModel> criarAnuncio(AnuncioModel anuncio) async {
