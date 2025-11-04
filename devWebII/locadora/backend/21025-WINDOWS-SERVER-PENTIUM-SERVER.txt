@@ -13456,3 +13456,4330 @@ Hibernate:
         ? rows 
     fetch
         first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.Integer` from String "56.11": not a valid `java.lang.Integer` value
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:161)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:135)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:224)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:178)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.lang.Integer` from String "56.11": not a valid `java.lang.Integer` value
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 53] (through reference chain: com.locadora.backend.dto.ClasseUpdateDTO["precoDiariaCentavos"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1958)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1245)
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer._parseInteger(StdDeserializer.java:848)
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer._parseInteger(StdDeserializer.java:827)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$IntegerDeserializer.deserialize(NumberDeserializers.java:531)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$IntegerDeserializer.deserialize(NumberDeserializers.java:506)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:399)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:185)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125)
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1501)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
+	... 51 more
+2025-11-03T12:34:10.071-03:00  WARN 15064 --- [backend] [nio-8085-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.Integer` from String "56.11": not a valid `java.lang.Integer` value]
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/telemetria.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2025-11-03T12:34:10.155-03:00  WARN 15064 --- [backend] [nio-8085-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/telemetria.]
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-11-03T12:39:03.349-03:00  WARN 15064 --- [backend] [nio-8085-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.locadora.backend.dto.ItemDTO> com.locadora.backend.controller.ItemController.criar(com.locadora.backend.dto.ItemCreateDTO): [Field error in object 'itemCreateDTO' on field 'tituloId': rejected value [null]; codes [NotNull.itemCreateDTO.tituloId,NotNull.tituloId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [itemCreateDTO.tituloId,tituloId]; arguments []; default message [tituloId]]; default message [Título é obrigatório]] ]
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/telemetria.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2025-11-03T12:39:03.450-03:00  WARN 15064 --- [backend] [nio-8085-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/telemetria.]
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-11-03T12:39:55.840-03:00  WARN 15064 --- [backend] [nio-8085-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.locadora.backend.dto.TituloDTO> com.locadora.backend.controller.TituloController.criar(com.locadora.backend.dto.TituloCreateDTO) with 3 errors: [Field error in object 'tituloCreateDTO' on field 'atoresIds': rejected value [null]; codes [NotEmpty.tituloCreateDTO.atoresIds,NotEmpty.atoresIds,NotEmpty.java.util.List,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [tituloCreateDTO.atoresIds,atoresIds]; arguments []; default message [atoresIds]]; default message [Deve haver pelo menos um ator]] [Field error in object 'tituloCreateDTO' on field 'diretorId': rejected value [null]; codes [NotNull.tituloCreateDTO.diretorId,NotNull.diretorId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [tituloCreateDTO.diretorId,diretorId]; arguments []; default message [diretorId]]; default message [Diretor é obrigatório]] [Field error in object 'tituloCreateDTO' on field 'classeId': rejected value [null]; codes [NotNull.tituloCreateDTO.classeId,NotNull.classeId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [tituloCreateDTO.classeId,classeId]; arguments []; default message [classeId]]; default message [Classe é obrigatória]] ]
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/telemetria.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2025-11-03T12:39:56.022-03:00  WARN 15064 --- [backend] [nio-8085-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/telemetria.]
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-11-03T13:55:37.085-03:00  INFO 15064 --- [backend] [nio-8085-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [320x00B0x1c0x0dCj0x1e0xa50xfd0x900x1b09q0x8f0xcb0xbe0xb7q0x980xfb!0xe50xd20xca0xee0xa60xeb|0x940x930xee0x9e3360x000xd00x7fT0x9d0xa10xed0xd50x960x870xd7`0x8e<0xca~0x0a0xcdr"0xc7S0xde#0xdf<0xed0xb0-0xe00x09b0xdd0x9d0xf00x08{0xec]0xc4u0x0c0xa30xd3f0x91jhT0xbc]0xe9_VFop0xf0u0x1c0xb60xa6-0xbb0xae90xe0_0xe60x150xd6Or0x09I0xb20x9e0xeb0xf40xb600x1dg,0xf80x820x0e0xb90xebl0x99Q0xf00xeb0xedL)\l0xf10xbc0x9c0xb7|0xda)0x18~P0xd7n0x9a0xd50x920x0b0xb70x8a0xb70x03W0x0c0xe60xc40x88a0xb80xc70xa10xa10x16@0x94?0xcb0x0cf0xa20x13PT0xff0x86Y0xcb0xaa0x0do0xed0xc8$0xca0xe0r0xc70xc450xd80xfe0xc00xe50xdf0x15J0xcaj0x0c0x1b0xff0x84tc0x93l0xabh0xfd0xaa0xe980x09I0xcb0xb9>0xbb0x006Tt0xe1th0xdd0xf2[50xad0x8d0xa80x860x8d0x890x82y0x0230xae0x83Hq4SL0xef0xc30x9a0xcc40xe2/]:|W0xb0.F0xee"0x010x910x020x9b0xd8@'0x000xf3(0xa9cvYxv3q0x18YK0xe80xf1B;D0xe70x1b0x9f0xd90xcd0xd80x96I0x1dw$0xe290xa40x7f0x8a0xbe0x880x970x1f220xa3T\0x1e,0xe20x070x96KM:p]0x890xf60x020xeb0x8a ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:406) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-11-03T14:06:53.712-03:00  INFO 15064 --- [backend] [nio-8085-exec-6] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+
+java.lang.IllegalArgumentException: Invalid character found in method name [320x000x0b0xc60x180xfbH0xe80x1d0xb70x90(0xc7Q0xf10xd40xf0CW0xbc)0xfa0xf4>0xdf0xb10xc90xd70xa30x830x800x1eu0xa03360x000xefQ0x17T#0x010xb1A0xc60xbeT;3A>Um>0xc50x130x0a0xff0xe60x990xc10xadtB0xd20xb20xcb0x9e0x9d0xf00x08{0xec]0xc4u0x0c0xa30xd3f0x91jhT0xbc]0xe9_VFop0xf0u0x1c0xb60xa6-0xbb0xae90xe0_0xe60x150xd6Or0x09I0xb20x9e0xeb0xf40xb600x1dg,0xf80x820x0e0xb90xebl0x99Q0xf00xeb0xedL)\l0xf10xbc0x9c0xb7|0xda)0x18~P0xd7n0x9a0xd50x920x0b0xb70x8a0xb70x03W0x0c0xe60xc40x88a0xb80xc70xa10xa10x16@0x94?0xcb0x0cf0xa20x13PT0xff0x86Y0xcb0xaa0x0do0xed0xc8$0xca0xe0r0xc70xc450xd80xfe0xc00xe50xdf0x15J0xcaj0x0c0x1b0xff0x84tc0x93l0xabh0xfd0xaa0xe980x09I0xcb0xb9>0xbb0x006Tt0xe1th0xdd0xf2[50xad0x8d0xa80x860x8d0x890x82y0x0230xae0x83H0xc7)cc0x890xde60xfd0x030x890xe50x100xdd0xd60xb8A.F0xee"0x010x910x020x9b0xd8@'0x000xf3(0xa9cvYxv3q0x18YK0xe80xf1B;D0xe70x1b0x9f0xd90xcd0xd80x96I0x1dw$0xe290xa40x7f0x8a0xbe0x880x970x1f220xa3T\0x1e,0xe20x070x96KM:p]0x890xf60x020xeb0x8a ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:406) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.ativo,
+        a1_0.data_nascimento,
+        a1_0.nacionalidade,
+        a1_0.nome 
+    from
+        atores a1_0 
+    order by
+        a1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.ativo,
+        c1_0.data_devolucao,
+        c1_0.nome,
+        c1_0.preco_diaria_centavos 
+    from
+        classes c1_0 
+    order by
+        c1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.ativo,
+        d1_0.data_nascimento,
+        d1_0.nacionalidade,
+        d1_0.nome 
+    from
+        diretores d1_0 
+    order by
+        d1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.ano,
+        t1_0.categoria,
+        t1_0.classe_id,
+        t1_0.diretor_id,
+        t1_0.nome,
+        t1_0.sinopse 
+    from
+        titulos t1_0 
+    order by
+        t1_0.nome 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        i1_0.id,
+        i1_0.dt_aquisicao,
+        i1_0.num_serie,
+        i1_0.tipo_item,
+        i1_0.titulo_id 
+    from
+        itens i1_0 
+    order by
+        i1_0.num_serie 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
