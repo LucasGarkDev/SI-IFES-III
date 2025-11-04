@@ -762,3 +762,6 @@ v24.11.0
 12:31:32 [vite] (client) hmr update /src/videoLocadora.jsx, /src/components/Layout.jsx, /src/components/Header.jsx, /src/pages/auth/AuthPage.jsx, /src/routes/PrivateRoute.jsx
 12:31:32 [vite] (client) hmr invalidate /src/components/ModuleWrapper.jsx Could not Fast Refresh ("errorMessages" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
 12:31:32 [vite] (client) hmr update /src/routes/VideoLocadoraRoutes.jsx, /src/components/ErrorBoundary.jsx
+12:33:22 [vite] (client) hmr update /src/pages/EditPage.jsx
+12:33:57 [vite] (client) hmr update /src/pages/NewPage.jsx
+Deseja finalizar o arquivo em lotes (S/N)? 
