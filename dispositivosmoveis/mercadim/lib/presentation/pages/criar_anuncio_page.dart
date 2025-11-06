@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../core/providers/usecase_providers.dart';
+import '../../core/services/image_upload_service.dart'; // ✅ novo
 import '../viewmodels/criar_anuncio_viewmodel.dart';
 import '../../domain/entities/anuncio.dart';
 
@@ -26,6 +27,7 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
   final _bairro = TextEditingController();
 
   File? _imagemSelecionada;
+  final _imageService = ImageUploadService(); // ✅ Instância do serviço
 
   Future<void> _selecionarImagem() async {
     try {
@@ -161,6 +163,16 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                                 double.tryParse(_preco.text.replaceAll(',', '.')) ??
                                     0.0;
 
+                            // ✅ Upload da imagem antes de criar o anúncio
+                            String imageUrl = '';
+                            if (_imagemSelecionada != null) {
+                              final uploadedUrl = await _imageService
+                                  .pickAndUploadImage(widget.usuarioId);
+                              if (uploadedUrl != null) {
+                                imageUrl = uploadedUrl;
+                              }
+                            }
+
                             final anuncio = Anuncio(
                               id: '',
                               titulo: _titulo.text.trim(),
@@ -170,8 +182,9 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                               cidade: _cidade.text.trim(),
                               bairro: _bairro.text.trim(),
                               dataCriacao: DateTime.now(),
-                              imagemPrincipalUrl:
-                                  _imagemSelecionada?.path ?? '', // ✅ caminho local
+                              imagemPrincipalUrl: imageUrl.isNotEmpty
+                                  ? imageUrl
+                                  : 'assets/images/no_image.png', // ✅ fallback
                               usuarioId: widget.usuarioId,
                               destaque: false,
                               imagens: [],

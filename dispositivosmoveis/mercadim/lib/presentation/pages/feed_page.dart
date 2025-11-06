@@ -1,5 +1,7 @@
+// lib/presentation/pages/feed_page.dart
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../viewmodels/feed_viewmodel.dart';
@@ -7,6 +9,7 @@ import '../widgets/anuncio_card.dart';
 import 'detalhes_anuncio_page.dart';
 import 'criar_anuncio_page.dart';
 import '../../core/providers/usecase_providers.dart';
+import '../../presentation/pages/edit_profile_page.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -16,13 +19,17 @@ class FeedPage extends ConsumerStatefulWidget {
 }
 
 class _FeedPageState extends ConsumerState<FeedPage> {
-  final _searchController = TextEditingController();
+  final _tituloCtrl = TextEditingController();
+  final _categoriaCtrl = TextEditingController();
+  final _cidadeCtrl = TextEditingController();
+  final _precoMinCtrl = TextEditingController();
+  final _precoMaxCtrl = TextEditingController();
+  bool _mostrarFavoritos = false;
   Timer? _debounce;
 
   @override
   void initState() {
     super.initState();
-    // 🔹 Carrega inicialmente todos os anúncios (sem filtro de cidade)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(feedViewModelProvider.notifier).carregarAnuncios('');
     });
@@ -30,16 +37,32 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
   @override
   void dispose() {
-    _searchController.dispose();
+    _tituloCtrl.dispose();
+    _categoriaCtrl.dispose();
+    _cidadeCtrl.dispose();
+    _precoMinCtrl.dispose();
+    _precoMaxCtrl.dispose();
     _debounce?.cancel();
     super.dispose();
   }
 
-  void _onSearchChanged(String value) {
-    // 🔹 Usa debounce para evitar múltiplas requisições rápidas
+  void _filtrar() {
     _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 400), () {
-      ref.read(feedViewModelProvider.notifier).carregarAnuncios(value.trim());
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+      final auth = ref.read(authViewModelProvider);
+      final user = auth.state.user;
+
+      final precoMin = double.tryParse(_precoMinCtrl.text.replaceAll(',', '.'));
+      final precoMax = double.tryParse(_precoMaxCtrl.text.replaceAll(',', '.'));
+
+      ref.read(feedViewModelProvider.notifier).filtrar(
+            titulo: _tituloCtrl.text.trim(),
+            categoria: _categoriaCtrl.text.trim(),
+            precoMin: precoMin,
+            precoMax: precoMax,
+            apenasFavoritos: _mostrarFavoritos,
+            userId: user?.id,
+          );
     });
   }
 
@@ -57,28 +80,49 @@ class _FeedPageState extends ConsumerState<FeedPage> {
           if (usuario != null && !isVisitante)
             Padding(
               padding: const EdgeInsets.only(right: 12),
-              child: CircleAvatar(
-                radius: 18,
-                backgroundColor: Colors.green.shade100,
-                child: Icon(Icons.person,
-                    color: Colors.green.shade900, size: 20),
+              child: GestureDetector(
+                onTap: () async {
+                  final updatedUser = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => EditProfilePage(currentUser: usuario),
+                    ),
+                  );
+
+                  if (updatedUser != null && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Perfil atualizado com sucesso!')),
+                    );
+                  }
+                },
+                child: CircleAvatar(
+                  radius: 18,
+                  backgroundColor: Colors.green.shade100,
+                  backgroundImage: (usuario.photoUrl != null &&
+                          usuario.photoUrl!.isNotEmpty)
+                      ? NetworkImage(usuario.photoUrl!)
+                      : const AssetImage('assets/images/user_placeholder.png')
+                          as ImageProvider,
+                  child: (usuario.photoUrl == null || usuario.photoUrl!.isEmpty)
+                      ? Icon(Icons.person,
+                          color: Colors.green.shade900, size: 20)
+                      : null,
+                ),
               ),
             ),
         ],
       ),
 
-      // ===============================
-      // 🔍 Campo de busca por cidade
-      // ===============================
       body: Column(
         children: [
+          // 🔹 Campo de busca por título
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(12, 8, 12, 4),
             child: TextField(
-              controller: _searchController,
-              onChanged: _onSearchChanged,
+              controller: _tituloCtrl,
+              onChanged: (_) => _filtrar(),
               decoration: InputDecoration(
-                hintText: 'Filtrar por cidade...',
+                hintText: 'Buscar por título...',
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
                 fillColor: Colors.green.shade50,
@@ -90,15 +134,64 @@ class _FeedPageState extends ConsumerState<FeedPage> {
             ),
           ),
 
-          // ===============================
-          // 📰 Lista de anúncios
-          // ===============================
+          // 🔹 Filtros adicionais
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: ExpansionTile(
+              title: const Text('Filtros avançados'),
+              children: [
+                TextField(
+                  controller: _categoriaCtrl,
+                  onChanged: (_) => _filtrar(),
+                  decoration: const InputDecoration(labelText: 'Categoria'),
+                ),
+                TextField(
+                  controller: _cidadeCtrl,
+                  onChanged: (_) => _filtrar(),
+                  decoration: const InputDecoration(labelText: 'Cidade'),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _precoMinCtrl,
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}'))],
+                        decoration: const InputDecoration(labelText: 'Preço mín.'),
+                        onChanged: (_) => _filtrar(),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: TextField(
+                        controller: _precoMaxCtrl,
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}'))],
+                        decoration: const InputDecoration(labelText: 'Preço máx.'),
+                        onChanged: (_) => _filtrar(),
+                      ),
+                    ),
+                  ],
+                ),
+                if (usuario != null && !isVisitante)
+                  SwitchListTile(
+                    title: const Text('Mostrar apenas favoritos ❤️'),
+                    value: _mostrarFavoritos,
+                    onChanged: (v) {
+                      setState(() => _mostrarFavoritos = v);
+                      _filtrar();
+                    },
+                  ),
+              ],
+            ),
+          ),
+
+          // 🔹 Lista de anúncios
           Expanded(
             child: switch (state) {
-              FeedLoading() =>
-                  const Center(child: CircularProgressIndicator()),
+              FeedLoading() => const Center(child: CircularProgressIndicator()),
               FeedError(:final mensagem) =>
-                  Center(child: Text(mensagem, style: TextStyle(color: Colors.red))),
+                  Center(child: Text(mensagem, style: const TextStyle(color: Colors.red))),
               FeedSuccess(:final anuncios) => anuncios.isEmpty
                   ? const Center(child: Text('Nenhum anúncio encontrado.'))
                   : ListView.builder(
@@ -110,8 +203,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) =>
-                                    DetalhesAnuncioPage(anuncio: anuncio),
+                                builder: (_) => DetalhesAnuncioPage(anuncio: anuncio),
                               ),
                             );
                           },
@@ -125,9 +217,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         ],
       ),
 
-      // ===============================
-      // ➕ Botão flutuante de criação
-      // ===============================
+      // 🔹 Botão flutuante de criação
       floatingActionButton: (usuario != null && !isVisitante)
           ? FloatingActionButton.extended(
               onPressed: () async {
@@ -140,15 +230,11 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
                 if (created != null && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Anúncio criado com sucesso!'),
-                    ),
+                    const SnackBar(content: Text('Anúncio criado com sucesso!')),
                   );
-
-                  // 🔄 Recarrega a lista (mantendo o filtro atual)
                   ref
                       .read(feedViewModelProvider.notifier)
-                      .carregarAnuncios(_searchController.text.trim());
+                      .carregarAnuncios(_tituloCtrl.text.trim());
                 }
               },
               icon: const Icon(Icons.add),
