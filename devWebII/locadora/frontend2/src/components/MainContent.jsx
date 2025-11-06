@@ -9,6 +9,7 @@ import DiretoresPage from "../pages/DiretoresPage";
 import ItensPage from "../pages/ItensPage";
 import TitulosPage from "../pages/TitulosPage";
 import ClientesPage from "../pages/ClientesPage";
+import LocacoesPage from "../pages/LocacoesPage";
 
 function MainContent({ selected }) {
   return (
@@ -19,6 +20,7 @@ function MainContent({ selected }) {
       {selected === "itens" && <ItensPage />}
       {selected === "titulos" && <TitulosPage />}
       {selected === "clientes" && <ClientesPage />}
+      {selected === "locacoes" && <LocacoesPage />}
       {!selected && <h2>Bem-vindo! Selecione uma opção no menu.</h2>}
     </main>
   );
