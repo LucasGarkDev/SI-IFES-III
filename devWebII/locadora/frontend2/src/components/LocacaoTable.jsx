@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Table.css";
+import "../styles/table.css";
 
 function LocacaoTable({ locacoes, onEdit, onDelete, onDevolver }) {
   return (

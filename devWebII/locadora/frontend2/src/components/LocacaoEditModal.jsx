@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Modal.css";
+import "../styles/modal.css";
 
 function LocacaoEditModal({ locacao, onSave, onClose }) {
   const [valorCentavos, setValorCentavos] = useState("");

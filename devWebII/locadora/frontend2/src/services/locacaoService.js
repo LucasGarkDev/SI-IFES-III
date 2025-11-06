@@ -1,7 +1,13 @@
-import api from "./api";
+// src/services/locacaoService.js
+import axios from "axios";
 
-export const getLocacoes = () => api.get("/locacoes");
-export const createLocacao = (data) => api.post("/locacoes", data);
-export const devolverLocacao = (data) => api.post("/locacoes/devolucao", data);
-export const cancelarLocacao = (id) => api.delete(`/locacoes/${id}`);
-export const updateLocacao = (id, data) => api.put(`/locacoes/${id}`, data);
+const API_URL = "http://localhost:8085/api/locacoes"; // ✅ coloque o /api aqui
+
+export const getLocacoes = () => axios.get(API_URL);
+export const createLocacao = (data) => axios.post(API_URL, data);
+export const devolverLocacao = (data) =>
+  axios.post(`${API_URL}/devolucao`, data);
+export const updateLocacao = (id, data) =>
+  axios.put(`${API_URL}/${id}`, data);
+export const deleteLocacao = (id) =>
+  axios.delete(`${API_URL}/${id}`);
