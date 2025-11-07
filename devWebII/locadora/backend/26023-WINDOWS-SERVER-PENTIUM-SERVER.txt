@@ -1,13 +1,13 @@
 Initialized native services in: C:\Users\luisa\.gradle\native
 Initialized jansi services in: C:\Users\luisa\.gradle\native
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
-Starting process 'command 'C:\Program Files\Java\jdk-17\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm8114524964433563672probe Command: C:\Program Files\Java\jdk-17\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
+Starting process 'command 'C:\Program Files\Java\jdk-17\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm3385439577429604075probe Command: C:\Program Files\Java\jdk-17\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
 Successfully started process 'command 'C:\Program Files\Java\jdk-17\bin\java.exe''
 Received JVM installation metadata from 'C:\Program Files\Java\jdk-17': {JAVA_HOME=C:\Program Files\Java\jdk-17, JAVA_VERSION=17.0.12, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=17.0.12+8-LTS-286, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=17.0.12+8-LTS-286, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
 Starting process 'Gradle build daemon'. Working directory: C:\Users\luisa\.gradle\daemon\8.14.3 Command: C:\Program Files\Java\jdk-17\bin\java.exe --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED -XX:MaxMetaspaceSize=384m -XX:+HeapDumpOnOutOfMemoryError -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=BR -Duser.language=pt -Duser.variant -cp C:\Users\luisa\.gradle\wrapper\dists\gradle-8.14.3-bin\cv11ve7ro1n3o1j4so8xd9n66\gradle-8.14.3\lib\gradle-daemon-main-8.14.3.jar -javaagent:C:\Users\luisa\.gradle\wrapper\dists\gradle-8.14.3-bin\cv11ve7ro1n3o1j4so8xd9n66\gradle-8.14.3\lib\agents\gradle-instrumentation-agent-8.14.3.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 8.14.3
 Successfully started process 'Gradle build daemon'
-An attempt to start the daemon took 39 mins 35.942 secs.
-The client will now receive all logging from the daemon (pid: 13216). The daemon log file: C:\Users\luisa\.gradle\daemon\8.14.3\daemon-13216.out.log
+An attempt to start the daemon took 24 mins 42.05 secs.
+The client will now receive all logging from the daemon (pid: 13632). The daemon log file: C:\Users\luisa\.gradle\daemon\8.14.3\daemon-13632.out.log
 Daemon will be stopped at the end of the build 
 Using 2 worker leases.
 Received JVM installation metadata from 'C:\Program Files\Java\jdk-17': {JAVA_HOME=C:\Program Files\Java\jdk-17, JAVA_VERSION=17.0.12, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=17.0.12+8-LTS-286, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=17.0.12+8-LTS-286, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
@@ -22,9 +22,7 @@ Included projects: [root project 'backend']
 > Configure project :
 Evaluating root project 'backend' using build file 'D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\backend\build.gradle'.
 Resolved plugin [id: 'java']
-Resource missing. [HTTP HEAD: https://plugins.gradle.org/m2/org/springframework/boot/org.springframework.boot.gradle.plugin/3.3.5/org.springframework.boot.gradle.plugin-3.3.5.jar]
 Resolved plugin [id: 'org.springframework.boot', version: '3.3.5']
-Resource missing. [HTTP HEAD: https://plugins.gradle.org/m2/io/spring/dependency-management/io.spring.dependency-management.gradle.plugin/1.1.7/io.spring.dependency-management.gradle.plugin-1.1.7.jar]
 Resolved plugin [id: 'io.spring.dependency-management', version: '1.1.7']
 Applying dependency management to configuration 'annotationProcessor' in project 'backend'
 Applying dependency management to configuration 'apiElements' in project 'backend'
@@ -53,15 +51,15 @@ Task name matched 'clean'
 Task name matched 'bootRun'
 Selected primary task 'clean' from project :
 Selected primary task 'bootRun' from project :
-Starting process 'command 'C:\Program Files\Java\jre1.8.0_471\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm16073417061155664120probe Command: C:\Program Files\Java\jre1.8.0_471\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
-Successfully started process 'command 'C:\Program Files\Java\jre1.8.0_471\bin\java.exe''
-Received JVM installation metadata from 'C:\Program Files\Java\jre1.8.0_471': {JAVA_HOME=C:\Program Files\Java\jre1.8.0_471, JAVA_VERSION=1.8.0_471, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=1.8.0_471-b09, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=25.471-b09, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
-Starting process 'command 'C:\Program Files\Java\jdk-23\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm10430030948348282236probe Command: C:\Program Files\Java\jdk-23\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
-Successfully started process 'command 'C:\Program Files\Java\jdk-23\bin\java.exe''
-Received JVM installation metadata from 'C:\Program Files\Java\jdk-23': {JAVA_HOME=C:\Program Files\Java\jdk-23, JAVA_VERSION=23.0.2, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=23.0.2+7-58, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=23.0.2+7-58, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
-Starting process 'command 'C:\Program Files\Java\jdk-24\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm7482197382880079212probe Command: C:\Program Files\Java\jdk-24\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
+Starting process 'command 'C:\Program Files\Java\jdk-24\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm8102390111237235432probe Command: C:\Program Files\Java\jdk-24\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
 Successfully started process 'command 'C:\Program Files\Java\jdk-24\bin\java.exe''
 Received JVM installation metadata from 'C:\Program Files\Java\jdk-24': {JAVA_HOME=C:\Program Files\Java\jdk-24, JAVA_VERSION=24.0.2, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=24.0.2+12-54, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=24.0.2+12-54, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
+Starting process 'command 'C:\Program Files\Java\jdk-23\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm3169062733346647583probe Command: C:\Program Files\Java\jdk-23\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command 'C:\Program Files\Java\jdk-23\bin\java.exe''
+Received JVM installation metadata from 'C:\Program Files\Java\jdk-23': {JAVA_HOME=C:\Program Files\Java\jdk-23, JAVA_VERSION=23.0.2, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=23.0.2+7-58, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=23.0.2+7-58, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
+Starting process 'command 'C:\Program Files\Java\jre1.8.0_471\bin\java.exe''. Working directory: C:\Users\luisa\.gradle\.tmp\tmp-jvm6784742678233636903probe Command: C:\Program Files\Java\jre1.8.0_471\bin\java.exe -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command 'C:\Program Files\Java\jre1.8.0_471\bin\java.exe''
+Received JVM installation metadata from 'C:\Program Files\Java\jre1.8.0_471': {JAVA_HOME=C:\Program Files\Java\jre1.8.0_471, JAVA_VERSION=1.8.0_471, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=1.8.0_471-b09, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=25.471-b09, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
 Resolving global dependency management for project 'backend'
 Excluding []
 Excluding []
@@ -71,8 +69,8 @@ Excluding []
 Tasks to be executed: [task ':clean', task ':compileJava', task ':processResources', task ':classes', task ':resolveMainClassName', task ':bootRun']
 Tasks that were excluded: []
 Resolve mutations for :clean (Thread[included builds,5,main]) started.
-destroyer locations for task group 0 (Thread[Execution worker,5,main]) started.
 :clean (Thread[included builds,5,main]) started.
+destroyer locations for task group 0 (Thread[Execution worker,5,main]) started.
 
 > Task :clean
 Caching disabled for task ':clean' because:
@@ -96,8 +94,8 @@ Compilation mode: in-process compilation
 Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
 Compiling with toolchain 'C:\Program Files\Java\jdk-17'.
 Compiling with JDK Java compiler API.
-Class dependency analysis for incremental compilation took 1.729 secs.
-Created classpath snapshot for incremental compilation in 2.588 secs.
+Class dependency analysis for incremental compilation took 0.774 secs.
+Created classpath snapshot for incremental compilation in 0.703 secs.
 Resolve mutations for :processResources (Thread[included builds,5,main]) started.
 :processResources (Thread[included builds,5,main]) started.
 
@@ -142,35 +140,35 @@ Successfully started process 'command 'C:\Program Files\Java\jdk-17\bin\java.exe
 
  :: Spring Boot ::                (v3.3.5)
 
-2025-11-04T13:28:44.582-03:00  INFO 13520 --- [backend] [  restartedMain] c.locadora.backend.BackendApplication    : Starting BackendApplication using Java 17.0.12 with PID 13520 (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\backend\build\classes\java\main started by LDA PENTIUM in D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\backend)
-2025-11-04T13:28:44.624-03:00  INFO 13520 --- [backend] [  restartedMain] c.locadora.backend.BackendApplication    : The following 1 profile is active: "dev"
-2025-11-04T13:28:45.227-03:00  INFO 13520 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-11-04T13:28:45.233-03:00  INFO 13520 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-11-04T13:28:51.504-03:00  INFO 13520 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-11-04T13:28:51.884-03:00  INFO 13520 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 317 ms. Found 8 JPA repository interfaces.
-2025-11-04T13:28:54.880-03:00  INFO 13520 --- [backend] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8085 (http)
-2025-11-04T13:28:54.959-03:00  INFO 13520 --- [backend] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-11-04T13:28:54.963-03:00  INFO 13520 --- [backend] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2025-11-04T13:28:55.142-03:00  INFO 13520 --- [backend] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-11-04T13:28:55.144-03:00  INFO 13520 --- [backend] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9905 ms
-2025-11-04T13:28:55.985-03:00  INFO 13520 --- [backend] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-11-04T13:28:56.535-03:00  INFO 13520 --- [backend] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-11-04T13:28:56.688-03:00  INFO 13520 --- [backend] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-11-04T13:28:57.964-03:00  INFO 13520 --- [backend] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-11-04T13:28:58.165-03:00  INFO 13520 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-11-04T13:28:59.266-03:00  INFO 13520 --- [backend] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@336b2baf
-2025-11-04T13:28:59.269-03:00  INFO 13520 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-11-04T13:29:00.300-03:00  WARN 13520 --- [backend] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-04T13:29:03.884-03:00  INFO 13520 --- [backend] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-11-04T13:29:06.341-03:00  INFO 13520 --- [backend] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-11-04T13:29:08.885-03:00  WARN 13520 --- [backend] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-04T13:29:10.432-03:00  INFO 13520 --- [backend] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-11-04T13:29:10.695-03:00  INFO 13520 --- [backend] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8085 (http) with context path '/'
-2025-11-04T13:29:10.716-03:00  INFO 13520 --- [backend] [  restartedMain] c.locadora.backend.BackendApplication    : Started BackendApplication in 28.713 seconds (process running for 33.692)
-2025-11-04T13:29:36.404-03:00  INFO 13520 --- [backend] [nio-8085-exec-2] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
+2025-11-05T01:24:24.170-03:00  INFO 3620 --- [backend] [  restartedMain] c.locadora.backend.BackendApplication    : Starting BackendApplication using Java 17.0.12 with PID 3620 (D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\backend\build\classes\java\main started by LDA PENTIUM in D:\Meus Projetos do VSCode\SI-IFES-III\devWebII\locadora\backend)
+2025-11-05T01:24:24.188-03:00  INFO 3620 --- [backend] [  restartedMain] c.locadora.backend.BackendApplication    : The following 1 profile is active: "dev"
+2025-11-05T01:24:24.485-03:00  INFO 3620 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-05T01:24:24.485-03:00  INFO 3620 --- [backend] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-05T01:24:29.577-03:00  INFO 3620 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-05T01:24:29.788-03:00  INFO 3620 --- [backend] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 191 ms. Found 8 JPA repository interfaces.
+2025-11-05T01:24:32.600-03:00  INFO 3620 --- [backend] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8085 (http)
+2025-11-05T01:24:32.662-03:00  INFO 3620 --- [backend] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-05T01:24:32.663-03:00  INFO 3620 --- [backend] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2025-11-05T01:24:32.846-03:00  INFO 3620 --- [backend] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-05T01:24:32.848-03:00  INFO 3620 --- [backend] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8361 ms
+2025-11-05T01:24:33.727-03:00  INFO 3620 --- [backend] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-05T01:24:33.881-03:00  INFO 3620 --- [backend] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-11-05T01:24:33.995-03:00  INFO 3620 --- [backend] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-11-05T01:24:35.088-03:00  INFO 3620 --- [backend] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-05T01:24:35.268-03:00  INFO 3620 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-11-05T01:24:36.752-03:00  INFO 3620 --- [backend] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@271f646f
+2025-11-05T01:24:36.769-03:00  INFO 3620 --- [backend] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-11-05T01:24:37.943-03:00  WARN 3620 --- [backend] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-05T01:24:41.379-03:00  INFO 3620 --- [backend] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-05T01:24:43.702-03:00  INFO 3620 --- [backend] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-05T01:24:45.649-03:00  WARN 3620 --- [backend] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-05T01:24:46.878-03:00  INFO 3620 --- [backend] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-11-05T01:24:47.141-03:00  INFO 3620 --- [backend] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8085 (http) with context path '/'
+2025-11-05T01:24:47.193-03:00  INFO 3620 --- [backend] [  restartedMain] c.locadora.backend.BackendApplication    : Started BackendApplication in 25.58 seconds (process running for 31.05)
+2025-11-05T01:25:21.344-03:00  INFO 3620 --- [backend] [nio-8085-exec-1] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
  Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
 
-java.lang.IllegalArgumentException: Invalid character found in method name [320x000xec90xe60xefS0xa50x9a50xe40xb590x13\0xa00x830x910x950xff[)0x93o}0x13 ]. HTTP method names must be tokens
+java.lang.IllegalArgumentException: Invalid character found in method name [320x000xf1u<0x020xb80x8d&s0xaaK0xce0x030x96c0xed ]. HTTP method names must be tokens
 	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:406) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
@@ -182,18 +180,8 @@ java.lang.IllegalArgumentException: Invalid character found in method name [320x
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
 	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
 
-2025-11-04T14:46:45.773-03:00  INFO 13520 --- [backend] [nio-8085-exec-8] o.apache.coyote.http11.Http11Processor   : Error parsing HTTP request header
- Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+2025-11-05T01:31:18.886-03:00  INFO 3620 --- [backend] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-05T01:31:18.975-03:00  INFO 3620 --- [backend] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-11-05T01:31:19.027-03:00  INFO 3620 --- [backend] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 
-java.lang.IllegalArgumentException: Invalid character found in method name [320x00R0x0a,0x0f0xbc0xff0xcd0xa10xb00x090x92a0x9c0xe60xff0xcf0xd9r!0xd20xf10xd80xec20xa6M0xc00x0e0xd3b0xfb0xae3360x000x1a0xd8;0xf00xf4U0x1c0xdaw0xd60x190x000xd80x81\0xfc0x0e0x1420xce0xc1=0x010xac10x990xf20xc20x8a40xec0xc20x9d0xf00x08{0xec]0xc4u0x0c0xa30xd3f0x91jhT0xbc]0xe9_VFop0xf0u0x1c0xb60xa6-0xbb0xae90xe0_0xe60x150xd6Or0x09I0xb20x9e0xeb0xf40xb600x1dg,0xf80x820x0e0xb90xebl0x99Q0xf00xeb0xedL)\l0xf10xbc0x9c0xb7|0xda)0x18~P0xd7n0x9a0xd50x920x0b0xb70x8a0xb70x03W0x0c0xe60xc40x88a0xb80xc70xa10xa10x16@0x94?0xcb0x0cf0xa20x13PT0xff0x86Y0xcb0xaa0x0do0xed0xc8$0xca0xe0r0xc70xc450xd80xfe0xc00xe50xdf0x15J0xcaj0x0c0x1b0xff0x84tc0x93l0xabh0xfd0xaa0xe980x09I0xcb0xb9>0xbb0x006Tt0xe1th0xdd0xf2[50xad0x8d0xa80x860x8d0x890x82y0x0230xae0x83H0xb40x080xbf40x120xe1d0xcc0xba30xfc0xa2C.O0xb9.F0xee"0x010x910x020x9b0xd8@'0x000xf3(0xa9cvYxv3q0x18YK0xe80xf1B;D0xe70x1b0x9f0xd90xcd0xd80x96I0x1dw$0xe290xa40x7f0x8a0xbe0x880x970x1f220xa3T\0x1e,0xe20x070x96KM:p]0x890xf60x020xeb0x8a ]. HTTP method names must be tokens
-	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:406) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
-
+> Task :bootRun FAILED
