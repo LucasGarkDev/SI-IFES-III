@@ -10,6 +10,9 @@ import 'detalhes_anuncio_page.dart';
 import 'criar_anuncio_page.dart';
 import '../../core/providers/usecase_providers.dart';
 import '../../presentation/pages/edit_profile_page.dart';
+// imports no topo
+import 'notificacoes_page.dart';
+
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -77,7 +80,22 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       appBar: AppBar(
         title: const Text('Mercadim'),
         actions: [
-          if (usuario != null && !isVisitante)
+          if (usuario != null && !isVisitante) ...[
+            // 🔔 Ícone de notificações
+            IconButton(
+              icon: const Icon(Icons.notifications_none),
+              tooltip: 'Notificações',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => NotificacoesPage(usuarioId: usuario.id),
+                  ),
+                );
+              },
+            ),
+
+            // 🧑‍💼 Avatar do perfil
             Padding(
               padding: const EdgeInsets.only(right: 12),
               child: GestureDetector(
@@ -104,12 +122,12 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                       : const AssetImage('assets/images/user_placeholder.png')
                           as ImageProvider,
                   child: (usuario.photoUrl == null || usuario.photoUrl!.isEmpty)
-                      ? Icon(Icons.person,
-                          color: Colors.green.shade900, size: 20)
+                      ? Icon(Icons.person, color: Colors.green.shade900, size: 20)
                       : null,
                 ),
               ),
             ),
+          ],
         ],
       ),
 
@@ -179,7 +197,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                     value: _mostrarFavoritos,
                     onChanged: (v) {
                       setState(() => _mostrarFavoritos = v);
-                      _filtrar();
+                      _filtrar(); // ✅ já chama o método correto com o novo estado
                     },
                   ),
               ],

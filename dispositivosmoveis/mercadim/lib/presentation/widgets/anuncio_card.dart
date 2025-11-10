@@ -175,43 +175,50 @@ class AnuncioCard extends ConsumerWidget {
           const Divider(height: 1),
 
           // ========= FAVORITAR =========
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Consumer(
-              builder: (context, ref, _) {
-                final vm = FavoritoViewModel(
-                  ref.read(toggleFavoritoProvider),
-                  usuario?.id ?? 'visitante',
-                );
-                final isFav = vm.isFavorito(anuncio.id);
+          Consumer(
+            builder: (context, ref, _) {
+              final auth = ref.watch(authViewModelProvider);
+              final usuario = auth.state.user;
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        isFav ? Icons.favorite : Icons.favorite_border,
-                        color: isFav ? Colors.red : Colors.black54,
-                      ),
-                      onPressed: usuario == null
-                          ? null
-                          : () => vm.toggle(anuncio.id),
-                    ),
-                    if (usuario != null && usuario.id == anuncio.usuarioId)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 12),
-                        child: Text(
-                          "Seu anúncio",
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            color: Colors.green.shade800,
+              final vm = FavoritoViewModel(
+                ref.read(toggleFavoritoProvider),
+                usuario?.id ?? 'visitante',
+              );
+
+              final isFav = vm.isFavorito(anuncio.id);
+
+              return IconButton(
+                icon: Icon(
+                  isFav ? Icons.favorite : Icons.favorite_border,
+                  color: isFav ? Colors.red : null,
+                ),
+                tooltip: usuario == null
+                    ? 'Faça login para favoritar'
+                    : (isFav ? 'Remover dos favoritos' : 'Adicionar aos favoritos'),
+                onPressed: usuario == null
+                    ? null
+                    : () async {
+                        await vm.toggle(anuncio.id);
+
+                        // ✅ feedback visual rápido
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              isFav
+                                  ? 'Removido dos favoritos.'
+                                  : 'Adicionado aos favoritos.',
+                            ),
+                            duration: const Duration(milliseconds: 800),
                           ),
-                        ),
-                      ),
-                  ],
-                );
-              },
-            ),
+                        );
+
+                        // 🔄 Atualiza o feed para refletir alterações se o filtro de favoritos estiver ativo
+                        ref
+                            .read(feedViewModelProvider.notifier)
+                            .filtrar(apenasFavoritos: false, userId: usuario.id);
+                      },
+              );
+            },
           ),
         ],
       ),
