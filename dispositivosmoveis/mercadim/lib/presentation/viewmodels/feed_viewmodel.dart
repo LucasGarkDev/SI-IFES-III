@@ -5,32 +5,26 @@ import '../../core/exceptions/app_exception.dart';
 import '../../core/providers/usecase_providers.dart';
 import '../../domain/entities/anuncio.dart';
 import '../../domain/usecases/get_anuncios_usecase.dart';
-import '../../domain/usecases/filtrar_anuncios.dart';
 import '../../domain/usecases/listar_favoritos.dart';
 
-/// Provider exposto para a UI
+/// ✅ Provider global para o Feed
 final feedViewModelProvider =
-    StateNotifierProvider<FeedViewModel, FeedState>(
-  (ref) => FeedViewModel(
+    StateNotifierProvider<FeedViewModel, FeedState>((ref) {
+  return FeedViewModel(
     ref.read(getAnunciosUseCaseProvider),
-    ref.read(filtrarAnunciosProvider),
     ref.read(listarFavoritosProvider),
-  ),
-);
+  );
+});
 
-/// ViewModel do Feed (UC11 - Visualizar Anúncios no Feed)
+/// ✅ ViewModel do Feed (UC11 - Visualizar Anúncios)
 class FeedViewModel extends StateNotifier<FeedState> {
   final GetAnunciosUseCase _getAnuncios;
-  final FiltrarAnuncios _filtrarAnuncios;
   final ListarFavoritos _listarFavoritos;
 
-  FeedViewModel(
-    this._getAnuncios,
-    this._filtrarAnuncios,
-    this._listarFavoritos,
-  ) : super(FeedLoading());
+  FeedViewModel(this._getAnuncios, this._listarFavoritos)
+      : super(FeedLoading());
 
-  /// 🔹 Carrega anúncios por cidade (modo simples, compatível com versões antigas)
+  /// 🔹 Carrega anúncios de uma cidade específica (ou todos se vazio)
   Future<void> carregarAnuncios(String cidade) async {
     try {
       state = FeedLoading();
@@ -38,12 +32,12 @@ class FeedViewModel extends StateNotifier<FeedState> {
       state = FeedSuccess(anuncios);
     } on AppException catch (e) {
       state = FeedError(e.mensagem);
-    } catch (_) {
-      state = FeedError('Erro inesperado ao carregar anúncios.');
+    } catch (e) {
+      state = FeedError('Erro ao carregar anúncios: $e');
     }
   }
 
-  /// 🔹 Aplica múltiplos filtros combinados
+  /// 🔹 Aplica múltiplos filtros (categoria, título, preço, favoritos)
   Future<void> filtrar({
     String? titulo,
     String? categoria,
@@ -56,14 +50,16 @@ class FeedViewModel extends StateNotifier<FeedState> {
     try {
       state = FeedLoading();
 
-      // 1️⃣ Consulta inicial no Firestore com filtros básicos
-      var anuncios = await _filtrarAnuncios(
-        categoria: categoria?.isEmpty ?? true ? null : categoria,
-        precoMin: precoMin,
-        precoMax: precoMax,
-      );
+      List<Anuncio> anuncios;
 
-      // 2️⃣ Filtra por título (client-side)
+      // 1️⃣ Se for para mostrar apenas favoritos do usuário
+      if (apenasFavoritos && userId != null) {
+        anuncios = await _listarFavoritos(userId);
+      } else {
+        anuncios = await _getAnuncios(cidade ?? '');
+      }
+
+      // 2️⃣ Filtros locais adicionais
       if (titulo != null && titulo.trim().isNotEmpty) {
         final termo = titulo.trim().toLowerCase();
         anuncios = anuncios
@@ -71,19 +67,34 @@ class FeedViewModel extends StateNotifier<FeedState> {
             .toList();
       }
 
-      // 3️⃣ Se quiser apenas favoritos e houver usuário logado
-      if (apenasFavoritos && userId != null) {
-        final favoritosIds = await _listarFavoritos(userId);
+      if (categoria != null && categoria.trim().isNotEmpty) {
+        final termoCat = categoria.trim().toLowerCase();
         anuncios = anuncios
-            .where((a) => favoritosIds.any((fav) => fav.id == a.id))
+            .where((a) => a.categoria.toLowerCase().contains(termoCat))
             .toList();
       }
 
+      if (cidade != null && cidade.trim().isNotEmpty) {
+        final termoCidade = cidade.trim().toLowerCase();
+        anuncios = anuncios
+            .where((a) => a.cidade.toLowerCase().contains(termoCidade))
+            .toList();
+      }
+
+      if (precoMin != null) {
+        anuncios = anuncios.where((a) => a.preco >= precoMin).toList();
+      }
+
+      if (precoMax != null) {
+        anuncios = anuncios.where((a) => a.preco <= precoMax).toList();
+      }
+
+      // ✅ Atualiza estado final
       state = FeedSuccess(anuncios);
     } on AppException catch (e) {
       state = FeedError(e.mensagem);
     } catch (e) {
-      state = FeedError('Erro inesperado ao filtrar anúncios: $e');
+      state = FeedError('Erro ao aplicar filtros: $e');
     }
   }
 }
