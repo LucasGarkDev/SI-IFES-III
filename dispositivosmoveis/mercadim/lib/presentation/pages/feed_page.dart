@@ -10,9 +10,7 @@ import 'detalhes_anuncio_page.dart';
 import 'criar_anuncio_page.dart';
 import '../../core/providers/usecase_providers.dart';
 import '../../presentation/pages/edit_profile_page.dart';
-// imports no topo
 import 'notificacoes_page.dart';
-
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -69,6 +67,22 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     });
   }
 
+  /// 🔹 Chama a busca de anúncios próximos
+  Future<void> _buscarAnunciosProximos() async {
+    final vm = ref.read(feedViewModelProvider.notifier);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Buscando anúncios próximos...')),
+    );
+
+    await vm.carregarAnunciosProximos();
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Anúncios próximos carregados!')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(feedViewModelProvider);
@@ -80,8 +94,14 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       appBar: AppBar(
         title: const Text('Mercadim'),
         actions: [
+          // 📍 Novo botão para buscar anúncios próximos
+          IconButton(
+            tooltip: 'Ver anúncios próximos',
+            icon: const Icon(Icons.my_location_outlined),
+            onPressed: _buscarAnunciosProximos,
+          ),
+
           if (usuario != null && !isVisitante) ...[
-            // 🔔 Ícone de notificações
             IconButton(
               icon: const Icon(Icons.notifications_none),
               tooltip: 'Notificações',
@@ -95,7 +115,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
               },
             ),
 
-            // 🧑‍💼 Avatar do perfil
             Padding(
               padding: const EdgeInsets.only(right: 12),
               child: GestureDetector(
@@ -133,7 +152,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
       body: Column(
         children: [
-          // 🔹 Campo de busca por título
+          // 🔹 Campo de busca
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 8, 12, 4),
             child: TextField(
@@ -152,7 +171,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
             ),
           ),
 
-          // 🔹 Filtros adicionais
+          // 🔹 Filtros
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: ExpansionTile(
@@ -197,14 +216,14 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                     value: _mostrarFavoritos,
                     onChanged: (v) {
                       setState(() => _mostrarFavoritos = v);
-                      _filtrar(); // ✅ já chama o método correto com o novo estado
+                      _filtrar();
                     },
                   ),
               ],
             ),
           ),
 
-          // 🔹 Lista de anúncios
+          // 🔹 Lista
           Expanded(
             child: switch (state) {
               FeedLoading() => const Center(child: CircularProgressIndicator()),
@@ -235,7 +254,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         ],
       ),
 
-      // 🔹 Botão flutuante de criação
+      // 🔹 Botão flutuante
       floatingActionButton: (usuario != null && !isVisitante)
           ? FloatingActionButton.extended(
               onPressed: () async {
