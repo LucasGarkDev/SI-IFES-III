@@ -67,26 +67,38 @@ public class LocacaoService {
         return toDTO(repo.save(loc));
     }
 
-    /* ================================================================
+    /*================================================================
        EFETUAR DEVOLUÇÃO
-    ================================================================ */
+    =============================================================== */
     @Transactional
     public LocacaoDTO devolver(LocacaoDevolucaoDTO dto) {
-        Item item = itemRepo.findByNumSerie(dto.getNumeroSerie())
-        .orElseThrow(() -> new NotFoundException("Item não encontrado pelo número de série."));
+        if (dto.getItemId() == null) {
+            throw new BusinessRuleException("itemId é obrigatório.");
+        }
+
+        // (opcional) log rápido do que chegou
+        // log.info("Devolução recebida: itemId={}, multa={}", dto.getItemId(), dto.getMulta());
+
+        Item item = itemRepo.findById(dto.getItemId())
+            .orElseThrow(() -> new NotFoundException("Item não encontrado pelo ID."));
 
         Locacao loc = repo.findLocacaoVigentePorItem(item.getId())
-                .orElseThrow(() -> new BusinessRuleException("Item informado não possui locação vigente."));
+            .orElseThrow(() -> new BusinessRuleException("Item informado não possui locação vigente."));
 
         LocalDate hoje = LocalDate.now();
         loc.setDataEfetivaDevolucao(hoje);
 
-        // Calcular multa se houver atraso
-        long atraso = ChronoUnit.DAYS.between(loc.getDataPrevistaDevolucao(), hoje);
-        if (atraso > 0) {
-            loc.setMultaCentavos((int) (atraso * (loc.getValorCentavos() * 0.1)));
+        // Se veio multa do front, usa; senão calcula por atraso
+        if (dto.getMulta() != null && dto.getMulta() > 0) {
+            loc.setMultaCentavos((int) Math.round(dto.getMulta() * 100));
         } else {
-            loc.setMultaCentavos(0);
+            long atraso = ChronoUnit.DAYS.between(loc.getDataPrevistaDevolucao(), hoje);
+            if (atraso > 0) {
+                int multaCalc = (int) Math.round(atraso * (loc.getValorCentavos() * 0.1));
+                loc.setMultaCentavos(multaCalc);
+            } else {
+                loc.setMultaCentavos(0);
+            }
         }
 
         return toDTO(repo.save(loc));

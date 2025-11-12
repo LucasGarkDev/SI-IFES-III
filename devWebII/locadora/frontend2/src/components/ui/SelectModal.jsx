@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/InputField.css"; // reaproveita o mesmo estilo retrô
+import "../../styles/InputField.css";
 
 function SelectModal({ isOpen, title, fetchItems, onSelect, onClose }) {
   const [items, setItems] = useState([]);
@@ -21,27 +21,41 @@ function SelectModal({ isOpen, title, fetchItems, onSelect, onClose }) {
 
   if (!isOpen) return null;
 
-  const itensFiltrados = items.filter((i) =>
-    i.nome?.toLowerCase().includes(filtro.toLowerCase())
-  );
+  // Filtro genérico para nome, numSerie ou tituloNome
+  const itensFiltrados = items.filter((i) => {
+    const termo = filtro.toLowerCase();
+    return (
+      i.nome?.toLowerCase().includes(termo) ||
+      i.numSerie?.toLowerCase().includes(termo) ||
+      i.tituloNome?.toLowerCase().includes(termo)
+    );
+  });
+
+  // Função para determinar o texto que será exibido
+  const getLabel = (i) => {
+    if (i.nome) return i.nome;
+    if (i.numSerie && i.tituloNome)
+      return `${i.numSerie} — ${i.tituloNome} (${i.tipoItem || ""})`;
+    if (i.numSerie) return i.numSerie;
+    if (i.tituloNome) return i.tituloNome;
+    return `ID ${i.id}`;
+  };
 
   return (
     <div className="modal-overlay">
       <div className="modal-box">
         <h3>{title}</h3>
 
-        {/* Campo de pesquisa usando o mesmo estilo dos inputs */}
         <div className="input-field" style={{ marginBottom: "8px" }}>
           <label>Pesquisar:</label>
           <input
             type="text"
             value={filtro}
             onChange={(e) => setFiltro(e.target.value)}
-            placeholder="Digite o nome..."
+            placeholder="Digite o termo..."
           />
         </div>
 
-        {/* Lista de opções */}
         <div
           style={{
             border: "1px solid #000",
@@ -74,8 +88,7 @@ function SelectModal({ isOpen, title, fetchItems, onSelect, onClose }) {
                   e.currentTarget.style.color = "#000";
                 }}
               >
-                <strong>{i.nome}</strong>
-                {i.categoria && <span> ({i.categoria})</span>}
+                <strong>{getLabel(i)}</strong>
               </div>
             ))
           ) : (
@@ -85,7 +98,6 @@ function SelectModal({ isOpen, title, fetchItems, onSelect, onClose }) {
           )}
         </div>
 
-        {/* Botão de ação */}
         <div style={{ marginTop: "10px", textAlign: "right" }}>
           <button
             className="btn-select"

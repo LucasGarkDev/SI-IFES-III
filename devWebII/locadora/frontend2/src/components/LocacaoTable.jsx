@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/table.css";
+import ActionButton from "./ui/ActionButton";
 
 function LocacaoTable({ locacoes, onEdit, onDelete, onDevolver }) {
   return (
@@ -19,17 +20,24 @@ function LocacaoTable({ locacoes, onEdit, onDelete, onDevolver }) {
           <th>Ações</th>
         </tr>
       </thead>
+
       <tbody>
         {locacoes.length === 0 ? (
           <tr>
-            <td colSpan="11">Nenhum registro encontrado</td>
+            <td colSpan="11" style={{ textAlign: "center" }}>
+              Nenhum registro encontrado
+            </td>
           </tr>
         ) : (
           locacoes.map((l) => (
             <tr key={l.id}>
               <td>{l.id}</td>
-              <td>{l.clienteId}</td>
-              <td>{l.itemId}</td>
+              <td>{l.cliente?.nome || `Cliente #${l.clienteId}`}</td>
+              <td>
+                {l.item
+                  ? `${l.item.numSerie} (${l.item.tipoItem})`
+                  : `Item #${l.itemId}`}
+              </td>
               <td>{l.dataLocacao}</td>
               <td>{l.dataPrevistaDevolucao}</td>
               <td>{l.dataEfetivaDevolucao || "-"}</td>
@@ -38,30 +46,19 @@ function LocacaoTable({ locacoes, onEdit, onDelete, onDevolver }) {
               <td>{l.paga ? "Sim" : "Não"}</td>
               <td>{l.cancelada ? "Sim" : "Não"}</td>
               <td>
-                {!l.cancelada && (
-                  <>
-                    <button
-                      className="btn-small"
-                      onClick={() => onEdit(l)}
-                    >
-                      Editar
-                    </button>
-                    {!l.dataEfetivaDevolucao && (
-                      <button
-                        className="btn-small yellow"
-                        onClick={() => onDevolver(l.itemId)}
-                      >
-                        Devolver
-                      </button>
-                    )}
-                    <button
-                      className="btn-small red"
-                      onClick={() => onDelete(l.id)}
-                    >
-                      Cancelar
-                    </button>
-                  </>
+                <ActionButton label="Editar" variant="edit" onClick={() => onEdit(l)} />
+                {!l.dataEfetivaDevolucao && (
+                  <ActionButton
+                    label="Devolver"
+                    variant="info"
+                    onClick={() => onDevolver(l)} // 🔧 Agora só chama o callback da página
+                  />
                 )}
+                <ActionButton
+                  label="Cancelar"
+                  variant="delete"
+                  onClick={() => onDelete(l.id)}
+                />
               </td>
             </tr>
           ))

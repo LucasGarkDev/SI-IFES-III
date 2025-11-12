@@ -4,14 +4,18 @@
  */
 package com.locadora.backend.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 
 public class LocacaoDevolucaoDTO {
+    @NotNull(message = "itemId é obrigatório")
+    private Long itemId;
 
-    @NotBlank(message = "Número de série do item é obrigatório")
-    private String numeroSerie;
+    private Double multa; // opcional
 
-    public String getNumeroSerie() { return numeroSerie; }
-    public void setNumeroSerie(String numeroSerie) { this.numeroSerie = numeroSerie; }
+    public Long getItemId() { return itemId; }
+    public void setItemId(Long itemId) { this.itemId = itemId; }
+
+    public Double getMulta() { return multa; }
+    public void setMulta(Double multa) { this.multa = multa; }
 }
-
