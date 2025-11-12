@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import FormButton from "./subcomponents/FormButton";
-import FormField from "./subcomponents/FormField";
 import { generateFormFields } from "../js/utils";
+import FormField from "./form/FormField";
+import FormButton from "./form/FormButton";
 
 /**
  * @component Form
