@@ -16,7 +16,7 @@ export const excludeFields = [
   "classeId",
   "diretorId",
   "tituloId",
-  "atoresIds"
+  "atoresIds",
 ];
 
 // auto form maker usa databaseSchema para criar os formularios
@@ -87,7 +87,7 @@ const modules = [
       id: 0,
       numSerie: 7415872,
       dtAquisicao: "30-08-1991",
-      tipoItem: ["DVD","fita","Blue Ray"],
+      tipoItem: ["DVD", "fita", "Blue Ray"],
       titulo: ["Terminator 2"],
     },
     backendPayloadMinimalRequired: {
@@ -107,7 +107,8 @@ const modules = [
       id: 0,
       nome: "Terminator 2",
       ano: 1991,
-      sinopse: "O jovem John Connor é a chave para a vitória da humanidade sobre a rebelião das máquinas no futuro. O garoto é alvo de T-1000, um exterminador feito de metal líquido que pode assumir a forma que desejar e que foi enviado do futuro para matá-lo. Outro exterminador, o renovado T-800, também é mandado de volta para proteger o menino. Enquanto John e sua mãe, Sarah Connor, fogem com o T-800, o garoto cria um vínculo afetivo inesperado com o robô.",
+      sinopse:
+        "O jovem John Connor é a chave para a vitória da humanidade sobre a rebelião das máquinas no futuro. O garoto é alvo de T-1000, um exterminador feito de metal líquido que pode assumir a forma que desejar e que foi enviado do futuro para matá-lo. Outro exterminador, o renovado T-800, também é mandado de volta para proteger o menino. Enquanto John e sua mãe, Sarah Connor, fogem com o T-800, o garoto cria um vínculo afetivo inesperado com o robô.",
       categoria: "Ficção Científica",
       // classeId: 0,
       classeNome: ["Lançamento"],
@@ -135,12 +136,51 @@ const modules = [
     },
   },
   {
-    name: "clientes/socio",
+    name: "clientes",
     label: "clientes",
     description:
       "Este caso de uso é responsável pelo controle de títulos, abrangendo ainclusãode um novo título, alteração, consulta e exclusão de títulos existentes.",
     // data: filtrarCampos(excludeFields, titulosArray),
-    // databaseSchema:
+    databaseSchema: {
+      nome: "Asdrubal",
+      dtNascimento: "1924-11-01",
+      sexo: "masculino",
+      cpf: "192.168.224-01",
+      endereco: "R. Central - São José",
+      telefone: "27 12345-6789",
+      dependentes: ["Filho1"],
+    },
+    backendPayloadMinimalRequired: {
+      nome: "string",
+      dtNascimento: "2025-11-01",
+      sexo: "string",
+      cpf: "string",
+      endereco: "string",
+      telefone: "string",
+      dependentes: [
+        {
+          nome: "string",
+          dtNascimento: "2025-11-01",
+          sexo: "string",
+        },
+      ],
+    },
+  },
+  {
+    name: "locacoes",
+    label: "locações",
+    description:
+      "Este caso de uso é responsável pelo controle de títulos, abrangendo ainclusãode um novo título, alteração, consulta e exclusão de títulos existentes.",
+    // data: filtrarCampos(excludeFields, titulosArray),
+    databaseSchema: {
+      nome: "Asdrubal",
+      dtNascimento: "1924-11-01",
+      sexo: "masculino",
+      cpf: "192.168.224-01",
+      endereco: "R. Central - São José",
+      telefone: "27 12345-6789",
+      dependentes: ["Filho1"],
+    },
     backendPayloadMinimalRequired: {
       nome: "string",
       dtNascimento: "2025-11-01",
@@ -158,6 +198,5 @@ const modules = [
     },
   },
 ];
-
 
 export default modules;
