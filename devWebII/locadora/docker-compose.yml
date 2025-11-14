@@ -1,21 +1,49 @@
 services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_locadora
+    restart: always
+    environment:
+      POSTGRES_DB: locadora_passatempo
+      POSTGRES_USER: locadoraSystem
+      POSTGRES_PASSWORD: locadoraSystem
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal_net
+
   backend:
-    build: ./backend
-    container_name: locadora-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_locadora
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/locadora_passatempo
+      SPRING_DATASOURCE_USERNAME: locadoraSystem
+      SPRING_DATASOURCE_PASSWORD: locadoraSystem
+      SPRING_PROFILES_ACTIVE: dev
     ports:
       - "8085:8085"
     networks:
-      - locadora-net
+      - internal_net
 
   frontend:
-    build: ./frontend
-    container_name: locadora-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_locadora
     ports:
       - "5173:5173"
-    networks:
-      - locadora-net
     depends_on:
       - backend
+    networks:
+      - internal_net
+
+volumes:
+  pgdata:
 
 networks:
-  locadora-net:
+  internal_net:
+    driver: bridge
