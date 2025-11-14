@@ -8,10 +8,15 @@ import com.locadora.backend.domain.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
+
     boolean existsByNumSerie(String numSerie);
 
     Page<Item> findByNumSerieContainingIgnoreCase(String numSerie, Pageable pageable);
+
+    Optional<Item> findByNumSerie(String numSerie); // ✅ adicionado
 }
+
 
