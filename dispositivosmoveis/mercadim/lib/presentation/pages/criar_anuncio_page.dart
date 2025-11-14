@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../core/providers/usecase_providers.dart';
+import '../../core/services/image_upload_service.dart';
+import '../../core/services/geofire_service.dart'; // ✅ novo
 import '../viewmodels/criar_anuncio_viewmodel.dart';
 import '../../domain/entities/anuncio.dart';
 
@@ -26,12 +30,13 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
   final _bairro = TextEditingController();
 
   File? _imagemSelecionada;
+  final _imageService = ImageUploadService();
+  final _geoService = GeoFireService(FirebaseFirestore.instance); // ✅ instância
 
   Future<void> _selecionarImagem() async {
     try {
       final picker = ImagePicker();
       final picked = await picker.pickImage(source: ImageSource.gallery);
-
       if (picked != null) {
         setState(() => _imagemSelecionada = File(picked.path));
       }
@@ -39,6 +44,46 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erro ao selecionar imagem: $e')),
       );
+    }
+  }
+
+  Future<Position?> _obterLocalizacao() async {
+    try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Serviço de localização desativado.')),
+        );
+        return null;
+      }
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Permissão de localização negada.')),
+          );
+          return null;
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Permissão permanente de localização negada.')),
+        );
+        return null;
+      }
+
+      return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao obter localização: $e')),
+      );
+      return null;
     }
   }
 
@@ -58,7 +103,6 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
               key: _form,
               child: ListView(
                 children: [
-                  // ======= CAMPOS PRINCIPAIS =======
                   TextFormField(
                     controller: _titulo,
                     decoration: const InputDecoration(labelText: 'Título'),
@@ -68,8 +112,6 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                     controller: _descricao,
                     decoration: const InputDecoration(labelText: 'Descrição'),
                   ),
-
-                  // ✅ Campo preço com formato numérico
                   TextFormField(
                     controller: _preco,
                     decoration: const InputDecoration(labelText: 'Preço (R\$)'),
@@ -80,7 +122,6 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                     ],
                     validator: vm.validatePreco,
                   ),
-
                   TextFormField(
                     controller: _categoria,
                     decoration: const InputDecoration(labelText: 'Categoria'),
@@ -96,7 +137,6 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
 
                   const SizedBox(height: 16),
 
-                  // ✅ Seletor de imagem
                   Text(
                     'Imagem principal',
                     style: Theme.of(context).textTheme.titleMedium,
@@ -141,14 +181,10 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
 
                   const SizedBox(height: 20),
 
-                  // ======= ERRO =======
                   if (vm.state.error != null)
-                    Text(
-                      vm.state.error!,
-                      style: const TextStyle(color: Colors.red),
-                    ),
+                    Text(vm.state.error!,
+                        style: const TextStyle(color: Colors.red)),
 
-                  // ======= BOTÃO PUBLICAR =======
                   FilledButton(
                     onPressed: vm.state.loading
                         ? null
@@ -161,6 +197,20 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                                 double.tryParse(_preco.text.replaceAll(',', '.')) ??
                                     0.0;
 
+                            // ✅ Upload da imagem
+                            String imageUrl = '';
+                            if (_imagemSelecionada != null) {
+                              final uploadedUrl = await _imageService
+                                  .pickAndUploadImage(widget.usuarioId);
+                              if (uploadedUrl != null) {
+                                imageUrl = uploadedUrl;
+                              }
+                            }
+
+                            // ✅ Obtém localização
+                            final pos = await _obterLocalizacao();
+                            if (pos == null) return;
+
                             final anuncio = Anuncio(
                               id: '',
                               titulo: _titulo.text.trim(),
@@ -170,8 +220,9 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                               cidade: _cidade.text.trim(),
                               bairro: _bairro.text.trim(),
                               dataCriacao: DateTime.now(),
-                              imagemPrincipalUrl:
-                                  _imagemSelecionada?.path ?? '', // ✅ caminho local
+                              imagemPrincipalUrl: imageUrl.isNotEmpty
+                                  ? imageUrl
+                                  : 'assets/images/no_image.png',
                               usuarioId: widget.usuarioId,
                               destaque: false,
                               imagens: [],
@@ -180,6 +231,13 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                             final created = await vm.submit(anuncio);
 
                             if (created != null && mounted) {
+                              // ✅ Salva a localização no Firestore
+                              await _geoService.salvarLocalizacaoAnuncio(
+                                anuncioId: created.id,
+                                latitude: pos.latitude,
+                                longitude: pos.longitude,
+                              );
+
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content:

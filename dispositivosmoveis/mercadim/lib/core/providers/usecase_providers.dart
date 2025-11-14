@@ -47,6 +47,7 @@ import '../../domain/usecases/entrar_como_visitante.dart';
 import '../../presentation/viewmodels/auth_viewmodel.dart';
 import '../../data/datasources/auth_firestore_ds.dart';
 import '../../domain/usecases/update_profile.dart';
+import '../services/geofire_service.dart';
 
 // ====== Serviços base ======
 final _idServiceProvider = Provider((ref) => IdService());
@@ -142,6 +143,8 @@ final _localizacaoRepositoryProvider =
 final detectarLocalizacaoProvider =
     Provider((ref) => DetectarLocalizacao(ref.read(_localizacaoRepositoryProvider)));
 
+final geoFireServiceProvider =
+    Provider((ref) => GeoFireService(FirebaseFirestore.instance));
 // ====== Entrar como Visitante ======
 final entrarComoVisitanteProvider =
     Provider((ref) => EntrarComoVisitante(ref.read(_authRepositoryProvider)));
