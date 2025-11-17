@@ -1,0 +1,53 @@
+
+> sistema-de-video-locadora@0.0.9 dev
+> set NO_COLOR=1 && npm run auto-install && vite --host
+
+
+> sistema-de-video-locadora@0.0.9 auto-install
+> npm install && node -v && npm run prepare-env
+
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @typescript-eslint/utils@5.62.0
+npm warn Found: eslint@9.37.0
+npm warn node_modules/eslint
+npm warn   dev eslint@"^9.37.0" from the root project
+npm warn   9 more (@babel/eslint-parser, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer eslint@"^6.0.0 || ^7.0.0 || ^8.0.0" from @typescript-eslint/utils@5.62.0
+npm warn node_modules/@typescript-eslint/type-utils/node_modules/@typescript-eslint/utils
+npm warn   @typescript-eslint/utils@"5.62.0" from @typescript-eslint/type-utils@5.62.0
+npm warn   node_modules/@typescript-eslint/type-utils
+npm warn
+npm warn Conflicting peer dependency: eslint@8.57.1
+npm warn node_modules/eslint
+npm warn   peer eslint@"^6.0.0 || ^7.0.0 || ^8.0.0" from @typescript-eslint/utils@5.62.0
+npm warn   node_modules/@typescript-eslint/type-utils/node_modules/@typescript-eslint/utils
+npm warn     @typescript-eslint/utils@"5.62.0" from @typescript-eslint/type-utils@5.62.0
+npm warn     node_modules/@typescript-eslint/type-utils
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'sistema-de-video-locadora@0.0.9',
+npm warn EBADENGINE   required: { node: '^22.x' },
+npm warn EBADENGINE   current: { node: 'v24.11.0', npm: '11.6.1' }
+npm warn EBADENGINE }
+
+added 66 packages in 43m
+
+304 packages are looking for funding
+  run `npm fund` for details
+v24.11.0
+
+> sistema-de-video-locadora@0.0.9 prepare-env
+> node src/js/createEnvIfMissing.js
+
+.env já existe. Nenhuma ação necessária.
+
+  VITE v7.1.10  ready in 2573387 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://26.106.30.88:5173/
+  ➜  Network: http://192.168.6.100:5173/
+  ➜  Network: http://172.29.160.1:5173/
+  ➜  Network: http://172.26.192.1:5173/
+  ➜  Network: http://172.31.80.1:5173/
+  ➜  press h + enter to show help

@@ -1,0 +1,59 @@
+
+> sistema-de-video-locadora@0.0.9 dev
+> set NO_COLOR=1 && npm run auto-install && vite --host
+
+
+> sistema-de-video-locadora@0.0.9 auto-install
+> npm install && node -v && npm run prepare-env
+
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @typescript-eslint/utils@5.62.0
+npm warn Found: eslint@9.37.0
+npm warn node_modules/eslint
+npm warn   dev eslint@"^9.37.0" from the root project
+npm warn   9 more (@babel/eslint-parser, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer eslint@"^6.0.0 || ^7.0.0 || ^8.0.0" from @typescript-eslint/utils@5.62.0
+npm warn node_modules/@typescript-eslint/type-utils/node_modules/@typescript-eslint/utils
+npm warn   @typescript-eslint/utils@"5.62.0" from @typescript-eslint/type-utils@5.62.0
+npm warn   node_modules/@typescript-eslint/type-utils
+npm warn
+npm warn Conflicting peer dependency: eslint@8.57.1
+npm warn node_modules/eslint
+npm warn   peer eslint@"^6.0.0 || ^7.0.0 || ^8.0.0" from @typescript-eslint/utils@5.62.0
+npm warn   node_modules/@typescript-eslint/type-utils/node_modules/@typescript-eslint/utils
+npm warn     @typescript-eslint/utils@"5.62.0" from @typescript-eslint/type-utils@5.62.0
+npm warn     node_modules/@typescript-eslint/type-utils
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'sistema-de-video-locadora@0.0.9',
+npm warn EBADENGINE   required: { node: '^22.x' },
+npm warn EBADENGINE   current: { node: 'v24.11.0', npm: '11.6.1' }
+npm warn EBADENGINE }
+
+added 66 packages, and audited 1777 packages in 44m
+
+304 packages are looking for funding
+  run `npm fund` for details
+
+40 vulnerabilities (6 moderate, 34 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+v24.11.0
+
+> sistema-de-video-locadora@0.0.9 prepare-env
+> node src/js/createEnvIfMissing.js
+
+.env já existe. Nenhuma ação necessária.
+error when starting dev server:
+Error: listen EACCES: permission denied 0.0.0.0:5173
+    at Server.setupListenHandle [as _listen2] (node:net:1918:21)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at httpServer.listen (file:///D:/Meus%20Projetos%20do%20VSCode/SI-IFES-III/devWebII/locadora/frontend/node_modules/vite/dist/node/chunks/dep-B0GuR2De.js:28223:11)

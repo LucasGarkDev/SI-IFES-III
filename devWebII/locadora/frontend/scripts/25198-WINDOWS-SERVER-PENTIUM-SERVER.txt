@@ -1,0 +1,8 @@
+
+> sistema-de-video-locadora@0.0.9 dev
+> set NO_COLOR=1 && npm run auto-install && vite --host
+
+
+> sistema-de-video-locadora@0.0.9 auto-install
+> npm install && node -v && npm run prepare-env
+
