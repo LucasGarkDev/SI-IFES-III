@@ -28,6 +28,7 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
   final _categoria = TextEditingController();
   final _cidade = TextEditingController();
   final _bairro = TextEditingController();
+  bool _btnLoading = false;
 
   File? _imagemSelecionada;
   final _imageService = ImageUploadService();
@@ -186,67 +187,80 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                         style: const TextStyle(color: Colors.red)),
 
                   FilledButton(
-                    onPressed: vm.state.loading
+                    onPressed: (_btnLoading || vm.state.loading)
                         ? null
                         : () async {
-                            if (!(_form.currentState?.validate() ?? false)) {
-                              return;
-                            }
+                            setState(() => _btnLoading = true);
 
-                            final precoValor =
-                                double.tryParse(_preco.text.replaceAll(',', '.')) ??
-                                    0.0;
-
-                            // ✅ Upload da imagem
-                            String imageUrl = '';
-                            if (_imagemSelecionada != null) {
-                              final uploadedUrl = await _imageService
-                                  .pickAndUploadImage(widget.usuarioId);
-                              if (uploadedUrl != null) {
-                                imageUrl = uploadedUrl;
+                            try {
+                              if (!(_form.currentState?.validate() ?? false)) {
+                                setState(() => _btnLoading = false);
+                                return;
                               }
-                            }
 
-                            // ✅ Obtém localização
-                            final pos = await _obterLocalizacao();
-                            if (pos == null) return;
+                              final precoValor =
+                                  double.tryParse(_preco.text.replaceAll(',', '.')) ?? 0.0;
 
-                            final anuncio = Anuncio(
-                              id: '',
-                              titulo: _titulo.text.trim(),
-                              descricao: _descricao.text.trim(),
-                              preco: precoValor,
-                              categoria: _categoria.text.trim(),
-                              cidade: _cidade.text.trim(),
-                              bairro: _bairro.text.trim(),
-                              dataCriacao: DateTime.now(),
-                              imagemPrincipalUrl: imageUrl.isNotEmpty
-                                  ? imageUrl
-                                  : 'assets/images/no_image.png',
-                              usuarioId: widget.usuarioId,
-                              destaque: false,
-                              imagens: [],
-                            );
+                              // Upload da imagem
+                              String imageUrl = '';
+                              if (_imagemSelecionada != null) {
+                                final uploadedUrl =
+                                    await _imageService.pickAndUploadImage(widget.usuarioId);
+                                if (uploadedUrl != null) imageUrl = uploadedUrl;
+                              }
 
-                            final created = await vm.submit(anuncio);
-
-                            if (created != null && mounted) {
-                              // ✅ Salva a localização no Firestore
-                              await _geoService.salvarLocalizacaoAnuncio(
-                                anuncioId: created.id,
-                                latitude: pos.latitude,
-                                longitude: pos.longitude,
-                              );
-
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
+                              // Localização
+                              final pos = await _obterLocalizacao();
+                              if (pos == null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
                                     content:
-                                        Text('Anúncio criado com sucesso!')),
+                                        Text('Não foi possível obter sua localização.'),
+                                  ),
+                                );
+                                setState(() => _btnLoading = false);
+                                return;
+                              }
+
+                              // Cria objeto
+                              final anuncio = Anuncio(
+                                id: '',
+                                titulo: _titulo.text.trim(),
+                                descricao: _descricao.text.trim(),
+                                preco: precoValor,
+                                categoria: _categoria.text.trim(),
+                                cidade: _cidade.text.trim(),
+                                bairro: _bairro.text.trim(),
+                                dataCriacao: DateTime.now(),
+                                imagemPrincipalUrl: imageUrl,
+                                usuarioId: widget.usuarioId,
+                                destaque: false,
+                                imagens: [],
                               );
-                              Navigator.pop(context, created);
+
+                              final created = await vm.submit(anuncio);
+
+                              if (created != null && mounted) {
+                                // salva localização
+                                await _geoService.salvarLocalizacaoAnuncio(
+                                  anuncioId: created.id,
+                                  latitude: pos.latitude,
+                                  longitude: pos.longitude,
+                                );
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Anúncio criado com sucesso!'),
+                                  ),
+                                );
+
+                                Navigator.pop(context, created);
+                              }
+                            } finally {
+                              if (mounted) setState(() => _btnLoading = false);
                             }
                           },
-                    child: vm.state.loading
+                    child: (vm.state.loading || _btnLoading)
                         ? const CircularProgressIndicator()
                         : const Text('Publicar'),
                   ),
