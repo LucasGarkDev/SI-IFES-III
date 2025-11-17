@@ -160,8 +160,30 @@ public class LocacaoService {
     private LocacaoDTO toDTO(Locacao loc) {
         LocacaoDTO dto = new LocacaoDTO();
         dto.setId(loc.getId());
+
         dto.setClienteId(loc.getCliente().getId());
         dto.setItemId(loc.getItem().getId());
+
+        // 🔥 Preencher dados completos do cliente
+        ClienteDTO c = new ClienteDTO();
+        c.setId(loc.getCliente().getId());
+        c.setNome(loc.getCliente().getNome());
+        c.setNumInscricao(loc.getCliente().getNumInscricao());
+        c.setSexo(loc.getCliente().getSexo());
+        c.setDtNascimento(loc.getCliente().getDtNascimento());
+        c.setEstaAtivo(loc.getCliente().getEstaAtivo());
+        dto.setCliente(c);
+
+        // 🔥 Preencher dados completos do item
+        ItemDTO i = new ItemDTO();
+        i.setId(loc.getItem().getId());
+        i.setNumSerie(loc.getItem().getNumSerie());
+        i.setDtAquisicao(loc.getItem().getDtAquisicao());
+        i.setTipoItem(loc.getItem().getTipoItem());
+        i.setTituloId(loc.getItem().getTitulo().getId());
+        i.setTituloNome(loc.getItem().getTitulo().getNome());
+        dto.setItem(i);
+
         dto.setDataLocacao(loc.getDataLocacao());
         dto.setDataPrevistaDevolucao(loc.getDataPrevistaDevolucao());
         dto.setDataEfetivaDevolucao(loc.getDataEfetivaDevolucao());
@@ -169,6 +191,7 @@ public class LocacaoService {
         dto.setMultaCentavos(loc.getMultaCentavos());
         dto.setPaga(loc.isPaga());
         dto.setCancelada(loc.isCancelada());
+
         return dto;
     }
 }
