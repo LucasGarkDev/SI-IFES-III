@@ -10,6 +10,10 @@ public class LocacaoDTO {
     private Long id;
     private Long clienteId;
     private Long itemId;
+    
+    private ClienteDTO cliente; // <—
+    private ItemDTO item; 
+    
     private LocalDate dataLocacao;
     private LocalDate dataPrevistaDevolucao;
     private LocalDate dataEfetivaDevolucao;
@@ -39,5 +43,23 @@ public class LocacaoDTO {
     public void setPaga(Boolean paga) { this.paga = paga; }
     public Boolean getCancelada() { return cancelada; }
     public void setCancelada(Boolean cancelada) { this.cancelada = cancelada; }
+
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    public ItemDTO getItem() {
+        return item;
+    }
+
+    public void setItem(ItemDTO item) {
+        this.item = item;
+    }
+    
+    
 }
 

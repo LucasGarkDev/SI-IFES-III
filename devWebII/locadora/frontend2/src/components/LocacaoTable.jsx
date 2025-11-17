@@ -35,7 +35,7 @@ function LocacaoTable({ locacoes, onEdit, onDelete, onDevolver }) {
               <td>{l.cliente?.nome || `Cliente #${l.clienteId}`}</td>
               <td>
                 {l.item
-                  ? `${l.item.numSerie} (${l.item.tipoItem})`
+                  ? `${l.item.numSerie} (${l.item.tituloNome})`
                   : `Item #${l.itemId}`}
               </td>
               <td>{l.dataLocacao}</td>
