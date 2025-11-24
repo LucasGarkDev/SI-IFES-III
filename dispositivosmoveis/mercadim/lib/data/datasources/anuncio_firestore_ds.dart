@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../core/exceptions/app_exception.dart';
 import '../models/anuncio_model.dart';
 import 'anuncio_remote_data_source.dart';
+import '../../domain/entities/anuncio.dart';
+
 
 class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
   final FirebaseFirestore firestore;
@@ -109,4 +111,14 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
       throw AppException('Erro ao filtrar anúncios: $e');
     }
   }
+
+  Future<Anuncio?> obterPorId(String id) async {
+    final doc = await firestore.collection("anuncios").doc(id).get();
+
+    if (!doc.exists) return null;
+
+    final data = doc.data()!;
+    return Anuncio.fromMap(doc.id, data);
+  }
+
 }

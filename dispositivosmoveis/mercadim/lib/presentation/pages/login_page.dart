@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../core/providers/usecase_providers.dart';
+import '../widgets/app_input.dart';
+import '../widgets/app_button.dart';
+import '../widgets/mercadim_page.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -19,68 +23,93 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final authVM = ref.watch(authViewModelProvider);
     final state = authVM.state;
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _form,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _email,
-                decoration: const InputDecoration(labelText: 'E-mail'),
-                validator: (v) =>
-                    v == null || v.isEmpty ? 'Informe o e-mail' : null,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _pass,
-                decoration: const InputDecoration(labelText: 'Senha'),
-                obscureText: true,
-                validator: (v) =>
-                    v == null || v.length < 4 ? 'Senha inválida' : null,
-              ),
-              const SizedBox(height: 20),
-              if (state.error != null)
-                Text(state.error!, style: const TextStyle(color: Colors.red)),
-              FilledButton(
-                onPressed: state.loading
-                    ? null
-                    : () async {
-                        if (!(_form.currentState?.validate() ?? false)) return;
+    return MercadimPage(
+      title: "Login",
+      child: Form(
+        key: _form,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ============================
+            // ✏ CAMPOS
+            // ============================
+            AppInput(
+              label: "E-mail",
+              controller: _email,
+              type: TextInputType.emailAddress,
+              validator: (v) =>
+                  v == null || v.isEmpty ? "Informe o e-mail" : null,
+            ),
+            const SizedBox(height: 16),
 
-                        final user = await authVM.login(
-                          _email.text.trim(),
-                          _pass.text,
+            AppInput(
+              label: "Senha",
+              controller: _pass,
+              obscure: true,
+              validator: (v) =>
+                  v == null || v.length < 4 ? "Senha inválida" : null,
+            ),
+
+            const SizedBox(height: 20),
+
+            // ============================
+            // ❗ ERRO GLOBAL
+            // ============================
+            if (state.error != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  state.error!,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+
+            // ============================
+            // 🟢 BOTÃO ENTRAR
+            // ============================
+            AppButton(
+              label: "Entrar",
+              loading: state.loading,
+              onPressed: state.loading
+                  ? null
+                  : () async {
+                      if (!(_form.currentState?.validate() ?? false)) return;
+
+                      final user = await authVM.login(
+                        _email.text.trim(),
+                        _pass.text,
+                      );
+
+                      if (user != null && mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Bem-vindo de volta, ${user.name}!"),
+                          ),
                         );
+                        Navigator.pushReplacementNamed(context, '/feed');
+                      }
+                    },
+            ),
 
-                        if (user != null && mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  'Bem-vindo de volta, ${user.name}!'),
-                            ),
-                          );
-                          Navigator.pushReplacementNamed(context, '/feed');
-                        }
-                      },
-                child: state.loading
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(),
-                      )
-                    : const Text('Entrar'),
-              ),
-              const SizedBox(height: 16),
-              TextButton(
+            const SizedBox(height: 16),
+
+            // ============================
+            // 🧾 BOTÃO "CRIAR CONTA"
+            // ============================
+            Center(
+              child: TextButton(
                 onPressed: () => Navigator.pushNamed(context, '/signup'),
-                child: const Text('Criar conta'),
+                child: const Text(
+                  'Criar conta',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

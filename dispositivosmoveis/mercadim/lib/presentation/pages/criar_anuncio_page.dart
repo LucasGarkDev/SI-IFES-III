@@ -8,9 +8,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../core/providers/usecase_providers.dart';
 import '../../core/services/image_upload_service.dart';
-import '../../core/services/geofire_service.dart'; // ✅ novo
+import '../../core/services/geofire_service.dart';
+
 import '../viewmodels/criar_anuncio_viewmodel.dart';
 import '../../domain/entities/anuncio.dart';
+import '../widgets/app_input.dart';
 
 class CriarAnuncioPage extends ConsumerStatefulWidget {
   final String usuarioId;
@@ -22,22 +24,29 @@ class CriarAnuncioPage extends ConsumerStatefulWidget {
 
 class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
   final _form = GlobalKey<FormState>();
+
   final _titulo = TextEditingController();
   final _descricao = TextEditingController();
   final _preco = TextEditingController();
   final _categoria = TextEditingController();
   final _cidade = TextEditingController();
   final _bairro = TextEditingController();
-  bool _btnLoading = false;
 
   File? _imagemSelecionada;
+  bool _btnLoading = false;
+
   final _imageService = ImageUploadService();
-  final _geoService = GeoFireService(FirebaseFirestore.instance); // ✅ instância
+  late final GeoFireService _geoService;
+
+  @override
+  void initState() {
+    super.initState();
+    _geoService = GeoFireService(FirebaseFirestore.instance);
+  }
 
   Future<void> _selecionarImagem() async {
     try {
-      final picker = ImagePicker();
-      final picked = await picker.pickImage(source: ImageSource.gallery);
+      final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (picked != null) {
         setState(() => _imagemSelecionada = File(picked.path));
       }
@@ -58,21 +67,20 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
         return null;
       }
 
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
+      LocationPermission perm = await Geolocator.checkPermission();
+      if (perm == LocationPermission.denied) {
+        perm = await Geolocator.requestPermission();
+        if (perm == LocationPermission.denied) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Permissão de localização negada.')),
+            const SnackBar(content: Text('Permissão negada.')),
           );
           return null;
         }
       }
 
-      if (permission == LocationPermission.deniedForever) {
+      if (perm == LocationPermission.deniedForever) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Permissão permanente de localização negada.')),
+          const SnackBar(content: Text('Permissão negada permanentemente.')),
         );
         return null;
       }
@@ -90,59 +98,84 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
 
   @override
   Widget build(BuildContext context) {
-    final criarAnuncioUC = ref.read(criarAnuncioProvider);
-    final vm = CriarAnuncioViewModel(criarAnuncioUC);
+    final criarUC = ref.read(criarAnuncioProvider);
+    final vm = CriarAnuncioViewModel(criarUC);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Novo Anúncio')),
+      appBar: AppBar(
+        title: const Text("Novo Anúncio"),
+        centerTitle: true,
+      ),
       body: AnimatedBuilder(
         animation: vm,
-        builder: (context, _) {
+        builder: (_, __) {
           return Padding(
             padding: const EdgeInsets.all(16),
             child: Form(
               key: _form,
               child: ListView(
                 children: [
-                  TextFormField(
+                  // ===========================
+                  // CAMPOS DE TEXTO
+                  // ===========================
+                  AppInput(
+                    label: "Título",
                     controller: _titulo,
-                    decoration: const InputDecoration(labelText: 'Título'),
+                    icon: const Icon(Icons.title),
                     validator: vm.validateTitulo,
                   ),
-                  TextFormField(
+                  const SizedBox(height: 16),
+
+                  AppInput(
+                    label: "Descrição",
                     controller: _descricao,
-                    decoration: const InputDecoration(labelText: 'Descrição'),
+                    icon: const Icon(Icons.description_outlined),
+                    type: TextInputType.multiline,
                   ),
-                  TextFormField(
+                  const SizedBox(height: 16),
+
+                  AppInput(
+                    label: "Preço (R\$)",
                     controller: _preco,
-                    decoration: const InputDecoration(labelText: 'Preço (R\$)'),
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
+                    icon: const Icon(Icons.monetization_on_outlined),
+                    type: const TextInputType.numberWithOptions(decimal: true),
+                    validator: vm.validatePreco,
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
                     ],
-                    validator: vm.validatePreco,
                   ),
-                  TextFormField(
-                    controller: _categoria,
-                    decoration: const InputDecoration(labelText: 'Categoria'),
-                  ),
-                  TextFormField(
-                    controller: _cidade,
-                    decoration: const InputDecoration(labelText: 'Cidade'),
-                  ),
-                  TextFormField(
-                    controller: _bairro,
-                    decoration: const InputDecoration(labelText: 'Bairro'),
-                  ),
-
                   const SizedBox(height: 16),
 
+                  AppInput(
+                    label: "Categoria",
+                    controller: _categoria,
+                    icon: const Icon(Icons.category_outlined),
+                  ),
+                  const SizedBox(height: 16),
+
+                  AppInput(
+                    label: "Cidade",
+                    controller: _cidade,
+                    icon: const Icon(Icons.location_city),
+                  ),
+                  const SizedBox(height: 16),
+
+                  AppInput(
+                    label: "Bairro",
+                    controller: _bairro,
+                    icon: const Icon(Icons.place_outlined),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // ===========================
+                  // IMAGEM DO ANÚNCIO
+                  // ===========================
                   Text(
-                    'Imagem principal',
+                    "Imagem principal",
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8),
+
                   GestureDetector(
                     onTap: _selecionarImagem,
                     child: Container(
@@ -152,117 +185,116 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: Colors.green.shade200),
                       ),
-                      child: _imagemSelecionada != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.file(
-                                _imagemSelecionada!,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                              ),
-                            )
-                          : Center(
+                      child: _imagemSelecionada == null
+                          ? Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.image_outlined,
-                                      size: 40, color: Colors.green),
+                                  const Icon(Icons.image, size: 42, color: Colors.green),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'Selecionar imagem da galeria',
+                                    "Selecionar imagem",
                                     style: TextStyle(
                                       color: Colors.green.shade700,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
+                              ),
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.file(
+                                _imagemSelecionada!,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
                               ),
                             ),
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
 
                   if (vm.state.error != null)
-                    Text(vm.state.error!,
-                        style: const TextStyle(color: Colors.red)),
+                    Text(vm.state.error!, style: const TextStyle(color: Colors.red)),
 
+                  // ===========================
+                  // BOTÃO PUBLICAR
+                  // ===========================
                   FilledButton(
-                    onPressed: (_btnLoading || vm.state.loading)
+                    onPressed: (vm.state.loading || _btnLoading)
                         ? null
                         : () async {
                             setState(() => _btnLoading = true);
 
-                            try {
-                              if (!(_form.currentState?.validate() ?? false)) {
-                                setState(() => _btnLoading = false);
-                                return;
-                              }
+                            if (!(_form.currentState?.validate() ?? false)) {
+                              setState(() => _btnLoading = false);
+                              return;
+                            }
 
-                              final precoValor =
-                                  double.tryParse(_preco.text.replaceAll(',', '.')) ?? 0.0;
+                            final precoValor =
+                                double.tryParse(_preco.text.replaceAll(',', '.')) ?? 0.0;
 
-                              // Upload da imagem
-                              String imageUrl = '';
-                              if (_imagemSelecionada != null) {
-                                final uploadedUrl =
-                                    await _imageService.pickAndUploadImage(widget.usuarioId);
-                                if (uploadedUrl != null) imageUrl = uploadedUrl;
-                              }
+                            // upload da imagem
+                            String imageUrl = "";
+                            if (_imagemSelecionada != null) {
+                              final url = await _imageService.pickAndUploadImage(
+                                widget.usuarioId,
+                              );
+                              if (url != null) imageUrl = url;
+                            }
 
-                              // Localização
-                              final pos = await _obterLocalizacao();
-                              if (pos == null) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content:
-                                        Text('Não foi possível obter sua localização.'),
-                                  ),
-                                );
-                                setState(() => _btnLoading = false);
-                                return;
-                              }
+                            // localização
+                            final pos = await _obterLocalizacao();
+                            if (pos == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      "Não foi possível obter sua localização."),
+                                ),
+                              );
+                              setState(() => _btnLoading = false);
+                              return;
+                            }
 
-                              // Cria objeto
-                              final anuncio = Anuncio(
-                                id: '',
-                                titulo: _titulo.text.trim(),
-                                descricao: _descricao.text.trim(),
-                                preco: precoValor,
-                                categoria: _categoria.text.trim(),
-                                cidade: _cidade.text.trim(),
-                                bairro: _bairro.text.trim(),
-                                dataCriacao: DateTime.now(),
-                                imagemPrincipalUrl: imageUrl,
-                                usuarioId: widget.usuarioId,
-                                destaque: false,
-                                imagens: [],
+                            final anuncio = Anuncio(
+                              id: "",
+                              titulo: _titulo.text.trim(),
+                              descricao: _descricao.text.trim(),
+                              preco: precoValor,
+                              categoria: _categoria.text.trim(),
+                              cidade: _cidade.text.trim(),
+                              bairro: _bairro.text.trim(),
+                              dataCriacao: DateTime.now(),
+                              imagemPrincipalUrl: imageUrl,
+                              usuarioId: widget.usuarioId,
+                              destaque: false,
+                              imagens: [],
+                            );
+
+                            final created = await vm.submit(anuncio);
+
+                            if (created != null && mounted) {
+                              await _geoService.salvarLocalizacaoAnuncio(
+                                anuncioId: created.id,
+                                latitude: pos.latitude,
+                                longitude: pos.longitude,
                               );
 
-                              final created = await vm.submit(anuncio);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Anúncio criado com sucesso!'),
+                                ),
+                              );
 
-                              if (created != null && mounted) {
-                                // salva localização
-                                await _geoService.salvarLocalizacaoAnuncio(
-                                  anuncioId: created.id,
-                                  latitude: pos.latitude,
-                                  longitude: pos.longitude,
-                                );
-
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Anúncio criado com sucesso!'),
-                                  ),
-                                );
-
-                                Navigator.pop(context, created);
-                              }
-                            } finally {
-                              if (mounted) setState(() => _btnLoading = false);
+                              Navigator.pop(context, created);
                             }
+
+                            setState(() => _btnLoading = false);
                           },
                     child: (vm.state.loading || _btnLoading)
                         ? const CircularProgressIndicator()
-                        : const Text('Publicar'),
+                        : const Text("Publicar"),
                   ),
                 ],
               ),

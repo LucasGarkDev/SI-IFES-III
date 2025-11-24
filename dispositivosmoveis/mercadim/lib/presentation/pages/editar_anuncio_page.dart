@@ -5,9 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../core/providers/usecase_providers.dart';
-import '../../core/services/image_upload_service.dart'; // ✅ import do serviço
+import '../../core/services/image_upload_service.dart';
 import '../viewmodels/editar_anuncio_viewmodel.dart';
 import '../../domain/entities/anuncio.dart';
+
+// novos widgets
+import '../widgets/mercadim_page.dart';
+import '../widgets/app_input.dart';
+import '../widgets/app_button.dart';
+import '../widgets/mercadim_card.dart';
 
 class EditarAnuncioPage extends ConsumerStatefulWidget {
   final Anuncio anuncio;
@@ -19,6 +25,7 @@ class EditarAnuncioPage extends ConsumerStatefulWidget {
 
 class _EditarAnuncioPageState extends ConsumerState<EditarAnuncioPage> {
   final _form = GlobalKey<FormState>();
+
   late TextEditingController _titulo;
   late TextEditingController _descricao;
   late TextEditingController _preco;
@@ -28,6 +35,7 @@ class _EditarAnuncioPageState extends ConsumerState<EditarAnuncioPage> {
 
   File? _novaImagemSelecionada;
   late String _imagemAtualUrl;
+
   final _imageService = ImageUploadService();
 
   @override
@@ -51,7 +59,7 @@ class _EditarAnuncioPageState extends ConsumerState<EditarAnuncioPage> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao selecionar imagem: $e')),
+        SnackBar(content: Text("Erro ao selecionar imagem: $e")),
       );
     }
   }
@@ -61,167 +69,192 @@ class _EditarAnuncioPageState extends ConsumerState<EditarAnuncioPage> {
     final editarAnuncioUC = ref.read(editarAnuncioProvider);
     final vm = EditarAnuncioViewModel(editarAnuncioUC);
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Editar Anúncio')),
-      body: AnimatedBuilder(
+    return MercadimPage(
+      title: "Editar Anúncio",
+      scrollable: true,
+      child: AnimatedBuilder(
         animation: vm,
         builder: (context, _) {
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: Form(
-              key: _form,
-              child: ListView(
-                children: [
-                  TextFormField(
-                    controller: _titulo,
-                    decoration: const InputDecoration(labelText: 'Título'),
-                    validator: vm.validateTitulo,
-                  ),
-                  TextFormField(
-                    controller: _descricao,
-                    decoration: const InputDecoration(labelText: 'Descrição'),
-                  ),
-                  TextFormField(
-                    controller: _preco,
-                    decoration: const InputDecoration(labelText: 'Preço (R\$)'),
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
-                    ],
-                    validator: vm.validatePreco,
-                  ),
-                  TextFormField(
-                    controller: _categoria,
-                    decoration: const InputDecoration(labelText: 'Categoria'),
-                  ),
-                  TextFormField(
-                    controller: _cidade,
-                    decoration: const InputDecoration(labelText: 'Cidade'),
-                  ),
-                  TextFormField(
-                    controller: _bairro,
-                    decoration: const InputDecoration(labelText: 'Bairro'),
-                  ),
+          return Form(
+            key: _form,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // ===============================
+                // ✏ CAMPOS DO ANÚNCIO
+                // ===============================
+                AppInput(
+                  label: "Título",
+                  controller: _titulo,
+                  validator: vm.validateTitulo,
+                ),
+                const SizedBox(height: 14),
 
-                  const SizedBox(height: 20),
+                AppInput(
+                  label: "Descrição",
+                  controller: _descricao,
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 14),
 
-                  // ========== IMAGEM ATUAL E NOVA ==========
-                  Text(
-                    'Imagem principal',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
+                AppInput(
+                  label: "Preço (R\$)",
+                  controller: _preco,
+                  type: const TextInputType.numberWithOptions(decimal: true),
+                  validator: vm.validatePreco,
+                ),
+                const SizedBox(height: 14),
 
-                  // ✅ Preview da imagem atual ou nova
-                  Container(
-                    height: 180,
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade50,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.green.shade200),
-                    ),
-                    child: _novaImagemSelecionada != null
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.file(
+                AppInput(
+                  label: "Categoria",
+                  controller: _categoria,
+                ),
+                const SizedBox(height: 14),
+
+                AppInput(
+                  label: "Cidade",
+                  controller: _cidade,
+                ),
+                const SizedBox(height: 14),
+
+                AppInput(
+                  label: "Bairro",
+                  controller: _bairro,
+                ),
+                const SizedBox(height: 20),
+
+                // ===============================
+                // 🖼 SEÇÃO DE IMAGENS
+                // ===============================
+                Text(
+                  "Imagem principal",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 10),
+
+                MercadimCard(
+                  padding: EdgeInsets.zero,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      height: 200,
+                      color: Colors.grey.shade200,
+                      child: _novaImagemSelecionada != null
+                          ? Image.file(
                               _novaImagemSelecionada!,
                               fit: BoxFit.cover,
                               width: double.infinity,
-                            ),
-                          )
-                        : (_imagemAtualUrl.isNotEmpty
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.network(
+                            )
+                          : (_imagemAtualUrl.isNotEmpty
+                              ? Image.network(
                                   _imagemAtualUrl,
                                   fit: BoxFit.cover,
                                   width: double.infinity,
-                                  errorBuilder: (_, __, ___) => Image.asset(
-                                    'assets/images/no_image.png',
-                                    fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) =>
+                                      Image.asset("assets/images/no_image.png"),
+                                )
+                              : Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.image_outlined,
+                                          size: 42,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        "Nenhuma imagem definida",
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              )
-                            : Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.image_outlined,
-                                        size: 40, color: Colors.green),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      'Nenhuma imagem definida',
-                                      style: TextStyle(
-                                          color: Colors.green.shade700),
-                                    ),
-                                  ],
-                                ),
-                              )),
+                                )),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                AppButton(
+                  icon: Icons.photo_camera_outlined,
+                  label: "Selecionar nova imagem",
+                  color: Theme.of(context).colorScheme.secondary,
+                  textColor: Theme.of(context).colorScheme.onSecondary,
+                  onPressed: _selecionarNovaImagem,
+                ),
+
+                const SizedBox(height: 20),
+
+                // ===============================
+                // ❗ ERRO GLOBAL
+                // ===============================
+                if (vm.state.error != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      vm.state.error!,
+                      style: const TextStyle(color: Colors.red),
+                    ),
                   ),
 
-                  const SizedBox(height: 8),
+                // ===============================
+                // 💾 BOTÃO SALVAR
+                // ===============================
+                AppButton(
+                  label: "Salvar Alterações",
+                  loading: vm.state.loading,
+                  icon: Icons.save_outlined,
+                  onPressed: vm.state.loading
+                      ? null
+                      : () async {
+                          if (!(_form.currentState?.validate() ?? false)) {
+                            return;
+                          }
 
-                  OutlinedButton.icon(
-                    icon: const Icon(Icons.photo_camera),
-                    label: const Text('Selecionar nova imagem'),
-                    onPressed: _selecionarNovaImagem,
-                  ),
+                          double precoValor =
+                              double.tryParse(_preco.text.replaceAll(',', '.')) ??
+                                  0.0;
 
-                  const SizedBox(height: 20),
+                          String imagemFinal = _imagemAtualUrl;
 
-                  if (vm.state.error != null)
-                    Text(vm.state.error!,
-                        style: const TextStyle(color: Colors.red)),
-
-                  FilledButton(
-                    onPressed: vm.state.loading
-                        ? null
-                        : () async {
-                            if (!(_form.currentState?.validate() ?? false)) {
-                              return;
-                            }
-
-                            double precoValor =
-                                double.tryParse(_preco.text.replaceAll(',', '.')) ??
-                                    0.0;
-
-                            // ✅ Upload da nova imagem (se houver)
-                            String imagemFinal = _imagemAtualUrl;
-                            if (_novaImagemSelecionada != null) {
-                              final url = await _imageService.pickAndUploadImage(
-                                widget.anuncio.usuarioId,
-                              );
-                              if (url != null) imagemFinal = url;
-                            }
-
-                            final updated = await vm.submit(
-                              widget.anuncio.copyWith(
-                                titulo: _titulo.text.trim(),
-                                descricao: _descricao.text.trim(),
-                                preco: precoValor,
-                                categoria: _categoria.text.trim(),
-                                cidade: _cidade.text.trim(),
-                                bairro: _bairro.text.trim(),
-                                imagemPrincipalUrl: imagemFinal,
-                              ),
+                          if (_novaImagemSelecionada != null) {
+                            final url =
+                                await _imageService.pickAndUploadImage(
+                              widget.anuncio.usuarioId,
                             );
+                            if (url != null) imagemFinal = url;
+                          }
 
-                            if (updated != null && mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        'Anúncio atualizado com sucesso!')),
-                              );
-                              Navigator.pop(context, updated);
-                            }
-                          },
-                    child: vm.state.loading
-                        ? const CircularProgressIndicator()
-                        : const Text('Salvar Alterações'),
-                  ),
-                ],
-              ),
+                          final updated = await vm.submit(
+                            widget.anuncio.copyWith(
+                              titulo: _titulo.text.trim(),
+                              descricao: _descricao.text.trim(),
+                              preco: precoValor,
+                              categoria: _categoria.text.trim(),
+                              cidade: _cidade.text.trim(),
+                              bairro: _bairro.text.trim(),
+                              imagemPrincipalUrl: imagemFinal,
+                            ),
+                          );
+
+                          if (updated != null && mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text("Anúncio atualizado com sucesso!")),
+                            );
+                            Navigator.pop(context, updated);
+                          }
+                        },
+                ),
+
+                const SizedBox(height: 20),
+              ],
             ),
           );
         },
