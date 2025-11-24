@@ -5,6 +5,7 @@ abstract class AnuncioRemoteDataSource {
   Future<AnuncioModel> criarAnuncio(AnuncioModel anuncio);
   Future<AnuncioModel> editarAnuncio(AnuncioModel anuncio);
   Future<void> excluirAnuncio(String id);
+  
 
   // (opcionais, caso você já use)
   Future<List<AnuncioModel>> buscarPorTitulo(String titulo) async =>
@@ -17,6 +18,8 @@ abstract class AnuncioRemoteDataSource {
     double? userLat,
     double? userLng,
   }) async => Future.value(<AnuncioModel>[]);
+
+  Future<AnuncioModel?> obterPorId(String id);
 }
 
 

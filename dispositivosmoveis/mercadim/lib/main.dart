@@ -6,10 +6,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'presentation/pages/feed_page.dart';
 import 'presentation/pages/signup_page.dart';
-import 'presentation/pages/login_page.dart';        // ✅
+import 'presentation/pages/login_page.dart';
 import 'presentation/pages/favoritos_page.dart';
 import 'presentation/pages/filtro_page.dart';
 import 'presentation/pages/buscar_anuncios_page.dart';
+
+// 👇 IMPORTANTE: importe o novo tema
+import 'presentation/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,10 +30,13 @@ class MercadimApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mercadim',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.green),
-      initialRoute: '/login',                       // ✅ começa no login
+
+      // 👇 AQUI A MÁGICA: usamos o tema completo do Mercadim
+      theme: AppTheme.light,
+
+      initialRoute: '/login',
       routes: {
-        '/login': (_) => const LoginPage(),        // ✅ nova rota
+        '/login': (_) => const LoginPage(),
         '/signup': (_) => const SignUpPage(),
         '/feed': (_) => const FeedPage(),
         '/favoritos': (_) => const FavoritosPage(usuarioId: 'u_atual'),

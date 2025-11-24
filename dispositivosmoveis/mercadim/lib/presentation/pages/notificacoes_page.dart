@@ -2,8 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../widgets/mercadim_page.dart';
+import '../widgets/mercadim_card.dart';
+
 class NotificacoesPage extends ConsumerStatefulWidget {
   final String usuarioId;
+
   const NotificacoesPage({super.key, required this.usuarioId});
 
   @override
@@ -40,41 +44,86 @@ class _NotificacoesPageState extends ConsumerState<NotificacoesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Notificações'),
-      ),
-      body: _notificacoes.isEmpty
-          ? const Center(
-              child: Text('Nenhuma notificação no momento.'),
+    return MercadimPage(
+      title: "Notificações",
+
+      // Como a lista é longa, o MercadimPage usará scroll automático por padrão.
+      child: _notificacoes.isEmpty
+          ? const Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: Center(
+                child: Text(
+                  'Nenhuma notificação no momento.',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
             )
-          : ListView.separated(
-              itemCount: _notificacoes.length,
-              separatorBuilder: (_, __) => const Divider(height: 0),
-              itemBuilder: (context, index) {
-                final notif = _notificacoes[index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: notif['cor'].withOpacity(0.2),
-                    child: Icon(notif['icone'], color: notif['cor']),
-                  ),
-                  title: Text(
-                    notif['titulo'],
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(notif['descricao']),
-                  trailing: Text(
-                    notif['hora'],
-                    style: const TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
+          : Column(
+              children: _notificacoes.map((notif) {
+                return MercadimCard(
+                  padding: const EdgeInsets.all(14),
                   onTap: () {
-                    // 🔜 Futuramente: abrir conversa, anúncio ou tela específica
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Abrindo: ${notif['titulo']}')),
+                      SnackBar(
+                        content: Text('Abrindo: ${notif['titulo']}'),
+                        duration: const Duration(milliseconds: 900),
+                      ),
                     );
                   },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // ÍCONE 🔵🟢🟠
+                      CircleAvatar(
+                        radius: 22,
+                        backgroundColor:
+                            (notif['cor'] as Color).withOpacity(0.15),
+                        child: Icon(
+                          notif['icone'],
+                          color: notif['cor'],
+                          size: 22,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+
+                      // Texto (Título + descrição)
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              notif['titulo'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              notif['descricao'],
+                              style: const TextStyle(
+                                color: Colors.black54,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(width: 12),
+
+                      // Horário
+                      Text(
+                        notif['hora'],
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
                 );
-              },
+              }).toList(),
             ),
     );
   }

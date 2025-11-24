@@ -27,18 +27,23 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     final enviarUC = ref.read(enviarMensagemProvider);
     final vm = ChatViewModel(enviarUC);
 
-    // ✅ Corrigido: identifica o outro usuário corretamente
+    // Identifica o outro usuário
     final outroUsuarioId = widget.conversa.usuario1Id == widget.usuarioAtualId
         ? widget.conversa.usuario2Id
         : widget.conversa.usuario1Id;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+
       appBar: AppBar(
+        elevation: 1,
+        centerTitle: false,
         title: FutureBuilder(
           future: ref.read(userRepositoryProvider).getById(outroUsuarioId),
           builder: (context, snapshot) {
             final nome = snapshot.data?.name ?? 'Usuário';
             final foto = snapshot.data?.photoUrl ?? '';
+
             return Row(
               children: [
                 CircleAvatar(
@@ -48,40 +53,66 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                       : const AssetImage('assets/images/user_placeholder.png')
                           as ImageProvider,
                 ),
-                const SizedBox(width: 8),
-                Text(nome),
+                const SizedBox(width: 10),
+                Text(
+                  nome,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             );
           },
         ),
       ),
+
       body: Column(
         children: [
+          // =============================
+          // LISTA DE MENSAGENS
+          // =============================
           Expanded(
             child: AnimatedBuilder(
               animation: vm,
               builder: (context, _) {
                 return ListView.builder(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                  reverse: false,
                   itemCount: vm.state.mensagens.length,
                   itemBuilder: (context, i) {
                     final msg = vm.state.mensagens[i];
                     final isMine = msg.remetenteId == widget.usuarioAtualId;
 
                     return Align(
-                      alignment:
-                          isMine ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: isMine
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Container(
-                        margin:
-                            const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.symmetric(vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 10),
                         decoration: BoxDecoration(
                           color: isMine
-                              ? Colors.green.shade100
-                              : Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(10),
+                              ? Colors.green.shade200
+                              : Colors.grey.shade300,
+                          borderRadius: BorderRadius.only(
+                            topLeft: const Radius.circular(12),
+                            topRight: const Radius.circular(12),
+                            bottomLeft: isMine
+                                ? const Radius.circular(12)
+                                : const Radius.circular(0),
+                            bottomRight: isMine
+                                ? const Radius.circular(0)
+                                : const Radius.circular(12),
+                          ),
                         ),
-                        child: Text(msg.conteudo),
+                        child: Text(
+                          msg.conteudo,
+                          style: TextStyle(
+                            color: Colors.grey.shade900,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
                     );
                   },
@@ -89,22 +120,58 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               },
             ),
           ),
+
+          // =============================
+          // CAIXA DE DIGITAÇÃO
+          // =============================
           Container(
-            color: Colors.green.shade50,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 6,
+                  offset: const Offset(0, -2),
+                ),
+              ],
+            ),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _controller,
-                    decoration: const InputDecoration(
+                    maxLines: 4,
+                    minLines: 1,
+                    decoration: InputDecoration(
                       hintText: 'Digite uma mensagem...',
-                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 10,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade300,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: const BorderSide(
+                          color: Colors.green,
+                          width: 1.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
+                const SizedBox(width: 8),
                 IconButton(
-                  icon: const Icon(Icons.send, color: Colors.green),
+                  icon: const Icon(Icons.send),
+                  color: Colors.green.shade800,
+                  iconSize: 28,
                   onPressed: () {
                     final text = _controller.text.trim();
                     if (text.isNotEmpty) {

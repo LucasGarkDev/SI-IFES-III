@@ -10,6 +10,10 @@ import '../../data/datasources/anuncio_firestore_ds.dart';
 import '../../data/repositories/anuncio_repository_impl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// ====== Favoritos ViewModel Global ======
+import '../../presentation/viewmodels/favorito_viewmodel.dart';
+import '../../data/datasources/favorito_firestore_ds.dart';
+import '../../data/repositories/favorito_repository_impl.dart';
 
 // ====== Auth ======
 import '../../domain/usecases/login_user.dart';
@@ -122,9 +126,13 @@ final enviarMensagemProvider =
     Provider((ref) => EnviarMensagem(ref.read(_chatRepositoryProvider)));
 
 // ====== Favoritos ======
-final _favoritoLocalDSProvider = Provider((ref) => FavoritoLocalDataSource());
-final _favoritoRepositoryProvider =
-    Provider((ref) => FavoritoRepositoryImpl(ref.read(_favoritoLocalDSProvider)));
+final _favoritoDSProvider = Provider(
+  (ref) => FavoritoFirestoreDataSource(FirebaseFirestore.instance),
+);
+
+final _favoritoRepositoryProvider = Provider(
+  (ref) => FavoritoRepositoryImpl(ref.read(_favoritoDSProvider)),
+);
 
 final toggleFavoritoProvider =
     Provider((ref) => ToggleFavorito(ref.read(_favoritoRepositoryProvider)));
@@ -157,4 +165,10 @@ final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
     ref.read(entrarComoVisitanteProvider),
     ref.read(loginUserProvider),
   );
+});
+
+final favoritoViewModelProvider =
+    ChangeNotifierProvider.family<FavoritoViewModel, String>((ref, userId) {
+  final toggleUC = ref.read(toggleFavoritoProvider);
+  return FavoritoViewModel(toggleUC, userId);
 });

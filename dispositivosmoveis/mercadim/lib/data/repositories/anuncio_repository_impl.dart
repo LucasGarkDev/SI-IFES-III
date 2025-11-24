@@ -59,4 +59,9 @@ class AnuncioRepositoryImpl implements AnuncioRepository {
     return models.map((m) => m.toEntity()).toList();
   }
 
+  @override
+  Future<Anuncio?> obterPorId(String id) {
+    return ds.obterPorId(id);
+  }
+
 }

@@ -8,11 +8,17 @@ import '../viewmodels/favorito_viewmodel.dart';
 import '../pages/editar_anuncio_page.dart';
 import '../viewmodels/feed_viewmodel.dart';
 import '../viewmodels/excluir_anuncio_viewmodel.dart';
+import 'mercadim_card.dart';
 
 class AnuncioCard extends ConsumerWidget {
   final Anuncio anuncio;
+  final VoidCallback? onTap;   // ⭐ ADICIONADO
 
-  const AnuncioCard({super.key, required this.anuncio});
+  const AnuncioCard({
+    super.key,
+    required this.anuncio,
+    this.onTap,               // ⭐ ADICIONADO
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,34 +26,33 @@ class AnuncioCard extends ConsumerWidget {
     final usuario = auth.state.user;
     final isAutor = usuario != null && usuario.id == anuncio.usuarioId;
 
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      elevation: 3,
-      color: Colors.green.shade50,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+    return MercadimCard(
+      padding: EdgeInsets.zero,
+      onTap: onTap,   // ⭐ PASSANDO PARA O MERCADIMCARD
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ========= IMAGEM PRINCIPAL =========
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: anuncio.imagemPrincipalUrl.isNotEmpty
                 ? Image.network(
                     anuncio.imagemPrincipalUrl,
                     height: 180,
                     width: double.infinity,
                     fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
+                    loadingBuilder: (context, child, progress) {
+                      if (progress == null) return child;
                       return Container(
                         height: 180,
                         color: Colors.grey.shade200,
                         child: const Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(strokeWidth: 2),
                         ),
                       );
                     },
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                    errorBuilder: (_, __, ___) => Image.asset(
                       'assets/images/no_image.png',
                       height: 180,
                       width: double.infinity,
@@ -63,118 +68,132 @@ class AnuncioCard extends ConsumerWidget {
           ),
 
           // ========= CABEÇALHO =========
-          ListTile(
-            title: Text(
-              anuncio.titulo,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(
-              'R\$ ${anuncio.preco.toStringAsFixed(2)} • ${anuncio.bairro}',
-              style: const TextStyle(color: Colors.black54),
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (anuncio.destaque)
-                  const Icon(Icons.star, color: Colors.amber),
-
-                // ✅ Botões visíveis apenas se o usuário for o autor
-                if (isAutor) ...[
-                  // ✏️ Editar
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blueGrey),
-                    tooltip: 'Editar anúncio',
-                    onPressed: () async {
-                      final updated = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => EditarAnuncioPage(anuncio: anuncio),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        anuncio.titulo,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
                         ),
-                      );
-
-                      if (updated != null && context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Anúncio atualizado com sucesso!'),
-                          ),
-                        );
-                        ref
-                            .read(feedViewModelProvider.notifier)
-                            .carregarAnuncios('');
-                      }
-                    },
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'R\$ ${anuncio.preco.toStringAsFixed(2)} • ${anuncio.bairro}',
+                        style: const TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
                   ),
+                ),
 
-                  // 🗑️ Excluir
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.redAccent),
-                    tooltip: 'Excluir anúncio',
-                    onPressed: () async {
-                      final confirmar = await showDialog<bool>(
-                        context: context,
-                        builder: (ctx) => AlertDialog(
-                          title: const Text('Excluir anúncio'),
-                          content: const Text(
-                              'Tem certeza de que deseja excluir este anúncio?'),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(ctx, false),
-                              child: const Text('Cancelar'),
-                            ),
-                            FilledButton(
-                              onPressed: () => Navigator.pop(ctx, true),
-                              child: const Text('Excluir'),
-                            ),
-                          ],
-                        ),
-                      );
+                Row(
+                  children: [
+                    if (anuncio.destaque)
+                      const Icon(Icons.star, color: Colors.amber),
 
-                      if (confirmar == true) {
-                        final excluirUC = ref.read(excluirAnuncioProvider);
-                        final vm = ExcluirAnuncioViewModel(excluirUC);
-                        final ok = await vm.submit(anuncio.id);
-
-                        if (ok && context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content:
-                                    Text('Anúncio excluído com sucesso!')),
-                          );
-                          ref
-                              .read(feedViewModelProvider.notifier)
-                              .carregarAnuncios('');
-                        } else if (vm.state.error != null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:
-                                  Text('Erro ao excluir: ${vm.state.error!}'),
+                    if (isAutor) ...[
+                      IconButton(
+                        visualDensity: VisualDensity.compact,
+                        icon: const Icon(Icons.edit, size: 20, color: Colors.blueGrey),
+                        onPressed: () async {
+                          final updated = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => EditarAnuncioPage(anuncio: anuncio),
                             ),
                           );
-                        }
-                      }
-                    },
-                  ),
-                ],
+
+                          if (updated != null && context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Anúncio atualizado com sucesso!'),
+                              ),
+                            );
+                            ref
+                                .read(feedViewModelProvider.notifier)
+                                .carregarAnuncios('');
+                          }
+                        },
+                      ),
+
+                      IconButton(
+                        visualDensity: VisualDensity.compact,
+                        icon: const Icon(Icons.delete, size: 20, color: Colors.redAccent),
+                        onPressed: () async {
+                          final confirmar = await showDialog<bool>(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: const Text('Excluir anúncio'),
+                              content: const Text(
+                                  'Tem certeza de que deseja excluir este anúncio?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(ctx, false),
+                                  child: const Text('Cancelar'),
+                                ),
+                                FilledButton(
+                                  onPressed: () => Navigator.pop(ctx, true),
+                                  child: const Text('Excluir'),
+                                ),
+                              ],
+                            ),
+                          );
+
+                          if (confirmar == true) {
+                            final excluirUC = ref.read(excluirAnuncioProvider);
+                            final vm = ExcluirAnuncioViewModel(excluirUC);
+                            final ok = await vm.submit(anuncio.id);
+
+                            if (ok && context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content:
+                                        Text('Anúncio excluído com sucesso!')),
+                              );
+                              ref
+                                  .read(feedViewModelProvider.notifier)
+                                  .carregarAnuncios('');
+                            } else if (vm.state.error != null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Erro ao excluir: ${vm.state.error!}'),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                      ),
+                    ],
+                  ],
+                )
               ],
             ),
           ),
 
-          // ========= DESCRIÇÃO RÁPIDA =========
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Text(
-              anuncio.descricao.isNotEmpty
-                  ? anuncio.descricao
-                  : 'Sem descrição.',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.black54),
+          if (anuncio.descricao.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Text(
+                anuncio.descricao,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: Colors.black54),
+              ),
             ),
-          ),
 
           const Divider(height: 1),
 
-          // ========= FAVORITAR =========
           Consumer(
             builder: (context, ref, _) {
               final auth = ref.watch(authViewModelProvider);
@@ -192,15 +211,11 @@ class AnuncioCard extends ConsumerWidget {
                   isFav ? Icons.favorite : Icons.favorite_border,
                   color: isFav ? Colors.red : null,
                 ),
-                tooltip: usuario == null
-                    ? 'Faça login para favoritar'
-                    : (isFav ? 'Remover dos favoritos' : 'Adicionar aos favoritos'),
                 onPressed: usuario == null
                     ? null
                     : () async {
                         await vm.toggle(anuncio.id);
 
-                        // ✅ feedback visual rápido
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -212,7 +227,6 @@ class AnuncioCard extends ConsumerWidget {
                           ),
                         );
 
-                        // 🔄 Atualiza o feed para refletir alterações se o filtro de favoritos estiver ativo
                         ref
                             .read(feedViewModelProvider.notifier)
                             .filtrar(apenasFavoritos: false, userId: usuario.id);
