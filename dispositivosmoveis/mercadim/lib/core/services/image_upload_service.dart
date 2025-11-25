@@ -7,7 +7,6 @@ class ImageUploadService {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final ImagePicker _picker = ImagePicker();
 
-  /// Abre a galeria e retorna o link de download da imagem enviada
   Future<String?> pickAndUploadImage(String usuarioId) async {
     try {
       final picked = await _picker.pickImage(source: ImageSource.gallery);
@@ -23,6 +22,19 @@ class ImageUploadService {
       return downloadUrl;
     } catch (e) {
       print('Erro ao fazer upload da imagem: $e');
+      return null;
+    }
+  }
+
+  Future<String?> uploadFile(File file, String userId) async {
+    try {
+      final path = "anuncios/$userId/${DateTime.now().millisecondsSinceEpoch}.jpg";
+      final ref = FirebaseStorage.instance.ref().child(path);
+
+      await ref.putFile(file);
+
+      return await ref.getDownloadURL();
+    } catch (e) {
       return null;
     }
   }

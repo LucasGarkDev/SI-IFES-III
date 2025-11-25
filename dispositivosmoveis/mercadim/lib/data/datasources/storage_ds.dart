@@ -9,4 +9,17 @@ class StorageDataSource {
     await ref.putFile(file);
     return await ref.getDownloadURL();
   }
+
+  Future<String?> uploadFile(File file, String userId) async {
+    try {
+      final path = "anuncios/$userId/${DateTime.now().millisecondsSinceEpoch}.jpg";
+      final ref = FirebaseStorage.instance.ref().child(path);
+
+      await ref.putFile(file);
+
+      return await ref.getDownloadURL();
+    } catch (e) {
+      return null;
+    }
+  }
 }

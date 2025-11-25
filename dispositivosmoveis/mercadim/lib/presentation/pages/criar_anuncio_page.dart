@@ -238,7 +238,8 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                             // upload da imagem
                             String imageUrl = "";
                             if (_imagemSelecionada != null) {
-                              final url = await _imageService.pickAndUploadImage(
+                              final url = await _imageService.uploadFile(
+                                _imagemSelecionada!,
                                 widget.usuarioId,
                               );
                               if (url != null) imageUrl = url;
