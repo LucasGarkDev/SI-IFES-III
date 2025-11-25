@@ -14,7 +14,7 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
           descricao: 'Ótimo para estudos e trabalho remoto.',
           preco: 2500.0,
           categoria: 'Eletrônicos',
-          cidade: 'Baixo Guandu', // ⚠️ bate com o FeedPage
+          cidade: 'Baixo Guandu',
           bairro: 'Centro',
           dataCriacao: DateTime.now(),
           imagemPrincipalUrl: 'https://via.placeholder.com/300x200?text=Notebook',
@@ -34,8 +34,18 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
     final results = _storage.where(
       (a) => a.cidade.toLowerCase() == cidade.toLowerCase(),
     );
-    // se não achar nada, devolve todos mesmo assim
+
     return results.isNotEmpty ? results.toList() : _storage;
+  }
+
+  @override
+  Future<AnuncioModel?> obterPorId(String id) async {
+    await Future.delayed(const Duration(milliseconds: 150));
+    try {
+      return _storage.firstWhere((a) => a.id == id);
+    } catch (_) {
+      return null;
+    }
   }
 
   @override
@@ -66,6 +76,7 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
   Future<List<AnuncioModel>> buscarPorTitulo(String titulo) async {
     await Future.delayed(const Duration(milliseconds: 200));
     final termo = titulo.trim().toLowerCase();
+
     return _storage
         .where((a) => a.titulo.toLowerCase().contains(termo))
         .toList();
@@ -96,7 +107,6 @@ class AnuncioRemoteDataSourceMock implements AnuncioRemoteDataSource {
       results = results.where((a) => a.preco <= precoMax);
     }
 
-    // por enquanto, sem filtro real de distância
     return results.toList();
   }
 }

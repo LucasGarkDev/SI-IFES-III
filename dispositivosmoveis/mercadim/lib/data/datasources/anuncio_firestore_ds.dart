@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../core/exceptions/app_exception.dart';
 import '../models/anuncio_model.dart';
 import 'anuncio_remote_data_source.dart';
-import '../../domain/entities/anuncio.dart';
-
 
 class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
   final FirebaseFirestore firestore;
@@ -16,6 +14,7 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
   Future<List<AnuncioModel>> fetchAnunciosPorCidade(String cidade) async {
     try {
       Query<Map<String, dynamic>> q = _col;
+
       if (cidade.isNotEmpty) {
         q = q.where('cidade', isEqualTo: cidade);
       }
@@ -30,6 +29,18 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
     }
   }
 
+  @override
+  Future<AnuncioModel?> obterPorId(String id) async {
+    try {
+      final doc = await _col.doc(id).get();
+
+      if (!doc.exists) return null;
+
+      return AnuncioModel.fromJson(doc.data()!).copyWith(id: doc.id);
+    } catch (e) {
+      throw AppException('Erro ao obter anúncio: $e');
+    }
+  }
 
   @override
   Future<AnuncioModel> criarAnuncio(AnuncioModel anuncio) async {
@@ -46,8 +57,9 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
   Future<AnuncioModel> editarAnuncio(AnuncioModel anuncio) async {
     try {
       if (anuncio.id.isEmpty) {
-        throw const AppException('ID do anúncio ausente para edição.');
+        throw const AppException('ID do anúncio ausente.');
       }
+
       await _col.doc(anuncio.id).update(anuncio.toJson());
       return anuncio;
     } catch (e) {
@@ -67,16 +79,16 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
   @override
   Future<List<AnuncioModel>> buscarPorTitulo(String titulo) async {
     try {
-      // Busca por prefixo (case-sensitive); se quiser case-insensitive, normalize e salve outro campo.
       final q = await _col
           .where('titulo', isGreaterThanOrEqualTo: titulo)
           .where('titulo', isLessThanOrEqualTo: '$titulo\uf8ff')
           .get();
+
       return q.docs
           .map((d) => AnuncioModel.fromJson(d.data()).copyWith(id: d.id))
           .toList();
     } catch (e) {
-      throw AppException('Erro ao buscar por título: $e');
+      throw AppException('Erro ao buscar anúncios por título: $e');
     }
   }
 
@@ -101,7 +113,6 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
       if (precoMax != null) {
         q = q.where('preco', isLessThanOrEqualTo: precoMax);
       }
-      // Distância real exige geohash/geoqueries; mantemos fora por ora.
 
       final snap = await q.get();
       return snap.docs
@@ -111,14 +122,4 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
       throw AppException('Erro ao filtrar anúncios: $e');
     }
   }
-
-  Future<Anuncio?> obterPorId(String id) async {
-    final doc = await firestore.collection("anuncios").doc(id).get();
-
-    if (!doc.exists) return null;
-
-    final data = doc.data()!;
-    return Anuncio.fromMap(doc.id, data);
-  }
-
 }

@@ -33,7 +33,7 @@ class AnuncioRepositoryImpl implements AnuncioRepository {
     await ds.excluirAnuncio(id);
   }
 
-    @override
+  @override
   Future<List<Anuncio>> buscarPorTitulo(String titulo) async {
     final models = await ds.buscarPorTitulo(titulo);
     return models.map((m) => m.toEntity()).toList();
@@ -60,8 +60,8 @@ class AnuncioRepositoryImpl implements AnuncioRepository {
   }
 
   @override
-  Future<Anuncio?> obterPorId(String id) {
-    return ds.obterPorId(id);
+  Future<Anuncio?> obterPorId(String id) async {
+    final model = await ds.obterPorId(id);
+    return model?.toEntity();
   }
-
 }
