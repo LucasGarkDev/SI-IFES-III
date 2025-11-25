@@ -222,13 +222,13 @@ class _EditarAnuncioPageState extends ConsumerState<EditarAnuncioPage> {
 
                           String imagemFinal = _imagemAtualUrl;
 
-                          if (_novaImagemSelecionada != null) {
-                            final url =
-                                await _imageService.pickAndUploadImage(
-                              widget.anuncio.usuarioId,
-                            );
-                            if (url != null) imagemFinal = url;
-                          }
+                         if (_novaImagemSelecionada != null) {
+                          final url = await _imageService.uploadFile(
+                            _novaImagemSelecionada!,
+                            widget.anuncio.usuarioId,
+                          );
+                          if (url != null) imagemFinal = url;
+                        }
 
                           final updated = await vm.submit(
                             widget.anuncio.copyWith(

@@ -57,7 +57,10 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       final picked = await picker.pickImage(source: ImageSource.gallery);
 
       if (picked != null) {
-        setState(() => _novaFoto = File(picked.path));
+        setState(() {
+          _novaFoto = File(picked.path);
+          _photoUrl = null; // <- ESSENCIAL: força o avatar a exibir a nova imagem
+        });
       }
     } catch (e) {
       ScaffoldMessenger.of(context)
@@ -115,31 +118,37 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
   Future<void> _aoTocarMapa(LatLng pos) async {
     try {
-      _mapController?.animateCamera(CameraUpdate.newLatLng(pos));
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(pos),
+      );
 
-      if (!kIsWeb) {
-        final placemarks = await geocoding.placemarkFromCoordinates(
-          pos.latitude,
-          pos.longitude,
-        );
+      // 🔎 Busca o endereço (sem localeIdentifier)
+      final placemarks = await geocoding.placemarkFromCoordinates(
+        pos.latitude,
+        pos.longitude,
+      );
 
-        final cityName =
-            placemarks.first.locality ?? placemarks.first.subAdministrativeArea;
+      if (placemarks.isEmpty) return;
 
-        setState(() {
-          _selectedPosition = pos;
-          _city.text = cityName ?? "";
-        });
-      } else {
-        setState(() {
-          _selectedPosition = pos;
-          _city.text = "Local selecionado";
-        });
-      }
+      final place = placemarks.first;
+
+      // 🔥 Tenta extrair a cidade de forma inteligente
+      final cidade =
+          place.locality ??
+          place.subAdministrativeArea ??
+          place.administrativeArea ??
+          place.name ??
+          "";
+
+      setState(() {
+        _selectedPosition = pos;
+        _city.text = cidade;
+      });
     } catch (e) {
       print("Erro ao clicar no mapa: $e");
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -279,10 +288,14 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                           String? fotoFinal = _photoUrl;
 
                           if (_novaFoto != null) {
-                            final url = await _imageService.pickAndUploadImage(
+                            final url = await _imageService.uploadFile(
+                              _novaFoto!,
                               widget.currentUser.id,
                             );
-                            if (url != null) fotoFinal = url;
+
+                            if (url != null) {
+                              fotoFinal = url;
+                            }
                           }
 
                           final updated = await vm.submit(
