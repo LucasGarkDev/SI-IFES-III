@@ -1,28 +1,22 @@
-import React, { useState } from "react";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import MainContent from "./components/MainContent";
-import "./styles/global.css";
+// Arquivo: locadora/frontend2/src/App.jsx
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+import ConsultarTituloPage from "./pages/ConsultarTituloPage";
+import AdminLayout from "./pages/AdminLayout";
 
 function App() {
-  // Estado que guarda qual opção do menu foi selecionada
-  const [selected, setSelected] = useState(null);
-
   return (
-    <div className="app-container">
-      {/* Cabeçalho */}
-      <Header />
+    <Routes>
+      {/* 🌟 NOVA HOME DO SISTEMA */}
+      <Route path="/" element={<ConsultarTituloPage />} />
 
-      <div className="content-wrapper">
-        {/* Barra lateral */}
-        <Sidebar onSelect={setSelected} />
-
-        {/* Conteúdo principal */}
-        <MainContent selected={selected} />
-      </div>
-    </div>
+      {/* 🔐 ÁREA ADMINISTRATIVA (layout antigo) */}
+      <Route path="/admin/*" element={<AdminLayout />} />
+    </Routes>
   );
 }
 
 export default App;
+
 
