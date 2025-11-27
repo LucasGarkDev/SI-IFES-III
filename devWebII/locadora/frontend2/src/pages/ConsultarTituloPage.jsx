@@ -1,5 +1,5 @@
 // src/pages/ConsultarTituloPage.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "../components/consulta-titulo/SearchBar";
 import TituloList from "../components/consulta-titulo/TituloList";
 import Poster from "../components/consulta-titulo/Poster";
@@ -15,16 +15,30 @@ function ConsultarTituloPage() {
   const [resultados, setResultados] = useState([]);
   const [tituloSelecionado, setTituloSelecionado] = useState(null);
 
+  // 🔥 BUSCAR TODOS OS TÍTULOS AO CARREGAR A PÁGINA
+  useEffect(() => {
+    async function carregarInicial() {
+      const resp = await buscarTitulosPorNome(""); // chama API sem filtro
+      setResultados(resp.content || []);
+    }
+    carregarInicial();
+  }, []);
+
+  // 🔎 BUSCA DINÂMICA
   async function handleSearch(texto) {
+    // Se o campo estiver vazio → buscar todos
     if (texto.trim() === "") {
-      setResultados([]);
+      const resp = await buscarTitulosPorNome("");
+      setResultados(resp.content || []);
       return;
     }
 
+    // Senão → filtrar por nome
     const resp = await buscarTitulosPorNome(texto);
     setResultados(resp.content || []);
   }
 
+  // 📝 SELECIONAR TÍTULO PARA VER DETALHES
   async function handleSelect(id) {
     const detalhes = await buscarDetalhesTitulo(id);
     setTituloSelecionado(detalhes);
@@ -32,8 +46,6 @@ function ConsultarTituloPage() {
 
   return (
     <div className="consulta-container" style={{ padding: "20px" }}>
-
-      {/* Cabeçalho da Nova Home */}
       <div className="consulta-header" style={{ display: "flex", justifyContent: "space-between" }}>
         <h1 style={{ margin: 0 }}>Locadora Passatempo</h1>
 
@@ -50,10 +62,8 @@ function ConsultarTituloPage() {
         </button>
       </div>
 
-      {/* Barra de Busca */}
       <SearchBar onSearch={handleSearch} />
 
-      {/* Grid Principal */}
       <div
         className="consulta-grid"
         style={{
@@ -63,10 +73,8 @@ function ConsultarTituloPage() {
           gap: "20px",
         }}
       >
-        {/* Lista de Títulos */}
         <TituloList resultados={resultados} onSelect={handleSelect} />
 
-        {/* Painel Direito: Poster + Detalhes */}
         <div>
           <Poster titulo={tituloSelecionado} />
           <TituloDetalhes titulo={tituloSelecionado} />

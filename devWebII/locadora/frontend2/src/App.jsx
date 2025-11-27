@@ -11,7 +11,7 @@ function App() {
       {/* 🌟 NOVA HOME DO SISTEMA */}
       <Route path="/" element={<ConsultarTituloPage />} />
 
-      {/* 🔐 ÁREA ADMINISTRATIVA (layout antigo) */}
+      {/* 🔐 ÁREA ADMINISTRATIVA */}
       <Route path="/admin/*" element={<AdminLayout />} />
     </Routes>
   );

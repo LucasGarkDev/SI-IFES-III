@@ -62,28 +62,20 @@ public class TituloController {
     }
 
 
-    // ============================
-    // CASO DE USO: CONSULTAR TÍTULO
-    // ============================
+    // =============================
+    //  NOVAS ROTAS PARA CONSULTA
+    // =============================
 
-    /**
-     * Busca leve por nome — retorna apenas (id, nome)
-     * Endpoint usado pela barra de pesquisa na tela principal
-     */
-    @GetMapping("/search")
-    public ResponseEntity<Page<TituloListDTO>> pesquisarPorNome(
-            @RequestParam String nome,
-            @PageableDefault(size = 10, sort = "nome") Pageable pageable
+    @GetMapping("/pesquisa")
+    public ResponseEntity<Page<TituloListDTO>> pesquisarTitulos(
+            @RequestParam(defaultValue = "") String nome,
+            @PageableDefault(size = 20, sort = "nome") Pageable pageable
     ) {
         return ResponseEntity.ok(service.pesquisarPorNome(nome, pageable));
     }
 
-    /**
-     * Busca completa de detalhes de um título
-     * Endpoint usado quando o usuário seleciona um título na lista
-     */
     @GetMapping("/{id}/detalhes")
-    public ResponseEntity<TituloDetalhesDTO> buscarDetalhes(@PathVariable Long id) {
+    public ResponseEntity<TituloDetalhesDTO> obterDetalhes(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarDetalhes(id));
     }
 }

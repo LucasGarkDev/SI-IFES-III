@@ -249,21 +249,22 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                               return;
                             }
 
+                            final cidadeNormalizada = _cidade.text.trim().toLowerCase();
+                            final bairroNormalizado = _bairro.text.trim().toLowerCase();
+
                             final anuncio = Anuncio(
                               id: "",
                               titulo: _titulo.text.trim(),
                               descricao: _descricao.text.trim(),
                               preco: precoValor,
                               categoria: _categoria.text.trim(),
-                              cidade: _cidade.text.trim(),
-                              bairro: _bairro.text.trim(),
+                              cidade: cidadeNormalizada,
+                              bairro: bairroNormalizado,
                               dataCriacao: DateTime.now(),
                               imagemPrincipalUrl: imageUrl,
                               usuarioId: widget.usuarioId,
                               destaque: false,
                               imagens: [],
-                              latitude: pos.latitude,
-                              longitude: pos.longitude,
                             );
 
                             final created = await vm.submit(anuncio);
