@@ -100,9 +100,20 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         title: const Text("Mercadim"),
         actions: [
           IconButton(
-            tooltip: "Ver anúncios próximos",
-            icon: const Icon(Icons.my_location_outlined),
-            onPressed: _buscarAnunciosProximos,
+            tooltip: "Filtrar por cidade atual",
+            icon: const Icon(Icons.location_on_outlined),
+            onPressed: () async {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Obtendo cidade atual...")),
+              );
+
+              await ref.read(feedViewModelProvider.notifier).filtrarPorCidadeAtual();
+
+              if (!mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Filtro por cidade aplicado!")),
+              );
+            },
           ),
 
           if (usuario != null && !isVisitante) ...[

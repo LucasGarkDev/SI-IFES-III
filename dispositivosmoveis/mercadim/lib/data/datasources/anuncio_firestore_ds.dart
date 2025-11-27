@@ -1,3 +1,4 @@
+// lib/data/datasources/anuncio_firestore_ds.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../core/exceptions/app_exception.dart';
 import '../models/anuncio_model.dart';
@@ -13,13 +14,18 @@ class AnuncioRemoteDataSourceFirestore implements AnuncioRemoteDataSource {
   @override
   Future<List<AnuncioModel>> fetchAnunciosPorCidade(String cidade) async {
     try {
+      print("DEBUG → cidade recebida no filtro: '$cidade'");
+      final cidadeNorm = cidade.toLowerCase().trim();
+      print("DEBUG → cidade normalizada: '$cidadeNorm'");
+
       Query<Map<String, dynamic>> q = _col;
 
-      if (cidade.isNotEmpty) {
-        q = q.where('cidade', isEqualTo: cidade);
+      if (cidadeNorm.isNotEmpty) {
+        q = q.where('cidade', isEqualTo: cidadeNorm);
       }
 
       final snapshot = await q.get();
+      print("DEBUG → documentos retornados: ${snapshot.docs.length}");
 
       return snapshot.docs
           .map((d) => AnuncioModel.fromJson(d.data()).copyWith(id: d.id))

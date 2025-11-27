@@ -1,4 +1,5 @@
 // lib/presentation/viewmodels/feed_viewmodel.dart
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,8 +10,10 @@ import '../../core/services/geofire_service.dart';
 import '../../domain/entities/anuncio.dart';
 import '../../domain/usecases/get_anuncios_usecase.dart';
 import '../../domain/usecases/listar_favoritos.dart';
+import '../../data/models/anuncio_model.dart';
+import 'package:geocoding/geocoding.dart';
 
-/// ✅ Provider global para o Feed
+
 final feedViewModelProvider =
     StateNotifierProvider<FeedViewModel, FeedState>((ref) {
   return FeedViewModel(
@@ -19,7 +22,6 @@ final feedViewModelProvider =
   );
 });
 
-/// ✅ ViewModel do Feed (UC11 - Visualizar Anúncios)
 class FeedViewModel extends StateNotifier<FeedState> {
   final GetAnunciosUseCase _getAnuncios;
   final ListarFavoritos _listarFavoritos;
@@ -28,20 +30,75 @@ class FeedViewModel extends StateNotifier<FeedState> {
   FeedViewModel(this._getAnuncios, this._listarFavoritos)
       : super(FeedLoading());
 
-  /// 🔹 Carrega anúncios de uma cidade específica (ou todos se vazio)
+  // CARREGAR NORMAL
   Future<void> carregarAnuncios(String cidade) async {
     try {
       state = FeedLoading();
       final anuncios = await _getAnuncios(cidade);
       state = FeedSuccess(anuncios);
-    } on AppException catch (e) {
-      state = FeedError(e.mensagem);
     } catch (e) {
       state = FeedError('Erro ao carregar anúncios: $e');
     }
   }
 
-  /// 🔹 Aplica múltiplos filtros (categoria, título, preço, favoritos)
+  Future<void> filtrarPorCidadeAtual() async {
+    try {
+      state = FeedLoading();
+
+      // 🔹 Verifica serviços e permissões
+      bool enabled = await Geolocator.isLocationServiceEnabled();
+      if (!enabled) {
+        state = FeedError('Serviço de localização desativado.');
+        return;
+      }
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          state = FeedError('Permissão negada.');
+          return;
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        state = FeedError('Permissão negada permanentemente.');
+        return;
+      }
+
+      // 🔹 Obtém coordenadas
+      final pos = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      // 🔹 Converte em nome da cidade
+      final placemarks = await placemarkFromCoordinates(
+        pos.latitude,
+        pos.longitude,
+        localeIdentifier: "pt_BR",
+      );
+
+      final cidade = placemarks.first.locality ??
+          placemarks.first.subAdministrativeArea ??
+          placemarks.first.administrativeArea ??
+          "";
+
+      if (cidade.isEmpty) {
+        state = FeedError("Não foi possível identificar sua cidade.");
+        return;
+      }
+
+      // 🔹 Busca anúncios somente da cidade encontrada
+      final anuncios = await _getAnuncios(cidade);
+
+      state = FeedSuccess(anuncios);
+    } catch (e) {
+      state = FeedError('Erro ao localizar cidade: $e');
+    }
+  }
+
+
+  // FILTRAR
   Future<void> filtrar({
     String? titulo,
     String? categoria,
@@ -56,32 +113,30 @@ class FeedViewModel extends StateNotifier<FeedState> {
 
       List<Anuncio> anuncios;
 
-      // 1️⃣ Se for para mostrar apenas favoritos do usuário
       if (apenasFavoritos && userId != null) {
         anuncios = await _listarFavoritos(userId);
       } else {
         anuncios = await _getAnuncios(cidade ?? '');
       }
 
-      // 2️⃣ Filtros locais adicionais
       if (titulo != null && titulo.trim().isNotEmpty) {
-        final termo = titulo.trim().toLowerCase();
+        final termo = titulo.toLowerCase();
         anuncios = anuncios
             .where((a) => a.titulo.toLowerCase().contains(termo))
             .toList();
       }
 
       if (categoria != null && categoria.trim().isNotEmpty) {
-        final termoCat = categoria.trim().toLowerCase();
+        final termo = categoria.toLowerCase();
         anuncios = anuncios
-            .where((a) => a.categoria.toLowerCase().contains(termoCat))
+            .where((a) => a.categoria.toLowerCase().contains(termo))
             .toList();
       }
 
       if (cidade != null && cidade.trim().isNotEmpty) {
-        final termoCidade = cidade.trim().toLowerCase();
+        final termo = cidade.toLowerCase();
         anuncios = anuncios
-            .where((a) => a.cidade.toLowerCase().contains(termoCidade))
+            .where((a) => a.cidade.toLowerCase().contains(termo))
             .toList();
       }
 
@@ -94,36 +149,34 @@ class FeedViewModel extends StateNotifier<FeedState> {
       }
 
       state = FeedSuccess(anuncios);
-    } on AppException catch (e) {
-      state = FeedError(e.mensagem);
     } catch (e) {
       state = FeedError('Erro ao aplicar filtros: $e');
     }
   }
 
-  /// 🌍 NOVO — Carrega anúncios próximos com base na localização do usuário.
+  // 🌍 ANÚNCIOS PRÓXIMOS — CORRIGIDO E SEGURO
   Future<void> carregarAnunciosProximos({double raioKm = 10}) async {
     try {
       state = FeedLoading();
 
-      // 1️⃣ Solicita permissão e obtém localização atual
+      // PERMISSÕES
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         state = FeedError('Serviço de localização desativado.');
         return;
       }
 
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
+      LocationPermission p = await Geolocator.checkPermission();
+      if (p == LocationPermission.denied) {
+        p = await Geolocator.requestPermission();
+        if (p == LocationPermission.denied) {
           state = FeedError('Permissão de localização negada.');
           return;
         }
       }
 
-      if (permission == LocationPermission.deniedForever) {
-        state = FeedError('Permissão permanente negada.');
+      if (p == LocationPermission.deniedForever) {
+        state = FeedError('Permissão negada permanentemente.');
         return;
       }
 
@@ -131,47 +184,32 @@ class FeedViewModel extends StateNotifier<FeedState> {
         desiredAccuracy: LocationAccuracy.high,
       );
 
-      // 2️⃣ Busca anúncios dentro do raio informado
+      // BUSCA
       final snapshot = await _geoService.buscarAnunciosPorRaio(
         latitude: pos.latitude,
         longitude: pos.longitude,
         raioKm: raioKm,
       );
 
-      final anuncios = snapshot.map((doc) {
-        final data = doc.data();
-        return Anuncio(
-          id: doc.id,
-          titulo: data['titulo'] ?? '',
-          descricao: data['descricao'] ?? '',
-          preco: (data['preco'] ?? 0).toDouble(),
-          categoria: data['categoria'] ?? '',
-          cidade: data['cidade'] ?? '',
-          bairro: data['bairro'] ?? '',
-          dataCriacao: (data['dataCriacao'] is Timestamp)
-              ? (data['dataCriacao'] as Timestamp).toDate()
-              : DateTime.now(),
-          imagemPrincipalUrl: data['imagemPrincipalUrl'] ?? '',
-          usuarioId: data['usuarioId'] ?? '',
-          destaque: data['destaque'] ?? false,
-          imagens: (data['imagens'] as List?)?.cast<String>() ?? [],
-        );
+      // CONVERTE MODELS → ENTITIES
+      List<Anuncio> anuncios = snapshot.map((doc) {
+        return AnuncioModel.fromMap(doc.data(), id: doc.id).toEntity();
       }).toList();
 
-      // 3️⃣ Ordena do mais próximo para o mais distante (opcional)
+      // ORDENA POR DISTÂNCIA (SE TIVER LAT / LNG)
       anuncios.sort((a, b) {
+        final aLat = a.latitude ?? 9999.0;
+        final aLng = a.longitude ?? 9999.0;
+        final bLat = b.latitude ?? 9999.0;
+        final bLng = b.longitude ?? 9999.0;
+
         final distA = _geoService.calcularDistanciaKm(
-          pos.latitude,
-          pos.longitude,
-          (a as dynamic).latitude ?? 0,
-          (a as dynamic).longitude ?? 0,
+          pos.latitude, pos.longitude, aLat, aLng,
         );
         final distB = _geoService.calcularDistanciaKm(
-          pos.latitude,
-          pos.longitude,
-          (b as dynamic).latitude ?? 0,
-          (b as dynamic).longitude ?? 0,
+          pos.latitude, pos.longitude, bLat, bLng,
         );
+
         return distA.compareTo(distB);
       });
 
@@ -182,7 +220,7 @@ class FeedViewModel extends StateNotifier<FeedState> {
   }
 }
 
-/// Estados possíveis do Feed
+/// ESTADOS
 abstract class FeedState {}
 
 class FeedLoading extends FeedState {}
