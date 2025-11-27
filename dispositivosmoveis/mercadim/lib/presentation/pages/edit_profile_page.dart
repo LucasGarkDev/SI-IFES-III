@@ -1,4 +1,5 @@
 // lib/presentation/pages/edit_profile_page.dart
+
 import 'dart:io' show File;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
@@ -11,9 +12,10 @@ import 'package:image_picker/image_picker.dart';
 import '../../core/providers/usecase_providers.dart';
 import '../../core/services/image_upload_service.dart';
 import '../viewmodels/edit_profile_viewmodel.dart';
+import '../viewmodels/auth_viewmodel.dart';
 import '../../domain/entities/user.dart';
 
-// novos componentes
+// UI
 import '../widgets/mercadim_page.dart';
 import '../widgets/app_input.dart';
 import '../widgets/app_button.dart';
@@ -40,7 +42,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   String? _photoUrl;
   LatLng? _selectedPosition;
 
-  /// Coloque sua chave real depois
+  /// SUA API KEY REAL
   final googlePlace = GooglePlace("AIzaSyD_LvXUFnaatN7Gn3HZFniaQ9B5Dz0wdKU");
 
   @override
@@ -49,25 +51,48 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     _name = TextEditingController(text: widget.currentUser.name);
     _city = TextEditingController(text: widget.currentUser.city ?? '');
     _photoUrl = widget.currentUser.photoUrl;
+
+    _centralizarMapaNaCidadeInicial();
   }
 
-  Future<void> _selecionarFoto() async {
+  /// ==============================================================
+  /// 1️⃣ Centraliza automaticamente no mapa a cidade do perfil
+  /// ==============================================================
+  Future<void> _centralizarMapaNaCidadeInicial() async {
+    final cidade = widget.currentUser.city;
+    if (cidade == null || cidade.isEmpty) return;
+
     try {
-      final picker = ImagePicker();
-      final picked = await picker.pickImage(source: ImageSource.gallery);
+      final results = await geocoding.locationFromAddress("$cidade, Brasil");
+      if (results.isEmpty) return;
 
-      if (picked != null) {
-        setState(() {
-          _novaFoto = File(picked.path);
-          _photoUrl = null; // <- ESSENCIAL: força o avatar a exibir a nova imagem
-        });
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Erro ao selecionar imagem: $e")));
-    }
+      final loc = results.first;
+      final pos = LatLng(loc.latitude, loc.longitude);
+
+      setState(() => _selectedPosition = pos);
+
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLngZoom(pos, 12),
+      );
+    } catch (_) {}
   }
 
+  /// ==============================================================
+  /// 2️⃣ Selecionar foto de perfil
+  /// ==============================================================
+  Future<void> _selecionarFoto() async {
+    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (picked == null) return;
+
+    setState(() {
+      _novaFoto = File(picked.path);
+      _photoUrl = null;
+    });
+  }
+
+  /// ==============================================================
+  /// 3️⃣ Buscar local digitado (autocomplete)
+  /// ==============================================================
   Future<void> _buscarLocal(String value) async {
     if (value.trim().isEmpty) return;
 
@@ -82,249 +107,198 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       final placeId = results.predictions!.first.placeId!;
       final details = await googlePlace.details.get(placeId);
 
-      if (details?.result?.geometry?.location == null) return;
+      final loc = details?.result?.geometry?.location;
+      if (loc == null) return;
 
-      final location = details!.result!.geometry!.location!;
-      final pos = LatLng(location.lat!, location.lng!);
+      final pos = LatLng(loc.lat!, loc.lng!);
+      _mapController?.animateCamera(CameraUpdate.newLatLngZoom(pos, 12));
 
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLngZoom(pos, 12),
-      );
+      final placemarks =
+          await geocoding.placemarkFromCoordinates(loc.lat!, loc.lng!);
 
-      if (kIsWeb) {
-        setState(() {
-          _selectedPosition = pos;
-          _city.text = value;
-        });
-        return;
-      }
-
-      final placemarks = await geocoding.placemarkFromCoordinates(
-        location.lat!,
-        location.lng!,
-      );
-
-      final cityName =
-          placemarks.first.locality ?? placemarks.first.subAdministrativeArea;
+      final cidade =
+          placemarks.first.locality ??
+          placemarks.first.subAdministrativeArea ??
+          placemarks.first.administrativeArea ??
+          value;
 
       setState(() {
         _selectedPosition = pos;
-        _city.text = cityName ?? value;
+        _city.text = cidade.toLowerCase();
       });
-    } catch (e) {
-      print("Erro no buscarLocal: $e");
-    }
+    } catch (_) {}
   }
 
+  /// ==============================================================
+  /// 4️⃣ Ao clicar no mapa → extrair cidade automaticamente
+  /// ==============================================================
   Future<void> _aoTocarMapa(LatLng pos) async {
     try {
-      _mapController?.animateCamera(
-        CameraUpdate.newLatLng(pos),
-      );
+      _mapController?.animateCamera(CameraUpdate.newLatLngZoom(pos, 13));
 
-      // 🔎 Busca o endereço (sem localeIdentifier)
-      final placemarks = await geocoding.placemarkFromCoordinates(
-        pos.latitude,
-        pos.longitude,
-      );
+      final placemarks =
+          await geocoding.placemarkFromCoordinates(pos.latitude, pos.longitude);
 
       if (placemarks.isEmpty) return;
 
-      final place = placemarks.first;
-
-      // 🔥 Tenta extrair a cidade de forma inteligente
       final cidade =
-          place.locality ??
-          place.subAdministrativeArea ??
-          place.administrativeArea ??
-          place.name ??
+          placemarks.first.locality ??
+          placemarks.first.subAdministrativeArea ??
+          placemarks.first.administrativeArea ??
           "";
+
+      if (cidade.isEmpty) return;
 
       setState(() {
         _selectedPosition = pos;
-        _city.text = cidade;
+        _city.text = cidade.toLowerCase();
       });
-    } catch (e) {
-      print("Erro ao clicar no mapa: $e");
-    }
+    } catch (_) {}
   }
 
+  /// ==============================================================
+  /// 5️⃣ Salvar alterações e atualizar estado global do usuário
+  /// ==============================================================
+  Future<void> _salvarPerfil() async {
+    if (!(_form.currentState?.validate() ?? false)) return;
 
-  @override
-  Widget build(BuildContext context) {
     final updateUC = ref.read(updateProfileUseCaseProvider);
     final vm = EditProfileViewModel(updateUC);
 
+    String? fotoFinal = _photoUrl;
+
+    if (_novaFoto != null) {
+      final url = await _imageService.uploadFile(
+        _novaFoto!,
+        widget.currentUser.id,
+      );
+      if (url != null) fotoFinal = url;
+    }
+
+    final updated = await vm.submit(
+      widget.currentUser.copyWith(
+        name: _name.text.trim(),
+        city: _city.text.trim().toLowerCase(),
+        photoUrl: fotoFinal,
+      ),
+    );
+
+    if (updated == null) return;
+
+    // ⭐ MUITO IMPORTANTE → Atualizar no estado global
+    ref.read(authViewModelProvider).atualizarUsuario(updated);
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Perfil atualizado com sucesso!")),
+    );
+
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return MercadimPage(
       title: "Editar Perfil",
       scrollable: true,
-      child: AnimatedBuilder(
-        animation: vm,
-        builder: (context, _) {
-          return Form(
-            key: _form,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // ==============================
-                // FOTO DO PERFIL
-                // ==============================
-                Center(
-                  child: Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.secondary.withOpacity(0.3),
-                        backgroundImage: _novaFoto != null
-                            ? FileImage(_novaFoto!)
-                            : (_photoUrl != null && _photoUrl!.isNotEmpty)
-                                ? NetworkImage(_photoUrl!)
-                                : const AssetImage(
-                                    "assets/images/user_placeholder.png",
-                                  ) as ImageProvider,
-                      ),
-
-                      // Botão de editar foto
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                          icon: const Icon(Icons.camera_alt, color: Colors.white),
-                          onPressed: _selecionarFoto,
-                        ),
-                      ),
-                    ],
+      child: Form(
+        key: _form,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // FOTO
+            Center(
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: _novaFoto != null
+                        ? FileImage(_novaFoto!)
+                        : (_photoUrl?.isNotEmpty ?? false)
+                            ? NetworkImage(_photoUrl!)
+                            : const AssetImage(
+                                "assets/images/user_placeholder.png",
+                              ) as ImageProvider,
                   ),
-                ),
-
-                const SizedBox(height: 24),
-
-                // ==============================
-                // NOME
-                // ==============================
-                AppInput(
-                  label: "Nome",
-                  controller: _name,
-                  validator: vm.validateName,
-                ),
-                const SizedBox(height: 16),
-
-                // ==============================
-                // CIDADE / LOCALIZAÇÃO
-                // ==============================
-                AppInput(
-                  label: "Cidade",
-                  controller: _city,
-                  icon: const Icon(Icons.location_city),
-                  type: TextInputType.text,
-                  validator: (_) => null,
-                  onChanged: _buscarLocal,
-                ),
-                const SizedBox(height: 20),
-
-                // ==============================
-                // MAPA
-                // ==============================
-                Text(
-                  "Selecione a localização (opcional)",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 12),
-
-                MercadimCard(
-                  padding: EdgeInsets.zero,
-                  child: SizedBox(
-                    height: 260,
-                    child: GoogleMap(
-                      initialCameraPosition: const CameraPosition(
-                        target: LatLng(-14.2350, -51.9253), // Brasil
-                        zoom: 3.5,
-                      ),
-                      onMapCreated: (c) => setState(() => _mapController = c),
-                      onTap: _aoTocarMapa,
-                      markers: _selectedPosition == null
-                          ? {}
-                          : {
-                              Marker(
-                                markerId: const MarkerId("selected"),
-                                position: _selectedPosition!,
-                              )
-                            },
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.camera_alt, color: Colors.white),
+                      onPressed: _selecionarFoto,
                     ),
                   ),
-                ),
+                ],
+              ),
+            ),
 
-                const SizedBox(height: 28),
+            const SizedBox(height: 24),
 
-                // ==============================
-                // ERRO GLOBAL
-                // ==============================
-                if (vm.state.error != null)
-                  Text(
-                    vm.state.error!,
-                    style: const TextStyle(color: Colors.red),
+            // NOME
+            AppInput(
+              label: "Nome",
+              controller: _name,
+              validator: (_) =>
+                  _name.text.trim().isEmpty ? "Nome obrigatório" : null,
+            ),
+            const SizedBox(height: 16),
+
+            // CIDADE
+            AppInput(
+              label: "Cidade",
+              controller: _city,
+              icon: const Icon(Icons.location_city),
+              onChanged: _buscarLocal,
+            ),
+            const SizedBox(height: 20),
+
+            Text("Selecione a localização",
+                style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 10),
+
+            // MAPA
+            MercadimCard(
+              padding: EdgeInsets.zero,
+              child: SizedBox(
+                height: 260,
+                child: GoogleMap(
+                  initialCameraPosition: const CameraPosition(
+                    target: LatLng(-14.2350, -51.9253),
+                    zoom: 3.8,
                   ),
-
-                const SizedBox(height: 12),
-
-                // ==============================
-                // BOTÃO SALVAR
-                // ==============================
-                AppButton(
-                  label: "Salvar Alterações",
-                  icon: Icons.save_outlined,
-                  loading: vm.state.loading,
-                  onPressed: vm.state.loading
-                      ? null
-                      : () async {
-                          if (!(_form.currentState?.validate() ?? false)) {
-                            return;
-                          }
-
-                          String? fotoFinal = _photoUrl;
-
-                          if (_novaFoto != null) {
-                            final url = await _imageService.uploadFile(
-                              _novaFoto!,
-                              widget.currentUser.id,
-                            );
-
-                            if (url != null) {
-                              fotoFinal = url;
-                            }
-                          }
-
-                          final updated = await vm.submit(
-                            widget.currentUser.copyWith(
-                              name: _name.text.trim(),
-                              city: _city.text.trim().isEmpty
-                                  ? null
-                                  : _city.text.trim(),
-                              photoUrl: fotoFinal,
-                            ),
-                          );
-
-                          if (updated != null && mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text("Perfil atualizado com sucesso!"),
-                              ),
-                            );
-                            Navigator.pop(context, updated);
-                          }
+                  onMapCreated: (c) {
+                    setState(() => _mapController = c);
+                    _centralizarMapaNaCidadeInicial();
+                  },
+                  onTap: _aoTocarMapa,
+                  markers: _selectedPosition == null
+                      ? {}
+                      : {
+                          Marker(
+                            markerId: const MarkerId("selected"),
+                            position: _selectedPosition!,
+                          )
                         },
                 ),
-
-                const SizedBox(height: 20),
-              ],
+              ),
             ),
-          );
-        },
+
+            const SizedBox(height: 28),
+
+            // BOTÃO SALVAR
+            AppButton(
+              label: "Salvar Alterações",
+              icon: Icons.save_outlined,
+              onPressed: _salvarPerfil,
+            ),
+
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

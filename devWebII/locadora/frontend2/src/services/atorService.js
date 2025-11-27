@@ -1,3 +1,4 @@
+// src/services/atorService.js
 import api from "./api";
 
 export const getAtores = () => api.get("/api/atores");
