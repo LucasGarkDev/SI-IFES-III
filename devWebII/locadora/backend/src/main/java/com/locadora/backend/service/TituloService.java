@@ -28,12 +28,21 @@ public class TituloService {
     private final DiretorRepository diretorRepo;
     private final AtorRepository atorRepo;
 
-    public TituloService(TituloRepository repo, ClasseRepository classeRepo,
-                         DiretorRepository diretorRepo, AtorRepository atorRepo) {
+    // ❗ ADICIONADO
+    private final ItemRepository itemRepo;
+
+    public TituloService(
+            TituloRepository repo,
+            ClasseRepository classeRepo,
+            DiretorRepository diretorRepo,
+            AtorRepository atorRepo,
+            ItemRepository itemRepo            // ❗ ADICIONADO
+    ) {
         this.repo = repo;
         this.classeRepo = classeRepo;
         this.diretorRepo = diretorRepo;
         this.atorRepo = atorRepo;
+        this.itemRepo = itemRepo;              // ❗ ADICIONADO
     }
 
     @Transactional
@@ -119,9 +128,6 @@ public class TituloService {
         Titulo t = repo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Título não encontrado."));
 
-        // FUTURO: se tiver itens, bloquear exclusão
-        // if (itemRepo.existsByTituloId(id)) throw new BusinessRuleException("Título possui itens cadastrados.");
-
         try {
             repo.delete(t);
         } catch (DataIntegrityViolationException e) {
@@ -142,6 +148,61 @@ public class TituloService {
         dto.setDiretorNome(t.getDiretor().getNome());
         dto.setAtoresNomes(t.getAtores().stream().map(Ator::getNome).toList());
         dto.setAtoresIds(t.getAtores().stream().map(Ator::getId).toList());
+        return dto;
+    }
+
+    // ------------------------------------------------------------
+    // NOVOS MÉTODOS
+    // ------------------------------------------------------------
+
+    @Transactional(readOnly = true)
+    public Page<TituloListDTO> pesquisarPorNome(String nome, Pageable pageable) {
+        Page<Titulo> page = repo.findByNomeContainingIgnoreCase(nome, pageable);
+
+        List<TituloListDTO> content = page.getContent().stream()
+                .map(t -> {
+                    TituloListDTO dto = new TituloListDTO();
+                    dto.setId(t.getId());
+                    dto.setNome(t.getNome());
+                    return dto;
+                })
+                .toList();
+
+        return new PageImpl<>(content, pageable, page.getTotalElements());
+    }
+
+    @Transactional(readOnly = true)
+    public TituloDetalhesDTO buscarDetalhes(Long id) {
+
+        Titulo t = repo.findById(id)
+                .orElseThrow(() -> new NotFoundException("Título não encontrado."));
+
+        TituloDetalhesDTO dto = new TituloDetalhesDTO();
+
+        dto.setId(t.getId());
+        dto.setNome(t.getNome());
+        dto.setAno(t.getAno());
+        dto.setSinopse(t.getSinopse());
+        dto.setCategoria(t.getCategoria());
+
+        // Classe
+        dto.setClasseNome(t.getClasse().getNome());
+        dto.setValorLocacao(t.getClasse().getPrecoDiariaCentavos());
+
+        // Diretor
+        dto.setDiretorNome(t.getDiretor().getNome());
+
+        // Atores
+        dto.setAtores(
+                t.getAtores().stream()
+                        .map(Ator::getNome)
+                        .toList()
+        );
+
+        // Quantidade de itens do título
+        int quantidade = itemRepo.countByTituloId(id);
+        dto.setQuantidadeDisponivel(quantidade);
+
         return dto;
     }
 }

@@ -22,6 +22,10 @@ public class TituloController {
         this.service = service;
     }
 
+    // ============================
+    // CRUD ADMINISTRATIVO
+    // ============================
+
     @PostMapping
     public ResponseEntity<TituloDTO> criar(@Valid @RequestBody TituloCreateDTO dto) {
         return ResponseEntity.ok(service.criar(dto));
@@ -55,6 +59,32 @@ public class TituloController {
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         service.excluir(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    // ============================
+    // CASO DE USO: CONSULTAR TÍTULO
+    // ============================
+
+    /**
+     * Busca leve por nome — retorna apenas (id, nome)
+     * Endpoint usado pela barra de pesquisa na tela principal
+     */
+    @GetMapping("/search")
+    public ResponseEntity<Page<TituloListDTO>> pesquisarPorNome(
+            @RequestParam String nome,
+            @PageableDefault(size = 10, sort = "nome") Pageable pageable
+    ) {
+        return ResponseEntity.ok(service.pesquisarPorNome(nome, pageable));
+    }
+
+    /**
+     * Busca completa de detalhes de um título
+     * Endpoint usado quando o usuário seleciona um título na lista
+     */
+    @GetMapping("/{id}/detalhes")
+    public ResponseEntity<TituloDetalhesDTO> buscarDetalhes(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarDetalhes(id));
     }
 }
 
