@@ -1,3 +1,6 @@
+// lib/presentation/pages/criar_anuncio_page.dart
+// lib/presentation/pages/criar_anuncio_page.dart
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,7 +65,7 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Serviço de localização desativado.')),
+          const SnackBar(content: Text('Ative o serviço de localização.')),
         );
         return null;
       }
@@ -72,7 +75,7 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
         perm = await Geolocator.requestPermission();
         if (perm == LocationPermission.denied) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Permissão negada.')),
+            const SnackBar(content: Text('Permissão de localização negada.')),
           );
           return null;
         }
@@ -80,7 +83,9 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
 
       if (perm == LocationPermission.deniedForever) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Permissão negada permanentemente.')),
+          const SnackBar(
+            content: Text('Permissão negada permanentemente. Vá em Configurações.'),
+          ),
         );
         return null;
       }
@@ -115,9 +120,7 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
               key: _form,
               child: ListView(
                 children: [
-                  // ===========================
-                  // CAMPOS DE TEXTO
-                  // ===========================
+                  // CAMPOS
                   AppInput(
                     label: "Título",
                     controller: _titulo,
@@ -139,10 +142,10 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                     controller: _preco,
                     icon: const Icon(Icons.monetization_on_outlined),
                     type: const TextInputType.numberWithOptions(decimal: true),
-                    validator: vm.validatePreco,
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
                     ],
+                    validator: vm.validatePreco,
                   ),
                   const SizedBox(height: 16),
 
@@ -167,13 +170,9 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  // ===========================
-                  // IMAGEM DO ANÚNCIO
-                  // ===========================
-                  Text(
-                    "Imagem principal",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  // IMAGEM
+                  Text("Imagem principal",
+                      style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 8),
 
                   GestureDetector(
@@ -186,19 +185,13 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                         border: Border.all(color: Colors.green.shade200),
                       ),
                       child: _imagemSelecionada == null
-                          ? Center(
+                          ? const Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.image, size: 42, color: Colors.green),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    "Selecionar imagem",
-                                    style: TextStyle(
-                                      color: Colors.green.shade700,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
+                                  Icon(Icons.image, size: 42, color: Colors.green),
+                                  SizedBox(height: 8),
+                                  Text("Selecionar imagem"),
                                 ],
                               ),
                             )
@@ -206,21 +199,19 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                               borderRadius: BorderRadius.circular(12),
                               child: Image.file(
                                 _imagemSelecionada!,
-                                width: double.infinity,
                                 fit: BoxFit.cover,
+                                width: double.infinity,
                               ),
                             ),
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 25),
 
                   if (vm.state.error != null)
                     Text(vm.state.error!, style: const TextStyle(color: Colors.red)),
 
-                  // ===========================
-                  // BOTÃO PUBLICAR
-                  // ===========================
+                  // PUBLICAR
                   FilledButton(
                     onPressed: (vm.state.loading || _btnLoading)
                         ? null
@@ -232,10 +223,13 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                               return;
                             }
 
-                            final precoValor =
-                                double.tryParse(_preco.text.replaceAll(',', '.')) ?? 0.0;
+                            // CONVERSÃO DE PREÇO
+                            final precoValor = double.tryParse(
+                                  _preco.text.replaceAll(',', '.'),
+                                ) ??
+                                0.0;
 
-                            // upload da imagem
+                            // UPLOAD DA IMAGEM
                             String imageUrl = "";
                             if (_imagemSelecionada != null) {
                               final url = await _imageService.uploadFile(
@@ -245,14 +239,11 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                               if (url != null) imageUrl = url;
                             }
 
-                            // localização
+                            // LOCALIZAÇÃO DO USUÁRIO
                             final pos = await _obterLocalizacao();
                             if (pos == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                      "Não foi possível obter sua localização."),
-                                ),
+                                const SnackBar(content: Text('Localização obrigatória.')),
                               );
                               setState(() => _btnLoading = false);
                               return;
@@ -271,23 +262,18 @@ class _CriarAnuncioPageState extends ConsumerState<CriarAnuncioPage> {
                               usuarioId: widget.usuarioId,
                               destaque: false,
                               imagens: [],
+                              latitude: pos.latitude,
+                              longitude: pos.longitude,
                             );
 
                             final created = await vm.submit(anuncio);
 
                             if (created != null && mounted) {
-                              await _geoService.salvarLocalizacaoAnuncio(
-                                anuncioId: created.id,
-                                latitude: pos.latitude,
-                                longitude: pos.longitude,
-                              );
-
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('Anúncio criado com sucesso!'),
                                 ),
                               );
-
                               Navigator.pop(context, created);
                             }
 

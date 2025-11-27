@@ -16,6 +16,10 @@ class AnuncioModel {
   final bool destaque;
   final List<String> imagens;
 
+  // 🔥 Campos adicionados
+  final double? latitude;
+  final double? longitude;
+
   const AnuncioModel({
     required this.id,
     required this.titulo,
@@ -29,19 +33,23 @@ class AnuncioModel {
     required this.usuarioId,
     required this.destaque,
     required this.imagens,
+    this.latitude,
+    this.longitude,
   });
 
   // =============================================================
   // ✅ JSON / MAP COMPATÍVEL COM FIRESTORE
   // =============================================================
-  factory AnuncioModel.fromJson(Map<String, dynamic> json, {String? id}) =>
-      AnuncioModel.fromMap(json, id: id ?? '');
+  factory AnuncioModel.fromJson(Map<String, dynamic> json, {String? id}) {
+    return AnuncioModel.fromMap(json, id: id ?? '');
+  }
 
   Map<String, dynamic> toJson() => toMap();
 
   factory AnuncioModel.fromMap(Map<String, dynamic> map, {required String id}) {
     final ts = map['dataCriacao'];
     late DateTime created;
+
     if (ts is Timestamp) {
       created = ts.toDate();
     } else if (ts is DateTime) {
@@ -64,10 +72,11 @@ class AnuncioModel {
       imagemPrincipalUrl: map['imagemPrincipalUrl'] ?? '',
       usuarioId: map['usuarioId'] ?? '',
       destaque: map['destaque'] ?? false,
-      imagens: (map['imagens'] as List?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          const [],
+      imagens: (map['imagens'] as List?)?.map((e) => e.toString()).toList() ?? const [],
+
+      // 🔥 LEITURA DA GEOLOCALIZAÇÃO
+      latitude: (map['latitude'] is num) ? (map['latitude'] as num).toDouble() : null,
+      longitude: (map['longitude'] is num) ? (map['longitude'] as num).toDouble() : null,
     );
   }
 
@@ -84,41 +93,53 @@ class AnuncioModel {
       'usuarioId': usuarioId,
       'destaque': destaque,
       'imagens': imagens,
+
+      // 🔥 SALVAR GEOLOCALIZAÇÃO NO FIRESTORE
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 
   // =============================================================
-  // ✅ Conversão com Entity
+  // ✅ Conversão Entity ↔ Model
   // =============================================================
-  factory AnuncioModel.fromEntity(Anuncio e) => AnuncioModel(
-        id: e.id,
-        titulo: e.titulo,
-        descricao: e.descricao,
-        preco: e.preco,
-        categoria: e.categoria,
-        cidade: e.cidade,
-        bairro: e.bairro,
-        dataCriacao: e.dataCriacao,
-        imagemPrincipalUrl: e.imagemPrincipalUrl,
-        usuarioId: e.usuarioId,
-        destaque: e.destaque,
-        imagens: e.imagens,
-      );
+  factory AnuncioModel.fromEntity(Anuncio e) {
+    return AnuncioModel(
+      id: e.id,
+      titulo: e.titulo,
+      descricao: e.descricao,
+      preco: e.preco,
+      categoria: e.categoria,
+      cidade: e.cidade,
+      bairro: e.bairro,
+      dataCriacao: e.dataCriacao,
+      imagemPrincipalUrl: e.imagemPrincipalUrl,
+      usuarioId: e.usuarioId,
+      destaque: e.destaque,
+      imagens: e.imagens,
+      latitude: e.latitude,
+      longitude: e.longitude,
+    );
+  }
 
-  Anuncio toEntity() => Anuncio(
-        id: id,
-        titulo: titulo,
-        descricao: descricao,
-        preco: preco,
-        categoria: categoria,
-        cidade: cidade,
-        bairro: bairro,
-        dataCriacao: dataCriacao,
-        imagemPrincipalUrl: imagemPrincipalUrl,
-        usuarioId: usuarioId,
-        destaque: destaque,
-        imagens: imagens,
-      );
+  Anuncio toEntity() {
+    return Anuncio(
+      id: id,
+      titulo: titulo,
+      descricao: descricao,
+      preco: preco,
+      categoria: categoria,
+      cidade: cidade,
+      bairro: bairro,
+      dataCriacao: dataCriacao,
+      imagemPrincipalUrl: imagemPrincipalUrl,
+      usuarioId: usuarioId,
+      destaque: destaque,
+      imagens: imagens,
+      latitude: latitude,
+      longitude: longitude,
+    );
+  }
 
   AnuncioModel copyWith({
     String? id,
@@ -133,6 +154,8 @@ class AnuncioModel {
     String? usuarioId,
     bool? destaque,
     List<String>? imagens,
+    double? latitude,
+    double? longitude,
   }) {
     return AnuncioModel(
       id: id ?? this.id,
@@ -147,6 +170,8 @@ class AnuncioModel {
       usuarioId: usuarioId ?? this.usuarioId,
       destaque: destaque ?? this.destaque,
       imagens: imagens ?? this.imagens,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 }

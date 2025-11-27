@@ -41,7 +41,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   LatLng? _selectedPosition;
 
   /// Coloque sua chave real depois
-  final googlePlace = GooglePlace("SUA_CHAVE_API_GOOGLE_AQUI");
+  final googlePlace = GooglePlace("AIzaSyD_LvXUFnaatN7Gn3HZFniaQ9B5Dz0wdKU");
 
   @override
   void initState() {

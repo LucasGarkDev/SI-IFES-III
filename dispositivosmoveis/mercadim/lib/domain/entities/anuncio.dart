@@ -14,6 +14,9 @@ class Anuncio {
   final bool destaque;
   final List<String> imagens;
 
+  final double? latitude;
+  final double? longitude;
+
   const Anuncio({
     required this.id,
     required this.titulo,
@@ -27,9 +30,10 @@ class Anuncio {
     required this.usuarioId,
     required this.destaque,
     required this.imagens,
+    this.latitude,
+    this.longitude,
   });
 
-  // 🔽 adiciona isso
   Anuncio copyWith({
     String? id,
     String? titulo,
@@ -43,6 +47,8 @@ class Anuncio {
     String? usuarioId,
     bool? destaque,
     List<String>? imagens,
+    double? latitude,
+    double? longitude,
   }) {
     return Anuncio(
       id: id ?? this.id,
@@ -57,8 +63,8 @@ class Anuncio {
       usuarioId: usuarioId ?? this.usuarioId,
       destaque: destaque ?? this.destaque,
       imagens: imagens ?? this.imagens,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 }
-
-
