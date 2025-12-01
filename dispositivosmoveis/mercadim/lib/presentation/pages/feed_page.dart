@@ -58,6 +58,12 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       final auth = ref.read(authViewModelProvider);
       final user = auth.state.user;
 
+      // 🔥 Recarrega sempre que o usuário for atualizado
+      ref.listen(authViewModelProvider, (prev, next) {
+        final cidadeNova = next.state.user?.city ?? '';
+        ref.read(feedViewModelProvider.notifier).carregarAnuncios(cidadeNova);
+      });
+
       final precoMin = double.tryParse(_precoMinCtrl.text.replaceAll(',', '.'));
       final precoMax = double.tryParse(_precoMaxCtrl.text.replaceAll(',', '.'));
 
