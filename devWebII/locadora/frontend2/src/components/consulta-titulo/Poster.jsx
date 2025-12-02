@@ -1,15 +1,19 @@
 // src/components/consulta-titulo/Poster.jsx
 import React, { useEffect, useState } from "react";
-import { buscarPoster } from "../../services/posterService";
+import { buscarPosterPorTitulo } from "../../services/posterService";
 
 function Poster({ titulo }) {
   const [poster, setPoster] = useState(null);
 
   useEffect(() => {
-    if (!titulo) return;
+    if (!titulo) {
+      setPoster(null);
+      return;
+    }
 
     async function load() {
-      const url = await buscarPoster(titulo.nome, titulo.ano);
+      // busca o poster só com o nome — IMDB faz o resto
+      const url = await buscarPosterPorTitulo(titulo.nome);
       setPoster(url);
     }
 
@@ -17,12 +21,28 @@ function Poster({ titulo }) {
   }, [titulo]);
 
   return (
-    <div style={{ textAlign: "center", background: "#222", padding: "20px" }}>
+    <div
+      style={{
+        textAlign: "center",
+        background: "#222",
+        padding: "20px",
+        borderRadius: "8px",
+        minHeight: "400px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
       {poster ? (
         <img
           src={poster}
           alt={titulo.nome}
-          style={{ width: "100%", borderRadius: "8px" }}
+          style={{
+            width: "100%",
+            maxHeight: "500px",
+            objectFit: "contain",
+            borderRadius: "8px",
+          }}
         />
       ) : (
         <p style={{ color: "#bbb" }}>Poster do Filme</p>
