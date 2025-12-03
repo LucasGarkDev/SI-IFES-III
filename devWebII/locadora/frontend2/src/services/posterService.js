@@ -1,49 +1,44 @@
+// src/services/posterService.js
 import axios from "axios";
 
-const RAPID_KEY = "SUA_CHAVE_AQUI"; // coloque sua chave
-const RAPID_HOST = "imdb236.p.rapidapi.com";
+const TMDB_KEY = "207a07d2856d1e71900bd03c89fb1f5c";
 
 const api = axios.create({
-  baseURL: `https://${RAPID_HOST}`,
-  headers: {
-    "X-RapidAPI-Key": RAPID_KEY,
-    "X-RapidAPI-Host": RAPID_HOST
-  }
+  baseURL: "https://api.themoviedb.org/3"
 });
 
-// 1️⃣ Buscar ID do IMDb
-export async function buscarImdbId(titulo) {
+// 1️⃣ Buscar filme pelo nome
+export async function buscarFilmeTmdb(nome, ano) {
   try {
-    const resp = await api.get(`/api/imdb/search`, {
-      params: { query: titulo }
+    const resp = await api.get("/search/movie", {
+      params: {
+        api_key: TMDB_KEY,
+        query: nome,
+        year: ano
+      }
     });
 
     if (resp.data.results?.length > 0) {
-      return resp.data.results[0].id; // pega o primeiro resultado
+      return resp.data.results[0];
     }
 
     return null;
   } catch (err) {
-    console.error("Erro ao buscar IMDb ID:", err);
+    console.error("Erro ao buscar filme TMDB:", err);
     return null;
   }
 }
 
-// 2️⃣ Buscar poster pelo ID
-export async function buscarPoster(imdbId) {
-  try {
-    const resp = await api.get(`/api/imdb/poster/${imdbId}`);
-    return resp.data.poster || null;
-  } catch (err) {
-    console.error("Erro ao buscar poster:", err);
-    return null;
-  }
+// 2️⃣ Gerar URL de poster
+export function gerarUrlPosterTmdb(path) {
+  if (!path) return null;
+  return `https://image.tmdb.org/t/p/w500${path}`;
 }
 
-// 3️⃣ Função completa: busca ID → busca poster
-export async function buscarPosterPorTitulo(titulo) {
-  const imdbId = await buscarImdbId(titulo);
-  if (!imdbId) return null;
+// 3️⃣ Função principal
+export async function buscarPosterPorTitulo(nome, ano) {
+  const filme = await buscarFilmeTmdb(nome, ano);
+  if (!filme) return null;
 
-  return await buscarPoster(imdbId);
+  return gerarUrlPosterTmdb(filme.poster_path);
 }
